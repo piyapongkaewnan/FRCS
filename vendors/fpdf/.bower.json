@@ -1,0 +1,35 @@
+{
+  "name": "fpdf",
+  "version": "0.0.1",
+  "homepage": "https://github.com/platdesign/fpdf",
+  "authors": [
+    "Christian Blaschke <mail@platdesign.de>"
+  ],
+  "description": "Create PDF-Files in the Browser.",
+  "main": "dist/fpdf.min.js",
+  "keywords": [
+    "pdf"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jspdf": "~1.0.119",
+    "stdClass": "*"
+  },
+  "_release": "0.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.1",
+    "commit": "0a9f8c1a64031b7d12fb78c750a0bbd86b96f5f3"
+  },
+  "_source": "https://github.com/platdesign/fpdf.git",
+  "_target": "^0.0.1",
+  "_originalSource": "fpdf"
+}
