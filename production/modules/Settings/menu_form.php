@@ -98,7 +98,7 @@ if($_GET['action'] == 'actionUpdate'){
       <input type="number" class="form-control input-sm" id="menu_order" name="menu_order" required="required" value="<?=$rs_edit['menu_order']?>">
     </div>
     <div class="form-group">
-      <label for="message-text" class="form-control-label">Menu Icon : <i id="show_icon" class="<?=$rs_edit['icon_name']?>"></i>&nbsp;<a href="javascript:$('.fontawesome-icon-list').toggle();$('#btn-icon').toggleClass('fa-caret-up', 'fa-caret-down');" class="btn btn-primary btn-xs"> Selected Icon <i id="btn-icon" class="fa fa-caret-down"></i></a> </label>
+      <label for="message-text" class="form-control-label">Menu Icon : <i id="show_icon" class="<?=$rs_edit['icon_name']?> fa-2x"></i>&nbsp;<a href="javascript:$('.fontawesome-icon-list').toggle();$('#btn-icon').toggleClass('fa-caret-up', 'fa-caret-down');" class="btn btn-primary btn-xs"> Selected Icon <i id="btn-icon" class="fa fa-caret-down"></i></a> </label>
       <div class="row fontawesome-icon-list" style="display:none">
         <?php
 	  $sql_icon = "SELECT icon_id,icon_name FROM icons";

@@ -20,8 +20,6 @@ var page = $('#page').val();
 //}
 
 
-
-
 //#########################################################
 // Set Realname to localStorage
 var profileRealname = localStorage.getItem("APPS.SITE.PROFILE_NAME");
@@ -31,28 +29,16 @@ localStorage.setItem("APPS.SITE.PROFILE_NAME" ,labelRealname);
 }
 
 
-//#########################################################
-// Check menu Auth
-var ck = $('#chkMenuAuth').val();
-if(ck == 0){
-	// Show modal when page not allow
 
-/*$('#FormModal').on('show.bs.modal', function(){
-    $.get("page_403.html", function(data){
-        $('#FormModal').find('.modal-content').html(data);
-    })
-})
-*/
+
+
+/*****************************************************************************************/
 
 $("#FormModal ,  #FormModalDelete , #PermissionModal").on('hide.bs.modal', function (e) {
     $(this).data('bs.modal', null);
 	$('#divMsg').html('');
 });	
 	
-									
-	$(".main_container").html("");
-	//$("body").append(msg);
-}
 
 
 /*****************************************************************************************/
@@ -175,15 +161,78 @@ $('input[name=selID]').click(function(){
 						});
 							
 			} // End function
+			
+			
+/*****************************************************************************************/
+// Main Action  on page
+ $.MainActionOnPage= function(modules  ,page  ,select_id){
+				//$.initActionButton();
+				
+				$('input[type=search]').addClass('form-control input-sm');
+				
+				// เลือกเมนู
+				$('#'+select_id).change(function(){
+					window.location = '?modules='+modules+'&page='+page+'&'+select_id+'='+$(this).val();
+				});
+			
+				var isSelected = select_id == '' ? '' : '&select_id='+$('#'+select_id).val();
+			
+				/*****************************************************************************************/
+				// Button Create, Edit,Delete Action
+				$("#btnCreate , #btnUpdate , #btnDelete").click( function() {	
+						var actions  = $(this).attr('rel');
+						var selID  = $(this).attr('ref');
+						
+						NProgress.start();		
+						
+						switch(actions) {
+							case 'actionCreate'  :
+							window.location = '?modules='+modules+'&page='+page+'&form=keyin&action='+actions+isSelected;
+							break;
+							case  'actionUpdate' :
+								//var FormModals  =  'FormModal' ;
+								window.location = '?modules='+modules+'&page='+page+'&form=keyin&action='+actions+'&id='+selID;
+								break;
+								
+								
+							case 'actionDelete':
+							
+								var FormModals  =  'FormModalDelete' ;
+								
+								$('#'+FormModals).modal('show');
+								NProgress.done();		
+								return false;
+									
+								break;
+						}
+						
+							NProgress.done();		
+						});
+						
+												
+						// Action for Delete program by ID
+						$('#actionDelete').click( function(){
+							var selID = getSelID() ;	
+						//	alert(page);
+							$.post( "./modules/"+modules+"/"+page+"_code.php", { action: 'actionDelete', id: selID } , function( data ) {
+										//$('#FormModalDelete').modal('hide');
+										$.showNotify('success');
+										//console.log(data);
+										setTimeout("window.location.reload(true)",2000);		
+									});
+						
+						});
+							
+			} // End function			
 
 
 /*****************************************************************************************/
 //debug = true , default = null
 
  $.FormAction = function(actions , modules  ,page , id , debug ){
-	
+
 	 $('#form_'+page).submit(function(event){
-		
+		 		
 		NProgress.start();
 		event.preventDefault(); // avoid to execute the actual submit of the form.
 		
@@ -411,3 +460,12 @@ str +=  "   </div>\n";
 $('#divMsg').html(str);
 
 }
+
+//#########################################################
+// Check menu Auth
+/*
+function chkMenuAuth(status){
+	if(status   == 'FALSE'){
+		window.location = 'page_403.php';
+	}
+}*/

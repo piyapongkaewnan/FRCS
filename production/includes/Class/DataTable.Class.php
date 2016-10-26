@@ -12,7 +12,8 @@ class dataTable{
 	var $pagingStart =0;		// กำหนดค่าเริ่มต้นการแสดง Pag
 	var $pagingEnd =25;    // กำหนดค่าสิ้นสุดการแสดง
 	var $orderType = "asc";
-	var $saveState = true;
+	var $saveState = false;
+	var $dom = '<Bf<rt>pi>'; // กำหนดการจัดวางตำแหน่ง DOM
 
 	function openTable(){
 		echo "<style type='text/css' title='currentStyle'>\n";
@@ -23,17 +24,18 @@ class dataTable{
 		//echo "	@import '../vendors/datatables/media/css/dataTables.bootstrap.min.css';\n";
 		echo "	@import '../vendors/datatables.net-bs/css/dataTables.bootstrap.css';\n";
 		echo "	@import '../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css';\n";
-		echo "	@import '../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css';\n";
 		
 		//echo "	@import './js/jquery.dataTables/css/dataTables.jqueryui.css';\n";
 		//echo "	@import './js/jquery.dataTables/css/page.css';\n";
 		echo "</style>\n";
-		echo "<script type='text/javascript' src='../vendors/datatables/media/js/jquery.dataTables.min.js'></script>\n";	
+		
+		echo "<script type='text/javascript' src='../vendors/datatables/media/js/jquery.dataTables.min.js'></script>\n";			
 		echo "<script type='text/javascript' src='../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js'></script>\n";			
-		/*
+		
 		echo "<script type='text/javascript' src='../vendors/datatables.net-responsive/js/dataTables.responsive.min.js'></script>\n";	
-		echo "<script type='text/javascript' src='../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js'></script>\n";
-		*/
+	/*	echo "<script type='text/javascript' src='../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js'></script>\n";*/
+
+
 		echo "<script type='text/javascript' src='../vendors/datatables.net-buttons/js/dataTables.buttons.min.js'></script>\n";			
 		echo "<script type='text/javascript' src='../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js'></script>\n";			
 		echo "<script type='text/javascript' src='../vendors/datatables.net-buttons/js/buttons.html5.min.js'></script>\n";			
@@ -53,6 +55,7 @@ class dataTable{
 		echo "				'bJQueryUI': true,\n";
 		echo "				'bStateSave': '".$this->saveState."', \n";
 		echo "				'sPaginationType': 'full_numbers',\n";
+		//echo "				'sPaginationType': 'simple_numbers',\n";
 		echo "               'bPaginate': '".$this->paging."', \n";
 		echo "               'iDisplayLength' : ".$this->pagingLength." ,\n";
 		echo "               'iDisplayStart': ".$this->pagingStart." ,\n";
@@ -70,7 +73,7 @@ class dataTable{
 		echo "				} ,\n";
 		
 		//echo "			 dom: '<Bf<t><lpi>>',  \n";
-		echo "			 dom: 'Bfrtip',  \n";
+		echo "			 dom: '$this->dom',  \n";
 		
 		echo "			     buttons: [ \n";
 		echo "			         { \n";

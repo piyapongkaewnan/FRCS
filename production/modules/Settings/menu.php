@@ -5,16 +5,16 @@ include("./includes/Class/Form.Class.php");
 $tbl = new dataTable();
 $tbl->id = ''.$_GET['page'];
 //$tbl->title = title_menu($_GET['setPage']);
-$tbl->menu = MENU_ACTION;
+//$tbl->menu = MENU_ACTION;
 $tbl->module = $_GET['module'];
 $tbl->page = $_GET['page'];
 $tbl->order = 1;
 //$tbl->orderType = "ASC";
-$tbl->pagingLength=10;
+//$tbl->pagingLength=2;
 
 
 // หาค่ากลุ่มเมนู
-$sql_mgroup = "SELECT * FROM menu_group ORDER BY menu_order";
+$sql_mgroup = "SELECT * FROM menu_group ORDER BY  menu_group_en";
 $rs_mgroup = $db->GetAll($sql_mgroup);
 
 //ถ้ามีการเลือกให้ where ตามค่าที่เลือก ถ้าไม่ ให้เอาค่า mgroup_id มา where
@@ -48,7 +48,7 @@ $tbl->openTable();
 <div class="row">
   <div class="col-xs-4">Menu Group :
     <select name="mgroup_id" id="mgroup_id" class="form-group input-sm">
-      <?=genOptionSelect($rs_mgroup,'mgroup_id','menu_group_en',$_GET['mgroup_id']);?>
+      <?=Form::genOptionSelect($rs_mgroup,'mgroup_id','menu_group_en',$_GET['mgroup_id']);?>
     </select>
   </div>
   <div class="col-xs-8 text-right">
@@ -62,8 +62,8 @@ $tbl->openTable();
       <th width="8%"> Order</th>
       <th width="20%">Menu name (TH)</th>
       <th width="20%">Menu name (EN)</th>
-      <th width="27%">Menu Description</th>
-      <th width="10%">Menu File</th>
+      <th width="26%">Menu Description</th>
+      <th width="11%">Menu File</th>
       <th width="8%">Icons</th>
     </tr>
   </thead>
@@ -81,6 +81,7 @@ $tbl->openTable();
     <?php } // End For ?>
   </tbody>
 </table>
+
 <?php 
 	$tbl->closeTable(); 
 ?>

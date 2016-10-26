@@ -5,9 +5,6 @@
 <file name="config_code.php" server="catbsc1//dwdm-fileupload/" local="130221828000000000" remote="130221828000000000" />
 <file name="menu.js" server="catbsc1//dwdm-fileupload/" local="130221828000000000" remote="130221828000000000" />
 <file name="menu.php" server="catbsc1//dwdm-fileupload/" local="130221828000000000" remote="130221828000000000" />
-<file name="menu_auth.js" server="catbsc1//dwdm-fileupload/" local="130221828000000000" remote="130221828000000000" />
-<file name="menu_auth.php" server="catbsc1//dwdm-fileupload/" local="130221828000000000" remote="130221828000000000" />
-<file name="menu_auth_code.php" server="catbsc1//dwdm-fileupload/" local="130221828000000000" remote="130221828000000000" />
 <file name="menu_code.php" server="catbsc1//dwdm-fileupload/" local="130221828000000000" remote="130221828000000000" />
 <file name="menu_form.php" server="catbsc1//dwdm-fileupload/" local="130221828000000000" remote="130221828000000000" />
 <file name="menu_group.js" server="catbsc1//dwdm-fileupload/" local="130221828000000000" remote="130221828000000000" />
@@ -25,9 +22,6 @@
 <file name="config.js" server="10.32.13.45//dwdm-management/" local="130533732000000000" remote="130533732000000000" />
 <file name="config.php" server="10.32.13.45//dwdm-management/" local="130537188000000000" remote="130537188000000000" />
 <file name="config_code.php" server="10.32.13.45//dwdm-management/" local="130533732000000000" remote="130533732000000000" />
-<file name="menu_auth.js" server="10.32.13.45//dwdm-management/" local="130533732000000000" remote="130533732000000000" />
-<file name="menu_auth.php" server="10.32.13.45//dwdm-management/" local="130533732000000000" remote="130533732000000000" />
-<file name="menu_auth_code.php" server="10.32.13.45//dwdm-management/" local="130533732000000000" remote="130533732000000000" />
 <file name="menu_group_code.php" server="10.32.13.45//dwdm-management/" local="130533732000000000" remote="130533732000000000" />
 <file name="users.js" server="10.32.13.45//dwdm-management/" local="130533732000000000" remote="130533732000000000" />
 <file name="users.php" server="10.32.13.45//dwdm-management/" local="130533732000000000" remote="130533732000000000" />
@@ -58,7 +52,6 @@
 <file name="menu_group.php" server="catbsc1//dwdm-management/" local="131045578800000000" remote="131045578800000000" />
 <file name="user_group.php" server="catbsc1//dwdm-management/" local="131183884951894693" remote="131183883000000000" />
 <file name="users.php" server="catbsc1//dwdm-management/" local="131045583000000000" remote="131045583000000000" />
-<file name="menu_auth.php" server="catbsc1//dwdm-management/" local="131003227200000000" remote="131003227200000000" />
 <file name="web_stats_by_date.php" server="catbsc1//dwdm-management/" local="131003230800000000" remote="131003230800000000" />
 <file name="web_stats_by_menu.php" server="catbsc1//dwdm-management/" local="131003230800000000" remote="131003230800000000" />
 <file name="web_stats_by_users.php" server="catbsc1//dwdm-management/" local="131003230800000000" remote="131003230800000000" />
@@ -80,7 +73,6 @@
 <file name="menu.js" server="catbsc1/dwdm-management/" local="131142495473519921" remote="131045573400000000" />
 <file name="menu_code.php" server="catbsc1/dwdm-management/" local="131142495475080011" remote="131044834800000000" />
 <file name="menu.php" server="catbsc1/dwdm-management/" local="131142495475580039" remote="131045576400000000" />
-<file name="menu_auth.php" server="catbsc1/dwdm-management/" local="131142495475590040" remote="131003227200000000" />
 <file name="menu_group.php" server="catbsc1/dwdm-management/" local="131142495477170130" remote="131045578800000000" />
 <file name="menu_form.php" server="catbsc1/dwdm-management/" local="131142495477190131" remote="131044833000000000" />
 <file name="menu_group_form.php" server="catbsc1/dwdm-management/" local="131142495477890171" remote="131031737400000000" />
@@ -100,8 +92,6 @@
 <file name="web_stats_by_users.php" server="catbsc1/dwdm-management/" local="131142495489040809" remote="131003230800000000" />
 <file name="config.js" server="catbsc1//dwdm-management/" local="130533732000000000" remote="130533732000000000" />
 <file name="config_code.php" server="catbsc1//dwdm-management/" local="130533732000000000" remote="130533732000000000" />
-<file name="menu_auth.js" server="catbsc1//dwdm-management/" local="130533732000000000" remote="130533732000000000" />
-<file name="menu_auth_code.php" server="catbsc1//dwdm-management/" local="130533732000000000" remote="130533732000000000" />
 <file name="menu_group_code.php" server="catbsc1//dwdm-management/" local="130533732000000000" remote="130533732000000000" />
 <file name="user_group_code.php" server="catbsc1//dwdm-management/" local="131183886752734990" remote="131183885400000000" />
 <file name="web_contents_code.php" server="catbsc1//dwdm-management/" local="130533732000000000" remote="130533732000000000" />

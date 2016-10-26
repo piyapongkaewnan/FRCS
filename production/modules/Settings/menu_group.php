@@ -46,9 +46,9 @@ $rs_list =  $db ->GetAll($sql_list);
           <thead>
             <tr>
               <th width="5%"  class="header_height">Manage</th>
-              <th width="18%" align="center">Menu Group TH</th>
-              <th width="25%" align="center"> Menu Group EN</th>
-              <th width="17%" align="center"> Module Name</th>
+              <th width="23%" align="center"> Menu Group EN</th>
+              <th width="23%" align="center">Menu Group TH</th>
+              <th width="14%" align="center"> Module Name</th>
               <th width="9%" align="center">Order</th>
               <th width="10%" align="center"> Icons</th>
               <th width="16%" align="center">Update Time</th>
@@ -58,8 +58,8 @@ $rs_list =  $db ->GetAll($sql_list);
             <?php for($i=0;$i<count($rs_list);$i++){ ?>
             <tr>
               <td align="center"><input type="radio" name="selID" id="selID_<?=$rs_list[$i]['mgroup_id']?>" value="<?=$rs_list[$i]['mgroup_id']?>"/></td>
+              <td><a href='?modules=<?=$Config['modules']?>&page=menu&mgroup_id=<?=$rs_list[$i]['mgroup_id']?>'><?=$rs_list[$i]['menu_group_en']?></a></td>
               <td><?=$rs_list[$i]['menu_group_th']?></td>
-              <td><?=$rs_list[$i]['menu_group_en']?></td>
               <td><?=$rs_list[$i]['module_name']?></td>
               <td align="center"><?=$rs_list[$i]['menu_order']?></td>
               <td align="center"><i class="<?=$rs_list[$i]['icon_name']?>"></i></td>

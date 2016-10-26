@@ -39,7 +39,7 @@ $rs_list = $db->GetAll($sql_list);
          <?php for($i=0;$i<count($rs_list);$i++){ ?>
             <tr>
               <td align="center"> <input type="radio" name="selID" id="selID_<?=$rs_list[$i]['group_id']?>" value="<?=$rs_list[$i]['group_id']?>"/></td>
-              <td><?=$rs_list[$i]['group_name']?></td>
+              <td><a href='?modules=<?=$Config['modules']?>&page=users&group_id=<?=$rs_list[$i]['group_id']?>'><?=$rs_list[$i]['group_name']?></td>
               <td><?=$rs_list[$i]['group_desc']?></td>
               <td align="center"><?=$rs_list[$i]['update_time'];?></td>
             </tr>

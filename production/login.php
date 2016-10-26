@@ -7,9 +7,8 @@ session_start();
 require_once("./includes/DBConnect.php");
 require_once("./includes/Class/Auth.Class.php");
 require_once("./includes/Class/Main.Class.php");
-require_once("./includes/functions.php");
 //show_session();
-
+//print_r($_SESSION);
 $user_id =  $_SESSION['sess_user_id'];
 
 //Set Variable to Class Auth
@@ -20,7 +19,7 @@ Auth::setUserID($user_id);
 MainWeb::GetSiteInfo(); // Get webpage variable
 
 //Check user login  <> isGuest ->index 
-if(!Auth::isGuest()){ pageback('index.php',''); }
+if(!Auth::isGuest()){ MainWeb::redirect('index.php'); }
 //show_session();
 ?>
 <!DOCTYPE html>

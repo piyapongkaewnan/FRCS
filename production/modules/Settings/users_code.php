@@ -14,8 +14,7 @@ $update_user_id = $_SESSION['sess_user_id'];
 print_r($_POST);
 print "</pre>";*/
 
-//exit;
-$db->debug = 1;
+$db->debug = 0;
 /************************************************/
 
 function set_authorize(){
@@ -96,11 +95,9 @@ if($action == "actionCreate"){
 		set_authorize(); // เรียกใช้การ update ค่าในตาราง tbl_user_on_site และ tbl_user_auth
 
 }else if($action == "actionDelete"){
-	$sql = "DELETE FROM tbl_user WHERE user_id = ".$_POST['id'];
+	$sql = "DELETE FROM user WHERE user_id = $user_id";
 	$result = $db->Execute($sql);
 	
-	//$sql = "DELETE FROM tbl_user_auth WHERE user_id = ".$_GET['user_id'];
-	//$result = $db->Execute($sql);
 }
 	
 	

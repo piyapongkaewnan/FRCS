@@ -7,12 +7,14 @@ require_once("./includes/DBConnect.php");
 require_once("./includes/Class/Auth.Class.php");
 require_once("./includes/Class/Menu.Class.php");
 require_once("./includes/Class/Main.Class.php");
-//require_once("./includes/Class/Form.Class.php");
 
-//require_once("./includes/functions.php");
+require_once("./includes/functions.php");
 
 # Check Session Timeout
 include("./session_timeout.php");
+
+
+if(!isset($_SESSION['sess_user_id'])){ pageback('login.php',''); }
 
 //Assign Variable
 
@@ -24,7 +26,6 @@ $Config['realname'] = $_SESSION['sess_realname'];
 $Config['modules'] = $_GET['modules'];
 $Config['page'] = $_GET['page'];
 
-if(!isset($_SESSION['sess_user_id'])){ MainWeb::redirect('login.php'); }
 
 
 //Call Auth Class
@@ -42,11 +43,13 @@ MainWeb::getPageInfo();
 
 
 $titleVal = MainWeb::getTitleVal();
+
 $chkMenuAuth = Auth::isAllowPage();
 
+if(!$chkMenuAuth){ pageback('page_403.php',''); }
+
 //Check is Guest = to login page
-//if(Auth::isGuest()){ pageback('login.php',''); }
-if(!$chkMenuAuth){ include('page_403.php'); return; }
+if(Auth::isGuest()){ pageback('login.php',''); }
 
 
 $db->debug= false;
@@ -55,7 +58,6 @@ $db->debug= false;
 <!DOCTYPE html>
 <html lang="en" ng-app>
 <head>
-<title><?=SITE_NAME;?> | <?=MainWeb::setTitleBar();?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -101,13 +103,11 @@ $db->debug= false;
 <!-- My Custom Core JS -->
 <script src="js/main.core.js"></script>
 
+<title><?=SITE_NAME;?> | <?=MainWeb::setTitleBar();?></title>
 <style type="text/css">
 body {
 	color : #444;
 }
- a:hover {
-	text-decoration:underline; 
- }
 </style>
 </head>
 <body class="nav-md main_body">
@@ -189,17 +189,13 @@ body {
               <div id="divPage">
                 <?php
 				// Setup Route to call mpdule & page
-					 if(isset($_GET['form']) && isset($Config['modules']) && isset($Config['page'])){
-                        include("./modules/".$Config['modules']."/".$Config['page']."_form.php");
-                    }else if(isset($Config['modules']) && isset($Config['page'])){
+                    if(isset($Config['modules']) && isset($Config['page'])){
                         include("./modules/".$Config['modules']."/".$Config['page'].".php");
                     }else if(isset($Config['modules']) && !isset($Config['page'])){
                         include("./modules/".$Config['modules']."/index.php");
                     }else{
 						 include("main.php");
 					}
-					
-					
 				
                       ?>
               </div>
@@ -222,7 +218,7 @@ body {
 </div>
 <input name="modules" id="modules" type="hidden" value="<?=$Config['modules']?>">
 <input name="page" id="page" type="hidden" value="<?=$Config['page']?>">
-<input name="chkMenuAuth" id="chkMenuAuth" type="hidden" value="<?=$chkMenuAuth?>">
+<input name="chkMenuAuth" id="chkMenuAuth" type="text" value="<?=$chkMenuAuth?>">
 <div id="divMsg"></div>
 <!-- Modal -->
 <!--<div class="modal fade" id="PermissionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -282,9 +278,7 @@ body {
 <script src="js/moment/moment.min.js"></script> 
 <script src="js/datepicker/daterangepicker.js"></script> 
 
-
 <script src="../build/js/custom.min.js"></script> 
-
 </body>
 </html>
 <?php

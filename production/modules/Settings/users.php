@@ -55,9 +55,7 @@ $tbl->openTable();
   <div class="col-xs-4">User Group :
 <select name="group_id" id="group_id" class="form-group input-sm">
         <option value="All">All</option>
-          <?php					  
-					  genOptionSelect($rs_usergroup,'group_id','group_name',$_GET['group_id']);
-		  ?>          
+          <?=Form::genOptionSelect($rs_usergroup,'group_id','group_name',$_GET['group_id']); ?>          
         </select>
   </div>
   <div class="col-xs-8 text-right">

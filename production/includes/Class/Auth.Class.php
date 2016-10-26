@@ -77,7 +77,7 @@ class Auth {
 	
 	//Check login state
 	public static function isGuest(){
-		return self::$user_id == '' ? true : false;
+		return  self::getUserID() == "" ? true : false;
 	}
 	
 		// function ในการตรวจสอบสิทธิ์การเข้าถึงหน้าเพจ
@@ -95,9 +95,9 @@ class Auth {
 				
 					$result =  self::$db ->GetRow($sql);
 						if($result['count_menu'] > 0){
-							return 1;	
+							return true;	
 						}else{
-							return 0;
+							return false;
 						}				
 				
 			} // End function
@@ -129,6 +129,7 @@ class Auth {
 		}
 			
 			
+		
 			// ฟังก์ชั่นในการหาหมวดหมู่ตามสิทธิ์
 			public static function getKnowledgeCate(){
 					$sql = "SELECT

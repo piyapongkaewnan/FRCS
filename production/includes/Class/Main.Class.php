@@ -1,3 +1,4 @@
+
 <?php
 #######################################
 # Class : Main
@@ -28,9 +29,11 @@ class MainWeb extends Auth {
 			define("COPYRIGHT"," &copy;".date('Y')."  ".$rs_config['website_name']);
 			
 			/* Menu Action*/
-			define("MENU_ACTION","<span class='doAction'><div class='btn-group' role='group' aria-label='...'><button type='button' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Create Data' id='btnCreate' rel='actionCreate'><i class='fa fa-plus'></i> Create</button><button type='button' class='btn  btn-primary  btn-sm'  data-toggle='tooltip' data-placement='top' title='Update Data' id='btnUpdate' rel='actionUpdate'><i class='fa fa-edit'></i> Update</button><button type='button' class='btn  btn-danger  btn-sm' data-toggle='tooltip' data-placement='top' title='Delete Data' id='btnDelete' rel='actionDelete'><i class='fa fa-trash'></i> Delete </button></div></span>");
+			define("MENU_ACTION","<div class='doActionModal toolbarGroup'><div class='btn-group' role='group' aria-label='...'><button type='button' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Create Data' id='btnCreate' rel='actionCreate'><i class='fa fa-plus'></i> Create</button><button type='button' class='btn  btn-primary  btn-sm'  data-toggle='tooltip' data-placement='top' title='Update Data' id='btnUpdate' rel='actionUpdate'><i class='fa fa-edit'></i> Update</button><button type='button' class='btn  btn-danger  btn-sm' data-toggle='tooltip' data-placement='top' title='Delete Data' id='btnDelete' rel='actionDelete'><i class='fa fa-trash'></i> Delete </button></div></div>");
+			define("MENU_ACTION_PAGE","<div class='doActionModal toolbarGroup'><div class='btn-group' role='group' aria-label='...'><button type='button' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Create Data' id='btnCreate' rel='actionCreate'><i class='fa fa-plus'></i> Create</button><button type='button' class='btn  btn-primary  btn-sm'  data-toggle='tooltip' data-placement='top' title='Update Data' id='btnUpdate' rel='actionUpdate'><i class='fa fa-edit'></i> Update</button><button type='button' class='btn  btn-danger  btn-sm' data-toggle='tooltip' data-placement='top' title='Delete Data' id='btnDelete' rel='actionDelete'><i class='fa fa-trash'></i> Delete </button></div></div>");
+			define("MENU_SAVE_ONLY","<span class='doAction'><button type='submit' class='btn btn-primary' data-toggle='tooltip' data-placement='top' title='Save Data' id='btnSave' rel='actionSave'><i class='fa fa-save'></i> Save</button></span>");
 			define("MENU_SAVE","<span class='doAction'><div class='btn-group' role='group' aria-label='...'><button type='button' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Save'><i class='fa fa-save'></i> Save </button></div></span>");
-			define("MENU_ADD","<span class='doAction'><button>เพิ่ม</button></span>");
+			define("MENU_ADD","<button type='button' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Create Data' id='btnCreate' rel='actionCreate'><i class='fa fa-plus'></i> Create</button>");
 			define("MENU_BACK","<span class='back'><button type='button' class='btn btn-info btn-sm' data-toggle='tooltip' data-placement='top' title='Back menu'><i class='fa fa-arrow-left'></i> Back </button></span>");
 			define("MENU_TOOLS","<span class='doAction'><button>แก้ไข</button><button>ลบ</button></span>");
 			define("MENU_SUBMIT","<input type='submit' name='btnSave' id='btnSave' value='บันทึก'  /><input type='reset' name='btnReset' id='btnReset' value='ล้างค่า' /> <span id='ajaxloading'>Loading..</span><span id='divMsgDiag'></span>");
@@ -96,7 +99,8 @@ class MainWeb extends Auth {
 	public function setAppTitle(){
 				if(self::$page){
 					$title = self::$titleVal;
-					return  "<i class='".$title['icon_name_menu']."'></i> <a href=\"?modules=".self::$modules."&page=".self::$page."\"\n>".$title['menu_name_'.self::$language]."</a> &raquo; <small>".$title['menu_desc']."</small>\n"; 
+					$do = isset($_GET['form'])  ? " (".$_GET['form'].") " : "";
+					return  "<i class='".$title['icon_name_menu']."'></i> <a href=\"?modules=".self::$modules."&page=".self::$page."\"\n>".$title['menu_name_'.self::$language]."</a> $do   <i class='fa fa-question' data-toggle='tooltip' data-placement='right' title='".$title['menu_desc']."' style='cursor:pointer'></i>\n"; 
 				}else{
 					return  "Home";	
 				}
@@ -123,8 +127,8 @@ class MainWeb extends Auth {
 	
 	//Open Web Content Template
 	public function openTemplate(){
-		
-					$str = "     <script src='../vendors/parsleyjs/dist/parsley.min.js'></script> \n";
+					$str = "<!-- open Template -->\n";
+					$str .= "     <script src='../vendors/parsleyjs/dist/parsley.min.js'></script> \n";
 					$str .= "<div class='row'>\n";
 					$str .= "  <div class='col-md-12 col-sm-12 col-xs-12'>\n";
 					$str .= "    <div class='x_panel'>\n";
@@ -157,6 +161,8 @@ class MainWeb extends Auth {
 					$str .= "         </div> \n";
 					$str .= "       </div> \n";
 					$str .= "     </div> \n";
+					$str .= "<!-- open Template -->\n";
+					
 					/*$str .= "    <script src='./modules/".Auth::$modules."/".Auth::$page.".js'></script>\n";*/
 				return $str;
 	}
@@ -183,7 +189,7 @@ class MainWeb extends Auth {
 				echo "      <div class='modal-body'>Do you want to delete?</div>\n";
 				echo "      <div class='modal-footer'>\n";
 				echo "      <button type='button' class='btn btn-default' data-dismiss='modal'><i class='fa fa-close'></i> Cancel</button>\n";
-				echo "      <button type='button' class='btn btn-primary' id='actionDelete'><i class='fa fa-trash'></i> Delete</button>\n";
+				echo "      <button type='button' class='btn btn-danger' id='actionDelete'><i class='fa fa-trash'></i> Delete</button>\n";
 				echo "      </div>\n";
 				echo "   </div>\n";
 				echo "    </div>\n";
@@ -300,7 +306,30 @@ public function highlight($str, $keywords = ''){
 		}		
  	}
 	#######################################################
+
+
+
+###########################################
+//Set Page goto
+function redirect($backStep) 
+{
+	echo "<script language=\"javascript\">";
+	if($backStep == -1){
+		echo "	history.back($backStep);";
+	}else if($backStep == "x"){
+		echo "window.close();";
+	}else if($backStep != ""){
+		echo "window.location = '".$backStep."';";
+	}
+	echo "</script>";
 }
+
+
+}
+
+
+
+
 
 
 ?>

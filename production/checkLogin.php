@@ -1,5 +1,5 @@
 <?php
-@session_start();
+session_start();
 
 include('./includes/DBConnect.php');
 include("./includes/Class/Auth.Class.php");
