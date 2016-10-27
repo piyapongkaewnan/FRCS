@@ -1,5 +1,5 @@
 <?php
-session_start();
+@session_start();
 
 #############################
 # Section : Includes Files
@@ -9,7 +9,7 @@ require_once("./includes/Class/Menu.Class.php");
 require_once("./includes/Class/Main.Class.php");
 //require_once("./includes/Class/Form.Class.php");
 
-//require_once("./includes/functions.php");
+require_once("./includes/functions.php");
 
 # Check Session Timeout
 include("./session_timeout.php");
@@ -17,10 +17,12 @@ include("./session_timeout.php");
 //Assign Variable
 
 //$_SESSION['sess_user_name'] = "Administrator";
-
+//show_session();
 
 $Config['user_id'] =  $_SESSION['sess_user_id'];
+$Config['user_name'] =  $_SESSION['sess_user_name'];
 $Config['realname'] = $_SESSION['sess_realname'];
+$Config['email'] =  $_SESSION['sess_email'];
 $Config['modules'] = $_GET['modules'];
 $Config['page'] = $_GET['page'];
 
@@ -88,22 +90,29 @@ $db->debug= false;
 <link href="../build/css/custom.min.css" rel="stylesheet">
 
 <!-- jQuery -->
-<script src="../vendors/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="../vendors/jquery/dist/jquery.min.js"></script>
 
 <!-- Angular -->
-<script src="../vendors/angular/angular.min.js"></script>
+<script type="text/javascript" src="../vendors/angular/angular.min.js"></script>
 
 <!-- PNotify --> 
-<script src="../vendors/pnotify/dist/pnotify.js"></script> 
-<script src="../vendors/pnotify/dist/pnotify.buttons.js"></script> 
-<script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script> 
+<script type="text/javascript" src="../vendors/pnotify/dist/pnotify.js"></script> 
+<script type="text/javascript" src="../vendors/pnotify/dist/pnotify.buttons.js"></script> 
+<script type="text/javascript" src="../vendors/pnotify/dist/pnotify.nonblock.js"></script> 
 
 <!-- My Custom Core JS -->
-<script src="js/main.core.js"></script>
+<script type="text/javascript" src="js/main.core.js"></script>
 
 <style type="text/css">
-body {
+body ,html{
 	color : #444;
+	font-size:12px
+}
+.btn {
+		font-size:12px
+}
+input['text'] {
+		font-size:12px
 }
  a:hover {
 	text-decoration:underline; 
@@ -244,18 +253,18 @@ body {
 </div>-->
 
 <!-- Bootstrap --> 
-<script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script> 
+<script type="text/javascript" src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script> 
 
 <!-- FastClick --> 
 <!--<script src="../vendors/fastclick/lib/fastclick.js"></script> --> 
 <!-- NProgress --> 
-<script src="../vendors/nprogress/nprogress.js"></script> 
+<script type="text/javascript" src="../vendors/nprogress/nprogress.js"></script> 
 <!-- Chart.js --> 
 <!--<script src="../vendors/Chart.js/dist/Chart.min.js"></script> --> 
 <!-- gauge.js --> 
 <!--<script src="../vendors/gauge.js/dist/gauge.min.js"></script> --> 
 <!-- bootstrap-progressbar --> 
-<script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script> 
+<script type="text/javascript" src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script> 
 
 <!-- Skycons --> 
 <!--<script src="../vendors/skycons/skycons.js"></script> --> 
@@ -276,14 +285,14 @@ body {
 <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script> 
 <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script> --> 
 <!-- jQuery custom content scroller --> 
-<script src="../vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script> 
+<script type="text/javascript" src="../vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script> 
 
 <!-- bootstrap-daterangepicker --> 
-<script src="js/moment/moment.min.js"></script> 
-<script src="js/datepicker/daterangepicker.js"></script> 
+<script type="text/javascript" src="js/moment/moment.min.js"></script> 
+<script type="text/javascript" src="js/datepicker/daterangepicker.js"></script> 
 
 
-<script src="../build/js/custom.min.js"></script> 
+<script type="text/javascript" src="../build/js/custom.min.js"></script> 
 
 </body>
 </html>

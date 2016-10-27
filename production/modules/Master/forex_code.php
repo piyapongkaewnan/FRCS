@@ -3,46 +3,58 @@
 /*
 print "<pre>";
 print_r($_POST);
-print "</pre>";*/
+print "</pre>";
+*/
 
 include('../../includes/DBConnect.php');
 
 
 $action = $_POST['action'];
-$mgroup_id = $_POST['id'];
-$menu_group_th = $_POST['menu_group_th'];
-$menu_group_en = $_POST['menu_group_en'];
-$module_name = $_POST['module_name'];
-$menu_order = $_POST['menu_order'];
-$icon_id = $_POST['icon_id'] =="" ? "1" : $_POST['icon_id'];
+$id = $_POST['id'];
+$FXCode = $_POST['FXCode'];
+$FXSymbol = $_POST['FXSymbol'];
+$FxName = $_POST['FxName'];
+$IsBase = $_POST['IsBase']  ?  $_POST['IsBase'] : 'NULL';
+$RateToBase = $IsBase == "1" ? "1" : $_POST['RateToBase']; //(if True, RateToBase is automatically set to 1)
+$IsActive = $_POST['IsActive']  ?  $_POST['IsActive'] : 'NULL';
 $user_id = $_SESSION['sess_user_id'];
 
 $db->debug =0;
 
 if($action == "actionCreate"){     
-		$sql = "INSERT INTO menu_group 
-								(  menu_group_th, menu_group_en, module_name,menu_order, icon_id ,update_by )
-					VALUES ( '$menu_group_th',
-								 '$menu_group_en', 
-								'$module_name',
-								 $menu_order, 
-								 $icon_id,
-								 $user_id
+		$sql = "INSERT INTO fx 
+								(  FXCode,FXSymbol,FxName,IsBase,RateToBase,IsActive,CreatedBy,CreatedOn )
+					VALUES ( '$FXCode',
+								 '$FXSymbol', 
+								 '$FxName',
+								 $IsBase,
+								 $RateToBase, 
+								 $IsActive,
+								 $user_id,
+								 NOW()
 								 );";
 		
 }else if($action == "actionUpdate"){ 
-		$sql = "UPDATE menu_group 
+		$sql = "UPDATE fx
 								SET   
-										menu_group_th = '$menu_group_th', 
-										menu_group_en='$menu_group_en',  
-										module_name= '$module_name',  
-										menu_order = $menu_order,  
-										icon_id = $icon_id ,
-										update_by  = $user_id 										
-					WHERE mgroup_id = $mgroup_id ";
+										FXCode ='$FXCode',
+										FXSymbol = '$FXSymbol', 
+										FxName='$FxName',
+										IsBase=$IsBase,
+										RateToBase = $RateToBase,
+										IsActive = $IsActive,
+										ModifiedBy = $user_id, 
+										ModifiedOn = NOW() 										
+					WHERE id = $id ";
 
 }else if($action == "actionDelete"){
-		$sql = "DELETE FROM menu_group WHERE mgroup_id = $mgroup_id" ;
+		$sql = "UPDATE fx
+								SET  										
+										IsActive = 0,
+										IsDelete = 1,
+										DeletedBy = $user_id, 
+										DeletedOn = NOW() 										
+					WHERE id = $id " ;
 }
 
 	$result = $db->Execute($sql);

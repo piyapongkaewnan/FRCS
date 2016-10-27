@@ -1,68 +1,81 @@
 <?php
 
+if($_GET['action'] ==  'actionUpdate'){
 // แสดงรายละเอียด
-  $sql_site = "SELECT
+  $sql_edit = "SELECT
                         *						 
-                       FROM configs ";                    
-$rs_site =  $db ->GetRow($sql_site);
+                       FROM fx WHERE id = ".$_GET['id'];                    
+$rs_edit =  $db ->GetRow($sql_edit);
 
+}
 ?>
+<?=MainWeb::openTemplate();?>
 
-<?=MainWeb::openTemplate();?> 
-      <form  data-parsley-validate name="form_<?=$_GET['page']?>" enctype="multipart/form-data" id="form_<?=$_GET['page']?>" method="post" >
-
-    <div class="row">
-      <div class="col-xs-6">
-        <div class="form-group">
-          <label for="username" class="form-control-label">*Username :</label>
-          <input name="username" type="text" id="username" size="20" class="form-control input-sm " value="<?=$rs_edit['username']?>" required="required" />
-        </div>
-        <div class="form-group">
-          <label for="password_hash" class="form-control-label">*Password :
-            <?=$_GET['action'] == 'actionUpdate' ? "<label><input type='checkbox' id='rememPass' name='rememPass' value='Y'/> Not Change</label>" : ""?>
-          </label>
-          <input name="password_hash" type="password" id="password_hash" size="20" class="form-control input-sm " value="<?=$rs_edit['password_hash']?>"/>
-          <!--   required="required" data-parsley-equalto="#re_password"  data-parsley-length="[6, 50]" pattern="[a-zA-Z0-9\s]+"  --> 
-        </div>
-        <div class="form-group">
-          <label for="re_password" class="form-control-label">*Re-Password :</label>
-          <input name="re_password" type="password" id="re_password" size="20" class="form-control input-sm " value="<?=$rs_edit['password_hash']?>" />
-          <!-- required="required" data-parsley-equalto="#password_hash"  data-parsley-length="[6, 50]" pattern="[a-zA-Z0-9\s]+" --> 
-        </div>
-        <div class="form-group">
-          <label for="realname" class="form-control-label">*Real Name :</label>
-          <input name="realname" type="text" id="realname" size="20" class="form-control input-sm " value="<?=$rs_edit['realname']?>" required="required" />
-        </div>
-        <div class="form-group">
-          <label for="email" class="form-control-label">*Email :</label>
-          <input name="email" type="email" id="email" size="20" class="form-control input-sm " value="<?=$rs_edit['email']?>" required="required" />
-        </div>
-      </div>
-      <div class="col-xs-6">
-        <div class="form-group"> 
-          <!--  data:image/jpeg;base64,<? //=base64_encode($rs_edit['picture'])?>-->
-          <div class=" text-center"> <img  src="./images/img.jpg"  alt="..." width="150" height="150" id="profile-img" class="img-thumbnail" style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Click for change profile picture">
-            <div style="height:5px"></div>
-            <button type="button" class="btn btn-xs btn-danger">Remove Picture</button>
-            <span class="btn btn-xs btn-info" id="newPic">New Picture</span> </div>
-        </div>
-        <div class="form-group">
-          <label for="user_group" class="form-control-label">*User Group :</label>
-          
-        </div>
-      </div>
+<br />
+<form id="form_<?=$Config['page']?>" name="form_<?=$Config['page']?>" method="post" data-parsley-validate class="form-horizontal form-label-left">
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="FXCode">FX Code <span class="required">*</span> </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input type="text" id="FXCode" name="FXCode" value="<?=$rs_edit['FXCode']?>" required="required " data-parsley-trigger="change" class="form-control col-md-7 col-xs-12 has-feedback-left">
+      <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="FXSymbol">FX Symbol </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input class="form-control  col-md-7 col-xs-12 has-feedback-left" id="FXSymbol" name="FXSymbol" type="text"  value="<?=$rs_edit['FXSymbol']?>"/>
+      <span class="fa fa-lock  form-control-feedback left" aria-hidden="true"></span> </div>
+  </div>
+  <div class="form-group">
+    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Fx Name *</label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input class="form-control col-md-7 col-xs-12 has-feedback-left" id="FxName" name="FxName" type="text" value="<?=$rs_edit['FxName']?>"  required="required"/>
+      <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span> </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="IsBase">Is Base </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input type="checkbox" class=" input-sm" name="IsBase" id="IsBase" value="1" <?=$rs_edit['IsBase'] == "1"  ? "checked" : ""?>/>
     </div>
   </div>
-          <div class="ln_solid"></div>
-          <div class="form-group">
-            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-              <button type="reset" class="btn btn-primary"><i class="fa fa-close"></i> Cancel</button>
-              <button type="submit" class="btn btn-success"><i class="fa fa-pencil-square-o"></i> Submit</button>
-            </div>
-          </div>
-          
-        </form>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">Rate To Base <span class="required">*</span> </label>
+    <div class="col-md-4 col-sm-3 col-xs-12">
+      <input class="form-control col-md-7 col-xs-12 has-feedback-left" id="RateToBase" name="RateToBase" value="<?=number_format($rs_edit['RateToBase'],8);?>" type="text" required="required"/>
+      <span class="fa fa-calculator form-control-feedback left" aria-hidden="true"></span> </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">IsActive <span class="required"></span> </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input type="checkbox" class=" input-sm" name="IsActive" id="IsActive" value="1"  <?=$rs_edit['IsActive'] == "1"  ? "checked" : ""?> />
+    </div>
+  </div>
+  <div class="ln_solid"></div>
+  <div class="form-group">
+    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+      <button type="reset" class="btn btn-primary"><i class="fa fa-close"></i> Cancel</button>
+      <button type="submit" class="btn btn-success"><i class="fa fa-pencil-square-o "></i> Submit</button>
+      <input type="hidden" name="action" id="action" value="<?=$_GET['action']?>">
+      <input type="hidden" name="id" id="id" value="<?=$_GET['id']?>">
+    </div>
+  </div>
+</form>
 <?=MainWeb::closeTemplate();?>
-<script src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script>
+<script src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 
+<script type="text/javascript">
+$(function(){
+	
+	//doAction
+		var actions = '<?=$_GET['action']?>';				
+		
+		//Modules
+		var modules = '<?=$_GET['modules']?>';
+		//Page
+		var page = '<?=$_GET['page']?>';		
 
+	
+		$.FormAction( actions ,modules  ,page , '<?=$_GET['id']?>' , false  );
 
+	
+
+});
+</script>

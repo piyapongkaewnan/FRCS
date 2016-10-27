@@ -4,6 +4,8 @@ session_start();
 include('./includes/DBConnect.php');
 include("./includes/Class/Auth.Class.php");
 include("./includes/Class/Main.Class.php");
+
+
 $db->debug=0;
 
 //$main = new MainWeb();

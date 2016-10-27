@@ -166,7 +166,8 @@ $('input[name=selID]').click(function(){
 /*****************************************************************************************/
 // Main Action  on page
  $.MainActionOnPage= function(modules  ,page  ,select_id){
-				//$.initActionButton();
+				
+				$.initActionButton();
 				
 				$('input[type=search]').addClass('form-control input-sm');
 				
@@ -181,7 +182,8 @@ $('input[name=selID]').click(function(){
 				// Button Create, Edit,Delete Action
 				$("#btnCreate , #btnUpdate , #btnDelete").click( function() {	
 						var actions  = $(this).attr('rel');
-						var selID  = $(this).attr('ref');
+						//var selID  = $(this).attr('ref');
+						var selID  = getSelID();
 						
 						NProgress.start();		
 						

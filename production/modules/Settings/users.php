@@ -94,4 +94,4 @@ $tbl->openTable();
 <?=MainWeb::closeTemplate();?> 
 <?=MainWeb::setModal();?> 
 <?=MainWeb::setModalDelete();?> 
-<script src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 
+<script type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 

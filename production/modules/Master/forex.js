@@ -11,18 +11,16 @@ $(function(){
 		// Get page name
 		var page = $('#page').val();	
 		
-		//var setTitle =  $("#setTitle").val();
 
-			// Setting Dialog
-		//setDialog(setPage,520,220);
-	//	$.setDialog(setPage , 520 , 220 ,setTitle);
-		
 		$.MainActionOnPage(modules , page,'');
 		//$('input[type=search]').addClass('form-control input-sm');
 		
-		$('#btnCreate, #btnUpdate, #btnDelete').css('cursor','pointer');
 		
-	//	$.initActionButton();
+		//$('#btnCreate, #btnUpdate, #btnDelete').css('cursor','pointer');
 		
+
+		$('button[type=reset').click(function(){
+				window.history.back(-1);
+		});
  });
 

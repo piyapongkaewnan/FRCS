@@ -5,12 +5,13 @@ include("./includes/Class/DataTable.Class.php");
 $tbl = new dataTable();
 $tbl->id = ''.$_GET['page'];
 //$tbl->title = title_menu($_GET['setPage']);
-$tbl->menu = MENU_ADD;//MENU_ACTION_PAGE;
+//$tbl->menu = MENU_ADD;//MENU_ACTION_PAGE;
 $tbl->module = $_GET['module'];
 $tbl->page = $_GET['page'];
-$tbl->order = 4;
+$tbl->order = 1;
+$tbl->saveState  = true;
 //$tbl->orderType = "ASC";
-$tbl->pagingLength=1;
+$tbl->pagingLength=10;
 
 // List User Group
 $sql_list = "SELECT * FROM fx";
@@ -24,7 +25,7 @@ $rs_list =  $db ->GetAll($sql_list);
 <div class="row">
   <div class="col-xs-4"></div>
   <div class="col-xs-8 text-right">
-    <?=MENU_ADD?>
+    <?=MENU_ACTION?>
   </div>
 </div>
 <div style="height:3px"></div>
@@ -41,23 +42,23 @@ $rs_list =  $db ->GetAll($sql_list);
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-striped table-hover table-bordered compact dt-responsive" id="<?=$tbl->id;?>">
   <thead>
     <tr>
-      <th width="16%" align="center">FX Code</th>
-      <th width="15%" align="center"> FX Symbol</th>
+      <th width="9%" align="center">Manage</th>
+      <th width="14%" align="center">FX Code</th>
+      <th width="16%" align="center"> FX Symbol</th>
       <th width="34%" align="center">FX Name</th>
-      <th width="15%" align="center"> Rate To Base</th>
+      <th width="14%" align="center"> Rate To Base</th>
       <th width="13%" align="center">Is Active</th>
-      <th width="7%"  class="header_height">Manage</th>
     </tr>
   </thead>
   <tbody >
     <?php for($i=0;$i<count($rs_list);$i++){ ?>
     <tr>
-      <td><?=$rs_list[$i]['FXCode']?></td>
+      <td align="center"><input type="radio" name="selID" id="selID_<?=$rs_list[$i]['id']?>" value="<?=$rs_list[$i]['id']?>"/></td>
+      <td align="center"><?=$rs_list[$i]['FXCode']?></td>
       <td><?=$rs_list[$i]['FXSymbol']?></td>
       <td><?=$rs_list[$i]['FxName']?></td>
-      <td align="center"><?=$rs_list[$i]['RateToBase']?></td>
+      <td align="right"><?=number_format($rs_list[$i]['RateToBase'],6)?></td>
       <td align="center"><?=$rs_list[$i]['IsActive'];?></td>
-      <td align="center"><i class="fa fa-save" id="btnUpdate"  rel='actionUpdate' ref="<?=$rs_list[$i]['id']?>"></i> | <i class="fa fa-trash" id="btnDelete"  rel='actionDelete' ref="<?=$rs_list[$i]['id']?>"></i><!--<input type="radio" name="selID" id="selID_<?=$rs_list[$i]['id']?>" value="<?=$rs_list[$i]['id']?>"/>--></td>
     </tr>
     <?php } // End For ?>
   </tbody>
@@ -71,3 +72,4 @@ $rs_list =  $db ->GetAll($sql_list);
 <?=MainWeb::setModal();?>
 <?=MainWeb::setModalDelete();?>
 <script src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 
+<!-- <i class="fa fa-save" id="btnUpdate"  rel='actionUpdate' ref="<?=$rs_list[$i]['id']?>"></i> | <i class="fa fa-trash" id="btnDelete"  rel='actionDelete' ref="<?=$rs_list[$i]['id']?>"></i> -->

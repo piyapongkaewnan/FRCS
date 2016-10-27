@@ -8,7 +8,7 @@ require_once("./includes/DBConnect.php");
 require_once("./includes/Class/Auth.Class.php");
 require_once("./includes/Class/Main.Class.php");
 //show_session();
-//print_r($_SESSION);
+print_r($_SESSION);
 $user_id =  $_SESSION['sess_user_id'];
 
 //Set Variable to Class Auth
@@ -44,12 +44,12 @@ if(!Auth::isGuest()){ MainWeb::redirect('index.php'); }
 
 <!-- Custom Theme Style -->
 <link href="css/login.css" rel="stylesheet">
-<script src="../vendors/jquery/dist/jquery.min.js"></script>
-<script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="../vendors/parsleyjs/dist/parsley.min.js"></script>
+<script type="text/javascript" src="../vendors/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../vendors/parsleyjs/dist/parsley.min.js"></script>
 
 <!-- NProgress -->
-<script src="../vendors/nprogress/nprogress.js"></script>
+<script type="text/javascript" src="../vendors/nprogress/nprogress.js"></script>
 </head>
 <body class="login">
 
@@ -86,8 +86,7 @@ if(!Auth::isGuest()){ MainWeb::redirect('index.php'); }
   <!-- /card-container --> 
 </div>
 <!-- /container --> 
-<script src="js/moment/moment.min.js"></script> 
-<!--<script src="js/main.core.js"></script> 
---><script src="js/login.js"></script>
+<script type="text/javascript" src="js/moment/moment.min.js"></script> 
+<script type="text/javascript" src="js/login.js"></script>
 </body>
 </html>

@@ -128,7 +128,9 @@ class MainWeb extends Auth {
 	//Open Web Content Template
 	public function openTemplate(){
 					$str = "<!-- open Template -->\n";
-					$str .= "     <script src='../vendors/parsleyjs/dist/parsley.min.js'></script> \n";
+					$str .= "     <script type='text/javascript' src='../vendors/parsleyjs/dist/parsley.min.js'></script> \n";
+					/*$str .= "     <script type='text/javascript' src='../vendors/parsleyjs/src/i18n/th.js'></script> \n";*/
+					$str .= "     <link rel='stylesheet' type='text/css' href='../vendors/parsleyjs/src/parsley.css'/> \n";
 					$str .= "<div class='row'>\n";
 					$str .= "  <div class='col-md-12 col-sm-12 col-xs-12'>\n";
 					$str .= "    <div class='x_panel'>\n";

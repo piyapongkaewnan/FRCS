@@ -19,17 +19,18 @@ $sqlUpdateStat = "UPDATE stats_login SET logout_datetime = Now() WHERE session_i
 $db->Execute($sqlUpdateStat);
 
 //$rememberRealName = $_SESSION['sess_realname'];
+$sesToUnset = array('sess_id','sess_user_id','sess_user_name','sess_email','sess_realname');
 
 //show_session();
-foreach($_SESSION as  $key => $val){
-	unset($_SESSION[$key]);
+foreach($sesToUnset as  $sess){
+	unset($_SESSION[$sess]);
 }
 
 // Store realname for Display login page
 //$_SESSION['sess_realname'] = $rememberRealName;
 
 // Redirect
-pageback('login.php','');
+MainWeb::redirect('login.php');
 
 
 ?>
