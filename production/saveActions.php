@@ -8,7 +8,7 @@ $db->debug = false; # Change to false for Production
 					
 switch($_POST['action']){
 	case  'save_stat'  :
-	//$sql_action = "INSERT INTO  stats_events  (user_id, session_id,menu_id)  VALUES(  ".$_SESSION['sess_user_id']." ,'".$_SESSION['sess_id']."' , ".$_POST['menu_id']." )";	
+	$sql_action = "INSERT INTO  stats_events  (user_id, session_id,menu_id)  VALUES(  ".$_SESSION['sess_user_id']." ,'".$_SESSION['sess_id']."' , ".$_POST['menu_id']." )";	
 	break;
 	
 	case  'add_favorites'  :

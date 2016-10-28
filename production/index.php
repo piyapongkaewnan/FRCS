@@ -9,14 +9,8 @@ require_once("./includes/Class/Menu.Class.php");
 require_once("./includes/Class/Main.Class.php");
 //require_once("./includes/Class/Form.Class.php");
 
-require_once("./includes/functions.php");
+//require_once("./includes/functions.php");
 
-# Check Session Timeout
-include("./session_timeout.php");
-
-//Assign Variable
-
-//$_SESSION['sess_user_name'] = "Administrator";
 //show_session();
 
 $Config['user_id'] =  $_SESSION['sess_user_id'];
@@ -26,8 +20,8 @@ $Config['email'] =  $_SESSION['sess_email'];
 $Config['modules'] = $_GET['modules'];
 $Config['page'] = $_GET['page'];
 
-if(!isset($_SESSION['sess_user_id'])){ MainWeb::redirect('login.php'); }
-
+//if(!isset($_SESSION['sess_user_id'])){ MainWeb::redirect('login.php'); }
+!$_SESSION['sess_user_id'] ?  MainWeb::redirect('login.php') : '';
 
 //Call Auth Class
 Auth::setDB($db);
@@ -52,6 +46,9 @@ if(!$chkMenuAuth){ include('page_403.php'); return; }
 
 
 $db->debug= false;
+
+# Check Session Timeout
+include("./session_timeout.php");
 
 ?>
 <!DOCTYPE html>
@@ -219,8 +216,7 @@ input['text'] {
         
         <!-- footer content -->
         <footer>
-          <div class="pull-right"> <?=COPYRIGHT?> <br>          
-          <?=SITE_NAME?></div>
+          <div class="pull-right"> <?=COPYRIGHT?></div>
           <div class="clearfix"></div>
         </footer>        
         <!-- /footer content --> 

@@ -8,7 +8,7 @@ require_once("./includes/DBConnect.php");
 require_once("./includes/Class/Auth.Class.php");
 require_once("./includes/Class/Main.Class.php");
 //show_session();
-print_r($_SESSION);
+//print_r($_SESSION);
 $user_id =  $_SESSION['sess_user_id'];
 
 //Set Variable to Class Auth
@@ -40,7 +40,7 @@ if(!Auth::isGuest()){ MainWeb::redirect('index.php'); }
 <!-- NProgress -->
 <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
 <!-- Animate.css -->
-<link href="../vendors/animate.css/animate.min.css" rel="stylesheet">
+<!--<link href="../vendors/animate.css/animate.min.css" rel="stylesheet">-->
 
 <!-- Custom Theme Style -->
 <link href="css/login.css" rel="stylesheet">

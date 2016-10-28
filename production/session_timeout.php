@@ -1,5 +1,5 @@
 <?php
-//session_start();
+session_start();
 
 $set_times = 30; // Set timeout period in minutes
 $inactive = $set_times * 60; // Converts minutes to seconds

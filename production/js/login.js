@@ -176,8 +176,8 @@ function supportsHTML5Storage() {
  */
 function setLocalStorageData() {
     if(!supportsHTML5Storage()) { return false; }		
-		localStorage.setItem("APPS.SITE.PROFILE_IMG_SRC", "./images/img.jpg?sz=100" );
-		localStorage.setItem("APPS.SITE.PROFILE_NAME", $("#profile-name").html());
+		localStorage.setItem("APPS.SITE.PROFILE_IMG_SRC", "./images/img.jpg" );
+		localStorage.setItem("APPS.SITE.PROFILE_NAME", $("#profile-name").text());
 		localStorage.setItem("APPS.SITE.PROFILE_REAUTH_USERNAME", inputUsername.value);
 		localStorage.setItem("APPS.SITE.PROFILE_REMEMBER_ME", inputRemember.value);
 		localStorage.setItem("APPS.SITE.PROFILE_LAST_LOGIN", 'Last login : '+dateTime);
@@ -189,7 +189,7 @@ function setLocalStorageData() {
  */
 function ResetLocalStorageData() {
     if(!supportsHTML5Storage()) { return false; }
-    localStorage.setItem("APPS.SITE.PROFILE_IMG_SRC", "./images/user.png?sz=100");
+    localStorage.setItem("APPS.SITE.PROFILE_IMG_SRC", "./images/user.png");
     localStorage.setItem("APPS.SITE.PROFILE_NAME", "");
     localStorage.setItem("APPS.SITE.PROFILE_REAUTH_USERNAME", "<input type='text' name='inputUsername' id='inputUsername' class='form-control' placeholder='Username' required autofocus>");
 	 localStorage.setItem("APPS.SITE.PROFILE_REMEMBER_ME", "<input type='checkbox' name='inputRemember' id='inputRemember' value='TRUE'>");

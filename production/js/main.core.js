@@ -23,7 +23,7 @@ var page = $('#page').val();
 //#########################################################
 // Set Realname to localStorage
 var profileRealname = localStorage.getItem("APPS.SITE.PROFILE_NAME");
-var labelRealname = $('#show_realname').html();
+var labelRealname = $('#show_realname').text();
 if(profileRealname  != labelRealname){
 localStorage.setItem("APPS.SITE.PROFILE_NAME" ,labelRealname);
 }
@@ -240,7 +240,7 @@ $('input[name=selID]').click(function(){
 		
 		 var request = $.ajax({
 					type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-					url         : './modules/'+modules+'/'+page+'_code.php?actions='+actions+'&time='+$.now(), // the url where we want to POST
+					url         : './modules/'+modules+'/'+page+'_code.php', // the url where we want to POST
 					data        : $(this).serialize(), // our data object
 					dataType    : 'html' // text, html, xml, json, jsonp, and script.
 					});
@@ -424,8 +424,8 @@ $.DataTableMerg = function(table_id , target, Length , scrollY ,colspan ){
 $.initActionButton = function (){
 	var $checkboxes = $('input[name=selID]');
 	if($checkboxes.filter(':checked').length<=0){	// if not select set edit,delete button to Disable
-		$('#btnUpdate').attr("disabled", "disabled");
-		$('#btnDelete').attr("disabled", "disabled");
+		//$('#btnUpdate').attr("disabled", "disabled");
+		//$('#btnDelete').attr("disabled", "disabled");
 	}else{  // if  select > 0  set edit,delete button to remove Disable
 		$('#btnUpdate').removeAttr('disabled'); 
 		$('#btnDelete').removeAttr('disabled'); 

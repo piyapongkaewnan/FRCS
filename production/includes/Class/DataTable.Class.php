@@ -74,9 +74,12 @@ class dataTable{
 		
 		//echo "			 dom: '<Bf<t><lpi>>',  \n";
 		echo "			 dom: '$this->dom',  \n";
-		
-		echo "			     buttons: [ \n";
-		echo "			         { \n";
+		echo "			 'columnDefs': [ {  \n";
+        echo "			   'targets': 'no-sort',  \n";
+        echo "			   'orderable': false,  \n";
+    	echo "			 } ] ,  \n";
+		echo "			     buttons: [ \n"; 
+		echo "			         { \n";  
 		echo "			           extend: 'copy', \n";
 		echo "			           className: 'btn-sm' \n";
 		echo "			         }, \n";

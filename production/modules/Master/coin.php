@@ -14,7 +14,7 @@ $tbl->saveState  = true;
 $tbl->pagingLength=10;
 
 // List User Group
-$sql_list = "SELECT * FROM fx";
+$sql_list = "SELECT   a.*,   b.FxName FROM coin a  LEFT JOIN fx b  ON a.FxId = b.id ORDER BY a.CoinName";
 $rs_list =  $db ->GetAll($sql_list);
 
 //$DirModule =  MainWeb::ScanDir( '../production/modules'); // path from top);
@@ -42,23 +42,25 @@ $rs_list =  $db ->GetAll($sql_list);
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-striped table-hover table-bordered compact dt-responsive" id="<?=$tbl->id;?>">
   <thead>
     <tr>
-      <th width="9%" align="center">Manage</th>
-      <th width="14%" align="center">FX Code</th>
-      <th width="16%" align="center"> FX Symbol</th>
-      <th width="34%" align="center">FX Name</th>
-      <th width="14%" align="center"> Rate To Base</th>
-      <th width="13%" align="center">Is Active</th>
+      <th width="8%" align="center">Manage</th>
+      <th width="12%" align="center">Coin Code</th>
+      <th width="22%" align="center"> Coin Name</th>
+      <th width="15%" align="center">Fx Name</th>
+      <th width="18%" align="center">Base Value</th>
+      <th width="15%" align="center">USD Conv. Rate</th>
+      <th width="10%" align="center">Is Active</th>
     </tr>
   </thead>
   <tbody >
     <?php for($i=0;$i<count($rs_list);$i++){ ?>
     <tr>
       <td align="center"><input type="radio" name="selID" id="selID_<?=$rs_list[$i]['id']?>" value="<?=$rs_list[$i]['id']?>"/></td>
-      <td align="center"><?=$rs_list[$i]['FXCode']?></td>
-      <td><?=$rs_list[$i]['FXSymbol']?></td>
+      <td align="center"><?=$rs_list[$i]['CoinCode']?></td>
+      <td><?=$rs_list[$i]['CoinName']?></td>
       <td><?=$rs_list[$i]['FxName']?></td>
-      <td align="right"><?=number_format($rs_list[$i]['RateToBase'],6)?></td>
-      <td align="center"><?=$rs_list[$i]['IsActive']=="1" ? "YES" : "NO";?></td>
+       <td><?=$rs_list[$i]['BaseValue']?></td>
+       <td><?=$rs_list[$i]['USDConversionRate']?></td>
+      <td width="10%" align="center"><?=$rs_list[$i]['IsActive']=="1" ? "YES" : "NO";?></td>
     </tr>
     <?php } // End For ?>
   </tbody>

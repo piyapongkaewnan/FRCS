@@ -14,7 +14,24 @@ $tbl->saveState  = true;
 $tbl->pagingLength=10;
 
 // List User Group
-$sql_list = "SELECT * FROM fx";
+$sql_list = "SELECT
+					  a.*,
+					  b.type,
+					  c.CountryName,
+					  (SELECT
+						 PartnerName
+					   FROM partner
+					   WHERE id = Partner1) AS Partner1,
+					  (SELECT
+						 PartnerName
+					   FROM partner
+					   WHERE id = Partner2) AS Partner2
+					FROM game a
+					  LEFT JOIN gametype b
+						ON a.GameType = b.id
+					  LEFT JOIN country c
+						ON a.Territory = c.id
+					ORDER BY a.GameName";
 $rs_list =  $db ->GetAll($sql_list);
 
 //$DirModule =  MainWeb::ScanDir( '../production/modules'); // path from top);
@@ -42,23 +59,31 @@ $rs_list =  $db ->GetAll($sql_list);
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-striped table-hover table-bordered compact dt-responsive" id="<?=$tbl->id;?>">
   <thead>
     <tr>
-      <th width="9%" align="center">Manage</th>
-      <th width="14%" align="center">FX Code</th>
-      <th width="16%" align="center"> FX Symbol</th>
-      <th width="34%" align="center">FX Name</th>
-      <th width="14%" align="center"> Rate To Base</th>
-      <th width="13%" align="center">Is Active</th>
+      <th width="4%" align="center" class="no-sort"><i class="fa fa-gear"></i></th>
+      <th width="7%" align="center">RefCode</th>
+      <th width="13%" align="center">GroupCode</th>
+      <th width="13%" align="center">GameName</th>
+      <th width="13%" align="center">GameType</th>
+      <th width="13%" align="center"> Partner1</th>
+      <th width="9%" align="center">Partner2</th>
+      <th width="10%" align="center">PercentShare</th>
+      <th width="10%" align="center">Territory</th>
+      <th width="8%" align="center">Is Active</th>
     </tr>
   </thead>
   <tbody >
     <?php for($i=0;$i<count($rs_list);$i++){ ?>
     <tr>
       <td align="center"><input type="radio" name="selID" id="selID_<?=$rs_list[$i]['id']?>" value="<?=$rs_list[$i]['id']?>"/></td>
-      <td align="center"><?=$rs_list[$i]['FXCode']?></td>
-      <td><?=$rs_list[$i]['FXSymbol']?></td>
-      <td><?=$rs_list[$i]['FxName']?></td>
-      <td align="right"><?=number_format($rs_list[$i]['RateToBase'],6)?></td>
-      <td align="center"><?=$rs_list[$i]['IsActive']=="1" ? "YES" : "NO";?></td>
+      <td align="center"><?=$rs_list[$i]['RefCode']?></td>
+      <td align="center"><?=$rs_list[$i]['GroupCode']?></td>
+      <td align="center"><?=$rs_list[$i]['GameName']?></td>
+      <td><?=$rs_list[$i]['type']?></td>
+      <td><?=$rs_list[$i]['Partner1']?></td>
+      <td><?=$rs_list[$i]['Partner2']?></td>
+       <td align="right"><?=$rs_list[$i]['PercentShare']?></td>
+       <td><?=$rs_list[$i]['CountryName']?></td>
+      <td width="8%" align="center"><?=$rs_list[$i]['IsActive']=="1" ? "YES" : "NO";?></td>
     </tr>
     <?php } // End For ?>
   </tbody>

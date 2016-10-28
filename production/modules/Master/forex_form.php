@@ -16,20 +16,20 @@ $rs_edit =  $db ->GetRow($sql_edit);
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="FXCode">FX Code <span class="required">*</span> </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <input type="text" id="FXCode" name="FXCode" value="<?=$rs_edit['FXCode']?>" required="required " data-parsley-trigger="change" class="form-control col-md-7 col-xs-12 has-feedback-left">
-      <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> </div>
+      <input type="text" id="FXCode" name="FXCode" value="<?=$rs_edit['FXCode']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
+      <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="FXSymbol">FX Symbol </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
       <input class="form-control  col-md-7 col-xs-12 has-feedback-left" id="FXSymbol" name="FXSymbol" type="text"  value="<?=$rs_edit['FXSymbol']?>"/>
-      <span class="fa fa-lock  form-control-feedback left" aria-hidden="true"></span> </div>
+      <span class="fa fa-dollar  form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
   <div class="form-group">
-    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Fx Name *</label>
+    <label  class="control-label col-md-3 col-sm-3 col-xs-12"  for="FxName">Fx Name *</label>
     <div class="col-md-6 col-sm-6 col-xs-12">
       <input class="form-control col-md-7 col-xs-12 has-feedback-left" id="FxName" name="FxName" type="text" value="<?=$rs_edit['FxName']?>"  required="required"/>
-      <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span> </div>
+      <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="IsBase">Is Base </label>
@@ -38,13 +38,13 @@ $rs_edit =  $db ->GetRow($sql_edit);
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-md-3 col-sm-3 col-xs-12">Rate To Base <span class="required">*</span> </label>
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="RateToBase">Rate To Base <span class="required">*</span> </label>
     <div class="col-md-4 col-sm-3 col-xs-12">
       <input class="form-control col-md-7 col-xs-12 has-feedback-left" id="RateToBase" name="RateToBase" value="<?=number_format($rs_edit['RateToBase'],8);?>" type="text" required="required"/>
       <span class="fa fa-calculator form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-md-3 col-sm-3 col-xs-12">IsActive <span class="required"></span> </label>
+    <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="IsActive">IsActive <span class="required"></span> </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
       <input type="checkbox" class=" input-sm" name="IsActive" id="IsActive" value="1"  <?=$rs_edit['IsActive'] == "1"  ? "checked" : ""?> />
     </div>
