@@ -16,7 +16,7 @@ $realname = $_SESSION['sess_realname'];
 
 !$_SESSION['sess_user_id'] ?  MainWeb::redirect('login.php') : '';
 
-$timeCountDown = 15; // Set time countdown x secound
+$timeCountDown = 10; // Set time countdown x secound
 
 Auth::setDB($db);
 Auth::setUserID($user_id);

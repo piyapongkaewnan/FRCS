@@ -19,7 +19,7 @@ Auth::setUserID($user_id);
 MainWeb::GetSiteInfo(); // Get webpage variable
 
 //Check user login  <> isGuest ->index 
-if(!Auth::isGuest()){ MainWeb::redirect('index.php'); }
+//if(!Auth::isGuest()){ MainWeb::redirect('index.php'); }
 //show_session();
 ?>
 <!DOCTYPE html>
@@ -88,5 +88,13 @@ if(!Auth::isGuest()){ MainWeb::redirect('index.php'); }
 <!-- /container --> 
 <script type="text/javascript" src="js/moment/moment.min.js"></script> 
 <script type="text/javascript" src="js/login.js"></script>
+
+<script type="text/javascript">
+$(function(){
+	
+});
+</script>
+
+
 </body>
 </html>

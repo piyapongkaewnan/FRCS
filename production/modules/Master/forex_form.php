@@ -8,6 +8,9 @@ if($_GET['action'] ==  'actionUpdate'){
 $rs_edit =  $db ->GetRow($sql_edit);
 
 }
+if ( $rs_edit['IsActive'] == "1" ||  $_GET['action'] ==  'actionCreate'){
+	$strIsActive =  "checked";
+}
 ?>
 <?=MainWeb::openTemplate();?>
 
@@ -15,13 +18,13 @@ $rs_edit =  $db ->GetRow($sql_edit);
 <form id="form_<?=$Config['page']?>" name="form_<?=$Config['page']?>" method="post" data-parsley-validate class="form-horizontal form-label-left">
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="FXCode">FX Code <span class="required">*</span> </label>
-    <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="col-md-4 col-sm-3 col-xs-12">
       <input type="text" id="FXCode" name="FXCode" value="<?=$rs_edit['FXCode']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
       <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="FXSymbol">FX Symbol </label>
-    <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="col-md-4 col-sm-3 col-xs-12">
       <input class="form-control  col-md-7 col-xs-12 has-feedback-left" id="FXSymbol" name="FXSymbol" type="text"  value="<?=$rs_edit['FXSymbol']?>"/>
       <span class="fa fa-dollar  form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
@@ -46,7 +49,7 @@ $rs_edit =  $db ->GetRow($sql_edit);
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="IsActive">IsActive <span class="required"></span> </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <input type="checkbox" class=" input-sm" name="IsActive" id="IsActive" value="1"  <?=$rs_edit['IsActive'] == "1"  ? "checked" : ""?> />
+      <input type="checkbox" class=" input-sm" name="IsActive" id="IsActive" value="1"  <?=$strIsActive?>  />
     </div>
   </div>
   <div class="ln_solid"></div>

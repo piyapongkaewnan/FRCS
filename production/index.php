@@ -1,5 +1,5 @@
 <?php
-@session_start();
+session_start();
 
 #############################
 # Section : Includes Files
@@ -7,11 +7,13 @@ require_once("./includes/DBConnect.php");
 require_once("./includes/Class/Auth.Class.php");
 require_once("./includes/Class/Menu.Class.php");
 require_once("./includes/Class/Main.Class.php");
+
+# Check Session Timeout
+include("./sessionTimeout.php");
+
 //require_once("./includes/Class/Form.Class.php");
 
-//require_once("./includes/functions.php");
-
-//show_session();
+//print_r($_SESSION);
 
 $Config['user_id'] =  $_SESSION['sess_user_id'];
 $Config['user_name'] =  $_SESSION['sess_user_name'];
@@ -21,7 +23,7 @@ $Config['modules'] = $_GET['modules'];
 $Config['page'] = $_GET['page'];
 
 //if(!isset($_SESSION['sess_user_id'])){ MainWeb::redirect('login.php'); }
-!$_SESSION['sess_user_id'] ?  MainWeb::redirect('login.php') : '';
+if(!isset($_SESSION['sess_user_id'])) {  MainWeb::redirect('logout.php');}
 
 //Call Auth Class
 Auth::setDB($db);
@@ -30,12 +32,10 @@ Auth::setRealName($Config['realname']);
 Auth::setModule($Config['modules']);
 Auth::setPage($Config['page']);
 
-
 //Call MainWeb Class
 MainWeb::GetSiteInfo(); // Get webpage variable
 Auth::setLanguage(LANGUAGE);
 MainWeb::getPageInfo();
-
 
 $titleVal = MainWeb::getTitleVal();
 $chkMenuAuth = Auth::isAllowPage();
@@ -44,11 +44,7 @@ $chkMenuAuth = Auth::isAllowPage();
 //if(Auth::isGuest()){ pageback('login.php',''); }
 if(!$chkMenuAuth){ include('page_403.php'); return; }
 
-
 $db->debug= false;
-
-# Check Session Timeout
-include("./session_timeout.php");
 
 ?>
 <!DOCTYPE html>
@@ -205,9 +201,7 @@ input['text'] {
 						 include("main.php");
 					}
 					
-					
-				
-                      ?>
+					?>
               </div>
             </div>
           </div>
@@ -229,24 +223,6 @@ input['text'] {
 <input name="page" id="page" type="hidden" value="<?=$Config['page']?>">
 <input name="chkMenuAuth" id="chkMenuAuth" type="hidden" value="<?=$chkMenuAuth?>">
 <div id="divMsg"></div>
-<!-- Modal -->
-<!--<div class="modal fade" id="PermissionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content alert alert-danger">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h5 class="modal-title" id="myModalLabel"><img src='images/iconError.gif' align='absmiddle'><strong > Warning!!</strong></h5>
-      </div>
-      <div class="modal-body">
-        <p><strong> You Do Not Have Sufficient Permission to Access This Page!!</strong><br>
-          Please contact your administrator..</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>-->
 
 <!-- Bootstrap --> 
 <script type="text/javascript" src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script> 
@@ -286,10 +262,7 @@ input['text'] {
 <!-- bootstrap-daterangepicker --> 
 <script type="text/javascript" src="js/moment/moment.min.js"></script> 
 <script type="text/javascript" src="js/datepicker/daterangepicker.js"></script> 
-
-
 <script type="text/javascript" src="../build/js/custom.min.js"></script> 
-
 </body>
 </html>
 <?php

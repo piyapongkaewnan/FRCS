@@ -12,13 +12,13 @@ $rs_edit =  $db ->GetRow($sql_edit);
 
 }
 
-// Get Data from fx
-$sqlFx = 'SELECT
+// Get Data from country
+$sqlCountry = 'SELECT
 					  id,
-					  CONCAT(FxName," (", FXCode,")") AS FxName
-					FROM fx
-					ORDER BY FxName ';
-$rsFx = $db->GetAll($sqlFx);	
+					 CountryName
+					FROM country
+					ORDER BY CountryName ';
+$rsCountry = $db->GetAll($sqlCountry);	
 
 
 
@@ -94,7 +94,7 @@ if ( $rs_edit['IsActive'] == "1" ||  $_GET['action'] ==  'actionCreate'){
     <div class="col-md-4 col-sm-3 col-xs-12">
       <select class="form-control col-md-7 col-xs-12 input-sm" name="Territory" id="Territory" tabindex="-1" required>
         <option></option>
-        <?=Form::genOptionSelect($rsFx,'id','FxName',$rs_edit['Territory']);?>
+        <?=Form::genOptionSelect($rsCountry,'id','CountryName',$rs_edit['Territory']);?>
       </select>
     </div>
   </div>
@@ -173,24 +173,27 @@ $(function(){
 		var page = '<?=$_GET['page']?>';		
 
 	
-		$.FormAction( actions ,modules  ,page , '<?=$_GET['id']?>' , true  );
+		$.FormAction( actions ,modules  ,page , '<?=$_GET['id']?>' , false  );
 
 		 $("#Territory , #Partner1 , #Partner2").select2({
-          placeholder: "Select a option",
+          placeholder: "Select a option..",
           allowClear: true
         });
 	
-	
+		// Onload call setPublisher
+		setPublisher($('#GameType').val());
+		
 		$('#GameType').change(function(){
 			setPublisher($(this).val());
 		});
 		
-	
+		
+		//>> if game type = MarketPlace , then Publisher value is Blank and Field is readonly
 		function setPublisher(GameType){
 			if(GameType == '3'){
 				$('#Publisher').prop('readonly',true);		
 			}else{
-				$('#Publisher').prop('readonly'false);	
+				$('#Publisher').prop('readonly',false);	
 			}
 		
 		}

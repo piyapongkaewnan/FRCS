@@ -59,11 +59,11 @@ $rs_list =  $db ->GetAll($sql_list);
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-striped table-hover table-bordered compact dt-responsive" id="<?=$tbl->id;?>">
   <thead>
     <tr>
-      <th width="4%" align="center" class="no-sort"><i class="fa fa-gear"></i></th>
-      <th width="7%" align="center">RefCode</th>
-      <th width="13%" align="center">GroupCode</th>
-      <th width="13%" align="center">GameName</th>
-      <th width="13%" align="center">GameType</th>
+      <th width="5%" align="center" class="no-sort"><i class="fa fa-gear"></i></th>
+      <th width="8%" align="center">RefCode</th>
+      <th width="10%" align="center">GroupCode</th>
+      <th width="16%" align="center">GameName</th>
+      <th width="11%" align="center">GameType</th>
       <th width="13%" align="center"> Partner1</th>
       <th width="9%" align="center">Partner2</th>
       <th width="10%" align="center">PercentShare</th>

@@ -1,4 +1,3 @@
-
 <?php
 #######################################
 # Class : Main
@@ -100,7 +99,8 @@ class MainWeb extends Auth {
 				if(self::$page){
 					$title = self::$titleVal;
 					$do = isset($_GET['form'])  ? " (".$_GET['form'].") " : "";
-					return  "<i class='".$title['icon_name_menu']."'></i> <a href=\"?modules=".self::$modules."&page=".self::$page."\"\n>".$title['menu_name_'.self::$language]."</a> $do   <i class='fa fa-question' data-toggle='tooltip' data-placement='right' title='".$title['menu_desc']."' style='cursor:pointer'></i>\n"; 
+					// <i class='fa fa-question' data-toggle='tooltip' data-placement='right' title='".$title['menu_desc']."' style='cursor:pointer'></i>
+					return  "<i class='".$title['icon_name_menu']."'></i> <a href=\"?modules=".self::$modules."&page=".self::$page."\"\n>".$title['menu_name_'.self::$language]."</a> $do  &raquo; <small>".$title['menu_desc']."</small>\n"; 
 				}else{
 					return  "Home";	
 				}
@@ -315,6 +315,7 @@ public function highlight($str, $keywords = ''){
 //Set Page goto
 function redirect($backStep) 
 {
+	
 	echo "<script language=\"javascript\">";
 	if($backStep == -1){
 		echo "	history.back($backStep);";
@@ -328,8 +329,6 @@ function redirect($backStep)
 
 
 }
-
-
 
 
 

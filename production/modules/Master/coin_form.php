@@ -12,6 +12,7 @@ $rs_edit =  $db ->GetRow($sql_edit);
 
 }
 
+// Get data from fa table to select2
 
 $sqlFx = 'SELECT
 					  id,
@@ -19,6 +20,7 @@ $sqlFx = 'SELECT
 					FROM fx
 					ORDER BY FxName ';
 $rsFx = $db->GetAll($sqlFx);					
+
 
 if ( $rs_edit['IsActive'] == "1" ||  $_GET['action'] ==  'actionCreate'){
 	$strIsActive =  "checked";
@@ -33,7 +35,7 @@ if ( $rs_edit['IsActive'] == "1" ||  $_GET['action'] ==  'actionCreate'){
 <form id="form_<?=$Config['page']?>" name="form_<?=$Config['page']?>" method="post" data-parsley-validate class="form-horizontal form-label-left">
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="CoinCode">Coin Code <span class="required">*</span> </label>
-    <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="col-md-4 col-sm-3 col-xs-12">
       <input type="text" id="CoinCode" name="CoinCode" value="<?=$rs_edit['CoinCode']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
       <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
@@ -45,7 +47,7 @@ if ( $rs_edit['IsActive'] == "1" ||  $_GET['action'] ==  'actionCreate'){
   </div>
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="FxId">Default FX<span class="required">*</span></label>
-    <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="col-md-4 col-sm-3 col-xs-12">
       <select class="form-control col-md-7 col-xs-12 input-sm" name="FxId" id="FxId" tabindex="-1" required>
         <option></option>
         <?=Form::genOptionSelect($rsFx,'id','FxName',$rs_edit['FxId']);?>

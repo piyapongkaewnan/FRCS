@@ -16,6 +16,8 @@ var page = $('#page').val();
 // Setting Dialogs
 //$.setDialog = function(page,w,h , title){
 
+// Set URL to Redirect back page
+var RedirectURL =  '?modules='+modules+'&page='+page;
 				
 //}
 
@@ -177,7 +179,10 @@ $('input[name=selID]').click(function(){
 				});
 			
 				var isSelected = select_id == '' ? '' : '&select_id='+$('#'+select_id).val();
-			
+				
+				
+				
+				
 				/*****************************************************************************************/
 				// Button Create, Edit,Delete Action
 				$("#btnCreate , #btnUpdate , #btnDelete").click( function() {	
@@ -215,16 +220,22 @@ $('input[name=selID]').click(function(){
 						// Action for Delete program by ID
 						$('#actionDelete').click( function(){
 							var selID = getSelID() ;	
+							
 						//	alert(page);
 							$.post( "./modules/"+modules+"/"+page+"_code.php", { action: 'actionDelete', id: selID } , function( data ) {
 										//$('#FormModalDelete').modal('hide');
 										$.showNotify('success');
 										//console.log(data);
-										setTimeout("window.location.reload(true)",2000);		
+										setTimeout("window.location.reload(true)",2000);			
 									});
 						
 						});
-							
+						
+						// Event when click Cancel button go to back
+						$('button[type=reset').click(function(){
+								window.history.back(-1);
+						});
+						
 			} // End function			
 
 
@@ -253,7 +264,8 @@ $('input[name=selID]').click(function(){
 								NProgress.done();
 								if(textStatus == true){
 									$.showNotify('success');
-									setTimeout("window.location.reload(true)",2000);
+									//setTimeout("window.location.reload(true)",2000);
+									setTimeout("window.location =  '"+RedirectURL+"' ",2000);		
 								}else{
 									$.showNotify('error');
 								}
@@ -406,13 +418,13 @@ $.DataTableMerg = function(table_id , target, Length , scrollY ,colspan ){
 					opts.type = "error";
 					break;
 				case 'info':
-					opts.title = "Breaking News";
-					opts.text = "Have you met Ted?";
+					opts.title = "Information";
+					opts.text = "See more information";
 					opts.type = "info";
 					break;
 				case 'success':
 					opts.title = "Actions complete";
-					opts.text = "I've invented a device that bites shiny metal asses.";
+					opts.text = "Your operation is complete!!";
 					opts.type = "success";
 					break;
 				}

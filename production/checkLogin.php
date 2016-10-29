@@ -9,7 +9,7 @@ include("./includes/Class/Main.Class.php");
 $db->debug=0;
 
 //$main = new MainWeb();
-$rendom_text = MainWeb::random_gen(64);
+//$rendom_text = MainWeb::random_gen(64);
 
 
 //print_r($_POST);
@@ -27,7 +27,7 @@ $rsUser =  $db ->GetRow($sqlUser);
 if(sizeof($rsUser)>0){
 	// หาหน่วยงานแรกที่สังกัดเพื่อกำหนดเป็นค่าแรกใน Session
 	
-	$_SESSION['sess_id'] = $rendom_text; // session_id();
+	$_SESSION['sess_id'] = MainWeb::random_gen(64); // session_id();
 	$_SESSION['sess_user_id'] = $rsUser['user_id'];
 	$_SESSION['sess_user_name'] = $rsUser['username'];
 	$_SESSION['sess_email'] = $rsUser['email'];

@@ -17,10 +17,6 @@ $(function(){
 		
 		
 		//$('#btnCreate, #btnUpdate, #btnDelete').css('cursor','pointer');
-		
-
-		$('button[type=reset').click(function(){
-				window.history.back(-1);
-		});
+	
  });
 

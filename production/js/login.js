@@ -17,12 +17,13 @@
  // Trigger form submit
  $('form[name=form-signin]').submit(function(event){
 		
+		event.preventDefault(); // avoid to execute the actual submit of the form.
+
 		var 	inputUsername =$('#inputUsername').val();
 		var 	inputPassword =$('#inputPassword').val();
 		var 	inputRemember =  $('#inputRemember').is(':checked') ? $('#inputRemember').val() : '';
 		var 	SignDiffAccount =$('#SignDiffAccount').val();
 		
-		event.preventDefault(); // avoid to execute the actual submit of the form.
 		
 		// Ajax progressbar loading start
 		NProgress.start();
@@ -43,9 +44,7 @@
 									
 					//Success
 					request.done (function(textStatus){
-								//if(debug == true){
-						//console.log(textStatus);   
-					//}
+					//console.log(textStatus);   
 					
 					NProgress.done();  // Stop akax data progress
 					
@@ -56,7 +55,7 @@
 						$('#message').removeClass('alert alert-danger');
 						$('#message').addClass('alert alert-success');
 						$('#message').html('<i class="fa fa-check"></i> Login Success!!');									
-						setTimeout("window.location = 'index.php' ",1000);	// Redirect to main page
+						setTimeout("window.location.href = 'index.php' ",1000);	// Redirect to main page
 						
 					}else{ // If false -> show error message
 						//console.log('Invalid username or Password!!'); 									

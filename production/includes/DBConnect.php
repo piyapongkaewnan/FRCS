@@ -21,8 +21,10 @@ try {
 		$db->Execute("SET character_set_connection=utf8");
                
 	} catch (exception $e) {
-		var_dump($e); 
-           adodb_backtrace($e->gettrace());
+		print "<pre>";
+		print_r($e); 
+		print "</pre>";
+       adodb_backtrace($e->gettrace());
 	}
 
 #$db->SetCharset("utf8");

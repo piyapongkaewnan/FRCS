@@ -1,6 +1,9 @@
 ﻿<?php
 @session_start();
-
+/*print "<pre>";
+print_r($_POST);
+print "</pre>";*/
+//exit;
 
 include('../../includes/DBConnect.php');
 
@@ -20,9 +23,11 @@ $DataSourceRemarks = $_POST['DataSourceRemarks'];
 $IsActive = $_POST['IsActive']  ?  $_POST['IsActive'] : '0';
 $user_id = $_SESSION['sess_user_id'];
 
-$db->debug =1;
+$db->debug =0;
 
 if($action == "actionCreate"){     
+	  $strPartner2 = $Partner2 == '' ? 'NULL' : $Partner2;
+	  //CASE  Partner2 WHEN  '' THEN NULL ELSE '$Partner2' END,
 		$sql = "INSERT INTO game  (
 									  RefCode,
 									  GroupCode,
@@ -45,7 +50,7 @@ if($action == "actionCreate"){
 									 '$GameName',	
 									 '$GameType',	
 									 '$Partner1',
-									 '$Partner2',
+									 $strPartner2 ,
 									 '$PercentShare', 
 									 '$Territory',	
 									 '$Publisher',	
@@ -63,8 +68,8 @@ if($action == "actionCreate"){
 										GroupCode = '$GroupCode', 
 										GameName = '$GameName',
 										GameType = '$GameType',
-										Partner1 = '$Partner1',
-										Partner2 = '$Partner2',
+										Partner1 =  '$Partner1' ,
+										Partner2 = CASE  Partner2 WHEN  '' THEN NULL ELSE $Partner2 END,
 										PercentShare = '$PercentShare', 
 										Territory = '$Territory',
 										Publisher = CASE GameType WHEN 3 THEN NULL ELSE '$Publisher' END ,
