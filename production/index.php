@@ -8,9 +8,6 @@ require_once("./includes/Class/Auth.Class.php");
 require_once("./includes/Class/Menu.Class.php");
 require_once("./includes/Class/Main.Class.php");
 
-# Check Session Timeout
-include("./sessionTimeout.php");
-
 //require_once("./includes/Class/Form.Class.php");
 
 //print_r($_SESSION);
@@ -18,17 +15,20 @@ include("./sessionTimeout.php");
 $Config['user_id'] =  $_SESSION['sess_user_id'];
 $Config['user_name'] =  $_SESSION['sess_user_name'];
 $Config['realname'] = $_SESSION['sess_realname'];
+$Config['picture'] = $_SESSION['sess_picture'];
 $Config['email'] =  $_SESSION['sess_email'];
 $Config['modules'] = $_GET['modules'];
 $Config['page'] = $_GET['page'];
 
+
 //if(!isset($_SESSION['sess_user_id'])){ MainWeb::redirect('login.php'); }
-if(!isset($_SESSION['sess_user_id'])) {  MainWeb::redirect('logout.php');}
+if(!isset($_SESSION['sess_user_id'])) {  MainWeb::redirect('login.php');}
 
 //Call Auth Class
 Auth::setDB($db);
 Auth::setUserID($Config['user_id']);
 Auth::setRealName($Config['realname']);
+Auth::setProfilePicture($Config['picture']);
 Auth::setModule($Config['modules']);
 Auth::setPage($Config['page']);
 
@@ -44,11 +44,14 @@ $chkMenuAuth = Auth::isAllowPage();
 //if(Auth::isGuest()){ pageback('login.php',''); }
 if(!$chkMenuAuth){ include('page_403.php'); return; }
 
+# Check Session Timeout
+include("./sessionTimeout.php");
+
 $db->debug= false;
 
 ?>
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="apps">
 <head>
 <title><?=SITE_NAME;?> | <?=MainWeb::setTitleBar();?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -97,19 +100,14 @@ $db->debug= false;
 <script type="text/javascript" src="js/main.core.js"></script>
 
 <style type="text/css">
-body ,html{
-	color : #444;
-	font-size:12px
+body {
+	color:#444;	
 }
-.btn {
-		font-size:12px
+.form-control , select {
+		font-size:12px;
 }
-input['text'] {
-		font-size:12px
-}
- a:hover {
-	text-decoration:underline; 
- }
+
+ 
 </style>
 </head>
 <body class="nav-md main_body">
@@ -117,14 +115,14 @@ input['text'] {
   <div class="main_container">
     <div class="col-md-3 left_col menu_fixed"> <!--  -->
       <div class="left_col scroll-view">
-        <div class="navbar nav_title"><a href="index.php" class="site_title"><i class="fa fa-paw"></i> <span>
+        <div class="navbar nav_title"><a href="index.php" class="site_title"><i class="fa fa-globe"></i> <span>
           <?=SITE_NAME?>
           </span></a> </div>
         <div class="clearfix"></div>
         
         <!-- menu profile quick info -->
         <div class="profile">
-          <div class="profile_pic"> <img src="images/img.jpg" alt="..." class="img-circle profile_img"> </div>
+          <div class="profile_pic"> <img src="<?=Auth::getProfilePicture()?>" alt="..." class="img-circle profile_img"> </div>
           <div class="profile_info"> <span>Welcome,</span>
             <h2>
               <span id="show_realname"><?=Auth::getRealName()?></span>
@@ -136,7 +134,7 @@ input['text'] {
         <!-- sidebar menu -->
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
           <div class="menu_section">
-            <h3>General</h3>
+            <h6>&nbsp;</h6>
             <?=MENU::showMenu();?>
           </div>
         </div>
@@ -263,6 +261,9 @@ input['text'] {
 <script type="text/javascript" src="js/moment/moment.min.js"></script> 
 <script type="text/javascript" src="js/datepicker/daterangepicker.js"></script> 
 <script type="text/javascript" src="../build/js/custom.min.js"></script> 
+<script type="text/javascript" src="./js/apps.js"></script> 
+
+
 </body>
 </html>
 <?php

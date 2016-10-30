@@ -6,6 +6,7 @@
                        FROM configs ";                    
 $rs_site =  $db ->GetRow($sql_site);
 
+$maxlifetime = ini_get("session.gc_maxlifetime") / 60;
 ?>
 
 <?=MainWeb::openTemplate();?> 
@@ -35,6 +36,14 @@ $rs_site =  $db ->GetRow($sql_site);
               </div>
             </div>
           </div>
+          
+           <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="session_timeout">Session timeout <small>(n minute)</small> </label>
+            <div class="col-md-3 col-sm-2 col-xs-12">
+              <input type="number" id="session_timeout" name="session_timeout" value="<?=$rs_site['session_timeout']?>" class="form-control col-md-7 col-xs-12 has-feedback-left" required="required" max="<?=$maxlifetime?>">
+              <span class="fa fa-clock-o form-control-feedback left" aria-hidden="true"></span> </div>
+          </div>
+          
           <div class="ln_solid"></div>
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

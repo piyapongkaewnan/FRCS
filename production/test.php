@@ -8,7 +8,7 @@
     <script>
       var countryApp = angular.module('countryApp', []);
       countryApp.controller('CountryCtrl', function ($scope, $http){
-        $http.get('data.txt').success(function(data) {
+        $http.get('./modules/Forms/data.php').success(function(data) {
           $scope.countries = data;
         });
       });
@@ -19,14 +19,14 @@
 	<h2>Angular.js JSON Fetching Example</h2>
     <input type="text" class="form-control" ng-model="queryString.countryName">
     Filter by {{queryString}}
-    <table class="table">
-      <tr>
+    <table class="table table-striped table-hover">
+      <tr class="info">
         <th>Code</th>
 		<th>Country</th>
       </tr>
-      <tr ng-repeat="country in countries | orderBy: 'key' | filter: queryString  ">
-        <td>{{country.key}}</td>
-		<td>{{country.value}}</td>
+      <tr ng-repeat="country in countries | orderBy: 'countryCode' | filter: queryString  ">
+        <td>{{country.countryCode}}</td>
+		<td>{{country.countryName}}</td>
       </tr>
     </table>
     </div>

@@ -19,7 +19,7 @@ Auth::setUserID($user_id);
 MainWeb::GetSiteInfo(); // Get webpage variable
 
 //Check user login  <> isGuest ->index 
-//if(!Auth::isGuest()){ MainWeb::redirect('index.php'); }
+if(!Auth::isGuest()){ MainWeb::redirect('index.php'); }
 //show_session();
 ?>
 <!DOCTYPE html>

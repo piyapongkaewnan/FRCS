@@ -25,6 +25,9 @@ class MainWeb extends Auth {
 			/* Language*/
 			define("LANGUAGE",$rs_config['website_language']);
 			
+			/* Session timeout*/
+			define("SESSION_TIMEOUT",$rs_config['session_timeout']);
+			
 			define("COPYRIGHT"," &copy;".date('Y')."  ".$rs_config['website_name']);
 			
 			/* Menu Action*/

@@ -335,9 +335,8 @@ body {
 	color: #73879C;
 	background: #2A3F54;
 	font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
-	font-size: 13px;
-	font-weight: 400;
-	line-height: 1.471;
+	font-size: 12px;
+	
 }
 .main_container .top_nav {
 	display: block;
@@ -446,7 +445,10 @@ a, a:visited, a:focus, a:active, :visited, :focus, :active, .btn:focus, .btn:act
 	outline: 0;
 }
 a:hover, a:focus {
-	text-decoration: none;
+	text-decoration: underline;
+}
+.sidebar-footer a {
+	color : #aaaaaa;	
 }
 .navbar {
 	margin-bottom: 0;
@@ -1111,7 +1113,7 @@ table.jambo_table tbody tr.selected td {
 	text-align: right;
 }
 .dataTables_info {
-	width: 60%;
+	/*width: 60%;*/
 	float: left;
 }
 .dataTables_paginate {
@@ -1122,32 +1124,33 @@ table.dataTable th.focus, table.dataTable td.focus {
 	outline: 2px solid #1ABB9C !important;
 	outline-offset: -1px;
 }
-table.display {
+table {
 	margin: 0 auto;
 	clear: both;
 	width: 100%;
 }
-table.display thead th {
+table thead th {
 	padding: 8px 18px 8px 10px;
 	border-bottom: 1px solid black;
 	font-weight: bold;
 	cursor: pointer;
+	text-align:center;
 }
-table.display tfoot th {
+table tfoot th {
 	padding: 3px 18px 3px 10px;
 	border-top: 1px solid black;
 	font-weight: bold;
 }
-table.display tr.heading2 td {
+table tr.heading2 td {
 	border-bottom: 1px solid #aaa;
 }
-table.display td {
+table tr td {
 	padding: 3px 10px;
 }
-table.display td.center {
+table td.center {
 	text-align: center;
 }
-table.display thead th:active, table.display thead td:active {
+table thead th:active, table.display thead td:active {
 	outline: none;
 }
 .dataTables_scroll {
@@ -1775,6 +1778,7 @@ a.star {
 button, .buttons, .btn, .modal-footer .btn + .btn {
 	margin-bottom: 5px;
 	margin-right: 5px;
+	font-size:12px;
 }
 .btn-group-vertical .btn, .btn-group .btn {
 	margin-bottom: 0;
@@ -1930,15 +1934,15 @@ span.section {
 	border-bottom: 1px solid #e5e5e5;
 }
 .form-control {
-	border-radius: 0;
-	width: 100%;
+	/*border-radius: 0;
+	width: 100%;*/
 }
 .form-horizontal .control-label {
 	padding-top: 8px;
 }
 .form-control:focus {
-	border-color: #CCD0D7;
-	box-shadow: none !important;
+	/*border-color: #CCD0D7;
+	box-shadow: none !important;*/
 }
 legend {
 	font-size: 18px;

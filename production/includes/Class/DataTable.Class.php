@@ -20,11 +20,11 @@ class dataTable{
 		
 		
 		//echo "	@import '../vendors/datatables/media/css/jquery.dataTables.css';\n";
-		/*echo "	@import './js/jquery.dataTables/css/jquery.dataTables_themeroller.css';\n";*/
-		//echo "	@import '../vendors/datatables/media/css/dataTables.bootstrap.min.css';\n";
-		echo "	@import '../vendors/datatables.net-bs/css/dataTables.bootstrap.css';\n";
+		//echo "	@import './js/jquery.dataTables/css/jquery.dataTables_themeroller.css';\n";
+		echo "	@import '../vendors/datatables/media/css/dataTables.bootstrap.min.css';\n";
+		//echo "	@import '../vendors/datatables.net-bs/css/dataTables.bootstrap.css';\n";
 		echo "	@import '../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css';\n";
-		
+		echo "	@import '../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css';\n";
 		//echo "	@import './js/jquery.dataTables/css/dataTables.jqueryui.css';\n";
 		//echo "	@import './js/jquery.dataTables/css/page.css';\n";
 		echo "</style>\n";

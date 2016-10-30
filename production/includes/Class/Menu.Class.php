@@ -111,7 +111,7 @@ class MENU extends Auth {
 						echo "            <nav>\n";
 						echo "              <div class='nav toggle'> <a id='menu_toggle'><i class='fa fa-bars'></i></a> </div>\n";
 						echo "              <ul class='nav navbar-nav navbar-right'>\n";
-						echo "                <li class=''> <a href='javascript:;' class='user-profile dropdown-toggle' data-toggle='dropdown' aria-expanded='false'> <img src='images/img.jpg' alt=''>".Auth::getRealName()."&nbsp;<span class=' fa fa-angle-down'></span> </a>\n";
+						echo "                <li class=''> <a href='javascript:;' class='user-profile dropdown-toggle' data-toggle='dropdown' aria-expanded='false'> <img src='".Auth::getProfilePicture()."' alt=''>".Auth::getRealName()."&nbsp;<span class=' fa fa-angle-down'></span> </a>\n";
 						echo "                  <ul class='dropdown-menu dropdown-usermenu pull-right'>\n";
 						echo "                    <li class='clickMenu' rel='3'><a href='?modules=Profiles&page=profile'><i class='fa fa-edit'></i> Profile</a></li>\n";
 						echo "                    <!--                <li> <a href='javascript:;'> <i class='fa fa-edit'></i><span class='badge bg-red pull-right'>50%</span> <span>Settings</span> </a> </li>\n";

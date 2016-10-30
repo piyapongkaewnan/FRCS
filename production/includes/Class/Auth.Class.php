@@ -12,8 +12,10 @@ class Auth {
 	protected static  $language;	
 	protected static  $user_id;	
 	protected static  $realname;
+	protected static  $picture;
 	protected static  $modules;	
 	protected static  $page;
+	protected static  $picPath = "./images/avatar";
 	
 	// Function for Set Database Object
 	public static function setDB($db) {
@@ -53,6 +55,20 @@ class Auth {
 	// Function for Get Real Name
 	public static function getRealName() {
         return self::$realname;
+    }
+	
+	// Function for Set Profile Picture
+	public static function setProfilePicture($picture) {
+        self::$picture = $picture;
+    }
+	
+	// Function for Get Profile Picture
+	public static function getProfilePicture() {
+		if(file_exists(self::$picPath."/".self::$picture)) {   
+			return self::$picPath."/".self::$picture; 
+		}else{ 
+			return self::$picPath."/".'user.png';
+		}
     }
 	
 	// Function for Set Modules from Get $_GET['modules']

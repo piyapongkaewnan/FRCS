@@ -55,7 +55,7 @@ $rs_list =  $db ->GetAll($sql_list);
     <tr>
       <td align="center"><input type="radio" name="selID" id="selID_<?=$rs_list[$i]['id']?>" value="<?=$rs_list[$i]['id']?>"/></td>
       <td align="center"><?=$rs_list[$i]['FXCode']?></td>
-      <td><?=$rs_list[$i]['FXSymbol']?></td>
+      <td align="center"><?=$rs_list[$i]['FXSymbol']?></td>
       <td><?=$rs_list[$i]['FxName']?></td>
       <td align="right"><?=number_format($rs_list[$i]['RateToBase'],6)?></td>
       <td align="center"><?=$rs_list[$i]['IsActive']=="1" ? "YES" : "NO";?></td>

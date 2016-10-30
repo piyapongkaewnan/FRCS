@@ -39,7 +39,7 @@ $rs_list =  $db ->GetAll($sql_list);
   <td align="right" valign="top" style="height:5px"></td>
 </tr>
 </table>-->
-<table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-striped table-hover table-bordered compact dt-responsive" id="<?=$tbl->id;?>">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="table  table-striped table-hover table-bordered compact dt-responsive" id="<?=$tbl->id;?>">
   <thead>
     <tr>
       <th width="12%" align="center">Manage</th>

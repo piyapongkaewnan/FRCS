@@ -152,5 +152,6 @@ setInterval(function(){
   </div>
   <div class="text-center"><a href="login.php" class="btn btn-primary btn-sm"><i class="fa fa-sign-in"></i> Login <span class="countdown"></span></a> </div>
 </div>
+<br>
 </body>
 </html>

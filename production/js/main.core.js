@@ -28,6 +28,7 @@ var profileRealname = localStorage.getItem("APPS.SITE.PROFILE_NAME");
 var labelRealname = $('#show_realname').text();
 if(profileRealname  != labelRealname){
 localStorage.setItem("APPS.SITE.PROFILE_NAME" ,labelRealname);
+localStorage.setItem("APPS.SITE.PROFILE_IMG_SRC" ,$(".profile_img").attr('src'));
 }
 
 
