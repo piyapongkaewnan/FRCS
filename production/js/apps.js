@@ -12,7 +12,7 @@ angular.module('FXApps')
 		.controller('FXController', function($scope, $http) {
 			 $scope.controllerName = 'FXController';
 			 $scope.getData = function(){ 
-			 		$http.get('./modules/Forms/fx-data.php').success(function(response) {
+			 		$http.get('./modules/Forms/fx-data.php?limit=15').success(function(response) {
 	 		 		$scope.items =  response;					
 					//console.log(response);					
 				});

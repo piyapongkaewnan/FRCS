@@ -25,8 +25,10 @@ $user_id = $_SESSION['sess_user_id'];
 
 $db->debug =0;
 
+$strPartner2 = $Partner2 == '' ? 'NULL' : $Partner2;
+
+
 if($action == "actionCreate"){     
-	  $strPartner2 = $Partner2 == '' ? 'NULL' : $Partner2;
 	  //CASE  Partner2 WHEN  '' THEN NULL ELSE '$Partner2' END,
 		$sql = "INSERT INTO game  (
 									  RefCode,
@@ -69,7 +71,7 @@ if($action == "actionCreate"){
 										GameName = '$GameName',
 										GameType = '$GameType',
 										Partner1 =  '$Partner1' ,
-										Partner2 = CASE  Partner2 WHEN  '' THEN NULL ELSE $Partner2 END,
+										Partner2 =  $strPartner2,
 										PercentShare = '$PercentShare', 
 										Territory = '$Territory',
 										Publisher = CASE GameType WHEN 3 THEN NULL ELSE '$Publisher' END ,

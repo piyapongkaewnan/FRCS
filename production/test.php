@@ -8,7 +8,7 @@
     <script>
       var countryApp = angular.module('countryApp', []);
       countryApp.controller('CountryCtrl', function ($scope, $http){
-        $http.get('./modules/Forms/data.php').success(function(data) {
+        $http.get('./modules/Forms/fx-data.php?limit=<?=$_GET['limit']?>').success(function(data) {
           $scope.countries = data;
         });
       });
@@ -17,18 +17,20 @@
   <body>
 <div class="container"  ng-controller="CountryCtrl">
 	<h2>Angular.js JSON Fetching Example</h2>
-    <input type="text" class="form-control" ng-model="queryString.countryName">
-    Filter by {{queryString}}
-    <table class="table table-striped table-hover">
-      <tr class="info">
-        <th>Code</th>
-		<th>Country</th>
-      </tr>
-      <tr ng-repeat="country in countries | orderBy: 'countryCode' | filter: queryString  ">
-        <td>{{country.countryCode}}</td>
-		<td>{{country.countryName}}</td>
-      </tr>
-    </table>
+        <input type="text" class="form-control input-sm" ng-model="queryString">
+        Filter by {{queryString}}
+        <table class="table table-striped table-hover">
+          <tr class="info">
+            <th>FXCode</th>
+            <th>FxName</th>
+            <th>RateToBase</th>
+          </tr>
+          <tr ng-repeat="item in countries | orderBy: 'FXCode' | filter: queryString  ">
+            <td>{{item.FXCode}}</td>
+            <td>{{item.FxName}}</td>
+            <td>{{item.RateToBase | currency: 'THB '}}</td>
+          </tr>
+        </table>
     </div>
   </body>
 </html>
