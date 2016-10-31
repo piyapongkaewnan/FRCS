@@ -96,6 +96,10 @@ $db->debug= false;
 <script type="text/javascript" src="../vendors/pnotify/dist/pnotify.buttons.js"></script> 
 <script type="text/javascript" src="../vendors/pnotify/dist/pnotify.nonblock.js"></script> 
 
+<script type='text/javascript' src='../vendors/parsleyjs/dist/parsley.min.js'></script> 
+<link rel='stylesheet' type='text/css' href='../vendors/parsleyjs/src/parsley.css'/>
+
+
 <!-- My Custom Core JS -->
 <script type="text/javascript" src="js/main.core.js"></script>
 

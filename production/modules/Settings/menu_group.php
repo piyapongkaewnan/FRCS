@@ -45,7 +45,7 @@ $rs_list =  $db ->GetAll($sql_list);
         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-striped table-hover table-bordered compact dt-responsive" id="<?=$tbl->id;?>">
           <thead>
             <tr>
-              <th width="5%"  class="header_height">Manage</th>
+              <th width="5%"  class="no-sort">Action</th>
               <th width="23%" align="center"> Menu Group EN</th>
               <th width="23%" align="center">Menu Group TH</th>
               <th width="14%" align="center"> Module Name</th>
@@ -78,5 +78,7 @@ $rs_list =  $db ->GetAll($sql_list);
 <?=MainWeb::setModal();?> 
 <?=MainWeb::setModalDelete();?> 
 
+<!-- Form Custom Core JS -->
+<script type="text/javascript" src="js/form.js"></script>
 
- <script src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script>
+<script  type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 

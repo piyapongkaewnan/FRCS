@@ -58,7 +58,7 @@ $tbl->openTable();
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-striped table-hover table-bordered compact dt-responsive" id="<?=$tbl->id;?>">
   <thead>
     <tr>
-      <th width="7%"  class="header_height">Manage</th>
+      <th width="7%"  class="no-sort">Action</th>
       <th width="8%"> Order</th>
       <th width="20%">Menu name (TH)</th>
       <th width="20%">Menu name (EN)</th>
@@ -89,7 +89,10 @@ $tbl->openTable();
 <?=MainWeb::closeTemplate();?> 
 <?=MainWeb::setModal();?> 
 <?=MainWeb::setModalDelete();?> 
-<script src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 
+<!-- Form Custom Core JS -->
+<script type="text/javascript" src="js/form.js"></script>
+
+<script  type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 
 
 <script type="text/javascript">
 $(function(){

@@ -81,7 +81,7 @@ if(!Auth::isGuest()){ MainWeb::redirect('index.php'); }
     </form>
     <div id="message"></div>
     <!-- /form --> 
-    <a href="javascript:void(0);" class="forgot-password">&raquo; Forgot the password ?</a> <br>
+    <!--<a href="javascript:void(0);" class="forgot-password">&raquo; Forgot the password ?</a> <br>-->
     <a href="javascript:void(0);" class="sign-other-account" id="SignDiffAccount">&raquo; Sign in with a different account ?</a> </div>
   <!-- /card-container --> 
 </div>

@@ -42,7 +42,7 @@ $rs_list =  $db ->GetAll($sql_list);
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table  table-striped table-hover table-bordered compact dt-responsive" id="<?=$tbl->id;?>">
   <thead>
     <tr>
-      <th width="12%" align="center">Manage</th>
+      <th width="12%" align="center" class="no-sort">Action</th>
       <th width="16%" align="center">Country Code</th>
       <th width="36%" align="center"> Country Name</th>
       <th width="24%" align="center">FX Name</th>
@@ -69,5 +69,9 @@ $rs_list =  $db ->GetAll($sql_list);
 <?=MainWeb::closeTemplate();?>
 <?=MainWeb::setModal();?>
 <?=MainWeb::setModalDelete();?>
-<script src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 
-<!-- <i class="fa fa-save" id="btnUpdate"  rel='actionUpdate' ref="<?=$rs_list[$i]['id']?>"></i> | <i class="fa fa-trash" id="btnDelete"  rel='actionDelete' ref="<?=$rs_list[$i]['id']?>"></i> -->
+
+<!-- Form Custom Core JS -->
+<script type="text/javascript" src="js/form.js"></script>
+
+<script  type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 
+

@@ -66,7 +66,7 @@ $tbl->openTable();
         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-striped table-hover table-bordered compact dt-responsive" id="<?=$tbl->id;?>">
   <thead>
     <tr>
-      <th width="9%"  class="header_height">Manage</th>
+      <th width="9%" class="no-sort">Action</th>
       <th width="21%">Username</th>
       <th width="26%">Real Name</th>
       <th width="25%">E-mail</th>
@@ -94,4 +94,8 @@ $tbl->openTable();
 <?=MainWeb::closeTemplate();?> 
 <?=MainWeb::setModal();?> 
 <?=MainWeb::setModalDelete();?> 
-<script type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 
+
+<!-- Form Custom Core JS -->
+<script type="text/javascript" src="js/form.js"></script>
+
+<script  type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 

@@ -83,7 +83,11 @@ if ( $rs_edit['IsActive'] == "1" ||  $_GET['action'] ==  'actionCreate'){
   </div>
 </form>
 <?=MainWeb::closeTemplate();?>
-<script src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 
+
+<!-- Form Custom Core JS -->
+<script type="text/javascript" src="js/form.js"></script>
+
+<script  type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 
 <!-- Select2 --> 
 <script src="../vendors/select2/dist/js/select2.full.min.js"></script> 
 <script type="text/javascript">

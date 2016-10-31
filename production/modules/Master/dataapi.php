@@ -14,7 +14,13 @@ $tbl->saveState  = true;
 $tbl->pagingLength=10;
 
 // List User Group
-$sql_list = "SELECT   a.*,   b.FxName FROM coin a  LEFT JOIN fx b  ON a.FxId = b.id ORDER BY a.CoinName";
+$sql_list = "SELECT
+				 	 a.*,
+ 					 b.type
+				FROM dataapi a
+				  JOIN datasourcetype b
+					ON a.DataSourceType = b.id
+				ORDER BY a.APIRefCode";
 $rs_list =  $db ->GetAll($sql_list);
 
 //$DirModule =  MainWeb::ScanDir( '../production/modules'); // path from top);
@@ -39,15 +45,16 @@ $rs_list =  $db ->GetAll($sql_list);
   <td align="right" valign="top" style="height:5px"></td>
 </tr>
 </table>-->
-<table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-striped table-hover table-bordered compact dt-responsive" id="<?=$tbl->id;?>">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-striped table-hover table-bordered compact countries_list dt-responsive" id="<?=$tbl->id;?>">
   <thead>
     <tr>
-      <th width="8%" align="center" class="no-sort">Action</th>
-      <th width="12%" align="center">Coin Code</th>
-      <th width="22%" align="center"> Coin Name</th>
-      <th width="15%" align="center">Fx Name</th>
-      <th width="18%" align="center">Base Value</th>
-      <th width="15%" align="center">USD Conv. Rate</th>
+      <th width="6%" align="center" class="no-sort">Action</th>
+      <th width="11%" align="center">APIRefCode</th>
+      <th width="17%" align="center">APIName</th>
+      <th width="16%" align="center">APIUrl</th>
+      <th width="13%" align="center">UserName</th>
+      <th width="14%" align="center"> Password</th>
+      <th width="13%" align="center">DataSourceType</th>
       <th width="10%" align="center">Is Active</th>
     </tr>
   </thead>
@@ -55,11 +62,12 @@ $rs_list =  $db ->GetAll($sql_list);
     <?php for($i=0;$i<count($rs_list);$i++){ ?>
     <tr>
       <td align="center"><input type="radio" name="selID" id="selID_<?=$rs_list[$i]['id']?>" value="<?=$rs_list[$i]['id']?>"/></td>
-      <td align="center"><?=$rs_list[$i]['CoinCode']?></td>
-      <td><?=$rs_list[$i]['CoinName']?></td>
-      <td><?=$rs_list[$i]['FxName']?></td>
-       <td><?=$rs_list[$i]['BaseValue']?></td>
-       <td><?=$rs_list[$i]['USDConversionRate']?></td>
+      <td align="center"><?=$rs_list[$i]['APIRefCode']?></td>
+      <td align="center"><?=$rs_list[$i]['APIName']?></td>
+      <td align="center"><?=$rs_list[$i]['APIUrl']?></td>
+      <td><?=$rs_list[$i]['UserName']?></td>
+      <td><?=$rs_list[$i]['Password']?></td>
+      <td><?=$rs_list[$i]['type']?></td>
       <td width="10%" align="center"><?=$rs_list[$i]['IsActive']=="1" ? "YES" : "NO";?></td>
     </tr>
     <?php } // End For ?>

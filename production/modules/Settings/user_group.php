@@ -29,7 +29,7 @@ $rs_list = $db->GetAll($sql_list);
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-striped table-hover table-bordered compact dt-responsive compact" id="<?=$tbl->id;?>">
   <thead>
     <tr>
-      <th width="8%"  class="header_height">Manage</th>
+      <th width="8%" class="no-sort">Action</th>
       <th width="37%" align="center">User Group Name</th>
       <th width="34%" align="center">User Group Description</th>
       <th width="21%" align="center">Update Time</th>
@@ -39,7 +39,7 @@ $rs_list = $db->GetAll($sql_list);
          <?php for($i=0;$i<count($rs_list);$i++){ ?>
             <tr>
               <td align="center"> <input type="radio" name="selID" id="selID_<?=$rs_list[$i]['group_id']?>" value="<?=$rs_list[$i]['group_id']?>"/></td>
-              <td><a href='?modules=<?=$Config['modules']?>&page=users&group_id=<?=$rs_list[$i]['group_id']?>'><?=$rs_list[$i]['group_name']?></td>
+              <td><a href="?modules=<?=$Config['modules']?>&page=users&group_id=<?=$rs_list[$i]['group_id']?>"><?=$rs_list[$i]['group_name']?></a></td>
               <td><?=$rs_list[$i]['group_desc']?></td>
               <td align="center"><?=$rs_list[$i]['update_time'];?></td>
             </tr>
@@ -56,5 +56,7 @@ $rs_list = $db->GetAll($sql_list);
 <?=MainWeb::setModal();?> 
 <?=MainWeb::setModalDelete();?> 
 
+<!-- Form Custom Core JS -->
+<script type="text/javascript" src="js/form.js"></script>
 
-<script src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script>
+<script  type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 

@@ -53,6 +53,8 @@ $maxlifetime = ini_get("session.gc_maxlifetime") / 60;
           </div>
         </form>
 <?=MainWeb::closeTemplate();?>
-<script src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script>
 
+<!-- Form Custom Core JS -->
+<script type="text/javascript" src="js/form.js"></script>
 
+<script  type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 

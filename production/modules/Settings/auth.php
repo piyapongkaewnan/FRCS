@@ -117,4 +117,8 @@ $tbl->openTable();
   <input type="hidden" name="action" id="action" value="actionUpdate" />
 </form>
 <?=MainWeb::closeTemplate();?>
-<script src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 
+
+<!-- Form Custom Core JS -->
+<script type="text/javascript" src="js/form.js"></script>
+
+<script  type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 

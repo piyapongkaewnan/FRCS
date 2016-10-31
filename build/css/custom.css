@@ -1134,7 +1134,7 @@ table thead th {
 	border-bottom: 1px solid black;
 	font-weight: bold;
 	cursor: pointer;
-	text-align:center;
+	text-align:left;
 }
 table tfoot th {
 	padding: 3px 18px 3px 10px;

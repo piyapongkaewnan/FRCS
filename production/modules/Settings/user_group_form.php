@@ -67,7 +67,7 @@ $(document).ready(function() {
 		var page = '<?=$_GET['page']?>';		
 
 	
-		$.FormAction( actions ,modules  ,page , '<?=$_GET['id']?>' , true  );		
+		$.FormAction( actions ,modules  ,page , '<?=$_GET['id']?>' , false  );		
 				
 
 		
