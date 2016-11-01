@@ -106,8 +106,8 @@ define(function (require) {
                     );
 
                     itemGroup.on('click', curry(dispatchSelectAction, name, api))
-                        .on('mouseover', curry(dispatchHighlightAction, seriesModel, '', api))
-                        .on('mouseout', curry(dispatchDownplayAction, seriesModel, '', api));
+                        .on('mouseover', curry(dispatchHighlightAction, seriesModel, null, api))
+                        .on('mouseout', curry(dispatchDownplayAction, seriesModel, null, api));
 
                     legendDrawedMap[name] = true;
                 }
@@ -176,6 +176,7 @@ define(function (require) {
             var itemIcon = itemModel.get('icon');
 
             var tooltipModel = itemModel.getModel('tooltip');
+            var legendGlobalTooltipModel = tooltipModel.parentModel;
 
             // Use user given icon first
             legendSymbolType = itemIcon || legendSymbolType;
@@ -233,7 +234,7 @@ define(function (require) {
                 tooltip: tooltipModel.get('show') ? zrUtil.extend({
                     content: name,
                     // Defaul formatter
-                    formatter: function () {
+                    formatter: legendGlobalTooltipModel.get('formatter', true) || function () {
                         return name;
                     },
                     formatterParams: {

@@ -1,4 +1,8 @@
+<?php
+require_once("./includes/DBConnect.php");
+?>
 <?=MainWeb::openTemplate();?>
+<!--  ng-controller="FXController"-->
 
 <div class="x_content" ng-app="FXApps"  ng-controller="FXController"> 
   <!-- Smart Wizard --> 
@@ -7,62 +11,120 @@
   <div id="wizard" class="form_wizard wizard_horizontal">
     <ul class="wizard_steps">
       <li> <a href="#step-1"> <span class="step_no">1</span> <span class="step_descr"> Step 1<br />
-        <small>Load APIs</small> </span> </a> </li>
+        <small>Load FX data</small> </span> </a> </li>
       <li> <a href="#step-2"> <span class="step_no">2</span> <span class="step_descr"> Step 2<br />
-        <small>Verify Data</small> </span> </a> </li>
+        <small>Load API Data</small> </span> </a> </li>
       <li> <a href="#step-3"> <span class="step_no">3</span> <span class="step_descr"> Step 3<br />
-        <small>Finish</small> </span> </a> </li>
+        <small>Manual Data Input</small> </span> </a> </li>
+      <li> <a href="#step-4"> <span class="step_no">4</span> <span class="step_descr"> Step 4<br />
+        <small>View Report</small> </span> </a> </li>
     </ul>
     <div id="step-1">
-      <div class="forn-control" style="overflow-y: scroll; height:250px">
-        <form class="form-horizontal form-label-left">
-          <?php
-		for($i=1;$i<=10;$i++){
+    <h2 class="StepTitle">Load FX Data</h2>
+      <form name="form_step1">
+      <!-- Columns are always 50% wide, on mobile and desktop -->
+<div class="row">
+  <div class="col-xs-6"><button type="button" id="loadFX" class="btn btn-primary btn-sm" ng-click="getFXData();"><i class="fa fa-bolt"></i> Load FX</button> <span class="loading1"></span></div>
+  <div class="col-xs-6 text-right"> <button type="button" class="btn btn-sm btn-info btn-save" style="display:none" /><i class="fa fa-save"></i> Save</button></div>
+</div>
+     <!--ng-click="getFXData();"-->
+          
+        
+        <!-- <h2>Show data from get APIs (Example)</h2>
+        <input type="text" class="form-control input-sm" ng-model="queryString">
+        Filter by {{queryString}}-->
+          <div class="showFX" style="display:none">
+            <h4><label class="label label-danger"> FX with no rate</label> </h4>
+                      <table width="100%" class="table table-striped table-hover">
+              <tr class="danger">
+                <th width="12%">FXCode</th>
+                <th width="37%">FxName</th>
+                <th width="27%">Date</th>
+                <th width="24%">RateToBase</th>
+              </tr>
+              <tr ng-repeat="item in items | orderBy: 'FXCode' | filter: queryString">
+                <td>{{item.FXCode}}</td>
+                <td>{{item.FxName}}</td>
+                <td><div class="col-md-12 col-sm-12 col-xs-12">
+      <input class="form-control col-md-12 col-xs-12 has-feedback-left date-picker" id="date" name="date" value="<?=date('Y-m-d')?>" type="date" data-date-inline-picker="true" required="required"/>
+      <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span> </div>
+ </td>
+                <td> <div class="form-group">
+   
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <input class="form-control col-md-12 col-xs-12 has-feedback-left" id="RateToBase" name="RateToBase" value="<?=number_format($rs_edit['RateToBase'],8);?>" type="number" required="required"/>
+      <span class="fa fa-calculator form-control-feedback left" aria-hidden="true"></span> </div>
+  </div></td>
+              </tr>
+            </table>
+        </div>
+      </form>
+    </div>
+    <div id="step-2">
+    <h2 class="StepTitle">Load API Data</h2>
+      <div class="forn-control"><!-- style="overflow-y: scroll; height:350px"-->
+       <div class="form-group" ><!--ng-click="getFXData();"-->
+          <button type="button" id="loadAPI" class="btn btn-primary btn-sm"><i class="fa fa-bolt"></i> Load API</button>
+         <!-- <span class="loading2"></span>--> </div>
+          <div class="showAPI" style="display:none">
+        <form>
+          <table width="100%" class="table table-striped table-hover">
+            <tr class="info">
+              <th width="18%">#</th>
+              <th width="63%">Source</th>
+              <th width="19%">Status</th>
+            </tr>
+            <?php
+		$sqlAPIType = "SELECT * FROM datasourcetype ORDER BY type";
+		$rsAPIType = $db->GetAll($sqlAPIType);
+		for($i=0;$i<count($rsAPIType);$i++){
 	?>
-          <div class="form-group ">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">API
-              <?=$i?>
-              <span class="loading"></span> </label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" id="API_<?=$i?>" class="form-control col-md-7 col-xs-12 input-sm text-api" value="API Data URL <?=$i?>" readonly>
-            </div>
-          </div>
-          <?php } ?>
+            <tr>
+              <td><?=($i+1)?></td>
+              <td><?=$rsAPIType[$i]['type']?></td>
+              <td><span class="loading2"></span></td>
+            </tr>
+            <?php } ?>
+          </table>
         </form>
-      </div>
-      <div class="form-group">
-        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-          <button type="button" id="loadAPI" class="btn btn-danger" ng-click="getData();ShowHide()"><i class="fa fa-bolt"></i> Load APIs</button>
         </div>
       </div>
     </div>
-    <div id="step-2">
+    <div id="step-3">
+      <h2 class="StepTitle">Manual Data Input</h2>
       <p>
-      <div class="container" ng-show="IsVisible">
-        <h2>Show data from get APIs (Example)</h2>
-        <input type="text" class="form-control input-sm" ng-model="queryString">
-        Filter by {{queryString}}
-        <table class="table table-striped table-hover">
-          <tr class="info">
-            <th>FXCode</th>
-            <th>FxName</th>
-            <th>RateToBase</th>
-          </tr>
-          <tr ng-repeat="item in items | orderBy: 'FXCode' | filter: queryString  ">
-            <td>{{item.FXCode}}</td>
-            <td>{{item.FxName}}</td>
-            <td>{{item.RateToBase | currency: 'THB '}}</td>
-          </tr>
-        </table>
-      </div>
+      <table class="table table-striped table-hover">
+            <tr class="info">
+              <th width="7%">#</th>
+              <th width="50%">Date Source</th>
+              <th width="23%">Manual Input using Form</th>
+              <th width="20%">Import</th>
+            </tr>
+            <?php
+		$sqlAPIType = "SELECT * FROM datasourcetype WHERE id IN(2,8) ORDER BY type";
+		$rsAPIType = $db->GetAll($sqlAPIType);
+		for($i=0;$i<count($rsAPIType);$i++){
+	?>
+            <tr>
+              <td><?=($i+1)?></td>
+              <td><?=$rsAPIType[$i]['type']?></td>
+              <td align="left"><a href="#" class="btn btn-sm btn-info">Edit</a></td>
+              <td><a href="#" class="btn btn-sm btn-success">Import from Excel</a></td>
+            </tr>
+            <?php } ?>
+          </table>
       </p>
     </div>
-    <div id="step-3">
-      <h2 class="StepTitle">Step 3 Content</h2>
-      <p> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-        eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
-      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+    <div id="step-4">
+      <h2 class="StepTitle"> View Report</h2>
+      <p>
+      <select class="form-control" name="viewReport" id="viewReport">
+      	<option> -- Select Report -- </option>
+        <option> Report 1</option>
+        <option> Report 2</option>
+        <option> Report 3</option>
+      </select>
+      </p>
     </div>
   </div>
   <!-- End SmartWizard Content --> 
@@ -70,6 +132,11 @@
   <!-- Tabs --><!-- End SmartWizard Content --> 
 </div>
 <?=MainWeb::closeTemplate();?>
+
+    <script type="text/javascript" src="js/moment/moment.min.js"></script> 
+
+    <script src="./js/datepicker/daterangepicker.js"></script>
+
 
 <!-- jQuery Smart Wizard --> 
 <script src="../vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script> 
@@ -79,8 +146,8 @@
 
       $(document).ready(function() {
 
-
-
+		var h = $( window ).height();
+		
         $('#wizard').smartWizard();
 
         $('#wizard_verticle').smartWizard({
@@ -90,10 +157,14 @@
         $('.buttonNext').addClass('btn btn-default');
         $('.buttonPrevious').addClass('btn btn-default');
         $('.buttonFinish').addClass('btn btn-success');
-      });
+		
+		
+
+ });
 	  
 	  
-	  /*
+
+	  			  /*
 		  			$.get('modules/Forms/data.php', function (json) {
   
 	//	console.log(json);  
@@ -103,38 +174,77 @@
 
 
 });*/
+			$('#step-1 , #step-2 , #step-3, #step-4').css('height', $( window ).height() -400);
+  
 	  
-	  
-	  $('#loadAPI').click(function(){
-		 
-		  $('.loading').html("<i class='fa fa-spinner fa-spin'></i> ");
-		  $(this).prop('disabled',true)
-		  
+	  $('#loadFX').click(function(){
+		// console.log(h);
+			$('.showFX').hide('fade');
+		  $('.loading1').html('');
+		  $(this).prop('disabled',true);
+		  $(this).html("<i class='fa fa-spinner fa-spin'></i> Plese wait..");
+		  $('.btn-save').hide();
 	/*	  $.get('data.txt',function(data){
 			  console.log(data);
 			  var obj = JSON.stringify(data)
 			  $('#showData').text(obj);
 			  
 		  });*/
-		  
 
-		  
-		   setTimeout( myFunction ,3000);	
+		setTimeout( step1 ,1000);	
 		   
-		   function myFunction() {
-				$('.loading').html('');
-				$('#loadAPI').prop('disabled',false)
-				$('.loading').html("<i class='fa fa-check'></i> ");
-				$('.loading').addClass("text-success");
-				$('.loading:eq(2)').html("<i class='fa fa-close'></i> ");
-				$('.loading:eq(2)').addClass("text-danger");
-				$('#API_3').addClass("border-red");
-				 
-			}
-			
 
 	  });
 	  
+	  $('#loadAPI').click(function(){
+		 $('.showAPI').show();
+		  $('.loading2').html("<i class='fa fa-spinner fa-spin'></i> Loading..");
+		   $(this).html("<i class='fa fa-spinner fa-spin'></i> Plese wait..");
+		  $(this).prop('disabled',true)
+		  
+		   setTimeout( step2 ,3000);	
+		  //step2();
+	  });
+		
+
+		$("#viewReport").change(function(){
+			window.location='?modules=Reports&page=Report1';
+		});
 	  
+	   function step1() {
+				$('.loading1').html('');
+				$('#loadFX').prop('disabled',false);
+				$('#loadFX').html("<i class='fa fa-bolt'></i> Load FX");
+				$('.loading1').html("<i class='fa fa-check'></i> Ok ");
+				$('.loading1').addClass("text-success");
+				$('.showFX').show('fade'); 
+				$('.btn-save').show();
+			}
+	  
+	   function step2() {
+				$('.loading2').html('');
+				$('#loadAPI').prop('disabled',false)
+				$('#loadAPI').html("<i class='fa fa-bolt'></i> Load API");
+				$('.showAPI').show(); 
+				$('.loading2').html("<i class='fa fa-check'></i> Success ");
+				$('.loading2').addClass("text-success");
+				$('.loading2:eq(1), .loading2:eq(3)').html("<i class='fa fa-close'></i> Fail ");
+				$('.loading2:eq(1), .loading2:eq(3)').addClass("text-danger");
+				$('#API_3').addClass("border-red");
+				
+			}
   
     </script> 
+<!-- bootstrap-daterangepicker -->
+    <script type="text/javascript">
+      $(document).ready(function() {
+		  
+        $('input[name="date"]').daterangepicker({
+          singleDatePicker: true,
+          calender_style: "picker_4"
+        }, function(start, end, label) {
+          console.log(start.toISOString(), end.toISOString(), label);
+        });
+      });
+    </script>
+    <!-- /bootstrap-daterangepicker -->

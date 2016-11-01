@@ -9,9 +9,11 @@ define(function (require) {
     var numberUtil = require('../../util/number');
 
     function normalizeSymbolSize(symbolSize) {
-        if (!(symbolSize instanceof Array)) {
-            symbolSize = [+symbolSize, +symbolSize];
-        }
+        symbolSize = symbolSize instanceof Array
+            ? symbolSize.slice()
+            : [+symbolSize, +symbolSize];
+        symbolSize[0] /= 2;
+        symbolSize[1] /= 2;
         return symbolSize;
     }
 
@@ -41,8 +43,14 @@ define(function (require) {
         var seriesModel = data.hostModel;
         var color = data.getItemVisual(idx, 'color');
 
+        // var symbolPath = symbolUtil.createSymbol(
+        //     symbolType, -0.5, -0.5, 1, 1, color
+        // );
+        // If width/height are set too small (e.g., set to 1) on ios10
+        // and macOS Sierra, a circle stroke become a rect, no matter what
+        // the scale is set. So we set width/height as 2. See #4150.
         var symbolPath = symbolUtil.createSymbol(
-            symbolType, -0.5, -0.5, 1, 1, color
+            symbolType, -1, -1, 2, 2, color
         );
 
         symbolPath.attr({
@@ -58,7 +66,6 @@ define(function (require) {
         graphic.initProps(symbolPath, {
             scale: size
         }, seriesModel, idx);
-
         this._symbolType = symbolType;
 
         this.add(symbolPath);
@@ -138,7 +145,6 @@ define(function (require) {
             }, seriesModel, idx);
         }
         this._updateCommon(data, idx, symbolSize, seriesScope);
-
         this._seriesModel = seriesModel;
     };
 
@@ -191,7 +197,7 @@ define(function (require) {
 
         var elStyle = symbolPath.style;
 
-        symbolPath.rotation = (symbolRotate || 0) * Math.PI / 180 || 0;
+        symbolPath.attr('rotation', (symbolRotate || 0) * Math.PI / 180 || 0);
 
         if (symbolOffset) {
             symbolPath.attr('position', [

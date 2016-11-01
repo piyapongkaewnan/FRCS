@@ -27,6 +27,7 @@
 		
 		// Ajax progressbar loading start
 		NProgress.start();
+		$('.btn-signin').html('<i class="fa fa-spinner fa-spin"></i> Please Wait...');
 		
 		// if checkbox #inputRemember = TRUE is checked -> Store Var to localStorage
 		if(inputRemember == 'TRUE'){
@@ -60,6 +61,7 @@
 					}else{ // If false -> show error message
 						//console.log('Invalid username or Password!!'); 									
 						$('#message').show();
+						$('.btn-signin').html('<i class="fa fa-sign-in"></i> Sign In');
 						$('#message').removeClass('alert alert-success');
 						$('#message').addClass('alert alert-danger');
 						if(profileReRememberMe == 'TRUE'){

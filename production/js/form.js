@@ -187,7 +187,7 @@ $('input[name=selID]').click(function(){
 						});
 						
 						// Event when click Cancel button go to back
-						$('button[type=reset').click(function(){
+						$('button[name=cancel').click(function(){
 								window.history.back(-1);
 						});
 						

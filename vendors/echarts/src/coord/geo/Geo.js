@@ -221,10 +221,41 @@ define(function (require) {
             if (data) {
                 return View.prototype.dataToPoint.call(this, data);
             }
-        }
+        },
+
+        /**
+         * @override
+         * @implements
+         * see {module:echarts/CoodinateSystem}
+         */
+        convertToPixel: zrUtil.curry(doConvert, 'dataToPoint'),
+
+        /**
+         * @override
+         * @implements
+         * see {module:echarts/CoodinateSystem}
+         */
+        convertFromPixel: zrUtil.curry(doConvert, 'pointToData')
+
     };
 
     zrUtil.mixin(Geo, View);
+
+    function doConvert(methodName, ecModel, finder, value) {
+        var geoModel = finder.geoModel;
+        var seriesModel = finder.seriesModel;
+
+        var coordSys = geoModel
+            ? geoModel.coordinateSystem
+            : seriesModel
+            ? (
+                seriesModel.coordinateSystem // For map.
+                || (seriesModel.getReferringComponents('geo')[0] || {}).coordinateSystem
+            )
+            : null;
+
+        return coordSys === this ? coordSys[methodName](value) : null;
+    }
 
     return Geo;
 });

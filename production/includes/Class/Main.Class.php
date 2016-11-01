@@ -38,7 +38,9 @@ class MainWeb extends Auth {
 			define("MENU_ADD","<button type='button' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Create Data' id='btnCreate' rel='actionCreate'><i class='fa fa-plus'></i> Create</button>");
 			define("MENU_BACK","<span class='back'><button type='button' class='btn btn-info btn-sm' data-toggle='tooltip' data-placement='top' title='Back menu'><i class='fa fa-arrow-left'></i> Back </button></span>");
 			define("MENU_TOOLS","<span class='doAction'><button>แก้ไข</button><button>ลบ</button></span>");
-			define("MENU_SUBMIT","<input type='submit' name='btnSave' id='btnSave' value='บันทึก'  /><input type='reset' name='btnReset' id='btnReset' value='ล้างค่า' /> <span id='ajaxloading'>Loading..</span><span id='divMsgDiag'></span>");
+			define("MENU_SUBMIT","<button type='button' name='cancel' class='btn btn-primary'><i class='fa fa-close'></i> Cancel</button>
+<button type='submit' class='btn btn-success'><i class='fa fa-pencil-square-o'></i> Submit</button>
+");
 			//return true;
 			
 			self::$SiteName =  SITE_NAME;
@@ -131,10 +133,9 @@ class MainWeb extends Auth {
 	//Open Web Content Template
 	public function openTemplate(){
 					$str = "<!-- open Template -->\n";
-			/*
 					$str .= "     <script type='text/javascript' src='../vendors/parsleyjs/dist/parsley.min.js'></script> \n";
+					/*$str .= "     <script type='text/javascript' src='../vendors/parsleyjs/src/i18n/th.js'></script> \n";*/
 					$str .= "     <link rel='stylesheet' type='text/css' href='../vendors/parsleyjs/src/parsley.css'/> \n";
-			*/
 					$str .= "<div class='row'>\n";
 					$str .= "  <div class='col-md-12 col-sm-12 col-xs-12'>\n";
 					$str .= "    <div class='x_panel'>\n";

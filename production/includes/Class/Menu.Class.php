@@ -94,7 +94,7 @@ class MENU extends Auth {
 				$menu .= "<a data-toggle=\"tooltip\" data-placement=\"top\" title=\"Settings\"> <span class=\"glyphicon glyphicon-cog\" aria-hidden=\"true\"></span> </a>";
 				$menu .= " <a data-toggle=\"tooltip\" data-placement=\"top\" title=\"FullScreen\"> <span class=\"glyphicon glyphicon-fullscreen\" aria-hidden=\"true\"></span> </a>";
 				$menu .= "<a data-toggle=\"tooltip\" data-placement=\"top\" title=\"Lock\"> <span class=\"glyphicon glyphicon-eye-close\" aria-hidden=\"true\"></span> </a>";
-				$menu .= " <a  href=\"logout.php\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Logout\"> <span class=\"glyphicon glyphicon-off\" aria-hidden=\"true\"></span> </a>";
+				$menu .= " <a  href=\"signout.php\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Logout\"> <span class=\"glyphicon glyphicon-off\" aria-hidden=\"true\"></span> </a>";
 				$menu .= " </div>";
 				$menu .= "<!-- /menu footer buttons --> 			";
 	
@@ -116,11 +116,11 @@ class MENU extends Auth {
 						echo "                    <li class='clickMenu' rel='3'><a href='?modules=Profiles&page=profile'><i class='fa fa-edit'></i> Profile</a></li>\n";
 						echo "                    <!--                <li> <a href='javascript:;'> <i class='fa fa-edit'></i><span class='badge bg-red pull-right'>50%</span> <span>Settings</span> </a> </li>\n";
 						echo "-->\n";
-						echo "                    <li><a href='javascript:;'><i class='fa fa-question'></i> Help</a></li>\n";
-						echo "                    <li><a href='logout.php'><i class='fa fa-power-off pull-left'></i> Log Out</a></li>\n";
+						//echo "                    <li><a href='javascript:;'><i class='fa fa-question'></i> Help</a></li>\n";
+						echo "                    <li><a href='signout.php'><i class='fa fa-power-off pull-left'></i> Log Out</a></li>\n";
 						echo "                  </ul>\n";
 						echo "                </li>\n";
-												self::showMessage();												
+						//						self::showMessage();												
 						echo "                  </ul>\n";
 						echo "                </li>\n";
 						echo "              </ul>\n";

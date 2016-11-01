@@ -95,7 +95,7 @@ setInterval(function(){
        // console.log("STOP!");
        // console.log(duration.asSeconds());
         //clearInterval(timerID);
-		window.location = 'login.php';
+		window.location = 'signin.php';
     }  else{  
 	  //show how many hours, minutes and seconds are left
 
@@ -150,7 +150,7 @@ setInterval(function(){
       </tbody>
     </table>
   </div>
-  <div class="text-center"><a href="login.php" class="btn btn-primary btn-sm"><i class="fa fa-sign-in"></i> Login <span class="countdown"></span></a> </div>
+  <div class="text-center"><a href="signin.php" class="btn btn-primary btn-sm"><i class="fa fa-sign-in"></i> Sign In <span class="countdown"></span></a> </div>
 </div>
 <br>
 </body>

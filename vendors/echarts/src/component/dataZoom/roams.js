@@ -23,7 +23,7 @@ define(function(require) {
          * @param {module:echarts/ExtensionAPI} api
          * @param {Object} dataZoomInfo
          * @param {string} dataZoomInfo.coordId
-         * @param {Object} dataZoomInfo.coordinateSystem
+         * @param {Function} dataZoomInfo.containsPoint
          * @param {Array.<string>} dataZoomInfo.allCoordIds
          * @param {string} dataZoomInfo.dataZoomId
          * @param {number} dataZoomInfo.throttleRate
@@ -36,6 +36,7 @@ define(function(require) {
             var theCoordId = dataZoomInfo.coordId;
 
             // Do clean when a dataZoom changes its target coordnate system.
+            // Avoid memory leak, dispose all not-used-registered.
             zrUtil.each(store, function (record, coordId) {
                 var dataZoomInfos = record.dataZoomInfos;
                 if (dataZoomInfos[theDataZoomId]
@@ -49,7 +50,6 @@ define(function(require) {
             cleanStore(store);
 
             var record = store[theCoordId];
-
             // Create if needed.
             if (!record) {
                 record = store[theCoordId] = {
@@ -62,10 +62,7 @@ define(function(require) {
             }
 
             // Consider resize, area should be always updated.
-            var rect = dataZoomInfo.coordinateSystem.getRect().clone();
-            record.controller.rectProvider = function () {
-                return rect;
-            };
+            record.controller.setContainsPoint(dataZoomInfo.containsPoint);
 
             // Update throttle.
             throttle.createOrUpdate(
@@ -89,6 +86,7 @@ define(function(require) {
             var store = giveStore(api);
 
             zrUtil.each(store, function (record) {
+                record.controller.dispose();
                 var dataZoomInfos = record.dataZoomInfos;
                 if (dataZoomInfos[dataZoomId]) {
                     delete dataZoomInfos[dataZoomId];
@@ -144,15 +142,15 @@ define(function(require) {
     function cleanStore(store) {
         zrUtil.each(store, function (record, coordId) {
             if (!record.count) {
-                record.controller.off('pan').off('zoom');
+                record.controller.dispose();
                 delete store[coordId];
             }
         });
     }
 
-    function onPan(record, dx, dy) {
+    function onPan(record, dx, dy, oldX, oldY, newX, newY) {
         wrapAndDispatch(record, function (info) {
-            return info.panGetRange(record.controller, dx, dy);
+            return info.panGetRange(record.controller, dx, dy, oldX, oldY, newX, newY);
         });
     }
 

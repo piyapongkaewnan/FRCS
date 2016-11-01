@@ -95,9 +95,11 @@ define(function(require, factory) {
         function ifAxisCanNotOnZero(otherAxisDim) {
             var axes = axesMap[otherAxisDim];
             for (var idx in axes) {
-                var axis = axes[idx];
-                if (axis && (axis.type === 'category' || !ifAxisCrossZero(axis))) {
-                    return true;
+                if (axes.hasOwnProperty(idx)) {
+                    var axis = axes[idx];
+                    if (axis && (axis.type === 'category' || !ifAxisCrossZero(axis))) {
+                        return true;
+                    }
                 }
             }
             return false;
@@ -191,7 +193,9 @@ define(function(require, factory) {
             if (axisIndex == null) {
                 // Find first axis
                 for (var name in axesMapOnDim) {
-                    return axesMapOnDim[name];
+                    if (axesMapOnDim.hasOwnProperty(name)) {
+                        return axesMapOnDim[name];
+                    }
                 }
             }
             return axesMapOnDim[axisIndex];
@@ -212,6 +216,83 @@ define(function(require, factory) {
                     return coordList[i];
                 }
             }
+        }
+    };
+
+    /**
+     * @implements
+     * see {module:echarts/CoodinateSystem}
+     */
+    gridProto.convertToPixel = function (ecModel, finder, value) {
+        var target = this._findConvertTarget(ecModel, finder);
+
+        return target.cartesian
+            ? target.cartesian.dataToPoint(value)
+            : target.axis
+            ? target.axis.toGlobalCoord(target.axis.dataToCoord(value))
+            : null;
+    };
+
+    /**
+     * @implements
+     * see {module:echarts/CoodinateSystem}
+     */
+    gridProto.convertFromPixel = function (ecModel, finder, value) {
+        var target = this._findConvertTarget(ecModel, finder);
+
+        return target.cartesian
+            ? target.cartesian.pointToData(value)
+            : target.axis
+            ? target.axis.coordToData(target.axis.toLocalCoord(value))
+            : null;
+    };
+
+    /**
+     * @inner
+     */
+    gridProto._findConvertTarget = function (ecModel, finder) {
+        var seriesModel = finder.seriesModel;
+        var xAxisModel = finder.xAxisModel
+            || (seriesModel && seriesModel.getReferringComponents('xAxis')[0]);
+        var yAxisModel = finder.yAxisModel
+            || (seriesModel && seriesModel.getReferringComponents('yAxis')[0]);
+        var gridModel = finder.gridModel;
+        var coordsList = this._coordsList;
+        var cartesian;
+        var axis;
+
+        if (seriesModel) {
+            cartesian = seriesModel.coordinateSystem;
+            zrUtil.indexOf(coordsList, cartesian) < 0 && (cartesian = null);
+        }
+        else if (xAxisModel && yAxisModel) {
+            cartesian = this.getCartesian(xAxisModel.componentIndex, yAxisModel.componentIndex);
+        }
+        else if (xAxisModel) {
+            axis = this.getAxis('x', xAxisModel.componentIndex);
+        }
+        else if (yAxisModel) {
+            axis = this.getAxis('y', yAxisModel.componentIndex);
+        }
+        // Lowest priority.
+        else if (gridModel) {
+            var grid = gridModel.coordinateSystem;
+            if (grid === this) {
+                cartesian = this._coordsList[0];
+            }
+        }
+
+        return {cartesian: cartesian, axis: axis};
+    };
+
+    /**
+     * @implements
+     * see {module:echarts/CoodinateSystem}
+     */
+    gridProto.containPoint = function (point) {
+        var coord = this._coordsList[0];
+        if (coord) {
+            return coord.containPoint(point);
         }
     };
 
@@ -402,11 +483,7 @@ define(function(require, factory) {
      */
     function findAxesModels(seriesModel, ecModel) {
         return zrUtil.map(axesTypes, function (axisType) {
-            var axisModel = ecModel.queryComponents({
-                mainType: axisType,
-                index: seriesModel.get(axisType + 'Index'),
-                id: seriesModel.get(axisType + 'Id')
-            })[0];
+            var axisModel = seriesModel.getReferringComponents(axisType)[0];
 
             if (__DEV__) {
                 if (!axisModel) {

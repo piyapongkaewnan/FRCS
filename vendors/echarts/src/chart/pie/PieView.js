@@ -334,6 +334,8 @@ define(function (require) {
             this._data = data;
         },
 
+        dispose: function () {},
+
         _createClipPath: function (
             cx, cy, r, startAngle, clockwise, cb, seriesModel
         ) {
@@ -356,7 +358,22 @@ define(function (require) {
             }, seriesModel, cb);
 
             return clipPath;
+        },
+
+        /**
+         * @implement
+         */
+        containPoint: function (point, seriesModel) {
+            var data = seriesModel.getData();
+            var itemLayout = data.getItemLayout(0);
+            if (itemLayout) {
+                var dx = point[0] - itemLayout.cx;
+                var dy = point[1] - itemLayout.cy;
+                var radius = Math.sqrt(dx * dx + dy * dy);
+                return radius <= itemLayout.r && radius >= itemLayout.r0;
+            }
         }
+
     });
 
     return Pie;

@@ -22,7 +22,7 @@ $Config['page'] = $_GET['page'];
 
 
 //if(!isset($_SESSION['sess_user_id'])){ MainWeb::redirect('login.php'); }
-if(!isset($_SESSION['sess_user_id'])) {  MainWeb::redirect('login.php');}
+if(!isset($_SESSION['sess_user_id'])) {  MainWeb::redirect('signin.php');}
 
 //Call Auth Class
 Auth::setDB($db);
@@ -71,8 +71,6 @@ $db->debug= false;
 
 <!-- bootstrap-progressbar -->
 <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-<!-- JQVMap -->
-<!--<link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>-->
 
 <!-- PNotify -->
 <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
@@ -229,35 +227,11 @@ body {
 <!-- Bootstrap --> 
 <script type="text/javascript" src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script> 
 
-<!-- FastClick --> 
-<!--<script src="../vendors/fastclick/lib/fastclick.js"></script> --> 
 <!-- NProgress --> 
 <script type="text/javascript" src="../vendors/nprogress/nprogress.js"></script> 
-<!-- Chart.js --> 
-<!--<script src="../vendors/Chart.js/dist/Chart.min.js"></script> --> 
-<!-- gauge.js --> 
-<!--<script src="../vendors/gauge.js/dist/gauge.min.js"></script> --> 
 <!-- bootstrap-progressbar --> 
 <script type="text/javascript" src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script> 
 
-<!-- Skycons --> 
-<!--<script src="../vendors/skycons/skycons.js"></script> --> 
-<!-- Flot --> 
-<!--<script src="../vendors/Flot/jquery.flot.js"></script> 
-<script src="../vendors/Flot/jquery.flot.pie.js"></script> 
-<script src="../vendors/Flot/jquery.flot.time.js"></script> 
-<script src="../vendors/Flot/jquery.flot.stack.js"></script> 
-<script src="../vendors/Flot/jquery.flot.resize.js"></script> --> 
-<!-- Flot plugins --> 
-<!--<script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script> 
-<script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script> 
-<script src="../vendors/flot.curvedlines/curvedLines.js"></script> --> 
-<!-- DateJS --> 
-<!--<script src="../vendors/DateJS/build/date.js"></script> -->
-<!-- JQVMap --> 
-<!--<script src="../vendors/jqvmap/dist/jquery.vmap.js"></script> 
-<script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script> 
-<script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script> --> 
 <!-- jQuery custom content scroller --> 
 <script type="text/javascript" src="../vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script> 
 

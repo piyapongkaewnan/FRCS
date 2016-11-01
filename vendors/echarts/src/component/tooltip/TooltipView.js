@@ -5,6 +5,7 @@ define(function (require) {
     var zrUtil = require('zrender/core/util');
     var formatUtil = require('../../util/format');
     var numberUtil = require('../../util/number');
+    var modelUtil = require('../../util/model');
     var parsePercent = numberUtil.parsePercent;
     var env = require('zrender/core/env');
     var Model = require('../../model/Model');
@@ -236,8 +237,16 @@ define(function (require) {
                 this.group.add(crossText);
             }
 
+            var triggerOn = tooltipModel.get('triggerOn');
+
             // Try to keep the tooltip show when refreshing
-            if (this._lastX != null && this._lastY != null) {
+            if (this._lastX != null
+                && this._lastY != null
+                // When user is willing to control tooltip totally using API,
+                // self._manuallyShowTip({x, y}) might cause tooltip hide,
+                // which is not expected.
+                && triggerOn !== 'none'
+            ) {
                 var self = this;
                 clearTimeout(this._refreshUpdateTimeout);
                 this._refreshUpdateTimeout = setTimeout(function () {
@@ -256,14 +265,17 @@ define(function (require) {
             zr.off('mousemove', this._mousemove);
             zr.off('mouseout', this._hide);
             zr.off('globalout', this._hide);
-            if (tooltipModel.get('triggerOn') === 'click') {
+
+            if (triggerOn === 'click') {
                 zr.on('click', this._tryShow, this);
             }
-            else {
+            else if (triggerOn === 'mousemove') {
                 zr.on('mousemove', this._mousemove, this);
                 zr.on('mouseout', this._hide, this);
                 zr.on('globalout', this._hide, this);
             }
+            // else triggerOn is 'none', which enable user
+            // to control tooltip totally using API.
         },
 
         _mousemove: function (e) {
@@ -282,17 +294,17 @@ define(function (require) {
 
         /**
          * Show tip manually by
-         *  dispatchAction({
-         *      type: 'showTip',
-         *      x: 10,
-         *      y: 10
-         *  });
+         * dispatchAction({
+         *     type: 'showTip',
+         *     x: 10,
+         *     y: 10
+         * });
          * Or
-         *  dispatchAction({
+         * dispatchAction({
          *      type: 'showTip',
          *      seriesIndex: 0,
-         *      dataIndex: 1
-         *  });
+         *      dataIndex or dataIndexInside or name
+         * });
          *
          *  TODO Batch
          */
@@ -304,7 +316,6 @@ define(function (require) {
 
             var ecModel = this._ecModel;
             var seriesIndex = event.seriesIndex;
-            var dataIndex = event.dataIndex;
             var seriesModel = ecModel.getSeriesByIndex(seriesIndex);
             var api = this._api;
 
@@ -319,14 +330,23 @@ define(function (require) {
                 }
                 if (seriesModel) {
                     var data = seriesModel.getData();
-                    if (dataIndex == null) {
-                        dataIndex = data.indexOfName(event.name);
+                    var dataIndex = modelUtil.queryDataIndex(data, event);
+
+                    if (dataIndex == null || zrUtil.isArray(dataIndex)) {
+                        return;
                     }
+
                     var el = data.getItemGraphicEl(dataIndex);
-                    var cx, cy;
+                    var cx;
+                    var cy;
                     // Try to get the point in coordinate system
                     var coordSys = seriesModel.coordinateSystem;
-                    if (coordSys && coordSys.dataToPoint) {
+                    if (seriesModel.getTooltipPosition) {
+                        var point = seriesModel.getTooltipPosition(dataIndex) || [];
+                        cx = point[0];
+                        cy = point[1];
+                    }
+                    else if (coordSys && coordSys.dataToPoint) {
                         var point = coordSys.dataToPoint(
                             data.getValues(
                                 zrUtil.map(coordSys.dimensions, function (dim) {
@@ -344,10 +364,12 @@ define(function (require) {
                         cx = rect.x + rect.width / 2;
                         cy = rect.y + rect.height / 2;
                     }
+
                     if (cx != null && cy != null) {
                         this._tryShow({
                             offsetX: cx,
                             offsetY: cy,
+                            position: event.position,
                             target: el,
                             event: {}
                         });
@@ -359,6 +381,7 @@ define(function (require) {
                 this._tryShow({
                     offsetX: event.x,
                     offsetY: event.y,
+                    position: event.position,
                     target: el,
                     event: {}
                 });
@@ -455,7 +478,7 @@ define(function (require) {
                 api.dispatchAction({
                     type: 'showTip',
                     from: this.uid,
-                    dataIndex: el.dataIndex,
+                    dataIndexInside: el.dataIndex,
                     seriesIndex: el.seriesIndex
                 });
             }
@@ -476,7 +499,7 @@ define(function (require) {
                 this._showTooltipContent(
                     // TODO params
                     subTooltipModel, defaultHtml, subTooltipModel.get('formatterParams') || {},
-                    asyncTicket, e.offsetX, e.offsetY, el, api
+                    asyncTicket, e.offsetX, e.offsetY, e.position, el, api
                 );
             }
             else {
@@ -586,7 +609,7 @@ define(function (require) {
 
                 if (axisPointerType !== 'cross') {
                     this._dispatchAndShowSeriesTooltipContent(
-                        coordSys, seriesCoordSysSameAxis.series, point, value, contentNotChange
+                        coordSys, seriesCoordSysSameAxis.series, point, value, contentNotChange, e.position
                     );
                 }
             }, this);
@@ -912,10 +935,10 @@ define(function (require) {
          * @param {Array.<number>} point
          * @param {Array.<number>} value
          * @param {boolean} contentNotChange
-         * @param {Object} e
+         * @param {Array.<number>|string|Function} [positionExpr]
          */
         _dispatchAndShowSeriesTooltipContent: function (
-            coordSys, seriesList, point, value, contentNotChange
+            coordSys, seriesList, point, value, contentNotChange, positionExpr
         ) {
 
             var rootTooltipModel = this._tooltipModel;
@@ -926,7 +949,7 @@ define(function (require) {
             var payloadBatch = zrUtil.map(seriesList, function (series) {
                 return {
                     seriesIndex: series.seriesIndex,
-                    dataIndex: series.getAxisTooltipDataIndex
+                    dataIndexInside: series.getAxisTooltipDataIndex
                         ? series.getAxisTooltipDataIndex(series.coordDimToDataDim(baseAxis.dim), value, baseAxis)
                         : series.getData().indexOfNearest(
                             series.coordDimToDataDim(baseAxis.dim)[0],
@@ -957,19 +980,19 @@ define(function (require) {
             // Dispatch showTip action
             api.dispatchAction({
                 type: 'showTip',
-                dataIndex: payloadBatch[0].dataIndex,
+                dataIndexInside: payloadBatch[0].dataIndexInside,
                 seriesIndex: payloadBatch[0].seriesIndex,
                 from: this.uid
             });
 
             if (baseAxis && rootTooltipModel.get('showContent') && rootTooltipModel.get('show')) {
                 var paramsList = zrUtil.map(seriesList, function (series, index) {
-                    return series.getDataParams(payloadBatch[index].dataIndex);
+                    return series.getDataParams(payloadBatch[index].dataIndexInside);
                 });
 
                 if (!contentNotChange) {
                     // Update html content
-                    var firstDataIndex = payloadBatch[0].dataIndex;
+                    var firstDataIndex = payloadBatch[0].dataIndexInside;
 
                     // Default tooltip content
                     // FIXME
@@ -980,19 +1003,19 @@ define(function (require) {
                         : seriesList[0].getData().getName(firstDataIndex);
                     var defaultHtml = (firstLine ? firstLine + '<br />' : '')
                         + zrUtil.map(seriesList, function (series, index) {
-                            return series.formatTooltip(payloadBatch[index].dataIndex, true);
+                            return series.formatTooltip(payloadBatch[index].dataIndexInside, true);
                         }).join('<br />');
 
                     var asyncTicket = 'axis_' + coordSys.name + '_' + firstDataIndex;
 
                     this._showTooltipContent(
                         rootTooltipModel, defaultHtml, paramsList, asyncTicket,
-                        point[0], point[1], null, api
+                        point[0], point[1], positionExpr, null, api
                     );
                 }
                 else {
                     updatePosition(
-                        rootTooltipModel.get('position'), point[0], point[1],
+                        positionExpr || rootTooltipModel.get('position'), point[0], point[1],
                         this._tooltipContent, paramsList, null, api
                     );
                 }
@@ -1037,12 +1060,12 @@ define(function (require) {
 
             this._showTooltipContent(
                 tooltipModel, defaultHtml, params, asyncTicket,
-                e.offsetX, e.offsetY, e.target, api
+                e.offsetX, e.offsetY, e.position, e.target, api
             );
         },
 
         _showTooltipContent: function (
-            tooltipModel, defaultHtml, params, asyncTicket, x, y, target, api
+            tooltipModel, defaultHtml, params, asyncTicket, x, y, positionExpr, target, api
         ) {
             // Reset ticket
             this._ticket = '';
@@ -1051,7 +1074,7 @@ define(function (require) {
                 var tooltipContent = this._tooltipContent;
 
                 var formatter = tooltipModel.get('formatter');
-                var positionExpr = tooltipModel.get('position');
+                positionExpr = positionExpr || tooltipModel.get('position');
                 var html = defaultHtml;
 
                 if (formatter) {
