@@ -111,7 +111,7 @@ setInterval(function(){
   <p>&nbsp;</p>
   <div class="alert alert-success alert-dismissible" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <strong><i class="fa fa-sign-out"></i> Logout Success !! </strong>&nbsp;&nbsp; Please wait <span class="countdown"></span> secound for see more activity below. Or don't wail click Login button </div>
+    <strong><i class="fa fa-sign-out"></i> Signout Success !! </strong>&nbsp;&nbsp; Please wait <span class="countdown"></span> secound for see more activity below. Or don't wail click Login button </div>
   <div class="panel panel-default "> 
     <!-- Default panel contents -->
     <div class="panel-heading"><strong><i class="fa fa-line-chart"></i> Activity Summary :

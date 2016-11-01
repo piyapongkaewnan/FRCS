@@ -61,8 +61,7 @@ if ( $rs_edit['IsActive'] == "1" ||  $_GET['action'] ==  'actionCreate'){
   <div class="ln_solid"></div>
   <div class="form-group">
     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-      <button type="reset" class="btn btn-primary"><i class="fa fa-close"></i> Cancel</button>
-      <button type="submit" class="btn btn-success"><i class="fa fa-pencil-square-o "></i> Submit</button>
+            <?=MENU_SUBMIT?>
       <input type="hidden" name="action" id="action" value="<?=$_GET['action']?>">
       <input type="hidden" name="id" id="id" value="<?=$_GET['id']?>">
     </div>
