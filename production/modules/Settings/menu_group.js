@@ -1,6 +1,5 @@
 // JavaScript Document
 $(function(){
-
 		
 		// modules = module name
 		// pages = page name
@@ -10,17 +9,11 @@ $(function(){
 		
 		// Get page name
 		var page = $('#page').val();	
-		
-		//var setTitle =  $("#setTitle").val();
-
-			// Setting Dialog
-		//setDialog(setPage,520,220);
-	//	$.setDialog(setPage , 520 , 220 ,setTitle);
-		
+				
 		$.MainAction(modules , page,'');
-		//$('input[type=search]').addClass('form-control input-sm');
-		
-	//	$.initActionButton();
-		
+	
+		//(page , bStateSave  ,iDisplayLength , iDisplayEnd , aaSorting , orderType);
+	 $.MyDataTable(page , false  , 10  , 10 , 4 , 'asc');
+	
  });
 

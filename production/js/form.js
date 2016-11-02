@@ -1,7 +1,5 @@
 // JavaScript Document
 $(function(){
-// JavaScript Document
-
 // modules = module name
 // page = page name
 // select_id = selection id
@@ -35,10 +33,12 @@ $('#PermissionModal').on('hide.bs.modal', function (e) {
 })
 
 /*****************************************************************************************/
-// Init on check Radio
-$('input[name=selID]').click(function(){
-	$("#hidRadio").val($(this).val()) ;		
+// Init on check Radio  $('#TableID').on('click','.icon-trash',function () {...
+$(':checkbox[name^=selID]').on('change',  function (e) {
+	
+	//$("#hidRadio").val($(this).val()) ;		
 	$.initActionButton();
+	//console.log(countChecked());
 });
 
 
@@ -47,6 +47,7 @@ $('input[name=selID]').click(function(){
 /*****************************************************************************************/
 // Main Action 
  $.MainAction= function(modules  ,page  ,select_id){
+	 
 				$.initActionButton();
 				
 				$('input[type=search]').addClass('form-control input-sm');
@@ -56,69 +57,45 @@ $('input[name=selID]').click(function(){
 					window.location = '?modules='+modules+'&page='+page+'&'+select_id+'='+$(this).val();
 				});
 			
-			
-			
 				/*****************************************************************************************/
 				// Button Create, Edit,Delete Action
-				$("#btnCreate , #btnUpdate , #btnDelete").click( function() {	
-						var actions  = $(this).attr('rel');
-						var selID  = getSelID();
+				$("#btnCreate , .btnUpdate , #btnDelete").click( function() {	
+				
+					$.doActionForm(this , select_id);  // call 
+				
+				});
 						
-						NProgress.start();		
-						
-						switch(actions) {
-							case 'actionCreate'  :
-							case  'actionUpdate' :
-								var FormModals  =  'FormModal' ;
-								 
-								 $.get('./modules/'+modules+'/'+page+'_form.php' , { time : $.now() , modules : modules , page : page, action:actions ,select_id : $('#'+select_id).val() ,id : selID },function(data){			
-										$('#'+FormModals+' .modal-content').html(data); 
-										$('#'+FormModals).modal('show');
-										return false;
-									});
-								 
-								//code block
-								break;
-								
-							/*case 'actionUpdate'  :
-							  var FormModals  =  'FormModal' ;
-							  $.get('./modules/'+modules+'/'+page+'_form.php' , { time : $.now() , modules : modules , page : page, action:actions , id : selID },function(data){			
-										$('#'+FormModals+' .modal-content').html(data); 
-										$('#'+FormModals).modal('show');
-										return false;
-									});
-								break;*/
-								
-							case 'actionDelete':
-							
-								var FormModals  =  'FormModalDelete' ;
-								
-								$('#'+FormModals).modal('show');
-								NProgress.done();		
-								return false;
-									
-								break;
-						}
-						
-							NProgress.done();		
+				<!-- // Button Create, Edit,Delete Action -->
+										
+				// Action for Delete program by ID
+				$('#actionDelete').click( function(){
+					
+					var arrayData = Array();
+					$("input:checkbox[name^=selID]:checked").each(function(){ // Loop for checkbox is checked
+						arrayData .push($(this).val());					
+					});
+					
+					// prepare data for send to delete 1,2,3
+					selID =  arrayData.join( "," );
+					
+				//console.log(selID);
+					$.post( "./modules/"+modules+"/"+page+"_code.php", { action: 'actionDelete', id: selID } , function( data ) {
+							//$('#FormModalDelete').modal('hide');
+							var countAction = data == '1' ? '1' : '0';
+							if(countAction == '1'){
+								$.showNotify('success');
+							}else{
+								$.showNotify('error');
+							}
+							//console.log(data);
+							setTimeout("window.location.reload(true)",2000);							
+					
 						});
 						
-												
-						// Action for Delete program by ID
-						$('#actionDelete').click( function(){
-							var selID = getSelID() ;	
-						//	alert(page);
-							$.post( "./modules/"+modules+"/"+page+"_code.php", { action: 'actionDelete', id: selID } , function( data ) {
-										//$('#FormModalDelete').modal('hide');
-										$.showNotify('success');
-										//console.log(data);
-										setTimeout("window.location.reload(true)",2000);		
-									});
-						
-						});
+				});
 							
-			} // End function
-			
+} // End function  Main Action 
+
 			
 /*****************************************************************************************/
 // Main Action  on page
@@ -135,15 +112,11 @@ $('input[name=selID]').click(function(){
 			
 				var isSelected = select_id == '' ? '' : '&select_id='+$('#'+select_id).val();
 				
-				
-				
-				
 				/*****************************************************************************************/
 				// Button Create, Edit,Delete Action
-				$("#btnCreate , #btnUpdate , #btnDelete").click( function() {	
+				$("#btnCreate , .btnUpdate , #btnDelete").click( function() {	
 						var actions  = $(this).attr('rel');
-						//var selID  = $(this).attr('ref');
-						var selID  = getSelID();
+						var selID  = $(this).attr('id');//getSelID();
 						
 						NProgress.start();		
 						
@@ -154,8 +127,7 @@ $('input[name=selID]').click(function(){
 							case  'actionUpdate' :
 								//var FormModals  =  'FormModal' ;
 								window.location = '?modules='+modules+'&page='+page+'&form=keyin&action='+actions+'&id='+selID;
-								break;
-								
+								break;						
 								
 							case 'actionDelete':
 							
@@ -172,8 +144,36 @@ $('input[name=selID]').click(function(){
 						});
 						
 												
+						
 						// Action for Delete program by ID
-						$('#actionDelete').click( function(){
+				$('#actionDelete').click( function(){
+					
+					var arrayData = Array();
+					$("input:checkbox[name^=selID]:checked").each(function(){ // Loop for checkbox is checked
+						arrayData .push($(this).val());					
+					});
+					
+					// prepare data for send to delete 1,2,3
+					selID =  arrayData.join( "," );
+					
+				//console.log(selID);
+					$.post( "./modules/"+modules+"/"+page+"_code.php", { action: 'actionDelete', id: selID } , function( data ) {
+							//$('#FormModalDelete').modal('hide');
+							var countAction = data == '1' ? '1' : '0';
+							if(countAction == '1'){
+								$.showNotify('success');
+							}else{
+								$.showNotify('error');
+							}
+							//console.log(data);
+							setTimeout("window.location.reload(true)",2000);							
+					
+						});
+						
+				});
+						
+						// Action for Delete program by ID
+				/*		$('#actionDelete').click( function(){
 							var selID = getSelID() ;	
 							
 						//	alert(page);
@@ -184,17 +184,18 @@ $('input[name=selID]').click(function(){
 										setTimeout("window.location.reload(true)",2000);			
 									});
 						
-						});
+						});*/
 						
 						// Event when click Cancel button go to back
 						$('button[name=cancel').click(function(){
 								window.history.back(-1);
 						});
 						
-			} // End function			
+			} // End function		 Main Action  on page	
 
 
 /*****************************************************************************************/
+<!--  Form Action -->
 //debug = true , default = null
 
  $.FormAction = function(actions , modules  ,page , id , debug ){
@@ -203,6 +204,8 @@ $('input[name=selID]').click(function(){
 		 		
 		NProgress.start();
 		event.preventDefault(); // avoid to execute the actual submit of the form.
+		$("button[type='submit']").addClass("disabled");
+		
 		
 		 var request = $.ajax({
 					type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
@@ -238,154 +241,126 @@ $('input[name=selID]').click(function(){
 });
 						
 }
+<!--  Form Action -->
 
 
+/*************************************************************************/
+// try catch for checkbox event 
+/*$('input').on('ifChanged', function(event){  
+ 	 $.initActionButton();
+});*/
 
-/*****************************************************************************************/
-
-$.DataTableServSide = function(table_id ,modules  ,page , key1 , var1 ){
-		
-	 var table =  $('#'+table_id).DataTable( 
-   {
-        "processing": true,
-        "serverSide": true,
-		'bJQueryUI': true,
-		'bStateSave': true,
-		 'iDisplayLength' : 25,
-		'sPaginationType': 'full_numbers',
-		/*
-		'lengthMenu': 'แสดง _MENU_ เรคคอร์ดต่อหน้า', 
-		 'zeroRecords': 'ไม่พบข้อมูลที่ค้นหา', 
-		'info': 'แสดงหน้าที่ _PAGE_ ถึง _PAGES_ ทั้งหมด _TOTAL_ เรคคอร์ด ',
-		'sSearch': '<b>ค้นหา</b> :', 
-		 'infoEmpty': 'ไม่พบข้อมูล',*/
-	 'language': {
-		
-		 'sProcessing': '<img src=\"./images/loading-gear.gif\">',
-		'oPaginate':{sFirst:'&laquo;',sLast:'&raquo;',sNext:'&#8250;',sPrevious:'&#8249;'}
-		} ,		
-		
-        "ajax": "./modules/"+modules+"/"+page+"_ajax.php?"+$.now()+"&"+key1+"="+var1,
-		'columnDefs': [{
-         'targets': 0,
-         'className': 'dt-body-center',		
-         'render': function (data, type, full, meta){
-             return '<input type="radio" name="id[]"  id="rowID_'+ $('<div/>').text(data).html() +'" value="'+ $('<div/>').text(data).html() +'">';
-         }
-      }]
-    } );
-	
-	
-	
-  /*  $('#'+table_id+' tbody').on('click', 'tr', function () {
-			var data = table.row( this ).data();
-			$('#rowID_'+data[0]).prop( "checked", true );
-			$("#hidRadio").val(data[0]);
-			//console.log( data[0]);
-    } );	*/		
-	
-}
-
-
-
-
-/*****************************************************************************************/
-
-
-$.DataTableMerg = function(table_id , target, Length , scrollY ,colspan ){
-		
-	 var table = $("#"+table_id).DataTable({
-        "columnDefs": [
-            { "visible": false, "targets": target }
-        ],
-        "order": [[ target, 'asc' ]],
-		 "scrollY":        scrollY+"vh",
-        "scrollCollapse": true,
-        "displayLength": Length,		
-		 'language': {
-		 'lengthMenu': 'แสดง _MENU_ เรคคอร์ดต่อหน้า', 
-		 'zeroRecords': 'ไม่พบข้อมูลที่ค้นหา', 
-		'info': 'แสดงหน้าที่ _PAGE_ ถึง _PAGES_ ทั้งหมด _TOTAL_ เรคคอร์ด ',
-		'sSearch': '<b>ค้นหา</b> :', 
-		 'infoEmpty': 'ไม่พบข้อมูล',
-		 'sProcessing': '<img src=\"./images/loading-gear.gif\">',
-		 'infoFiltered': '(จากทั้งหมด _MAX_ เรคคอร์ด )',	
-		'oPaginate':{sFirst:'&laquo;',sLast:'&raquo;',sNext:'&#8250;',sPrevious:'&#8249;'}
-		} ,	
-		
-        "drawCallback": function ( settings ) {
-            var api = this.api();
-            var rows = api.rows( {page:'current'} ).nodes();
-            var last=null;
- 
-            api.column(target, {page:'current'} ).data().each( function ( group, i ) {
-                if ( last !== group ) {
-                    $(rows).eq( i ).before(
-                        '<tr class="group"><td colspan="'+colspan+'"><strong>'+group+'</strong></td></tr>'
-                    );
- 
-                    last = group;
-                }
-            } );
-        }
-    } );
- 
-
-/*****************************************************************************************/
-
-    // Order by the grouping
-    $('#'+table_id+' tbody').on( 'click', 'tr.group', function () {
-        var currentOrder = table.order()[0];
-        if ( currentOrder[0] === target && currentOrder[1] === 'asc' ) {
-            table.order( [ target, 'desc' ] ).draw();
-        }
-        else {
-            table.order( [ target, 'asc' ] ).draw();
-        }
-    } );
-}
-
+// Check All checkbox
+$(':checkbox[id=check-all]').click (function () {
+  $(':checkbox[name^=selID]').prop('checked', this.checked);
+   $.initActionButton();
 });
 
 
-/*****************************************************************************************/
+// on pagination change
+$('.data-table').on('draw.dt', function () {
+    $.initActionButton();
+});
 
-// Function for check select radio 
+
+/*************************************************************************/
+// Function for check select checkbox 
 $.initActionButton = function (){
-	var $checkboxes = $('input[name=selID]');
+		var countCheckBox = $("input[name='selID[]']:checked").length;
+	
+	//	console.log(countCheckBox);
+	
+	//$('input[type=checkbox]').on('ifChecked', function(event){
+	//	console.log(event.type + ' callback');
+	if(countCheckBox > 0){
+		$('#btnDelete').removeAttr('disabled'); 
+	//});
+	}else{
+	
+	//$('input[type=checkbox]').on('ifUnchecked', function(event){
+	//	console.log(event.type + ' callback');
+		 $("input[id='check-all']").prop("checked",false);
+		$('#btnDelete').attr("disabled", "disabled");
+	//});
+	}
+	/*var $checkboxes = $('input[name=selID]');
 	if($checkboxes.filter(':checked').length<=0){	// if not select set edit,delete button to Disable
 		//$('#btnUpdate').attr("disabled", "disabled");
 		//$('#btnDelete').attr("disabled", "disabled");
 	}else{  // if  select > 0  set edit,delete button to remove Disable
 		$('#btnUpdate').removeAttr('disabled'); 
 		$('#btnDelete').removeAttr('disabled'); 
-	}
+	}*/
 }
+<!-- // Function for check select checkbox  -->
+/*************************************************************************/
 
 
+/*************************************************************************/
+<!-- DoAction for control form -->
+$.doActionForm = function (_this , select_id){
+		var actions  = $(_this).attr('rel');
+		var selID  = $(_this).attr('id');//getSelID();
+		//console.log(modules);
+		NProgress.start();		
+		
+		switch(actions) {
+			case 'actionCreate'  :
+			case  'actionUpdate' :
+				var FormModals  =  'FormModal' ;
+				 
+				 $.get('./modules/'+modules+'/'+page+'_form.php' , { time : $.now() , modules : modules , page : page, action:actions ,select_id : $('#'+select_id).val() ,id : selID },function(data){			
+						$('#'+FormModals+' .modal-content').html(data); 
+						$('#'+FormModals).modal('show');
+						return false;
+					});
+				 
+				//code block
+				break;
+
+			case 'actionDelete':
+			
+				var FormModals  =  'FormModalDelete' ;
+				
+				$('#'+FormModals).modal('show');
+				NProgress.done();		
+				return false;									
+				break;
+		}
+		
+			NProgress.done();			
+}
+<!-- DoAction for control form -->
+/*************************************************************************/
+
+
+/*************************************************************************/
 // Function for Get selection data ID
 function getSelID(){
 	return $("#hidRadio").val();		
 }
+/*************************************************************************/
 
 
+/*************************************************************************/
 function showModalDelete(){
-	var str =  "<div class='modal fade' id='FormModalDelete' tabindex='-1' role='dialog' aria-labelledby='ModalLabel' aria-hidden='true' data-keyboard='false' data-backdrop='static'>\n";
-   str +=  " <div class='modal-dialog' role='document'>\n";
-str +=  "      <div class='modal-content'>\n";	
-str +=  "       <div class='modal-header'>\n";	
-str +=  "       <button type='button' class='close' data-dismiss='modal' aria-label='Close'> <span aria-hidden='true'>&times;</span> </button>\n";	
-str +=  "       <h4 class='modal-title' id='ModalLabel'>Confirm!</h4>\n";	
-str +=  "       </div>\n";	
-str +=  "       <div class='modal-body'>Do you want to delete?</div>\n";	
-str +=  "       <div class='modal-footer'>\n";	
-str +=  "       <button type='button' class='btn btn-default' data-dismiss='modal'><i class='fa fa-close'></i> Cancel</button>\n";	
-str +=  "       <button type='button' class='btn btn-primary' id='actionDelete'><i class='fa fa-trash'></i> Delete</button>\n";	
-str +=  "       </div>\n";	
-str +=  "    </div>\n";	
-str +=  "     </div>\n";	
-str +=  "   </div>\n";	
-//console.log(str);
-$('#divMsg').html(str);
+			var str =  "<div class='modal fade' id='FormModalDelete' tabindex='-1' role='dialog' aria-labelledby='ModalLabel' aria-hidden='true' data-keyboard='false' data-backdrop='static'>\n";
+		   str +=  " <div class='modal-dialog' role='document'>\n";
+		str +=  "      <div class='modal-content'>\n";	
+		str +=  "       <div class='modal-header'>\n";	
+		str +=  "       <button type='button' class='close' data-dismiss='modal' aria-label='Close'> <span aria-hidden='true'>&times;</span> </button>\n";	
+		str +=  "       <h4 class='modal-title' id='ModalLabel'>Confirm!</h4>\n";	
+		str +=  "       </div>\n";	
+		str +=  "       <div class='modal-body'>Do you want to delete?</div>\n";	
+		str +=  "       <div class='modal-footer'>\n";	
+		str +=  "       <button type='button' class='btn btn-default' data-dismiss='modal'><i class='fa fa-close'></i> Cancel</button>\n";	
+		str +=  "       <button type='button' class='btn btn-primary' id='actionDelete'><i class='fa fa-trash'></i> Delete</button>\n";	
+		str +=  "       </div>\n";	
+		str +=  "    </div>\n";	
+		str +=  "     </div>\n";	
+		str +=  "   </div>\n";	
+		//console.log(str);
+		$('#divMsg').html(str);
+	}
 
-}
+});

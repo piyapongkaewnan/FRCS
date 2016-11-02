@@ -77,14 +77,41 @@ $db->debug= false;
 <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
 <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
 
+<!--  parsley -->
+<link rel='stylesheet' type='text/css' href='../vendors/parsleyjs/src/parsley.css'/>
+
+<!-- iCheck -->
+<link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
 <!-- jQuery custom content scroller -->
 <link href="../vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
 
 <!-- Custom Theme Style -->
 <link href="../build/css/custom.min.css" rel="stylesheet">
 
+<!-- Datatable CSS -->
+<link href="../vendors/datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">
+<link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+<link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+
+
 <!-- jQuery -->
 <script type="text/javascript" src="../vendors/jquery/dist/jquery.min.js"></script>
+
+<!-- parsley --> 
+<script type='text/javascript' src='../vendors/parsleyjs/dist/parsley.min.js'></script> 
+
+<!-- Bootstrap --> 
+<script type="text/javascript" src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script> 
+
+<!-- NProgress --> 
+<script type="text/javascript" src="../vendors/nprogress/nprogress.js"></script> 
+<!-- bootstrap-progressbar --> 
+<script type="text/javascript" src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script> 
+
+<!-- jQuery custom content scroller --> 
+<script type="text/javascript" src="../vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script> 
+
 
 <!-- Angular -->
 <script type="text/javascript" src="../vendors/angular/angular.min.js"></script>
@@ -94,12 +121,37 @@ $db->debug= false;
 <script type="text/javascript" src="../vendors/pnotify/dist/pnotify.buttons.js"></script> 
 <script type="text/javascript" src="../vendors/pnotify/dist/pnotify.nonblock.js"></script> 
 
-<script type='text/javascript' src='../vendors/parsleyjs/dist/parsley.min.js'></script> 
-<link rel='stylesheet' type='text/css' href='../vendors/parsleyjs/src/parsley.css'/>
+<!-- iCheck --> 
+<script src="../vendors/iCheck/icheck.min.js"></script> 
+
+<!-- bootstrap-daterangepicker --> 
+<!--<script type="text/javascript" src="js/moment/moment.min.js"></script> -->
+<script type="text/javascript" src="../vendors/moment/min/moment.min.js"></script> 
+<!--<script type="text/javascript" src="js/datepicker/daterangepicker.js"></script> -->
+<script type="text/javascript" src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script> 
+
+
+<!-- Datatables -->
+<script type='text/javascript' src='../vendors/datatables/media/js/jquery.dataTables.min.js'></script>
+<script type='text/javascript' src='../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js'></script>
+<script type='text/javascript' src='../vendors/datatables.net-responsive/js/dataTables.responsive.min.js'></script>
+<script type='text/javascript' src='../vendors/datatables.net-buttons/js/dataTables.buttons.min.js'></script>
+<script type='text/javascript' src='../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js'></script>
+<script type='text/javascript' src='../vendors/datatables.net-buttons/js/buttons.html5.min.js'></script>
+<script type='text/javascript' src='../vendors/datatables.net-buttons/js/buttons.print.min.js'></script>
+<script type='text/javascript' src='../vendors/jszip/dist/jszip.min.js'></script>
+<script type='text/javascript' src='../vendors/pdfmake/build/pdfmake.min.js'></script>
+<script type='text/javascript' src='../vendors/pdfmake/build/vfs_fonts.js'></script>
+
+<script type="text/javascript" src="./js/apps.js"></script> 
+<script type="text/javascript" src="./js/datatable.custom.js"></script> 
 
 
 <!-- My Custom Core JS -->
 <script type="text/javascript" src="js/main.core.js"></script>
+
+<script type="text/javascript" src="./js/form.js"></script> 
+
 
 <style type="text/css">
 body {
@@ -109,7 +161,6 @@ body {
 		font-size:12px;
 }
 
- 
 </style>
 </head>
 <body class="nav-md main_body">
@@ -151,43 +202,6 @@ body {
           <?=MainWeb::setBreadcrumb();?>
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12"> 
-              <!-- top tiles --> 
-              <!--
-          <div class="row tile_count">
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
-              <div class="count">2500</div>
-              <span class="count_bottom"><i class="green">4% </i> From last Week</span>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-clock-o"></i> Average Time</span>
-              <div class="count">123.50</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Males</span>
-              <div class="count green">2,500</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Females</span>
-              <div class="count">4,567</div>
-              <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Collections</span>
-              <div class="count">2,315</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Connections</span>
-              <div class="count">7,325</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-            </div>
-          </div>
---> 
-              <!-- /top tiles -->
-              
               <div id="divPage">
                 <?php
 				// Setup Route to call mpdule & page
@@ -199,8 +213,7 @@ body {
                         include("./modules/".$Config['modules']."/index.php");
                     }else{
 						 include("main.php");
-					}
-					
+					}					
 					?>
               </div>
             </div>
@@ -223,24 +236,8 @@ body {
 <input name="page" id="page" type="hidden" value="<?=$Config['page']?>">
 <input name="chkMenuAuth" id="chkMenuAuth" type="hidden" value="<?=$chkMenuAuth?>">
 <div id="divMsg"></div>
-
-<!-- Bootstrap --> 
-<script type="text/javascript" src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script> 
-
-<!-- NProgress --> 
-<script type="text/javascript" src="../vendors/nprogress/nprogress.js"></script> 
-<!-- bootstrap-progressbar --> 
-<script type="text/javascript" src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script> 
-
-<!-- jQuery custom content scroller --> 
-<script type="text/javascript" src="../vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script> 
-
-<!-- bootstrap-daterangepicker --> 
-<script type="text/javascript" src="js/moment/moment.min.js"></script> 
-<script type="text/javascript" src="js/datepicker/daterangepicker.js"></script> 
-<script type="text/javascript" src="../build/js/custom.min.js"></script> 
-<script type="text/javascript" src="./js/apps.js"></script> 
-
+<!-- JS Custom -->
+<script type="text/javascript" src="../build/js/custom.js"></script> 
 
 </body>
 </html>

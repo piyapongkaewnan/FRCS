@@ -81,7 +81,7 @@ if($action == "actionCreate"){
 										IsDelete = CASE IsActive WHEN 1 THEN 0 WHEN 0 THEN 0 END,
 										ModifiedBy = $user_id, 
 										ModifiedOn = NOW() 																		
-					WHERE id = $id ";
+					WHERE id = $id; ";
 
 
 }else if($action == "actionDelete"){
@@ -91,7 +91,7 @@ if($action == "actionCreate"){
 										IsActive = CASE IsDelete WHEN 1 THEN 0 WHEN 0 THEN 1 END,
 										DeletedBy = $user_id, 
 										DeletedOn = NOW() 										
-					WHERE id = $id " ;
+					WHERE id IN ( $id );" ;
 }
 
 	$result = $db->Execute($sql);

@@ -69,7 +69,7 @@ $DirModule =  MainWeb::ScanDir( '../'); // path from top);
     <div class="form-group">
       <label for="module_name" class="form-control-label">Module:</label>
       <!--<input type="text" class="form-control input-sm" id="recipient-name" required="required">-->
-      <select name="module_name" id="module_name" class="form-control input-sm">
+      <select name="module_name" id="module_name" class="form-control input-sm" required>
         <?=Form::listComboBox($DirModule,$rs_edit['module_name']);?>
       </select>
     </div>

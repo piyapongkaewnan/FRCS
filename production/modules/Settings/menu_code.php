@@ -51,7 +51,7 @@ if($action == "actionCreate"){
 					WHERE menu_id = $menu_id ";
 
 }else if($action == "actionDelete"){
-	 $sql = "DELETE FROM menu WHERE menu_id = ".$_POST['id'];
+	 $sql = "DELETE FROM menu WHERE menu_id  IN ($menu_id)";
 }
 	$result = $db->Execute($sql);
 	if($result){

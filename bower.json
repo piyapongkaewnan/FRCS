@@ -85,6 +85,7 @@
   },
   "dependencies": {
     "stdClass": "^0.1.0",
-    "fpdf": "^0.0.1"
+    "fpdf": "^0.0.1",
+    "moment": "^2.15.2"
   }
 }

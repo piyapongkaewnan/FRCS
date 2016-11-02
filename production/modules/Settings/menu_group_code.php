@@ -1,10 +1,10 @@
 ﻿<?php
 @session_start();
-/*
-print "<pre>";
-print_r($_POST);
-print "</pre>";*/
 
+/*print "<pre>";
+print_r($_POST);
+print "</pre>";
+*/
 include('../../includes/DBConnect.php');
 
 
@@ -42,7 +42,7 @@ if($action == "actionCreate"){
 					WHERE mgroup_id = $mgroup_id ";
 
 }else if($action == "actionDelete"){
-		$sql = "DELETE FROM menu_group WHERE mgroup_id = $mgroup_id" ;
+		$sql = "DELETE FROM menu_group WHERE mgroup_id IN ($mgroup_id) " ;
 }
 
 	$result = $db->Execute($sql);

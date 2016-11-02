@@ -1,4 +1,8 @@
 <?php
+###############################################
+# Class for define Database Connection
+
+###############################################
 include("adodb/adodb-exceptions.inc.php"); 
 require('adodb/adodb.inc.php');
 #Define Valiable for DB Connection

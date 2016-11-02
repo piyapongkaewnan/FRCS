@@ -30,7 +30,7 @@ if($action == "actionCreate"){
 					WHERE group_id = $group_id ";
 
 }else if($action == "actionDelete"){
-	$sql = "DELETE FROM user_group WHERE group_id = $group_id";
+	$sql = "DELETE FROM user_group WHERE group_id IN ($group_id)";
 }
 	$result = $db->Execute($sql);
 	if($result){

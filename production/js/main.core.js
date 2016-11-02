@@ -52,7 +52,6 @@ $('.clickMenu').click(function(){
 });
 
  
-});
 
 
 /*****************************************************************************************/
@@ -93,6 +92,62 @@ $('.clickMenu').click(function(){
 
 
 
+
+<!--- My Customize DataTable --> 
+$.MyDataTable = function(tableID , bStateSave  ,iDisplayLength , iDisplayEnd , aaSorting , orderType){  
+
+	
+   if ($('#table_'+tableID).length) { 
+
+
+	var tableID = $('#table_'+tableID).dataTable({
+				//'bJQueryUI': true,
+				'bStateSave': bStateSave, 
+				'sPaginationType': 'full_numbers',
+               'bPaginate': '1', 
+               'iDisplayLength' : iDisplayLength ,
+               'iDisplayStart': 0 ,
+               'iDisplayEnd' : iDisplayEnd,
+				'aaSorting': [[ aaSorting, orderType ]],
+				'language': {
+				     'sProcessing': '<img src="./images/loading-gear.gif">',	
+				     'oPaginate':{sFirst:'&laquo;',sLast:'&raquo;',sNext:'&#8250;',sPrevious:'&#8249;'} 
+				} ,
+			 dom: '<Bf<rt>pi>',  
+			 'columnDefs': [ {  
+			   'targets': 'no-sort',  
+			   'orderable': false,  
+			 } ] ,  
+			     buttons: [ 
+			         { 
+			           extend: 'copy', 
+			           className: 'btn-sm' 
+			         }, 
+			         { 
+			           extend: 'csv', 
+			            className: 'btn-sm' 
+			          }, 
+			         { 
+			           extend: 'excel', 
+			           className: 'btn-sm' 
+			         }, 
+			         { 
+			            extend: 'pdfHtml5', 
+			            className: 'btn-sm' 
+			          }, 
+			           { 
+			             extend: 'print', 
+			             className: 'btn-sm' 
+			           } 
+			          ], 
+			          responsive: true 
+ 				}); 
+   			} 
+
+}
+<!--- My Customize DataTable --> 
+
+});
 
 
 //#########################################################

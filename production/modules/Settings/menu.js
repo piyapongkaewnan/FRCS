@@ -13,12 +13,8 @@ $(function(){
 		
 		$.MainAction(modules,page,'mgroup_id');
 		
-		
-		//showModalDelete();
-		//$.initActionButton();
-	
-	
+				//(page , bStateSave  ,iDisplayLength , iDisplayEnd , aaSorting , orderType);
+	 $.MyDataTable(page , false  , 10  , 10 , 1 , 'asc');
 
-		
  });
 

@@ -70,7 +70,7 @@ $(document).ready(function() {
         var bodyHeight = $BODY.outerHeight(),
             footerHeight = $BODY.hasClass('footer_fixed') ? -10 : $FOOTER.height(),
             leftColHeight = $LEFT_COL.eq(1).height() + $SIDEBAR_FOOTER.height(),
-            contentHeight = bodyHeight < leftColHeight ? leftColHeight : bodyHeight;
+            contentHeight = bodyHeight < leftColHeight ? leftColHeight-40 : bodyHeight-20;
 
         // normalize content
         contentHeight -= $NAV_MENU.height() + footerHeight;
@@ -203,6 +203,7 @@ $(document).ready(function() {
 // iCheck
 $(document).ready(function() {
     if ($("input.flat")[0]) {
+		
         $(document).ready(function () {
             $('input.flat').iCheck({
                 checkboxClass: 'icheckbox_flat-green',
@@ -248,15 +249,16 @@ $('.bulk_action input#check-all').on('ifUnchecked', function () {
 
 function countChecked() {
     if (checkState === 'all') {
-        $(".bulk_action input[name='table_records']").iCheck('check');
+        $(".bulk_action input[name='selID[]']").iCheck('check');
     }
     if (checkState === 'none') {
-        $(".bulk_action input[name='table_records']").iCheck('uncheck');
+        $(".bulk_action input[name='selID[]']").iCheck('uncheck');
     }
 
-    var checkCount = $(".bulk_action input[name='table_records']:checked").length;
-
+    var checkCount = $(".bulk_action input[name='selID[]']:checked").length;
+	
     if (checkCount) {
+		
         $('.column-title').hide();
         $('.bulk-actions').show();
         $('.action-cnt').html(checkCount + ' Records Selected');

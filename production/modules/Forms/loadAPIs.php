@@ -67,7 +67,6 @@ require_once("./includes/DBConnect.php");
           <button type="button" id="loadAPI" class="btn btn-primary btn-sm"><i class="fa fa-bolt"></i> Load API</button>
          <!-- <span class="loading2"></span>--> </div>
           <div class="showAPI" style="display:none">
-        <form>
           <table width="100%" class="table table-striped table-hover">
             <tr class="info">
               <th width="18%">#</th>
@@ -86,7 +85,6 @@ require_once("./includes/DBConnect.php");
             </tr>
             <?php } ?>
           </table>
-        </form>
         </div>
       </div>
     </div>
@@ -179,7 +177,7 @@ require_once("./includes/DBConnect.php");
 	  
 	  $('#loadFX').click(function(){
 		// console.log(h);
-			$('.showFX').hide('fade');
+			$('.showFX').hide();
 		  $('.loading1').html('');
 		  $(this).prop('disabled',true);
 		  $(this).html("<i class='fa fa-spinner fa-spin'></i> Plese wait..");
@@ -217,7 +215,7 @@ require_once("./includes/DBConnect.php");
 				$('#loadFX').html("<i class='fa fa-bolt'></i> Load FX");
 				$('.loading1').html("<i class='fa fa-check'></i> Ok ");
 				$('.loading1').addClass("text-success");
-				$('.showFX').show('fade'); 
+				$('.showFX').show(); 
 				$('.btn-save').show();
 			}
 	  

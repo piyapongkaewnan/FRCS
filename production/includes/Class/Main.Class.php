@@ -31,7 +31,10 @@ class MainWeb extends Auth {
 			define("COPYRIGHT"," &copy;".date('Y')."  ".$rs_config['website_name']);
 			
 			/* Menu Action*/
+			define("MENU_ACTION","<div class='doActionModal toolbarGroup'><div class='btn-group' role='group' aria-label='...'><button type='button' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Add Data' id='btnCreate' rel='actionCreate'><i class='fa fa-plus'></i> &nbsp;Add&nbsp; </button><button type='button' class='btn  btn-danger  btn-sm' data-toggle='tooltip' data-placement='top' title='Delete Data' id='btnDelete' rel='actionDelete' disabled><i class='fa fa-trash'></i> Delete </button></div></div>");
+			/*
 			define("MENU_ACTION","<div class='doActionModal toolbarGroup'><div class='btn-group' role='group' aria-label='...'><button type='button' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Create Data' id='btnCreate' rel='actionCreate'><i class='fa fa-plus'></i> Create</button><button type='button' class='btn  btn-primary  btn-sm'  data-toggle='tooltip' data-placement='top' title='Update Data' id='btnUpdate' rel='actionUpdate' disabled><i class='fa fa-edit'></i> Update</button><button type='button' class='btn  btn-danger  btn-sm' data-toggle='tooltip' data-placement='top' title='Delete Data' id='btnDelete' rel='actionDelete' disabled><i class='fa fa-trash'></i> Delete </button></div></div>");
+			*/
 			/*define("MENU_ACTION_PAGE","<div class='doActionModal toolbarGroup'><div class='btn-group' role='group' aria-label='...'><button type='button' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Create Data' id='btnCreate' rel='actionCreate'><i class='fa fa-plus'></i> Create</button><button type='button' class='btn  btn-primary  btn-sm'  data-toggle='tooltip' data-placement='top' title='Update Data' id='btnUpdate' rel='actionUpdate'><i class='fa fa-edit'></i> Update</button><button type='button' class='btn  btn-danger  btn-sm' data-toggle='tooltip' data-placement='top' title='Delete Data' id='btnDelete' rel='actionDelete'><i class='fa fa-trash'></i> Delete </button></div></div>");*/
 			define("MENU_SAVE_ONLY","<span class='doAction'><button type='submit' class='btn btn-primary' data-toggle='tooltip' data-placement='top' title='Save Data' id='btnSave' rel='actionSave'><i class='fa fa-save'></i> Save</button></span>");
 			define("MENU_SAVE","<span class='doAction'><div class='btn-group' role='group' aria-label='...'><button type='button' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Save'><i class='fa fa-save'></i> Save </button></div></span>");
@@ -133,9 +136,9 @@ class MainWeb extends Auth {
 	//Open Web Content Template
 	public function openTemplate(){
 					$str = "<!-- open Template -->\n";
-					$str .= "     <script type='text/javascript' src='../vendors/parsleyjs/dist/parsley.min.js'></script> \n";
+					/*$str .= "     <script type='text/javascript' src='../vendors/parsleyjs/dist/parsley.min.js'></script> \n";*/
 					/*$str .= "     <script type='text/javascript' src='../vendors/parsleyjs/src/i18n/th.js'></script> \n";*/
-					$str .= "     <link rel='stylesheet' type='text/css' href='../vendors/parsleyjs/src/parsley.css'/> \n";
+					/*$str .= "     <link rel='stylesheet' type='text/css' href='../vendors/parsleyjs/src/parsley.css'/> \n";*/
 					$str .= "<div class='row'>\n";
 					$str .= "  <div class='col-md-12 col-sm-12 col-xs-12'>\n";
 					$str .= "    <div class='x_panel'>\n";

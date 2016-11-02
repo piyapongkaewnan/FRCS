@@ -46,11 +46,10 @@ ModifiedOn
 ?>
 <?=MainWeb::openTemplate();?>
 <style type="text/css">
-	form {
-		padding:0px;
-		margin:0px;	
-	}
-
+form {
+	padding:0px;
+	margin:0px;
+}
 </style>
 <form id="form_<?=$Config['page']?>" name="form_<?=$Config['page']?>" method="post" data-parsley-validate class="form-horizontal form-label-left">
   <div class="form-group">
@@ -109,67 +108,67 @@ ModifiedOn
 </form>
 <?=MainWeb::closeTemplate();?>
 <form id="form_Param" name="form_Param" method="post" data-parsley-validate class="form-horizontal form-label-left">
-<div class='row'>
-  <div class='col-md-12 col-sm-12 col-xs-12'>
-    <div class='x_panel'>
-      <div class='x_title'>
-        <h2><i class="fa fa-bolt"></i> API Parameters</h2>
-        <ul class='nav navbar-right panel_toolbox'>
-          <li><a class='collapse-link'><i class='fa fa-chevron-up'></i></a> </li>
-          <li><a class='close-link'><i class='fa fa-close'></i></a> </li>
-        </ul>
-        <div class='clearfix'></div>
-      </div>
-      <div class='x_content'>
-        <div class="x_content" id="APIParam">
-          <div class="form-group  pull-left">
-            <label class="control-label col-md-12 col-sm-12 col-xs-12">
-            <button id="b1" class="btn btn-warning addMore" type="button"><i class="fa fa-plus"></i> Add Parammeter</button>
-           </label>
-          </div>
-          <table class="table table-striped table-hover table-responsive" id="tableParam">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Parameter Name</th>
-                <th>Parameter Value</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-           <!--   <tr>
+  <div class='row'>
+    <div class='col-md-12 col-sm-12 col-xs-12'>
+      <div class='x_panel'>
+        <div class='x_title'>
+          <h2><i class="fa fa-bolt"></i> API Parameters</h2>
+          <ul class='nav navbar-right panel_toolbox'>
+            <li><a class='collapse-link'><i class='fa fa-chevron-up'></i></a> </li>
+            <li><a class='close-link'><i class='fa fa-close'></i></a> </li>
+          </ul>
+          <div class='clearfix'></div>
+        </div>
+        <div class='x_content'>
+          <div class="x_content" id="APIParam">
+            <div class="form-group  pull-left">
+              <label class="control-label col-md-12 col-sm-12 col-xs-12">
+                <button id="b1" class="btn btn-warning addMore" type="button"><i class="fa fa-plus"></i> Add Parameters</button>
+              </label>
+            </div>
+            <table class="table table-striped table-hover table-responsive" id="tableParam">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Parameter Name</th>
+                  <th>Parameter Value</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!--   <tr>
                 <th scope=row><i class="fa fa-magic"></i></th>
                 <td><input type="text" name="paramName[]" id="paramName" class="form-control input-sm" required="required" /></td>
                 <td><input type="text" name="paramValue[]" id="paramValue" class="form-control input-sm" required="required" /></td>
                 <td><button type="submit" class="btn btn-success btn-xs"> Save</button>  
                 		<a href="javascript:void(0);" class="btn btn-danger btn-xs">Remove</a></td>
               </tr>-->
-              <tr>
-                <th scope=row>1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td><a href="javascript:void(0);" class="btn btn-info btn-xs">Edit</a>  <a href="javascript:void(0);" class="btn btn-danger btn-xs"> Remove</a></td>
-              </tr>
-              <tr>
-                <th scope=row>2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td><a href="javascript:void(0);" class="btn btn-info btn-xs">Edit</a>  <a href="javascript:void(0);" class="btn btn-danger btn-xs"> Remove</a></td>
-              </tr>
-              <tr>
-                <th scope=row>3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td><a href="javascript:void(0);" class="btn btn-info btn-xs">Edit</a> <a href="javascript:void(0);" class="btn btn-danger btn-xs"> Remove</a></td>
-              </tr>
-            </tbody>
-          </table>
+                <tr>
+                  <th scope=row>1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td><a href="javascript:void(0);" class="btn btn-info btn-xs">Edit</a> <a href="javascript:void(0);" class="btn btn-danger btn-xs"> Remove</a></td>
+                </tr>
+                <tr>
+                  <th scope=row>2</th>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td><a href="javascript:void(0);" class="btn btn-info btn-xs">Edit</a> <a href="javascript:void(0);" class="btn btn-danger btn-xs"> Remove</a></td>
+                </tr>
+                <tr>
+                  <th scope=row>3</th>
+                  <td>Larry</td>
+                  <td>the Bird</td>
+                  <td><a href="javascript:void(0);" class="btn btn-info btn-xs">Edit</a> <a href="javascript:void(0);" class="btn btn-danger btn-xs"> Remove</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-          </form>
+</form>
 <!-- Form Custom Core JS --> 
 <script type="text/javascript" src="js/form.js"></script> 
 <script  type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 
@@ -202,4 +201,4 @@ $(function(){
 	});
 
 });
-</script>
+</script> 

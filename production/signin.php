@@ -86,7 +86,7 @@ if(!Auth::isGuest()){ MainWeb::redirect('index.php'); }
   <!-- /card-container --> 
 </div>
 <!-- /container --> 
-<script type="text/javascript" src="js/moment/moment.min.js"></script> 
+<script type="text/javascript" src="../vendors/moment/min/moment.min.js"></script> 
 <script type="text/javascript" src="js/login.js"></script>
 
 <script type="text/javascript">

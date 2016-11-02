@@ -14,7 +14,7 @@ $user_id =  $_SESSION['sess_user_id'];
 $sess_id = $_SESSION['sess_id'];
 $realname = $_SESSION['sess_realname'];
 
-!$_SESSION['sess_user_id'] ?  MainWeb::redirect('login.php') : '';
+!$_SESSION['sess_user_id'] ?  MainWeb::redirect('signin.php') : '';
 
 $timeCountDown = 10; // Set time countdown x secound
 
@@ -74,7 +74,7 @@ $db->debug=0;
 <script type="text/javascript" src="../vendors/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script type="text/javascript" src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/moment/moment.min.js"></script>
+<script type="text/javascript" src="../vendors/moment/min/moment.min.js"></script> 
 </head>
 <style type="text/css">
 body {
@@ -111,7 +111,7 @@ setInterval(function(){
   <p>&nbsp;</p>
   <div class="alert alert-success alert-dismissible" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <strong><i class="fa fa-sign-out"></i> Signout Success !! </strong>&nbsp;&nbsp; Please wait <span class="countdown"></span> secound for see more activity below. Or don't wail click Login button </div>
+    <strong><i class="fa fa-sign-out"></i> Sign Out Success !! </strong>&nbsp;&nbsp; Please wait <span class="countdown"></span> secound for see more activity below. Or don't wail click <label class="label label-primary">Sign In</label> button </div>
   <div class="panel panel-default "> 
     <!-- Default panel contents -->
     <div class="panel-heading"><strong><i class="fa fa-line-chart"></i> Activity Summary :

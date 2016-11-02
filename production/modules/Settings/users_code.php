@@ -95,7 +95,7 @@ if($action == "actionCreate"){
 		set_authorize(); // เรียกใช้การ update ค่าในตาราง tbl_user_on_site และ tbl_user_auth
 
 }else if($action == "actionDelete"){
-	$sql = "DELETE FROM user WHERE user_id = $user_id";
+	$sql = "DELETE FROM user WHERE user_id IN ($user_id)";
 	$result = $db->Execute($sql);
 	
 }

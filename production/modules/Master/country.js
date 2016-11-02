@@ -13,10 +13,10 @@ $(function(){
 		
 
 		$.MainActionOnPage(modules , page,'');
-		//$('input[type=search]').addClass('form-control input-sm');
+	
 		
-		
-		//$('#btnCreate, #btnUpdate, #btnDelete').css('cursor','pointer');
+			//(page , bStateSave  ,iDisplayLength , iDisplayEnd , aaSorting , orderType);
+	    $.MyDataTable(page , false  , 10  , 10 , 1 , 'asc');
 		
 
  });

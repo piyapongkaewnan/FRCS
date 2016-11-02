@@ -1,17 +1,5 @@
 <?php
-include("./includes/Class/DataTable.Class.php");
 include("./includes/Class/Form.Class.php");
-
-$tbl = new dataTable();
-$tbl->id = ''.$_GET['page'];
-//$tbl->title = title_menu($_GET['setPage']);
-//$tbl->menu = MENU_ACTION;
-$tbl->module = $_GET['module'];
-$tbl->page = $_GET['page'];
-$tbl->order = 1;
-//$tbl->orderType = "ASC";
-//$tbl->pagingLength=2;
-
 
 // หาค่ากลุ่มเมนู
 $sql_mgroup = "SELECT * FROM menu_group ORDER BY  menu_group_en";
@@ -40,8 +28,6 @@ $sql_list = "SELECT
 				ORDER BY a.menu_order  ";
 $rs_list = $db->GetAll($sql_list);
 
-$tbl->openTable();
-
 ?>
 <?=MainWeb::openTemplate();?> 
 
@@ -55,48 +41,37 @@ $tbl->openTable();
     <?=MENU_ACTION?>
   </div>
 </div>
-<table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-striped table-hover table-bordered compact dt-responsive" id="<?=$tbl->id;?>">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-striped table-hover table-bordered compact dt-responsive  bulk_action data-table" id="table_<?=$Config['page']?>">
   <thead>
-    <tr>
-      <th width="7%"  class="no-sort">Action</th>
-      <th width="8%"> Order</th>
-      <th width="20%">Menu name (TH)</th>
-      <th width="20%">Menu name (EN)</th>
-      <th width="26%">Menu Description</th>
-      <th width="11%">Menu File</th>
+    <tr class="headings">
+      <th width="5%"  class="no-sort text-center"> <input type="checkbox" id="check-all" class="" /></th>
+      <th width="6%"> Order</th>
+      <th width="17%">Menu name (TH)</th>
+      <th width="18%">Menu name (EN)</th>
+      <th width="24%">Menu Description</th>
+      <th width="13%">Menu File</th>
       <th width="8%">Icons</th>
+       <th width="9%" class="no-sort"> Action</th>
     </tr>
   </thead>
   <tbody>
     <?php for($i=0;$i<count($rs_list);$i++){ ?>
     <tr>
-      <td align="center" valign="top"><input type="radio" name="selID" id="selID_<?=$rs_list[$i]['menu_id']?>" value="<?=$rs_list[$i]['menu_id']?>"/></td>
+      <td align="center" valign="top"><input type="checkbox" class="selCheckBox" name="selID[]" id="<?=$rs_list[$i]['menu_id']?>" value="<?=$rs_list[$i]['menu_id']?>"></td>
       <td align="center" valign="top"><?=$rs_list[$i]['menu_order']?></td>
       <td valign="top"><?=$rs_list[$i]['menu_name_th']?></td>
       <td valign="top"><?=$rs_list[$i]['menu_name_en']?></td>
       <td valign="top"><?=$rs_list[$i]['menu_desc']?></td>
       <td valign="top"><?=$rs_list[$i]['menu_file']?></td>
       <td align="center" valign="top"><i class ="<?=$rs_list[$i]['icon_name']?>"></i></td>
+      <td align="center"><a href="javascript:void(0);" class="btn btn-xs btn-info btnUpdate" rel="actionUpdate" id="<?=$rs_list[$i]['menu_id']?>">Edit</a></td>
     </tr>
     <?php } // End For ?>
   </tbody>
 </table>
 
-<?php 
-	$tbl->closeTable(); 
-?>
 <input type="hidden" name="hidRadio" id="hidRadio" value="" />
 <?=MainWeb::closeTemplate();?> 
 <?=MainWeb::setModal();?> 
 <?=MainWeb::setModalDelete();?> 
-<!-- Form Custom Core JS -->
-<script type="text/javascript" src="js/form.js"></script>
-
 <script  type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 
-
-<script type="text/javascript">
-$(function(){
-//	alert($.oTable_menu);
-	
-});
-</script>
