@@ -237,7 +237,7 @@ body {
 <input name="chkMenuAuth" id="chkMenuAuth" type="hidden" value="<?=$chkMenuAuth?>">
 <div id="divMsg"></div>
 <!-- JS Custom -->
-<script type="text/javascript" src="../build/js/custom.js"></script> 
+<script type="text/javascript" src="../build/js/custom.min.js"></script> 
 
 </body>
 </html>
