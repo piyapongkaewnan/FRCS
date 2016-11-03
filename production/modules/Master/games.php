@@ -48,10 +48,10 @@ $rs_list =  $db ->GetAll($sql_list);
       <th width="8%" align="center">RefCode</th>
       <th width="10%" align="center">GroupCode</th>
       <th width="16%" align="center">GameName</th>
-      <th width="11%" align="center">GameType</th>
-      <th width="13%" align="center"> Partner1</th>
-      <th width="9%" align="center">Partner2</th>
-      <th width="10%" align="center">PercentShare</th>
+      <th width="14%" align="center">GameType</th>
+      <th width="12%" align="center"> Partner1</th>
+<!--      <th width="9%" align="center">Partner2</th>
+-->      <th width="9%" align="center">PercentShare</th>
       <th width="10%" align="center">Territory</th>
       <th width="8%" align="center">Is Active</th>
       <th width="8%" class="no-sort"> Action</th>      
@@ -66,11 +66,11 @@ $rs_list =  $db ->GetAll($sql_list);
       <td align="center"><?=$rs_list[$i]['GameName']?></td>
       <td><?=$rs_list[$i]['type']?></td>
       <td><?=$rs_list[$i]['Partner1']?></td>
-      <td><?=$rs_list[$i]['Partner2']?></td>
-       <td align="right"><?=$rs_list[$i]['PercentShare']?></td>
+<!--      <td><?=$rs_list[$i]['Partner2']?></td>
+-->       <td align="right"><?=$rs_list[$i]['PercentShare']?></td>
        <td><?=$rs_list[$i]['CountryName']?></td>
       <td width="8%" align="center"><?=$rs_list[$i]['IsActive']=="1" ? "YES" : "NO";?></td>
-      <td align="center"><a href="javascript:void(0);" class="btn btn-xs btn-info btnUpdate" rel="actionUpdate" id="<?=$rs_list[$i]['id']?>">Edit</a></td>      
+      <td align="center"><a href="<?=MainWeb::getURI()?>&form=keyin&action=actionUpdate&id=<?=$rs_list[$i]['id']?>" class="btn btn-xs btn-info btnUpdate" >Edit</a></td>
     </tr>
     <?php } // End For ?>
   </tbody>

@@ -1,7 +1,6 @@
 <!-- Select2 -->
 <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet">
 <?php
-include("./includes/Class/Form.Class.php");
 
 if($_GET['action'] ==  'actionUpdate'){
 // แสดงรายละเอียด
@@ -159,9 +158,6 @@ if ( $rs_edit['IsActive'] == "1" ||  $_GET['action'] ==  'actionCreate'){
 <?=MainWeb::closeTemplate();?>
 
 
-<!-- Form Custom Core JS -->
-<script type="text/javascript" src="js/form.js"></script>
-
 <script  type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 
 
 <!-- Select2 --> 
@@ -178,7 +174,8 @@ $(function(){
 		var page = '<?=$_GET['page']?>';		
 
 	
-		$.FormAction( actions ,modules  ,page , '<?=$_GET['id']?>' , false  );
+		//  actions , modules  ,page , selected , debug , isCurrentPage
+		$.FormAction( actions ,modules  ,page ,  '<?=$_GET['id']?>' , false ,  false );
 
 		 $("#Territory , #Partner1 , #Partner2").select2({
           placeholder: "Select a option..",

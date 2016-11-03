@@ -13,7 +13,7 @@ $(function(){
 		$.MainAction(modules , page,'');
 	
 		//(page , bStateSave  ,iDisplayLength , iDisplayEnd , aaSorting , orderType);
-	 $.MyDataTable(page , false  , 10  , 10 , 4 , 'asc');
+		 $.MyDataTable(page , false  , 10  , 10 , 4 , 'asc');
 	
  });
 

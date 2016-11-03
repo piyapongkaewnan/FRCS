@@ -34,7 +34,7 @@ $db->Execute($sqlUpdateStat);
 								ON b.menu_id = c.menu_id
 							WHERE a.user_id = $user_id
 								AND a.session_id = '$sess_id'
-							ORDER BY b.event_datetime DESC ";
+							ORDER BY b.event_datetime ";
 $rsSummary = $db->GetAll($sqlSummary);
 //$rememberRealName = $_SESSION['sess_realname'];
 //$sesToUnset = array('sess_id','sess_user_id','sess_user_name','sess_email','sess_realname');

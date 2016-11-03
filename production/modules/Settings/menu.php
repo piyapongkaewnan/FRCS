@@ -1,5 +1,4 @@
 <?php
-include("./includes/Class/Form.Class.php");
 
 // หาค่ากลุ่มเมนู
 $sql_mgroup = "SELECT * FROM menu_group ORDER BY  menu_group_en";
@@ -64,7 +63,7 @@ $rs_list = $db->GetAll($sql_list);
       <td valign="top"><?=$rs_list[$i]['menu_desc']?></td>
       <td valign="top"><?=$rs_list[$i]['menu_file']?></td>
       <td align="center" valign="top"><i class ="<?=$rs_list[$i]['icon_name']?>"></i></td>
-      <td align="center"><a href="javascript:void(0);" class="btn btn-xs btn-info btnUpdate" rel="actionUpdate" id="<?=$rs_list[$i]['menu_id']?>">Edit</a></td>
+      <td align="center"><a href="<?=MainWeb::getURI()?>&form=keyin&action=actionUpdate&id=<?=$rs_list[$i]['menu_id']?>" class="btn btn-xs btn-info btnUpdate" >Edit</a></td>
     </tr>
     <?php } // End For ?>
   </tbody>
@@ -72,6 +71,5 @@ $rs_list = $db->GetAll($sql_list);
 
 <input type="hidden" name="hidRadio" id="hidRadio" value="" />
 <?=MainWeb::closeTemplate();?> 
-<?=MainWeb::setModal();?> 
 <?=MainWeb::setModalDelete();?> 
 <script  type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 

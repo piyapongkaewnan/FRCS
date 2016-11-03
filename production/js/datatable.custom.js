@@ -4,23 +4,25 @@ $(function(){
 
 
 <!--- My Customize DataTable --> 
-$.MyDataTable = function(tableID , bStateSave  ,iDisplayLength , iDisplayEnd , aaSorting , orderType){  
+$.MyDataTable = function(tableID , bStateSave  ,iDisplayLength , iDisplayEnd , aaSorting , orderType ){  
 
    if ($('#table_'+tableID).length) { 
 
 	var table = $('#table_'+tableID).dataTable({
-				//'bJQueryUI': true,
-				'bStateSave': bStateSave, 
-				'sPaginationType': 'full_numbers',
-               'bPaginate': '1', 
-               'iDisplayLength' : iDisplayLength ,
-               'iDisplayStart': 0 ,
-               'iDisplayEnd' :  iDisplayEnd ,
-				'aaSorting': [[ aaSorting, "'"+orderType+'"']],
-				'language': {
-				     'sProcessing': '<img src="./images/loading-gear.gif">',	
-				     'oPaginate':{sFirst:'&laquo;',sLast:'&raquo;',sNext:'&#8250;',sPrevious:'&#8249;'} 
-				} ,
+			//'bJQueryUI': true,
+			'bStateSave': bStateSave, 
+			'sPaginationType': 'full_numbers',
+			'bPaginate': '1', 
+			'iDisplayLength' : iDisplayLength ,
+			'iDisplayStart': 0 ,
+			'iDisplayEnd' :  iDisplayEnd ,
+			'scrollX': true ,
+			'scrollY': '200px',
+			'aaSorting': [[ aaSorting, "'"+orderType+'"']],
+			'language': {
+			'sProcessing': '<img src="./images/loading-gear.gif">',	
+			'oPaginate':{sFirst:'&laquo;',sLast:'&raquo;',sNext:'&#8250;',sPrevious:'&#8249;'} 
+			} ,
 			 dom: '<Bf<rt>pi>',  
 			 'columnDefs': [ {  
 			   'targets': 'no-sort',  
@@ -48,7 +50,7 @@ $.MyDataTable = function(tableID , bStateSave  ,iDisplayLength , iDisplayEnd , a
 			             className: 'btn-sm' 
 			           } 
 			          ], 
-			          responsive: true 
+			          responsive: false 
  				}); 
    			} 
 

@@ -95,6 +95,7 @@ class Auth {
 	public static function isGuest(){
 		return  self::getUserID() == "" ? true : false;
 	}
+		
 	
 		// function ในการตรวจสอบสิทธิ์การเข้าถึงหน้าเพจ
 		public static function checkPageAuth(){

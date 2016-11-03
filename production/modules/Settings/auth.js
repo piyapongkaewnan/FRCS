@@ -9,9 +9,8 @@ $(function(){
 	var page = $('#page').val();	
 
 
-
-	$.FormAction( 'actionUpdate' ,modules  ,page , null , false  );
-	
+	//  actions , modules  ,page , selected , debug , isCurrentPage
+	$.FormAction( 'actionUpdate' ,modules  ,page , $("#group_id").val() , false ,  true );
 
 				
 	// เลือกเมนู

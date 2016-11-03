@@ -12,11 +12,11 @@ $(function(){
 		var page = $('#page').val();	
 		
 
-		$.MainActionOnPage(modules , page,'');
+		$.MainAction(modules , page,'');
 	
 		
 			//(page , bStateSave  ,iDisplayLength , iDisplayEnd , aaSorting , orderType);
-	    $.MyDataTable(page , false  , 10  , 10 , 1 , 'asc');
+	    $.MyDataTable(page , true  , 10  , 10 , 1 , 'asc');
 		
 
  });

@@ -21,17 +21,16 @@ $rs_list =  $db ->GetAll($sql_list);
   </div>
 </div>
 <div style="height:3px"></div>
-<table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-striped table-hover table-bordered compact dt-responsive  bulk_action data-table" id="table_<?=$Config['page']?>">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-striped table-hover table-bordered compact  nowrap bulk_action data-table" id="table_<?=$Config['page']?>">
   <thead>
     <tr class="headings">
-      <th width="5%"  class="no-sort text-center"> <input type="checkbox" id="check-all" class="" /></th>
-      <th width="18%"> Menu Group EN</th>
-      <th width="19%">Menu Group TH</th>
-      <th width="16%"> Module Name</th>
-      <th width="9%">Order</th>
-      <th width="10%"> Icons</th>
-      <th width="14%">Update Time</th>
-      <th width="9%" class="no-sort"> Action</th>
+      <th width="7%"  class="no-sort text-center"> <input type="checkbox" id="check-all" class="" /></th>
+      <th width="20%"> Menu Group EN</th>
+      <th width="21%">Menu Group TH</th>
+      <th width="18%"> Module Name</th>
+      <th width="12%">Order</th>
+      <th width="11%"> Icons</th>
+      <th width="11%" class="no-sort"> Action</th>
     </tr>
  <!-- <th class="bulk-actions" colspan="8"> <a class="antoo" style="color:#333; font-weight:500;"><i class="fa fa-chevron-down"></i> Bulk Actions ( <span class="action-cnt"> </span> ) </a> </th>-->
       </thead>
@@ -44,8 +43,7 @@ $rs_list =  $db ->GetAll($sql_list);
       <td><?=$rs_list[$i]['module_name']?></td>
       <td align="center"><?=$rs_list[$i]['menu_order']?></td>
       <td align="center"><i class="<?=$rs_list[$i]['icon_name']?>"></i></td>
-      <td align="center"><?=$rs_list[$i]['update_time'];?></td>
-      <td align="center"><a href="javascript:void(0);" class="btn btn-xs btn-info btnUpdate" rel="actionUpdate" id="<?=$rs_list[$i]['mgroup_id']?>">Edit</a></td>
+      <td align="center"><a href="<?=MainWeb::getURI()?>&form=keyin&action=actionUpdate&id=<?=$rs_list[$i]['mgroup_id']?>" class="btn btn-xs btn-info btnUpdate" >Edit</a></td>
     </tr>
     <?php } // End For ?>
   </tbody>
@@ -53,7 +51,7 @@ $rs_list =  $db ->GetAll($sql_list);
 <!--</div>-->
 <input type="hidden" name="hidRadio" id="hidRadio" value="" />
 <?=MainWeb::closeTemplate();?>
-<?=MainWeb::setModal();?>
+<? //=MainWeb::setModal();?>
 <?=MainWeb::setModalDelete();?>
 <!-- Form Custom Core JS --> 
 <script  type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 

@@ -44,13 +44,12 @@ $rs_list =  $db ->GetAll($sql_list);
       <td><?=$rs_list[$i]['CountryName']?></td>
       <td><?=$rs_list[$i]['FxName']?></td>
       <td align="center"><?=$rs_list[$i]['IsActive']=="1" ? "YES" : "NO";?></td>
-      <td align="center"><a href="javascript:void(0);" class="btn btn-xs btn-info btnUpdate" rel="actionUpdate" id="<?=$rs_list[$i]['id']?>">Edit</a></td>
+      <td align="center"><a href="<?=MainWeb::getURI()?>&form=keyin&action=actionUpdate&id=<?=$rs_list[$i]['id']?>" class="btn btn-xs btn-info btnUpdate" >Edit</a></td>
     </tr>
     <?php } // End For ?>
   </tbody>
 </table>
 <input type="hidden" name="hidRadio" id="hidRadio" value="" />
 <?=MainWeb::closeTemplate();?>
-<?=MainWeb::setModal();?>
 <?=MainWeb::setModalDelete();?>
 <script  type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 

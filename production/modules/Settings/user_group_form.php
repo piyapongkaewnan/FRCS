@@ -1,21 +1,4 @@
 ﻿<?php
-session_start();
-include("../../includes/DBConnect.php");
-include("../../includes/Class/Auth.Class.php");
-include("../../includes/Class/Main.Class.php");
-/*print "<pre>";
-print_r($_GET);
-print "</pre>";*/
-
-Auth::setDB($db);
-Auth::setModule($_GET['modules']);
-Auth::setPage($_GET['page']);
-
-
-//Call MainWeb Class
-MainWeb::GetSiteInfo(); // Get webpage variable
-Auth::setLanguage(LANGUAGE);
-MainWeb::getPageInfo();
 
 if($_GET['action'] == 'actionUpdate'){
 	$id = $_GET['id'];
@@ -23,37 +6,32 @@ if($_GET['action'] == 'actionUpdate'){
 	$rs_edit = $db->GetRow($sql_edit);
 }
 ?>
-<script type="text/javascript" src="../vendors/parsleyjs/dist/parsley.min.js"></script>
+<?=MainWeb::openTemplate();?>
 
-<form  data-parsley-validate name="form_<?=$_GET['page']?>" id="form_<?=$_GET['page']?>" method="post">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
-    <h4 class="modal-title" id="exampleModalLabel">
-      <?=MainWeb::setTitleBar();?>
-    </h4>
+<br />
+<form  data-parsley-validate name="form_<?=$_GET['page']?>" id="form_<?=$_GET['page']?>" method="post" class="form-horizontal form-label-left">
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="group_name">User Group Name <span class="required">*</span> </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input type="text" id="group_name" name="group_name" value="<?=$rs_edit['group_name']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
+      <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
-  <div class="modal-body">
-    <div class="form-group">
-      <label for="group_name" class="form-control-label">*User Group Name:</label>
-      <input type="text" class="form-control input-sm" id="group_name" name="group_name" required="required" value="<?=$rs_edit['group_name']?>">
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="group_desc">User Group Description <span class="required">*</span> </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input type="text" id="group_desc" name="group_desc" value="<?=$rs_edit['group_desc']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
+      <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
+  </div>
+  <div class="ln_solid"></div>
+  <div class="form-group">
+    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+      <?=MENU_SUBMIT?>
+      <input type="hidden" name="action" id="action" value="<?=$_GET['action']?>">
+      <input type="hidden" name="id" id="id" value="<?=$_GET['id']?>">
     </div>
-    <div class="form-group">
-      <label for="group_desc" class="form-control-label">*User Group Description:</label>
-      <input type="text" class="form-control input-sm" id="group_desc" name="group_desc" required="required" value="<?=$rs_edit['group_desc']?>">
-    </div>
-   
-    
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i> Cancel</button>
-    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i> Save</button>
-  </div>
-  <input type="hidden" name="id" id="id" value="<?=$_GET['id']?>">
-  <input type="hidden" name="action" id="action" value="<?=$_GET['action']?>">
-  <input type="hidden" name="icon_id" id="icon_id" value="<?=$rs_edit['icon_id']?>">
 </form>
-
-
+<?=MainWeb::closeTemplate();?>
 <script type="text/javascript">
 $(document).ready(function() {
 	// Trigger form submit
@@ -72,4 +50,4 @@ $(document).ready(function() {
 
 		
 });
-</script>
+</script> 

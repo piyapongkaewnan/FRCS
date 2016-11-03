@@ -1,7 +1,5 @@
 <?php
 
-include("./includes/Class/Form.Class.php");
-
 // List User Group
 $sql_list = "SELECT *
 				FROM user_group ORDER BY update_time DESC ";
@@ -36,7 +34,7 @@ $rs_list = $db->GetAll($sql_list);
         </a></td>
       <td><?=$rs_list[$i]['group_desc']?></td>
       <td align="center"><?=$rs_list[$i]['update_time'];?></td>
-      <td align="center"><a href="javascript:void(0);" class="btn btn-xs btn-info btnUpdate" rel="actionUpdate" id="<?=$rs_list[$i]['group_id']?>">Edit</a></td>
+      <td align="center"><a href="<?=MainWeb::getURI()?>&form=keyin&action=actionUpdate&id=<?=$rs_list[$i]['group_id']?>" class="btn btn-xs btn-info btnUpdate" >Edit</a></td>
     </tr>
     <?php } // End For ?>
   </tbody>

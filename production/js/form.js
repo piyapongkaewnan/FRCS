@@ -42,64 +42,16 @@ $(':checkbox[name^=selID]').on('change',  function (e) {
 });
 
 
+// Event when click Cancel button go to back
+$("button[name='cancel']").click(function(){
+	//alert('');
+		window.history.back(-1);
+});
 
 	
 /*****************************************************************************************/
-// Main Action 
+// Main Action  
  $.MainAction= function(modules  ,page  ,select_id){
-	 
-				$.initActionButton();
-				
-				$('input[type=search]').addClass('form-control input-sm');
-				
-				// เลือกเมนู
-				$('#'+select_id).change(function(){
-					window.location = '?modules='+modules+'&page='+page+'&'+select_id+'='+$(this).val();
-				});
-			
-				/*****************************************************************************************/
-				// Button Create, Edit,Delete Action
-				$("#btnCreate , .btnUpdate , #btnDelete").click( function() {	
-				
-					$.doActionForm(this , select_id);  // call 
-				
-				});
-						
-				<!-- // Button Create, Edit,Delete Action -->
-										
-				// Action for Delete program by ID
-				$('#actionDelete').click( function(){
-					
-					var arrayData = Array();
-					$("input:checkbox[name^=selID]:checked").each(function(){ // Loop for checkbox is checked
-						arrayData .push($(this).val());					
-					});
-					
-					// prepare data for send to delete 1,2,3
-					selID =  arrayData.join( "," );
-					
-				//console.log(selID);
-					$.post( "./modules/"+modules+"/"+page+"_code.php", { action: 'actionDelete', id: selID } , function( data ) {
-							//$('#FormModalDelete').modal('hide');
-							var countAction = data == '1' ? '1' : '0';
-							if(countAction == '1'){
-								$.showNotify('success');
-							}else{
-								$.showNotify('error');
-							}
-							//console.log(data);
-							setTimeout("window.location.reload(true)",2000);							
-					
-						});
-						
-				});
-							
-} // End function  Main Action 
-
-			
-/*****************************************************************************************/
-// Main Action  on page
- $.MainActionOnPage= function(modules  ,page  ,select_id){
 				
 				$.initActionButton();
 				
@@ -114,7 +66,7 @@ $(':checkbox[name^=selID]').on('change',  function (e) {
 				
 				/*****************************************************************************************/
 				// Button Create, Edit,Delete Action
-				$("#btnCreate , .btnUpdate , #btnDelete").click( function() {	
+				$("#btnCreate , .btnUpdate2 , #btnDelete").click( function() {	
 						var actions  = $(this).attr('rel');
 						var selID  = $(this).attr('id');//getSelID();
 						
@@ -124,10 +76,10 @@ $(':checkbox[name^=selID]').on('change',  function (e) {
 							case 'actionCreate'  :
 							window.location = '?modules='+modules+'&page='+page+'&form=keyin&action='+actions+isSelected;
 							break;
-							case  'actionUpdate' :
+						/*	case  'actionUpdate' :
 								//var FormModals  =  'FormModal' ;
-								window.location = '?modules='+modules+'&page='+page+'&form=keyin&action='+actions+'&id='+selID;
-								break;						
+								window.location = '?modules='+modules+'&page='+page+'&form=keyin&action='+actions+'&id='+selID+isSelected;
+								break;			*/			
 								
 							case 'actionDelete':
 							
@@ -186,34 +138,34 @@ $(':checkbox[name^=selID]').on('change',  function (e) {
 						
 						});*/
 						
-						// Event when click Cancel button go to back
-						$('button[name=cancel').click(function(){
-								window.history.back(-1);
-						});
 						
-			} // End function		 Main Action  on page	
+						
+			} // End function		 Main Action  
 
 
 /*****************************************************************************************/
 <!--  Form Action -->
 //debug = true , default = null
+// function(actions , modules  ,page , selected , debug , isCurrentPage ){
+	 
+ $.FormAction = function(actions , modules  ,page , selected , debug , isCurrentPage ){
 
- $.FormAction = function(actions , modules  ,page , id , debug ){
-
-	 $('#form_'+page).submit(function(event){
+	 $('#form_'+page).submit(function(event ,  redirect){
 		 		
 		NProgress.start();
 		event.preventDefault(); // avoid to execute the actual submit of the form.
-		$("button[type='submit']").addClass("disabled");
+		//$("button[type='submit']").addClass("disabled");
+		$("button[type='submit']").prop("disabled", true);
 		
 		
 		 var request = $.ajax({
-					type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-					url         : './modules/'+modules+'/'+page+'_code.php', // the url where we want to POST
-					data        : $(this).serialize(), // our data object
-					dataType    : 'html' // text, html, xml, json, jsonp, and script.
+					type         : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+					url           : './modules/'+modules+'/'+page+'_code.php', // the url where we want to POST
+					data         : $(this).serialize(), // our data object
+					dataType  : 'html' // text, html, xml, json, jsonp, and script.
 					});
-									
+
+								
 					//Success
 					request.done (function(textStatus){
 								if(debug == true){
@@ -222,8 +174,18 @@ $(':checkbox[name^=selID]').on('change',  function (e) {
 								NProgress.done();
 								if(textStatus == true){
 									$.showNotify('success');
-									//setTimeout("window.location.reload(true)",2000);
-									setTimeout("window.location =  '"+RedirectURL+"' ",2000);		
+									
+									//setTimeout("window.location =  '"+redirect+"' ",2000);										
+								
+									//setTimeout("window.history.back(-1)",2000);	
+									
+									// Check redirect			
+									if(isCurrentPage) { // if = true -> reload current page				
+										setTimeout("window.location.reload(true)",2000);
+									}else{ //  else = false -> reload current page
+										setTimeout("window.history.back(-1)",2000);	
+									}
+								
 								}else{
 									$.showNotify('error');
 								}
@@ -238,8 +200,9 @@ $(':checkbox[name^=selID]').on('change',  function (e) {
 								$.showNotify('error');				
 					});
 				
-});
-						
+	});
+				
+				
 }
 <!--  Form Action -->
 
@@ -283,54 +246,8 @@ $.initActionButton = function (){
 		$('#btnDelete').attr("disabled", "disabled");
 	//});
 	}
-	/*var $checkboxes = $('input[name=selID]');
-	if($checkboxes.filter(':checked').length<=0){	// if not select set edit,delete button to Disable
-		//$('#btnUpdate').attr("disabled", "disabled");
-		//$('#btnDelete').attr("disabled", "disabled");
-	}else{  // if  select > 0  set edit,delete button to remove Disable
-		$('#btnUpdate').removeAttr('disabled'); 
-		$('#btnDelete').removeAttr('disabled'); 
-	}*/
 }
 <!-- // Function for check select checkbox  -->
-/*************************************************************************/
-
-
-/*************************************************************************/
-<!-- DoAction for control form -->
-$.doActionForm = function (_this , select_id){
-		var actions  = $(_this).attr('rel');
-		var selID  = $(_this).attr('id');//getSelID();
-		//console.log(modules);
-		NProgress.start();		
-		
-		switch(actions) {
-			case 'actionCreate'  :
-			case  'actionUpdate' :
-				var FormModals  =  'FormModal' ;
-				 
-				 $.get('./modules/'+modules+'/'+page+'_form.php' , { time : $.now() , modules : modules , page : page, action:actions ,select_id : $('#'+select_id).val() ,id : selID },function(data){			
-						$('#'+FormModals+' .modal-content').html(data); 
-						$('#'+FormModals).modal('show');
-						return false;
-					});
-				 
-				//code block
-				break;
-
-			case 'actionDelete':
-			
-				var FormModals  =  'FormModalDelete' ;
-				
-				$('#'+FormModals).modal('show');
-				NProgress.done();		
-				return false;									
-				break;
-		}
-		
-			NProgress.done();			
-}
-<!-- DoAction for control form -->
 /*************************************************************************/
 
 

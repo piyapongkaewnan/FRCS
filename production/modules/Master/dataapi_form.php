@@ -1,7 +1,6 @@
 <!-- Select2 -->
 <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet">
 <?php
-include("./includes/Class/Form.Class.php");
 
 if($_GET['action'] ==  'actionUpdate'){
 // แสดงรายละเอียด
@@ -74,13 +73,13 @@ form {
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="UserName">UserName <span class="required">*</span> </label>
     <div class="col-md-4 col-sm-3 col-xs-12">
       <input class="form-control  col-md-7 col-xs-12 has-feedback-left" id="UserName" name="UserName" type="text"  value="<?=$rs_edit['UserName']?>" required="required"/>
-      <span class="fa fa-edit  form-control-feedback left" aria-hidden="true"></span> </div>
+      <span class="fa fa-user  form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Password">Password <span class="required">*</span> </label>
     <div class="col-md-4 col-sm-3 col-xs-12">
       <input class="form-control  col-md-7 col-xs-12 has-feedback-left" id="Password" name="Password" type="text"  value="<?=$rs_edit['Password']?>" required="required"/>
-      <span class="fa fa-edit  form-control-feedback left" aria-hidden="true"></span> </div>
+      <span class="fa fa-user  form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="DataSourceType">DataSourceType <span class="required">*</span></label>
@@ -169,8 +168,6 @@ form {
     </div>
   </div>
 </form>
-<!-- Form Custom Core JS --> 
-<script type="text/javascript" src="js/form.js"></script> 
 <script  type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 
 
 <!-- Select2 --> 
@@ -186,8 +183,9 @@ $(function(){
 		//Page
 		var page = '<?=$_GET['page']?>';		
 
-	
-		$.FormAction( actions ,modules  ,page , '<?=$_GET['id']?>' , false  );
+			//  actions , modules  ,page , selected , debug , isCurrentPage
+		$.FormAction( actions ,modules  ,page ,  '<?=$_GET['id']?>' , true ,  true );
+
 
 		 $("#DataSourceType").select2({
           placeholder: "Select a option..",
@@ -196,7 +194,7 @@ $(function(){
 	
 
 	$('.addMore').click(function(){
-		var input = '<tr>                <th scope=row><i class="fa fa-magic"></i></th>                <td><input type="text" name="paramName[]" id="paramName" class="form-control input-sm" required="required" /></td>                <td><input type="text" name="paramValue[]" id="paramValue" class="form-control input-sm" required="required" /></td>                <td><button type="submit" class="btn btn-success btn-xs"> Save</button>                 		<a href="javascript:void(0);" class="btn btn-danger btn-xs">Remove</a></td>              </tr>';
+		var input = '<tr>                <th scope=row><i class="fa fa-magic"></i></th>                <td><input type="text" name="paramName[]" id="paramName" class="form-control input-sm" required="required" /></td>                <td><input type="text" name="paramValue[]" id="paramValue" class="form-control input-sm" required="required" /></td>                <td><button type="submit" class="btn btn-success btn-xs"> Save</button>                 		<a href="javascript:void(0);" class="btn btn-danger btn-xs removeParam">Remove</a></td>              </tr>';
 		$('#tableParam tbody:parent').append(input);
 	});
 

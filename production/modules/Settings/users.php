@@ -1,5 +1,4 @@
 <?php
-include("./includes/Class/Form.Class.php");
 
 // หาค่ากลุ่มผู้ใช้งาน  
 $sql_usergroup = "SELECT * FROM user_group ORDER BY group_name";
@@ -67,13 +66,12 @@ $rs_list = $db->GetAll($sql_list);
       <td><?=$rs_list[$i]['realname']?></td>
       <td><?=$rs_list[$i]['email']?></td>
       <td align="center"><?=$rs_list[$i]['update_time'];?></td>
-      <td align="center"><a href="javascript:void(0);" class="btn btn-xs btn-info btnUpdate" rel="actionUpdate" id="<?=$rs_list[$i]['user_id']?>">Edit</a></td>
+      <td align="center"><a href="<?=MainWeb::getURI()?>&form=keyin&action=actionUpdate&id=<?=$rs_list[$i]['user_id']?>" class="btn btn-xs btn-info btnUpdate" >Edit</a></td>
     </tr>
     <?php } // End for ?>
   </tbody>
 </table>
 <input type="hidden" name="hidRadio" id="hidRadio" value="" />
 <?=MainWeb::closeTemplate();?>
-<?=MainWeb::setModal();?>
-<?=MainWeb::setModalDelete();?>
+<?=MainWeb::setModalDelete();?> 
 <script  type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 

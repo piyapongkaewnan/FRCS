@@ -1,23 +1,4 @@
 <?php
-session_start();
-include("../../includes/DBConnect.php");
-include("../../includes/Class/Form.Class.php");
-include("../../includes/Class/Auth.Class.php");
-include("../../includes/Class/Main.Class.php");
-/*print "<pre>";
-print_r($_GET);
-print "</pre>";*/
-
-Auth::setDB($db);
-Auth::setModule($_GET['modules']);
-Auth::setPage($_GET['page']);
-
-
-//Call MainWeb Class
-MainWeb::GetSiteInfo(); // Get webpage variable
-Auth::setLanguage(LANGUAGE);
-MainWeb::getPageInfo();
-
 
 if($_GET['action'] == 'actionUpdate'){
 	$id = $_GET['id'];
@@ -57,48 +38,56 @@ if($_GET['action'] == 'actionUpdate'){
 	background-color: #CCC;
 }
 </style>
-<script type="text/javascript" src="../vendors/parsleyjs/dist/parsley.min.js"></script>
-
-<form  data-parsley-validate name="form_<?=$_GET['page']?>" id="form_<?=$_GET['page']?>" method="post">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
-    <h4 class="modal-title" id="exampleModalLabel">
-      <?=MainWeb::setTitleBar();?>
-    </h4>
-  </div>
-  <div class="modal-body">
-    <div class="form-group">
-      <label for="mgroup_id" class="form-control-label">*Menu Group:</label>
-      <select name="mgroup_id" id="mgroup_id" class="form-control input-sm">
+<?=MainWeb::openTemplate();?>
+<br />
+<form  data-parsley-validate name="form_<?=$_GET['page']?>" id="form_<?=$_GET['page']?>" method="post" class="form-horizontal form-label-left">
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mgroup_id">Menu Group <span class="required">*</span> </label>
+    <div class="col-md-4 col-sm-3 col-xs-12">
+     <select name="mgroup_id" id="mgroup_id" class="form-control input-sm" required>
           <?php
 		  $sql_mgroup = "SELECT * FROM menu_group ORDER BY menu_group_en";
 		  $rs_mgroup = $db->GetAll($sql_mgroup);
 		  Form::genOptionSelect($rs_mgroup,'mgroup_id','menu_group_en',$mgroup_id);
 		  ?>
         </select>
-    </div>
+     </div>
+  </div>
+  
+   <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu_name_en">Menu Group EN <span class="required">*</span> </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input type="text" id="menu_name_en" name="menu_name_en" value="<?=$rs_edit['menu_name_en']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
+      <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
+  </div>
     <div class="form-group">
-      <label for="menu_name_en" class="form-control-label">*Menu Group EN:</label>
-      <input type="text" class="form-control input-sm" id="menu_name_en" name="menu_name_en" required="required" value="<?=$rs_edit['menu_name_en']?>">
-    </div>
-    <div class="form-group">
-      <label for="menu_name_th" class="form-control-label">*Menu Group TH:</label>
-      <input type="text" class="form-control input-sm" id="menu_name_th" name="menu_name_th" required="required" value="<?=$rs_edit['menu_name_th']?>">
-    </div>
-    <div class="form-group">
-      <label for="menu_desc" class="form-control-label">Menu Description :</label>
-      <textarea name="menu_desc" rows="2"  class="form-control input-sm" id="menu_desc"><?=$rs_edit['menu_desc']?></textarea>
-    </div>
-    <div class="form-group">
-      <label for="menu_file" class="form-control-label">*Menu File:</label>
-      <input type="text" class="form-control input-sm" id="menu_file" name="menu_file" required="required" value="<?=$rs_edit['menu_file']?>">
-    </div>
-    <div class="form-group">
-      <label for="menu_order" class="form-control-label">Menu order :</label>
-      <input type="number" class="form-control input-sm" id="menu_order" name="menu_order" required="required" value="<?=$rs_edit['menu_order']?>">
-    </div>
-    <div class="form-group">
-      <label for="message-text" class="form-control-label">Menu Icon : <i id="show_icon" class="<?=$rs_edit['icon_name']?> fa-2x"></i>&nbsp;<a href="javascript:$('.fontawesome-icon-list').toggle();$('#btn-icon').toggleClass('fa-caret-up', 'fa-caret-down');" class="btn btn-primary btn-xs"> Selected Icon <i id="btn-icon" class="fa fa-caret-down"></i></a> </label>
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu_name_th">Menu Group TH <span class="required">*</span> </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input type="text" id="menu_name_th" name="menu_name_th" value="<?=$rs_edit['menu_name_th']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
+      <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
+  </div>
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu_desc">Menu Description <span class="required"></span> </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+       <textarea name="menu_desc" rows="2"  class="form-control input-sm" id="menu_desc"><?=$rs_edit['menu_desc']?></textarea>
+	</div>
+  </div>
+ 
+ <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu_file">Menu File <span class="required">*</span> </label>
+    <div class="col-md-4 col-sm-3 col-xs-12">
+      <input type="text" id="menu_file" name="menu_file" value="<?=$rs_edit['menu_file']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
+      <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
+  </div>
+ <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu_order">Menu Order <span class="required">*</span> </label>
+    <div class="col-md-3 col-sm-3 col-xs-12">
+      <input type="number" id="menu_order" name="menu_order" value="<?=$rs_edit['menu_order']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left" min="1">
+      <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
+  </div>
+   <div class="form-group">
+    <label for="message-text" class="control-label col-md-3 col-sm-3 col-xs-12">Menu Icon   </label>
+    <div class="col-md-7 col-sm-12 col-xs-12"> <a href="javascript:$('.fontawesome-icon-list').toggle();$('#btn-icon').toggleClass('fa-caret-up', 'fa-caret-down');" class="btn btn-danger btn-xs"> Selected Icon <i id="btn-icon" class="fa fa-caret-down"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<i id="show_icon" class="<?=$rs_edit['icon_name']?>"></i>
       <div class="row fontawesome-icon-list" style="display:none">
         <?php
 	  $sql_icon = "SELECT icon_id,icon_name FROM icons";
@@ -110,13 +99,15 @@ if($_GET['action'] == 'actionUpdate'){
       </div>
     </div>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i> Cancel</button>
-    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i> Save</button>
+   <div class="ln_solid"></div>
+  <div class="form-group">
+    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+      <?=MENU_SUBMIT?>
+      <input type="hidden" name="action" id="action" value="<?=$_GET['action']?>">
+      <input type="hidden" name="id" id="id" value="<?=$_GET['id']?>">
+      <input type="hidden" name="icon_id" id="icon_id" value="<?=$rs_edit['icon_id']?>">
+    </div>
   </div>
-  <input type="hidden" name="id" id="id" value="<?=$_GET['id']?>">
-  <input type="hidden" name="action" id="action" value="<?=$_GET['action']?>">
-  <input type="hidden" name="icon_id" id="icon_id" value="<?=$rs_edit['icon_id']?>">
 </form>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -131,8 +122,9 @@ $(document).ready(function() {
 		var page = '<?=$_GET['page']?>';		
 
 	
-		$.FormAction( actions ,modules  ,page , '<?=$_GET['id']?>' , false  );
-
+			//  actions , modules  ,page , selected , debug , isCurrentPage
+		$.FormAction( actions ,modules  ,page ,  '<?=$_GET['id']?>' , false ,  false );
+	
 
 //Set icon_id when click as icon list
 $('.fa-hover1').click(function(){

@@ -15,16 +15,6 @@ $rs_list =  $db ->GetAll($sql_list);
   </div>
 </div>
 <div style="height:3px"></div>
-<!--<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr>
-    <td width="50%" align="left" valign="middle"></td>
-    <td width="50%" align="right" valign="top"><? //=MENU_ACTION?></td>
-  </tr>
-<tr>
-  <td align="left" valign="middle"></td>
-  <td align="right" valign="top" style="height:5px"></td>
-</tr>
-</table>-->
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-striped table-hover table-bordered compact dt-responsive  bulk_action data-table" id="table_<?=$Config['page']?>">
   <thead>
     <tr class="headings">
@@ -46,13 +36,11 @@ $rs_list =  $db ->GetAll($sql_list);
       <td><?=$rs_list[$i]['FxName']?></td>
       <td align="right"><?=number_format($rs_list[$i]['RateToBase'],6)?></td>
       <td align="center"><?=$rs_list[$i]['IsActive']=="1" ? "YES" : "NO";?></td>
-      <td align="center"><a href="javascript:void(0);" class="btn btn-xs btn-info btnUpdate" rel="actionUpdate" id="<?=$rs_list[$i]['id']?>">Edit</a></td>
+      <td align="center"><a href="<?=MainWeb::getURI()?>&form=keyin&action=actionUpdate&id=<?=$rs_list[$i]['id']?>" class="btn btn-xs btn-info btnUpdate" >Edit</a></td>
     </tr>
     <?php } // End For ?>
   </tbody>
 </table>
-<input type="hidden" name="hidRadio" id="hidRadio" value="" />
 <?=MainWeb::closeTemplate();?>
-<?=MainWeb::setModal();?>
 <?=MainWeb::setModalDelete();?>
 <script  type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 

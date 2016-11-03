@@ -1,23 +1,4 @@
 <?php
-session_start();
-include("../../includes/DBConnect.php");
-include("../../includes/Class/Form.Class.php");
-include("../../includes/Class/Auth.Class.php");
-include("../../includes/Class/Main.Class.php");
-/*print "<pre>";
-print_r($_GET);
-print "</pre>";*/
-
-Auth::setDB($db);
-Auth::setModule($_GET['modules']);
-Auth::setPage($_GET['page']);
-
-
-//Call MainWeb Class
-MainWeb::GetSiteInfo(); // Get webpage variable
-Auth::setLanguage(LANGUAGE);
-MainWeb::getPageInfo();
-
 
 if($_GET['action'] == 'actionUpdate'){
 // List User Group
@@ -32,7 +13,7 @@ $rs_edit =  $db ->GetRow($sql_edit);
 
 }
 
-$DirModule =  MainWeb::ScanDir( '../'); // path from top);
+$DirModule =  MainWeb::ScanDir( 'modules/'); // path from top);
 
 ?>
 <style type="text/css">
@@ -48,37 +29,38 @@ $DirModule =  MainWeb::ScanDir( '../'); // path from top);
 	background-color: #CCC;
 }
 </style>
-<script type="text/javascript" src="../vendors/parsleyjs/dist/parsley.min.js"></script>
-
-<form  data-parsley-validate name="form_<?=$_GET['page']?>" id="form_<?=$_GET['page']?>" method="post">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
-    <h4 class="modal-title" id="exampleModalLabel">
-      <?=MainWeb::setTitleBar();?>
-    </h4>
+<?=MainWeb::openTemplate();?>
+<br />
+<form  data-parsley-validate name="form_<?=$_GET['page']?>" id="form_<?=$_GET['page']?>" method="post" class="form-horizontal form-label-left">
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu_group_th">Menu Group TH <span class="required">*</span> </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input type="text" id="menu_group_th" name="menu_group_th" value="<?=$rs_edit['menu_group_th']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
+      <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
-  <div class="modal-body">
-    <div class="form-group">
-      <label for="menu_group_th" class="form-control-label">*Menu Group TH:</label>
-      <input type="text" class="form-control input-sm" id="menu_group_th" name="menu_group_th" required="required" value="<?=$rs_edit['menu_group_th']?>">
-    </div>
-    <div class="form-group">
-      <label for="menu_group_en" class="form-control-label">*Menu Group EN:</label>
-      <input type="text" class="form-control input-sm" id="menu_group_en" name="menu_group_en" required="required" value="<?=$rs_edit['menu_group_en']?>">
-    </div>
-    <div class="form-group">
-      <label for="module_name" class="form-control-label">Module:</label>
-      <!--<input type="text" class="form-control input-sm" id="recipient-name" required="required">-->
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu_group_en">Menu Group EN <span class="required">*</span> </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input type="text" id="menu_group_en" name="menu_group_en" value="<?=$rs_edit['menu_group_en']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
+      <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="module_name">Module <span class="required">*</span> </label>
+    <div class="col-md-4 col-sm-3 col-xs-12">
       <select name="module_name" id="module_name" class="form-control input-sm" required>
         <?=Form::listComboBox($DirModule,$rs_edit['module_name']);?>
       </select>
     </div>
-    <div class="form-group">
-      <label for="menu_order" class="form-control-label">Menu Order:</label>
-      <input type="number" class="form-control input-sm" id="menu_order" name="menu_order" required="required" value="<?=$rs_edit['menu_order']?>">
-    </div>
-    <div class="form-group">
-      <label for="message-text" class="form-control-label">Menu Icon : &nbsp;&nbsp;<i id="show_icon" class="<?=$rs_edit['icon_name']?>"></i>&nbsp;&nbsp;<a href="javascript:$('.fontawesome-icon-list').toggle();$('#btn-icon').toggleClass('fa-caret-up', 'fa-caret-down');" class="btn btn-primary btn-xs"> Selected Icon <i id="btn-icon" class="fa fa-caret-down"></i></a> </label>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu_order">Menu Order <span class="required">*</span> </label>
+    <div class="col-md-3 col-sm-3 col-xs-12">
+      <input type="number" id="menu_order" name="menu_order" value="<?=$rs_edit['menu_order']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left" min="1">
+      <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
+  </div>
+ <div class="form-group">
+    <label for="message-text" class="control-label col-md-3 col-sm-3 col-xs-12">Menu Icon   </label>
+    <div class="col-md-7 col-sm-12 col-xs-12"> <a href="javascript:$('.fontawesome-icon-list').toggle();$('#btn-icon').toggleClass('fa-caret-up', 'fa-caret-down');" class="btn btn-danger btn-xs"> Selected Icon <i id="btn-icon" class="fa fa-caret-down"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<i id="show_icon" class="<?=$rs_edit['icon_name']?>"></i>
       <div class="row fontawesome-icon-list" style="display:none">
         <?php
 	  $sql_icon = "SELECT icon_id,icon_name FROM icons";
@@ -89,15 +71,17 @@ $DirModule =  MainWeb::ScanDir( '../'); // path from top);
 	  ?>
       </div>
     </div>
+  </div>  <div class="ln_solid"></div>
+  <div class="form-group">
+    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+      <?=MENU_SUBMIT?>
+      <input type="hidden" name="action" id="action" value="<?=$_GET['action']?>">
+      <input type="hidden" name="id" id="id" value="<?=$_GET['id']?>">
+      <input type="hidden" name="icon_id" id="icon_id" value="<?=$rs_edit['icon_id']?>">
+    </div>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i> Cancel</button>
-    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i> Save</button>
-  </div>
-  <input type="hidden" name="id" id="id" value="<?=$_GET['id']?>">
-  <input type="hidden" name="action" id="action" value="<?=$_GET['action']?>">
-  <input type="hidden" name="icon_id" id="icon_id" value="<?=$rs_edit['icon_id']?>">
 </form>
+<?=MainWeb::closeTemplate();?>
 <script type="text/javascript">
 $(document).ready(function() {
 	// Trigger form submit
@@ -111,7 +95,8 @@ $(document).ready(function() {
 		var page = '<?=$_GET['page']?>';		
 
 	
-		$.FormAction( actions ,modules  ,page , '<?=$_GET['id']?>' , false  );
+		//  actions , modules  ,page , selected , debug , isCurrentPage
+		$.FormAction( actions ,modules  ,page ,  '<?=$_GET['id']?>' , false ,  false );
 
 
 //Set icon_id when click as icon list

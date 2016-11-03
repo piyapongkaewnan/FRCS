@@ -10,6 +10,7 @@ class MainWeb extends Auth {
 	protected static   $SiteName;
 	protected static   $isActive;
 	protected static   $titleVal;	
+
 	
 	// Get Site Title
 	public function GetSiteInfo(){
@@ -30,6 +31,8 @@ class MainWeb extends Auth {
 			
 			define("COPYRIGHT"," &copy;".date('Y')."  ".$rs_config['website_name']);
 			
+			define("COPYRIGHT"," &copy;".date('Y')."  ".$rs_config['website_name']);
+			
 			/* Menu Action*/
 			define("MENU_ACTION","<div class='doActionModal toolbarGroup'><div class='btn-group' role='group' aria-label='...'><button type='button' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Add Data' id='btnCreate' rel='actionCreate'><i class='fa fa-plus'></i> &nbsp;Add&nbsp; </button><button type='button' class='btn  btn-danger  btn-sm' data-toggle='tooltip' data-placement='top' title='Delete Data' id='btnDelete' rel='actionDelete' disabled><i class='fa fa-trash'></i> Delete </button></div></div>");
 			/*
@@ -47,8 +50,16 @@ class MainWeb extends Auth {
 			//return true;
 			
 			self::$SiteName =  SITE_NAME;
+			
+			//self::$URIForm =  "?modules=".Auth::getModule()."&page=".Auth::getPage();
 	}
 	
+	
+	// Function for Get URI from Get $_GET['modules']
+	public static function getURI($URIForm=null) {
+		//$uri = $URIForm <> ""  ?  $URIForm : "";
+        return "?modules=".Auth::getModule()."&page=".Auth::getPage();//.$uri;
+    }
 
 	// Get title from URL
 	public function getPageInfo($param = ""){

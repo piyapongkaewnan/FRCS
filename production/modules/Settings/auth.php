@@ -1,6 +1,5 @@
 <?php
 include("./includes/Class/DataTable.Class.php");
-include("./includes/Class/Form.Class.php");
 
 
 $tbl = new dataTable();
@@ -117,8 +116,5 @@ $tbl->openTable();
   <input type="hidden" name="action" id="action" value="actionUpdate" />
 </form>
 <?=MainWeb::closeTemplate();?>
-
-<!-- Form Custom Core JS -->
-<script type="text/javascript" src="js/form.js"></script>
 
 <script  type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 

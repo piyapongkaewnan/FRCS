@@ -7,6 +7,7 @@ require_once("./includes/DBConnect.php");
 require_once("./includes/Class/Auth.Class.php");
 require_once("./includes/Class/Menu.Class.php");
 require_once("./includes/Class/Main.Class.php");
+require_once("./includes/Class/Form.Class.php");
 
 //require_once("./includes/Class/Form.Class.php");
 
@@ -53,7 +54,8 @@ $db->debug= false;
 <!DOCTYPE html>
 <html lang="en" ng-app="apps">
 <head>
-<title><?=SITE_NAME;?> | <?=MainWeb::setTitleBar();?></title>
+<title><?=SITE_NAME;?> | <?=MainWeb::setTitleBar();?>
+</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -94,42 +96,39 @@ $db->debug= false;
 <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
 <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
 
-
 <!-- jQuery -->
 <script type="text/javascript" src="../vendors/jquery/dist/jquery.min.js"></script>
 
-<!-- parsley --> 
-<script type='text/javascript' src='../vendors/parsleyjs/dist/parsley.min.js'></script> 
+<!-- parsley -->
+<script type='text/javascript' src='../vendors/parsleyjs/dist/parsley.min.js'></script>
 
-<!-- Bootstrap --> 
-<script type="text/javascript" src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script> 
+<!-- Bootstrap -->
+<script type="text/javascript" src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 
-<!-- NProgress --> 
-<script type="text/javascript" src="../vendors/nprogress/nprogress.js"></script> 
-<!-- bootstrap-progressbar --> 
-<script type="text/javascript" src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script> 
+<!-- NProgress -->
+<script type="text/javascript" src="../vendors/nprogress/nprogress.js"></script>
+<!-- bootstrap-progressbar -->
+<script type="text/javascript" src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
 
-<!-- jQuery custom content scroller --> 
-<script type="text/javascript" src="../vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script> 
-
+<!-- jQuery custom content scroller -->
+<script type="text/javascript" src="../vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
 
 <!-- Angular -->
 <script type="text/javascript" src="../vendors/angular/angular.min.js"></script>
 
-<!-- PNotify --> 
-<script type="text/javascript" src="../vendors/pnotify/dist/pnotify.js"></script> 
-<script type="text/javascript" src="../vendors/pnotify/dist/pnotify.buttons.js"></script> 
-<script type="text/javascript" src="../vendors/pnotify/dist/pnotify.nonblock.js"></script> 
+<!-- PNotify -->
+<script type="text/javascript" src="../vendors/pnotify/dist/pnotify.js"></script>
+<script type="text/javascript" src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+<script type="text/javascript" src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
 
-<!-- iCheck --> 
-<script src="../vendors/iCheck/icheck.min.js"></script> 
+<!-- iCheck -->
+<script src="../vendors/iCheck/icheck.min.js"></script>
 
-<!-- bootstrap-daterangepicker --> 
+<!-- bootstrap-daterangepicker -->
 <!--<script type="text/javascript" src="js/moment/moment.min.js"></script> -->
-<script type="text/javascript" src="../vendors/moment/min/moment.min.js"></script> 
+<script type="text/javascript" src="../vendors/moment/min/moment.min.js"></script>
 <!--<script type="text/javascript" src="js/datepicker/daterangepicker.js"></script> -->
-<script type="text/javascript" src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script> 
-
+<script type="text/javascript" src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
 
 <!-- Datatables -->
 <script type='text/javascript' src='../vendors/datatables/media/js/jquery.dataTables.min.js'></script>
@@ -142,25 +141,19 @@ $db->debug= false;
 <script type='text/javascript' src='../vendors/jszip/dist/jszip.min.js'></script>
 <script type='text/javascript' src='../vendors/pdfmake/build/pdfmake.min.js'></script>
 <script type='text/javascript' src='../vendors/pdfmake/build/vfs_fonts.js'></script>
-
-<script type="text/javascript" src="./js/apps.js"></script> 
-<script type="text/javascript" src="./js/datatable.custom.js"></script> 
-
+<script type="text/javascript" src="./js/apps.js"></script>
+<script type="text/javascript" src="./js/datatable.custom.js"></script>
 
 <!-- My Custom Core JS -->
 <script type="text/javascript" src="js/main.core.js"></script>
-
-<script type="text/javascript" src="./js/form.js"></script> 
-
-
+<script type="text/javascript" src="./js/form.js"></script>
 <style type="text/css">
 body {
-	color:#444;	
+	color:#444;
 }
-.form-control , select {
-		font-size:12px;
+.form-control, select {
+	font-size:12px;
 }
-
 </style>
 </head>
 <body class="nav-md main_body">
@@ -177,13 +170,13 @@ body {
         <div class="profile">
           <div class="profile_pic"> <img src="<?=Auth::getProfilePicture()?>" alt="..." class="img-circle profile_img"> </div>
           <div class="profile_info"> <span>Welcome,</span>
-            <h2>
-              <span id="show_realname"><?=Auth::getRealName()?></span>
-            </h2>
+            <h2> <span id="show_realname">
+              <?=Auth::getRealName()?>
+              </span> </h2>
           </div>
         </div>
         <!-- /menu profile quick info --> 
-               
+        
         <!-- sidebar menu -->
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
           <div class="menu_section">
@@ -201,7 +194,7 @@ body {
           <div style="margin-top:60px;"></div>
           <?=MainWeb::setBreadcrumb();?>
           <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12"> 
+            <div class="col-md-12 col-sm-12 col-xs-12">
               <div id="divPage">
                 <?php
 				// Setup Route to call mpdule & page
@@ -223,9 +216,11 @@ body {
         
         <!-- footer content -->
         <footer>
-          <div class="pull-right"> <?=COPYRIGHT?></div>
+          <div class="pull-right">
+            <?=COPYRIGHT?>
+          </div>
           <div class="clearfix"></div>
-        </footer>        
+        </footer>
         <!-- /footer content --> 
         
       </div>
@@ -236,9 +231,8 @@ body {
 <input name="page" id="page" type="hidden" value="<?=$Config['page']?>">
 <input name="chkMenuAuth" id="chkMenuAuth" type="hidden" value="<?=$chkMenuAuth?>">
 <div id="divMsg"></div>
-<!-- JS Custom -->
-<script type="text/javascript" src="../build/js/custom.min.js"></script> 
-
+<!-- JS Custom --> 
+<script type="text/javascript" src="../build/js/custom.min.js"></script>
 </body>
 </html>
 <?php
