@@ -34,11 +34,11 @@ $rs_list =  $db ->GetAll($sql_list);
   <thead>
     <tr class="headings">
       <th width="5%"  class="no-sort text-center"> <input type="checkbox" id="check-all" class="" /></th>
-      <th width="11%" align="center">APIRefCode</th>
-      <th width="17%" align="center">APIName</th>
-      <th width="16%" align="center">APIUrl</th>
-      <th width="13%" align="center">UserName</th>
-      <th width="14%" align="center"> Password</th>
+      <th width="9%" align="center">APIRefCode</th>
+      <th width="16%" align="center">APIName</th>
+      <th width="14%" align="center">APIUrl</th>
+      <th width="12%" align="center">UserName</th>
+      <th width="13%" align="center"> Password</th>
       <th width="13%" align="center">DataSourceType</th>
       <th width="10%" align="center">Is Active</th>
       <th width="8%" class="no-sort"> Action</th>
@@ -49,8 +49,8 @@ $rs_list =  $db ->GetAll($sql_list);
     <tr>
       <td align="center"><input type="checkbox" class="selCheckBox" name="selID[]" id="<?=$rs_list[$i]['id']?>" value="<?=$rs_list[$i]['id']?>"></td>
       <td align="center"><?=$rs_list[$i]['APIRefCode']?></td>
-      <td align="center"><?=$rs_list[$i]['APIName']?></td>
-      <td align="center"><?=$rs_list[$i]['APIUrl']?></td>
+      <td><?=$rs_list[$i]['APIName']?></td>
+      <td><?=$rs_list[$i]['APIUrl']?></td>
       <td><?=$rs_list[$i]['UserName']?></td>
       <td><?=$rs_list[$i]['Password']?></td>
       <td><?=$rs_list[$i]['type']?></td>

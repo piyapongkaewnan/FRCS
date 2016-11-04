@@ -14,7 +14,7 @@ if($_GET['action'] == 'actionUpdate'){
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="group_name">User Group Name <span class="required">*</span> </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
       <input type="text" id="group_name" name="group_name" value="<?=$rs_edit['group_name']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
-      <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
+      <span class="fa fa-users form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="group_desc">User Group Description <span class="required">*</span> </label>

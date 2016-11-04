@@ -34,13 +34,13 @@ if ( $rs_edit['IsActive'] == "1" ||  $_GET['action'] ==  'actionCreate'){
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="CountryCode">Country Code <span class="required">*</span> </label>
     <div class="col-md-4 col-sm-3 col-xs-12">
       <input type="text" id="CountryCode" name="CountryCode" value="<?=$rs_edit['CountryCode']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
-      <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span> </div>
+      <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="CountryName">Country Name <span class="required">*</span> </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
       <input class="form-control  col-md-7 col-xs-12 has-feedback-left" id="CountryName" name="CountryName" type="text"  value="<?=$rs_edit['CountryName']?>" required="required"/>
-      <span class="fa fa-edit  form-control-feedback left" aria-hidden="true"></span> </div>
+      <span class="fa fa-keyboard-o  form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="FxId">Fx Name  <span class="required">*</span></label>

@@ -16,8 +16,7 @@ $.MyDataTable = function(tableID , bStateSave  ,iDisplayLength , iDisplayEnd , a
 			'iDisplayLength' : iDisplayLength ,
 			'iDisplayStart': 0 ,
 			'iDisplayEnd' :  iDisplayEnd ,
-			'scrollX': true ,
-			'scrollY': '200px',
+			//'scrollX': true ,
 			'aaSorting': [[ aaSorting, "'"+orderType+'"']],
 			'language': {
 			'sProcessing': '<img src="./images/loading-gear.gif">',	

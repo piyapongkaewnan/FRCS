@@ -27,14 +27,14 @@ if($_GET['action'] == 'actionUpdate'){
         <div class="col-md-8 col-sm-8 col-xs-12">
           <input type="password" id="password_hash" name="password_hash" value="<?=$rs_edit['password_hash']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
           <!--   required="required" data-parsley-equalto="#re_password"  data-parsley-length="[6, 50]" pattern="[a-zA-Z0-9\s]+"  --> 
-          <span class="fa fa-user-o form-control-feedback left" aria-hidden="true"></span> </div>
+          <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span> </div>
       </div>
       <div class="form-group">
         <label for="re_password" class="control-label col-md-3 col-sm-3 col-xs-12">Re-Password <span class="required">*</span> </label>
         <div class="col-md-8 col-sm-8 col-xs-12">
           <input type="password" id="re_password" name="re_password" value="<?=$rs_edit['password_hash']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
           <!-- required="required" data-parsley-equalto="#password_hash"  data-parsley-length="[6, 50]" pattern="[a-zA-Z0-9\s]+" --> 
-          <span class="fa fa-user-o form-control-feedback left" aria-hidden="true"></span> </div>
+          <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span> </div>
       </div>
       <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="realname">Real Name <span class="required">*</span> </label>
@@ -46,7 +46,7 @@ if($_GET['action'] == 'actionUpdate'){
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span> </label>
         <div class="col-md-8 col-sm-8 col-xs-12">
           <input type="email" id="email" name="email" value="<?=$rs_edit['email']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
-          <span class="fa fa-user-o form-control-feedback left" aria-hidden="true"></span> </div>
+          <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span> </div>
       </div>
     </div>
     <div class="col-xs-5">

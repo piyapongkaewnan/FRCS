@@ -35,6 +35,10 @@ class MainWeb extends Auth {
 			
 			/* Menu Action*/
 			define("MENU_ACTION","<div class='doActionModal toolbarGroup'><div class='btn-group' role='group' aria-label='...'><button type='button' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Add Data' id='btnCreate' rel='actionCreate'><i class='fa fa-plus'></i> &nbsp;Add&nbsp; </button><button type='button' class='btn  btn-danger  btn-sm' data-toggle='tooltip' data-placement='top' title='Delete Data' id='btnDelete' rel='actionDelete' disabled><i class='fa fa-trash'></i> Delete </button></div></div>");
+			
+			define("MENU_SUBMIT","<button type='button' name='cancel' class='btn btn-primary'><i class='fa fa-close'></i> Cancel</button>
+<button type='submit' class='btn btn-success'><i class='fa fa-save'></i> Submit</button>
+");
 			/*
 			define("MENU_ACTION","<div class='doActionModal toolbarGroup'><div class='btn-group' role='group' aria-label='...'><button type='button' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Create Data' id='btnCreate' rel='actionCreate'><i class='fa fa-plus'></i> Create</button><button type='button' class='btn  btn-primary  btn-sm'  data-toggle='tooltip' data-placement='top' title='Update Data' id='btnUpdate' rel='actionUpdate' disabled><i class='fa fa-edit'></i> Update</button><button type='button' class='btn  btn-danger  btn-sm' data-toggle='tooltip' data-placement='top' title='Delete Data' id='btnDelete' rel='actionDelete' disabled><i class='fa fa-trash'></i> Delete </button></div></div>");
 			*/
@@ -44,9 +48,7 @@ class MainWeb extends Auth {
 			define("MENU_ADD","<button type='button' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Create Data' id='btnCreate' rel='actionCreate'><i class='fa fa-plus'></i> Create</button>");
 			define("MENU_BACK","<span class='back'><button type='button' class='btn btn-info btn-sm' data-toggle='tooltip' data-placement='top' title='Back menu'><i class='fa fa-arrow-left'></i> Back </button></span>");
 			define("MENU_TOOLS","<span class='doAction'><button>แก้ไข</button><button>ลบ</button></span>");
-			define("MENU_SUBMIT","<button type='button' name='cancel' class='btn btn-primary'><i class='fa fa-close'></i> Cancel</button>
-<button type='submit' class='btn btn-success'><i class='fa fa-pencil-square-o'></i> Submit</button>
-");
+
 			//return true;
 			
 			self::$SiteName =  SITE_NAME;

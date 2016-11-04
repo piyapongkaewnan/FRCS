@@ -42,7 +42,7 @@ if ( $rs_edit['IsActive'] == "1" ||  $_GET['action'] ==  'actionCreate'){
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="CoinName">Coin Name <span class="required">*</span> </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
       <input class="form-control  col-md-7 col-xs-12 has-feedback-left" id="CoinName" name="CoinName" type="text"  value="<?=$rs_edit['CoinName']?>" required="required"/>
-      <span class="fa fa-edit  form-control-feedback left" aria-hidden="true"></span> </div>
+      <span class="fa fa-keyboard-o  form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="FxId">Default FX<span class="required">*</span></label>

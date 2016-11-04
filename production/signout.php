@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+//echo $_SERVER['HTTP_REFERER'];
+
+
 #############################
 # Section : Includes Files
 require_once(".//includes/DBConnect.php");
@@ -81,8 +84,30 @@ body {
 	font-size:12px;
 }
 </style>
+
+<!-- // Set redirect URL for redirect after Sign On	 -->
+
+<script type="text/javascript">
+    if(supportsHTML5Storage()) {
+		localStorage.setItem("APPS.SITE.URL_REDIRECT", '<?=$_SERVER['HTTP_REFERER']?>'); 	
+	}
+	
+function supportsHTML5Storage() {
+    try {
+        return 'localStorage' in window && window['localStorage'] !== null;
+    } catch (e) {
+        return false;
+    }
+}	
+	
+</script>
+<!-- // Set redirect URL for redirect after Sign On	 -->
+
+
 <script type="text/javascript">
 $(function(){
+	
+// Countdown time	
 var time = <?=$timeCountDown?>; // Secound
 var duration = moment.duration(time * 1000, 'milliseconds');
 var interval = 1000;
@@ -105,6 +130,7 @@ setInterval(function(){
 
 
 });
+
 </script>
 <body class="logout">
 <div class="container container-fluid">

@@ -141,12 +141,12 @@ $db->debug= false;
 <script type='text/javascript' src='../vendors/jszip/dist/jszip.min.js'></script>
 <script type='text/javascript' src='../vendors/pdfmake/build/pdfmake.min.js'></script>
 <script type='text/javascript' src='../vendors/pdfmake/build/vfs_fonts.js'></script>
-<script type="text/javascript" src="./js/apps.js"></script>
-<script type="text/javascript" src="./js/datatable.custom.js"></script>
 
 <!-- My Custom Core JS -->
+<script type="text/javascript" src="./js/datatable.custom.js"></script>
 <script type="text/javascript" src="js/main.core.js"></script>
 <script type="text/javascript" src="./js/form.js"></script>
+<script type="text/javascript" src="./js/apps.js"></script>
 <style type="text/css">
 body {
 	color:#444;
@@ -197,6 +197,7 @@ body {
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div id="divPage">
                 <?php
+
 				// Setup Route to call mpdule & page
 					 if(isset($_GET['form']) && isset($Config['modules']) && isset($Config['page'])){
                         include("./modules/".$Config['modules']."/".$Config['page']."_form.php");
@@ -205,7 +206,7 @@ body {
                     }else if(isset($Config['modules']) && !isset($Config['page'])){
                         include("./modules/".$Config['modules']."/index.php");
                     }else{
-						 include("main.php");
+						 include("main.php");						
 					}					
 					?>
               </div>
@@ -222,7 +223,6 @@ body {
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content --> 
-        
       </div>
     </div>
   </div>

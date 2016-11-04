@@ -168,10 +168,14 @@ $("button[name='cancel']").click(function(){
 								
 					//Success
 					request.done (function(textStatus){
-								if(debug == true){
-									console.log(textStatus);   
-								}
 								NProgress.done();
+								
+								if(debug == true){
+									console.log(textStatus);  
+									$("button[type='submit']").prop("disabled", false); 
+									return false;
+								}
+								
 								if(textStatus == true){
 									$.showNotify('success');
 									

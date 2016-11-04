@@ -71,13 +71,13 @@ if ( $rs_edit['IsActive'] == "1" ||  $_GET['action'] ==  'actionCreate'){
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="GroupCode">Group Code <span class="required">*</span> </label>
     <div class="col-md-4 col-sm-3 col-xs-12">
       <input class="form-control  col-md-7 col-xs-12 has-feedback-left" id="GroupCode" name="GroupCode" type="text"  value="<?=$rs_edit['GroupCode']?>" required="required"/>
-      <span class="fa fa-edit  form-control-feedback left" aria-hidden="true"></span> </div>
+      <span class="fa fa-keyboard-o  form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="GameName">Game Name <span class="required">*</span> </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
       <input class="form-control  col-md-7 col-xs-12 has-feedback-left" id="GameName" name="GameName" type="text"  value="<?=$rs_edit['GameName']?>" required="required"/>
-      <span class="fa fa-edit  form-control-feedback left" aria-hidden="true"></span> </div>
+      <span class="fa fa-keyboard-o  form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="GameType">Game Type <span class="required">*</span></label>
@@ -125,20 +125,20 @@ if ( $rs_edit['IsActive'] == "1" ||  $_GET['action'] ==  'actionCreate'){
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Publisher">Publisher </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
       <input class="form-control  col-md-7 col-xs-12 has-feedback-left" id="Publisher" name="Publisher" type="text"  value="<?=$rs_edit['Publisher']?>" >
-      <span class="fa fa-edit  form-control-feedback left" aria-hidden="true"></span> </div>
+      <span class="fa fa-keyboard-o  form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="PaymentChannel">Payment Channel </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
       <textarea name="PaymentChannel" class="form-control  col-md-7 col-xs-12 has-feedback-left" id="PaymentChannel"><?=$rs_edit['PaymentChannel']?></textarea>
-      <span class="fa fa-edit  form-control-feedback left" aria-hidden="true"></span> </div>
+      <span class="fa fa-keyboard-o  form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="DataSourceRemarks">DataSource Remarks </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
       <textarea name="DataSourceRemarks" class="form-control  col-md-7 col-xs-12 has-feedback-left" id="DataSourceRemarks"><?=$rs_edit['DataSourceRemarks']?>
 </textarea>
-      <span class="fa fa-edit  form-control-feedback left" aria-hidden="true"></span> </div>
+      <span class="fa fa-keyboard-o  form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="IsActive">IsActive <span class="required"></span> </label>

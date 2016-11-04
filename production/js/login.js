@@ -24,6 +24,8 @@
 		var 	inputRemember =  $('#inputRemember').is(':checked') ? $('#inputRemember').val() : '';
 		var 	SignDiffAccount =$('#SignDiffAccount').val();
 		
+		var URLs  = localStorage.getItem("APPS.SITE.URL_REDIRECT"); 
+		
 		
 		// Ajax progressbar loading start
 		NProgress.start();
@@ -45,18 +47,22 @@
 									
 					//Success
 					request.done (function(textStatus){
-					//console.log(textStatus);   
+					//console.log(URLs);   
 					
 					NProgress.done();  // Stop akax data progress
+					
 					
 					// Check return from target submit from (TRUE,FALSE)
 					if(textStatus == true){ // if true
 						//showNotify('success');
+						
+						//var redirect = URLs == null ? 'index.php' : URLs; 
+						var redirect  = 'index.php';
 						$('#message').show();
 						$('#message').removeClass('alert alert-danger');
 						$('#message').addClass('alert alert-success');
 						$('#message').html('<i class="fa fa-check"></i> Login Success!!');									
-						setTimeout("window.location.href = 'index.php' ",1000);	// Redirect to main page
+						setTimeout("window.location.href = '"+redirect+"' ",1000);	// Redirect to main page
 						
 					}else{ // If false -> show error message
 						//console.log('Invalid username or Password!!'); 									
