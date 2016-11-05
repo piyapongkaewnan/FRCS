@@ -29,8 +29,8 @@ $rs_list =  $db ->GetAll($sql_list);
   <thead>
     <tr class="headings">
       <th width="5%"  class="no-sort text-center"> <input type="checkbox" id="check-all" class="" /></th>
-      <th width="11%" align="center">Coin Code</th>
-      <th width="21%" align="center"> Coin Name</th>
+      <th width="10%" align="center">Coin Code</th>
+      <th width="22%" align="center"> Coin Name</th>
       <th width="18%" align="center">Fx Name</th>
       <th width="12%" align="center">Base Value</th>
       <th width="15%" align="center">USD Conv. Rate</th>

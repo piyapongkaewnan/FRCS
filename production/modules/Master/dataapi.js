@@ -11,11 +11,11 @@ $(function(){
 		// Get page name
 		var page = $('#page').val();	
 		
-
+		//form.js -> MainAction (modules  ,page  ,select_id) 
 		$.MainAction(modules , page,'');
 
-			//(page , bStateSave  ,iDisplayLength , iDisplayEnd , aaSorting , orderType);
-	    $.MyDataTable(page , true  , 10  , 10 , 1 , 'asc');
+		//datatable.custom.js ->(page  ,iDisplayLength  , aaSorting , orderType , bStateSave);
+	    $.MyDataTable(page   , 10   , 1 , 'asc' , true);
 
 		
  });

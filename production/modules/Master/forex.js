@@ -1,6 +1,5 @@
 // JavaScript Document
 $(function(){
-
 		
 		// modules = module name
 		// pages = page name
@@ -12,10 +11,11 @@ $(function(){
 		var page = $('#page').val();	
 		
 
-		$.MainAction(modules , page, '');
-		
-			//(page , bStateSave  ,iDisplayLength , iDisplayEnd , aaSorting , orderType);
-	    $.MyDataTable(page , true  , 10  , 10 , 1 , 'asc');
+		//form.js -> MainAction (modules  ,page  ,select_id) 
+		$.MainAction(modules , page,'');
+
+		//datatable.custom.js ->(page  ,iDisplayLength  , aaSorting , orderType , bStateSave);
+	    $.MyDataTable(page   , 10   , 1 , 'asc' , true);
 		
  });
 

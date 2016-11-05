@@ -132,7 +132,7 @@ class MainWeb extends Auth {
 			$title = self::$titleVal;	
 			$str ='';
 			$str .= "<ol class=\"breadcrumb container\" style=\"margin-bottom:10px;\">";	
-        	$str .= "<li><i class=\"glyphicon glyphicon-home\"></i> <a href=\"./index.php\">Home</a></li>";
+        	$str .= "<li><a href=\"./index.php\"><i class=\"glyphicon glyphicon-home\"></i> Home</a></li>";
 			if(isset(self::$modules)){
 				//$str .=  "<li class=\"active\"><i class='".$title['icon_name_gmenu']."'></i> <a href=\"?modules=".$title['module_name']."&listModule=true\"\n>".$title['menu_group_'.self::$language]."</a></li>";	
 				$str .=  "<li class=\"active\"><i class='".$title['icon_name_gmenu']."'></i> ".$title['menu_group_'.self::$language]."</li>";	
@@ -203,7 +203,7 @@ class MainWeb extends Auth {
 // Function for setting Modal Delete confirm Ready for call	
 	public function setModalDelete(){
 				echo "	<div class='modal fade' id='FormModalDelete' tabindex='-1' role='dialog' aria-labelledby='ModalLabel' aria-hidden='true' data-keyboard='false' data-backdrop='static'>\n";
-				echo "    <div class='modal-dialog' role='document'>\n";
+				echo "    <div class='modal-dialog modal-sm' role='document'>\n";
 				echo "      <div class='modal-content'>\n";
 				echo "      <div class='modal-header'>\n";
 				echo "      <button type='button' class='close' data-dismiss='modal' aria-label='Close'> <span aria-hidden='true'>&times;</span> </button>\n";

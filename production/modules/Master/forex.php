@@ -18,7 +18,7 @@ $rs_list =  $db ->GetAll($sql_list);
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-striped table-hover table-bordered compact dt-responsive  bulk_action data-table" id="table_<?=$Config['page']?>">
   <thead>
     <tr class="headings">
-      <th width="5%"  class="no-sort text-center"> <input type="checkbox" id="check-all" class="" /></th>
+      <th width="5%"  class="no-sort text-center">&nbsp;<input type="checkbox" id="check-all" class="" />&nbsp;</th>
       <th width="12%" align="center">FX Code</th>
       <th width="13%" align="center"> FX Symbol</th>
       <th width="35%" align="center">FX Name</th>

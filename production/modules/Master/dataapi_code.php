@@ -3,7 +3,9 @@
 /*print "<pre>";
 print_r($_POST);
 print "</pre>";
+exit;
 */
+
 include('../../includes/DBConnect.php');
 
 $action = $_POST['action'];
@@ -20,22 +22,24 @@ $user_id = $_SESSION['sess_user_id'];
 //$paramValue = $_POST['paramValue'];
 $user_id = $_SESSION['sess_user_id'];
 
+$isChange = $_POST['isChange'] ;
+
 $db->debug =0;
 
 // Function for set API Detail 
 function setAPIDetail(){
-global $db ,$user_id,$action ,$id;			
+global $db ,$user_id,$action ,$id ,$isChange;			
 				
 		/************************************************/
 		# Add dataapidetail
 		// Clear data on table dataapidetail where  id  when action = actionCreate ,  actionUpdate
 	 	
-		if($action <> "actionCreate"){ 
+		if($action <> "actionCreate" && $isChange == "1"){ 
 		$sqlDelData = "DELETE FROM dataapidetail WHERE APIID = $id ";			
 		$db->Execute($sqlDelData);
 		}
 		
-		if($action == "actionCreate"){ 
+		if($action == "actionCreate" && isset($_POST['paramName'])){ 
 			// Get MAX from  tbl_users จากค่า auto increatment
 			$rs_get_lastID = $db->GetRow("SELECT MAX(id) as MAXID FROM  dataapi ");
 			$APIID = $rs_get_lastID['MAXID'];	
@@ -45,7 +49,7 @@ global $db ,$user_id,$action ,$id;
 		}
 	
 		// Loop for insert data to dataapidetail		
-		if($_POST['paramName']){ 
+		if(isset($_POST['paramName']) && $isChange == "1"){ 
 				for($i=0;$i<sizeof($_POST['paramName']);$i++){
 							$sqladdParam = "INSERT INTO dataapidetail (
 																		APIID,
@@ -59,9 +63,12 @@ global $db ,$user_id,$action ,$id;
 								$rsActionParam = $db->Execute($sqladdParam);
 					}
 					
-		}
+				return $rsActionParam ? '1' : '0';	
+		}else{
+			
+		}		return '1';
 		
-			echo $rsActionParam ? '1' : '0';
+			
 		
 } // End function
 
@@ -69,7 +76,7 @@ global $db ,$user_id,$action ,$id;
 
 if($action == "actionCreate"){     
 	  //CASE  Partner2 WHEN  '' THEN NULL ELSE '$Partner2' END,
-		$sqlCreate = "INSERT INTO dataapi  (
+		$sqlAction = "INSERT INTO dataapi  (
 									APIRefCode,
 									APIName,
 									APIUrl,
@@ -91,17 +98,19 @@ if($action == "actionCreate"){
 									 $user_id,
 									 NOW()
 									 );";
-		$resultCreate = $db->Execute($sqlCreate);
+	/*	$resultCreate = $db->Execute($sqlCreate);
 		
-		if($resultCreate){	 			
-				setAPIDetail(); // function API Detail			
+		if($resultCreate &&  isset($_POST['paramName'])){	 			
+				 setAPIDetail(); // function API Detail			
+		}else if($resultCreate){	 			
+				echo '1';
 		}else{
 				echo '0';	
 		}
-
+*/
 		
 }else if($action == "actionUpdate"){  
-		$sqlUpdate = "UPDATE 	dataapi 
+		$sqlAction = "UPDATE 	dataapi 
 								SET
 										APIRefCode	 =	'$APIRefCode',
 										APIName	 =	'$APIName',
@@ -115,30 +124,43 @@ if($action == "actionCreate"){
 										ModifiedOn = NOW() 																		
 					WHERE id = $id ; ";
 					
-					$resultUpdate = $db->Execute($sqlUpdate);
+				//	$resultUpdate = $db->Execute($sqlAction);
 		
-		if($resultUpdate){
+	/*	if($resultUpdate){
 			setAPIDetail(); // function API Detail			
 			
 		}else{
 			echo '0';	
-		}
+		}*/
 
 
 }else if($action == "actionDelete"){
-		$sql = "UPDATE dataapi
+		$sqlAction = "UPDATE dataapi
 								SET  				
 										IsDelete = 1,
 										IsActive = CASE IsDelete WHEN 1 THEN 0 WHEN 0 THEN 1 END,
 										DeletedBy = $user_id, 
 										DeletedOn = NOW() 										
 					WHERE id IN ( $id ) ;" ;
-		$result = $db->Execute($sql);
+		//$resultAction = $db->Execute($sql);
 	
-		echo $result ? '1' : '0';	
-					
+/*		//echo $resultAction ? '1' : '0';	
+		//	if($action <> "actionCreate"){ 
+		$sqlDelData = "DELETE FROM dataapidetail WHERE APIID IN ( $id ) ";			
+		$db->Execute($sqlDelData);
+	//	}
+*/					
 }
 
+$resultAction = $db->Execute($sqlAction);
+
+	if($resultAction &&  $action <> 'actionDelete'){	 		// In case create or Update	
+				 echo setAPIDetail(); // function API Detail			
+		}else if($resultAction){	 			
+				echo '1';
+		}else{
+				echo '0';	
+		}
 	
 
 ?>

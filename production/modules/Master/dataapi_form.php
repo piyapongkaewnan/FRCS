@@ -38,9 +38,9 @@ form {
 </style>
 <form id="form_<?=$Config['page']?>" name="form_<?=$Config['page']?>" method="post" data-parsley-validate class="form-horizontal form-label-left">
   <div class="row">
-    <div class="control-label col-md-12 col-sm-12 col-xs-12"> <span class="loading-validate"></span>
+    <div class="control-label col-md-12 col-sm-12 col-xs-12">
       <button id="b2" class="btn btn-danger paramValidate" type="button"><i class="fa fa-bolt"></i> Validate Parameters</button>
-    </div>
+      <span class="loading-validate"></span> </div>
   </div>
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="APIRefCode">API Ref Code <span class="required">*</span> </label>
@@ -61,7 +61,7 @@ form {
       <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="UserName">UserName <span class="required">*</span> </label>
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="UserName">User Name <span class="required">*</span> </label>
     <div class="col-md-4 col-sm-3 col-xs-12">
       <input class="form-control  col-md-7 col-xs-12 has-feedback-left" id="UserName" name="UserName" type="text"  value="<?=$rs_edit['UserName']?>" required="required"/>
       <span class="fa fa-user  form-control-feedback left" aria-hidden="true"></span> </div>
@@ -70,7 +70,7 @@ form {
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Password">Password <span class="required">*</span> </label>
     <div class="col-md-4 col-sm-3 col-xs-12">
       <input class="form-control  col-md-7 col-xs-12 has-feedback-left" id="Password" name="Password" type="text"  value="<?=$rs_edit['Password']?>" required="required"/>
-      <span class="fa fa-user  form-control-feedback left" aria-hidden="true"></span> </div>
+      <span class="fa fa-lock  form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="DataSourceType">DataSourceType <span class="required">*</span></label>
@@ -92,9 +92,10 @@ form {
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="x_content" id="APIParam">
         <div class="form-group  pull-left">
-          <label class="control-label col-md-6 col-sm-6 col-xs-6">
-            <button id="b1" class="btn btn-info addParamMore" type="button"><i class="fa fa-plus"></i> Add Parameters</button>
+          <label class="control-label col-md-12 col-sm-12 col-xs-12">
+            <button id="b1" class="btn btn-info addParamMore" type="button"><i class="fa fa-plus"></i> Add Parameters <span class="badge totalParam"></span></button>  
           </label>
+         
         </div>
         <table class="table table-striped table-hover table-responsive" id="tableParam">
           <thead>
@@ -114,25 +115,26 @@ form {
 					for($i=0;$i<sizeof($rsApiDetail);$i++){
 			?>
             <tr>
-              <th scope="row"></th>
-              <td><input type="text" name="paramName[]" id="paramName" class="form-control input-sm" required="required" value="<?=$rsApiDetail[$i]['ParameterName']?>" /></td>
-              <td><input type="text" name="paramValue[]" id="paramValue" class="form-control input-sm" required="required"  value="<?=$rsApiDetail[$i]['ParameterValue']?>"/></td>
-              <td><a href="javascript:void(0);" class="btn btn-danger btn-xs removeParam">Remove</a></td>
+              <th><?=($i+1)?></th>
+              <td><input type="text" name="paramName[]" id="paramName_<?=$i?>" class="form-control input-sm read" required="required" value="<?=$rsApiDetail[$i]['ParameterName']?>" readonly/></td>
+              <td><input type="text" name="paramValue[]" id="paramValue_<?=$i?>" class="form-control input-sm" required="required"  value="<?=$rsApiDetail[$i]['ParameterValue']?>" readonly/></td>
+              <td><span class="actionParam"><a href="javascript:void(0);" class="btn btn-info btn-xs editParam">Edit</a></span><a href="javascript:void(0);" class="btn btn-danger btn-xs removeParam">Remove</a></td>
             </tr>
             <?php
 					} // End for
-			   }else{ ?>
-            <tr>
-              <th colspan="4" scope="row" class="text-center"><label class="text-danger">No Parameter</label></th>
+			  // }else{ ?>
+         <!--   <tr>
+              <td colspan="4" scope="row" class="text-center"><label class="text-danger">No Parameter</label></th>
             </tr>
-            <?php }
-				}else{
+            <?php //}
+			//	}else{
 					?>
             <tr>
-              <th colspan="4" scope="row" class="text-center"><label class="text-danger">No Parameter</label></th>
-            </tr>
+              <td colspan="4" scope="row" class="text-center"><label class="text-danger">No Parameter</label></td>
+            </tr>-->
             <?php
 				}
+			}
 				?>
           </tbody>
         </table>
@@ -145,13 +147,14 @@ form {
       <?=MENU_SUBMIT?>
       <input type="hidden" name="action" id="action" value="<?=$_GET['action']?>">
       <input type="hidden" name="id" id="id" value="<?=$_GET['id']?>">
+       <input type="hidden" name="isChange" id="isChange" value="0">
     </div>
   </div>
 </form>
 <?=MainWeb::closeTemplate();?>
 <script  type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 
 
-<!-- Select2 --> 
+<!-- Select2 ----> 
 <script src="../vendors/select2/dist/js/select2.full.min.js"></script> 
 <script type="text/javascript">
 $(function(){
@@ -166,7 +169,8 @@ $(function(){
 
 			//  actions , modules  ,page , selected , debug , isCurrentPage
 		$.FormAction( actions ,modules  ,page ,  '<?=$_GET['id']?>' , false ,  false );
-
+		
+		genRowNo();
 
 		 $("#DataSourceType").select2({
           placeholder: "Select a option..",
@@ -176,21 +180,49 @@ $(function(){
 	
 // Add Parameter
 	$('.addParamMore').click(function(){
+	//	console.log($('#tableParam > tbody tr:last-child td:first-child').html());		
 		var input = '<tr>\n';
-			  input += '<th scope="row" class="text-right"><i class="fa fa-magic"></i></th>\n';				
+			  input += '<th scope="row"><i class="fa fa-bolt"></i></th>\n';				
 			  input += '<td><input type="text" name="paramName[]" id="paramName" class="form-control input-sm" required="required" /></td>\n';   
 			  input += '<td><input type="text" name="paramValue[]" id="paramValue" class="form-control input-sm" required="required" /></td>\n';            
-			  input += ' <td><a href="javascript:void(0);" class="btn btn-danger btn-xs removeParam">Remove</a></td>\n';
+			  input += ' <td><span class="actionParam"><a href="javascript:void(0);" class="btn btn-info btn-xs editParam">Done</a></span><a href="javascript:void(0);" class="btn btn-danger btn-xs removeParam">Remove</a></td>\n';
  		   	  input += '</tr>\n';
-		$('#tableParam tbody:parent').append(input).show('fade');
-	});
+		$('#tableParam tbody:parent').append(input);
+		$('#isChange').val(1);
 	
+	//console.log($('#tableParam > tbody tr:last-child td:first-child').html());		
+			genRowNo();	
+		
+	});
+
+
+// Edit Edit Parameter
+$(document).on('click', '.editParam', function(e) {
+//$(this).toggleClass('btn-success' , 'btn-info');	
+ //var rowID = $(this).closest('tr').attr('id'); // table row ID 
+  var rowIndex = $(this).parents("tr").index();
+	
+		if ($.trim($(this).text()) === 'Edit') {
+				$(this).text('Done');
+//				$(this).addClass('btn-success');
+				$('input[name^=paramName]').eq(rowIndex).prop('readonly',false);
+				$('input[name^=paramValue]').eq(rowIndex).prop('readonly',false);				
+		} else {
+				$(this).text('Edit');     
+//				$(this).addClass('btn-info');
+				$('input[name^=paramName]').eq(rowIndex).prop('readonly',true);
+				$('input[name^=paramValue]').eq(rowIndex).prop('readonly',true);
+		}
+							
+});
+
 	
 // Remove Parameter
-$(document).on('click', '#tableParam tr td a.removeParam', function(e) {
+$(document).on('click', '.removeParam', function(e) {
 			$(this).parent().parent().remove();
-				return false;
-			});
+			$('#isChange').val(1);
+			genRowNo();
+});
 
 
 // Validate Parameter
@@ -203,13 +235,14 @@ $(document).on('click', '.paramValidate', function(e) {
 				return false;
 });
 
+
 function testResult(){
 				 $('.paramValidate').prop("disabled",false);
 				 $('.paramValidate').html('<i class="fa fa-bolt"></i> Validate Parameters');
-				 $('.loading-validate').html('<i class="fa fa-check text-success"> </i>OK ');
+				 $('.loading-validate').html('<i class="fa fa-check text-success"> </i> Pass ');
 				 
 
-				$.ajax({
+				/*$.ajax({
 				  dataType: "json",
 				  url: 'http://data.tmd.go.th/api/WeatherToday/V1/?type=json',
 				//  data: data,
@@ -217,36 +250,20 @@ function testResult(){
 					alert(data);
 					//  console.log(data);
 				  }
-				});
-		
+				});*/
 						 
 }
 
-
+// Function for generate tablw Row no on first td
+function genRowNo(){		
+		var numRow = $('#tableParam > tbody  > tr').each(function (i) {
+		   $("th:first-child", this).html((i+1));
+		});
+		$('.totalParam').html(numRow.length);
+}
 
 
 });
 
 
 </script> 
-
-<div id="images"></div>
- 
-<script>
-(function() {
-  var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
-  $.getJSON( flickerAPI, {
-    tags: "mount rainier",
-    tagmode: "any",
-    format: "json"
-  })
-    .done(function( data ) {
-      $.each( data.items, function( i, item ) {
-        $( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
-        if ( i === 9 ) {
-          return false;
-        }
-      });
-    });
-})();
-</script>

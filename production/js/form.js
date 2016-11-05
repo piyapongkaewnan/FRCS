@@ -11,8 +11,9 @@ var modules = $('#modules').val();
 var page = $('#page').val();	
 
 // Set URL to Redirect back page
-var RedirectURL =  '?modules='+modules+'&page='+page;
-				
+//var RedirectURL =  '?modules='+modules+'&page='+page;
+
+var RedirectURL = $('#pageRedirect').val();				
 
 
 /*****************************************************************************************/
@@ -45,7 +46,8 @@ $(':checkbox[name^=selID]').on('change',  function (e) {
 // Event when click Cancel button go to back
 $("button[name='cancel']").click(function(){
 	//alert('');
-		window.history.back(-1);
+		//window.history.back(-1);
+		window.location = RedirectURL;
 });
 
 	
@@ -187,7 +189,9 @@ $("button[name='cancel']").click(function(){
 									if(isCurrentPage) { // if = true -> reload current page				
 										setTimeout("window.location.reload(true)",2000);
 									}else{ //  else = false -> reload current page
-										setTimeout("window.history.back(-1)",2000);	
+										
+										//setTimeout("window.history.back(-1)",2000);	
+										setTimeout("window.location = '"+RedirectURL+"'",2000);	
 									}
 								
 								}else{

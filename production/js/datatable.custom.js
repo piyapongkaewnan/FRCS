@@ -2,9 +2,8 @@ $(function(){
 // JavaScript Document
 
 
-
 <!--- My Customize DataTable --> 
-$.MyDataTable = function(tableID , bStateSave  ,iDisplayLength , iDisplayEnd , aaSorting , orderType ){  
+$.MyDataTable = function(tableID  ,iDisplayLength  , aaSorting , orderType ,bStateSave ){  
 
    if ($('#table_'+tableID).length) { 
 
@@ -15,9 +14,9 @@ $.MyDataTable = function(tableID , bStateSave  ,iDisplayLength , iDisplayEnd , a
 			'bPaginate': '1', 
 			'iDisplayLength' : iDisplayLength ,
 			'iDisplayStart': 0 ,
-			'iDisplayEnd' :  iDisplayEnd ,
+			//'iDisplayEnd' :  10 ,
 			//'scrollX': true ,
-			'aaSorting': [[ aaSorting, "'"+orderType+'"']],
+			'aaSorting': [[ aaSorting, orderType]],
 			'language': {
 			'sProcessing': '<img src="./images/loading-gear.gif">',	
 			'oPaginate':{sFirst:'&laquo;',sLast:'&raquo;',sNext:'&#8250;',sPrevious:'&#8249;'} 
@@ -49,9 +48,12 @@ $.MyDataTable = function(tableID , bStateSave  ,iDisplayLength , iDisplayEnd , a
 			             className: 'btn-sm' 
 			           } 
 			          ], 
-			          responsive: false 
+			          responsive: true 
  				}); 
    			} 
+		
+		// Call event on checkbox	
+		//initCheckbox(tableID);
 
 }
 <!--- My Customize DataTable --> 
@@ -181,6 +183,16 @@ $('.data-table').on('draw.dt', function () {
     turn_on_icheck('icheckbox_flat-green input flat');
 });*/
 
+	
+<!-- checkbox is true when click tr -->
+/*function initCheckbox(tableID){
+		 $('#table_'+tableID+' tbody').on('click', 'tr', function (event) {
+        if (event.target.type !== 'checkbox') {
+            $(':checkbox', this).trigger('click');
+        }
+    });
+}*/
+<!-- checkbox is true when click tr -->
 
 
 

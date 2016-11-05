@@ -1,26 +1,6 @@
-<?php
-
-include("./includes/Class/DataTable.Class.php");
-
-$tbl = new dataTable();
-$tbl->id = ''.$_GET['page'];
-//$tbl->title = title_menu($_GET['setPage']);
-//$tbl->menu = MENU_ADD;//MENU_ACTION_PAGE;
-$tbl->module = $_GET['module'];
-$tbl->page = $_GET['page'];
-$tbl->order = 1;
-$tbl->saveState  = true;
-//$tbl->orderType = "ASC";
-$tbl->pagingLength=10;
-?>
-
-<!-- page content -->
-
   <?=MainWeb::openTemplate();?>
- <?php  $tbl->openTable();  ?>
-
             <p class="text-muted font-13 m-b-30">Summary Report ... (Sample Data) </p>
-            <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-striped table-hover table-bordered compact dt-responsive  bulk_action data-table" id="table_<?=$Config['page']?>">
               <thead>
                 <tr>
                   <th>Name</th>
@@ -250,14 +230,5 @@ $tbl->pagingLength=10;
                 </tr>
               </tbody>
             </table>
-         <?php  $tbl->closeTable();  ?>
-
          <?=MainWeb::closeTemplate();?>
-
-<!-- /page content --> 
-
-
-
  <script src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script>
-
-<!-- /Datatables --> 

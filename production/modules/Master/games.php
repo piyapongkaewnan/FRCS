@@ -63,7 +63,7 @@ $rs_list =  $db ->GetAll($sql_list);
       <td align="center"><input type="checkbox" class="selCheckBox" name="selID[]" id="<?=$rs_list[$i]['id']?>" value="<?=$rs_list[$i]['id']?>"></td>
       <td align="center"><?=$rs_list[$i]['RefCode']?></td>
       <td align="center"><?=$rs_list[$i]['GroupCode']?></td>
-      <td align="center"><?=$rs_list[$i]['GameName']?></td>
+      <td><?=$rs_list[$i]['GameName']?></td>
       <td><?=$rs_list[$i]['type']?></td>
       <td><?=$rs_list[$i]['Partner1']?></td>
 <!--      <td><?=$rs_list[$i]['Partner2']?></td>

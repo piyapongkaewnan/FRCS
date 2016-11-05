@@ -1,71 +1,18 @@
- $(document).ready(function() {
-        var handleDataTableButtons = function() {
-          if ($("#datatable-buttons").length) {
-            $("#datatable-buttons").DataTable({
-              dom: "Bfrtip",
-              buttons: [
-                {
-                  extend: "copy",
-                  className: "btn-sm"
-                },
-                {
-                  extend: "csv",
-                  className: "btn-sm"
-                },
-                {
-                  extend: "excel",
-                  className: "btn-sm"
-                },
-                {
-                  extend: "pdfHtml5",
-                  className: "btn-sm"
-                },
-                {
-                  extend: "print",
-                  className: "btn-sm"
-                },
-              ],
-              responsive: true
-            });
-          }
-        };
+// JavaScript Document
+$(function(){
+		
+		// modules = module name
+		// pages = page name
+		// select_id = selection id
+		// Get modules name
+		var modules = $('#modules').val();
+		
+		// Get page name
+		var page = $('#page').val();	
+				
 
-        TableManageButtons = function() {
-        
-          return {
-            init: function() {
-              handleDataTableButtons();
-            }
-          };
-        }();
+		//datatable.custom.js ->(page  ,iDisplayLength  , aaSorting , orderType , bStateSave);
+	    $.MyDataTable(page   , 10   , 0 , 'asc' , false);
+	
+ });
 
-        $('#datatable').dataTable();
-
-     
-        $('#datatable-responsive').DataTable();
-
-        $('#datatable-scroller').DataTable({
-          ajax: "js/datatables/json/scroller-demo.json",
-          deferRender: true,
-          scrollY: 380,
-          scrollCollapse: true,
-          scroller: true
-        });
-
-
-        var $datatable = $('#datatable-checkbox');
-
-        $datatable.dataTable({
-          'order': [[ 1, 'asc' ]],
-          'columnDefs': [
-            { orderable: false, targets: [0] }
-          ]
-        });
-        $datatable.on('draw.dt', function() {
-          $('input').iCheck({
-            checkboxClass: 'icheckbox_flat-green'
-          });
-        });
-
-        TableManageButtons.init();
-      });

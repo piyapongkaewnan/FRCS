@@ -48,7 +48,7 @@ $tbl->openTable();
     <thead>
       <tr>
         <th width="8%">No.</th>
-        <th width="72%">Menu Name</th>
+        <th width="72%">Program Name</th>
         <th width="20%">Authorize</th>
       </tr>
     </thead>

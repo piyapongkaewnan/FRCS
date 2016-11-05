@@ -61,7 +61,7 @@
 						$('#message').show();
 						$('#message').removeClass('alert alert-danger');
 						$('#message').addClass('alert alert-success');
-						$('#message').html('<i class="fa fa-check"></i> Login Success!!');									
+						$('#message').html('<i class="fa fa-check"></i> Sign In Success!!');									
 						setTimeout("window.location.href = '"+redirect+"' ",1000);	// Redirect to main page
 						
 					}else{ // If false -> show error message

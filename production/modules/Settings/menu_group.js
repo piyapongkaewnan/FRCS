@@ -10,10 +10,11 @@ $(function(){
 		// Get page name
 		var page = $('#page').val();	
 				
+		//form.js -> MainAction (modules  ,page  ,select_id) 
 		$.MainAction(modules , page,'');
-	
-		//(page , bStateSave  ,iDisplayLength , iDisplayEnd , aaSorting , orderType);
-		 $.MyDataTable(page , false  , 10  , 10 , 4 , 'asc');
+
+		//datatable.custom.js ->(page  ,iDisplayLength  , aaSorting , orderType , bStateSave);
+	    $.MyDataTable(page   , 10   , 4 , 'asc' , true);
 	
  });
 

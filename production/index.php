@@ -21,7 +21,6 @@ $Config['email'] =  $_SESSION['sess_email'];
 $Config['modules'] = $_GET['modules'];
 $Config['page'] = $_GET['page'];
 
-
 //if(!isset($_SESSION['sess_user_id'])){ MainWeb::redirect('login.php'); }
 if(!isset($_SESSION['sess_user_id'])) {  MainWeb::redirect('signin.php');}
 
@@ -230,6 +229,7 @@ body {
 <input name="modules" id="modules" type="hidden" value="<?=$Config['modules']?>">
 <input name="page" id="page" type="hidden" value="<?=$Config['page']?>">
 <input name="chkMenuAuth" id="chkMenuAuth" type="hidden" value="<?=$chkMenuAuth?>">
+<input name="pageRedirect" id="pageRedirect" type="text" value="<?=$_SERVER['HTTP_REFERER']?>">
 <div id="divMsg"></div>
 <!-- JS Custom --> 
 <script type="text/javascript" src="../build/js/custom.min.js"></script>
