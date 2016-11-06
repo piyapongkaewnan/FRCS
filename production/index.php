@@ -70,6 +70,9 @@ $db->debug= false;
 <!-- NProgress -->
 <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
 
+ <!-- Dropzone.js -->
+ <link href="../vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
+
 <!-- bootstrap-progressbar -->
 <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
 
@@ -79,8 +82,8 @@ $db->debug= false;
 <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
 
 <!--  parsley -->
-<link rel='stylesheet' type='text/css' href='../vendors/parsleyjs/src/parsley.css'/>
-
+<!--<link rel='stylesheet' type='text/css' href='../vendors/parsleyjs/src/parsley.css'/>
+-->
 <!-- iCheck -->
 <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
 
@@ -88,7 +91,7 @@ $db->debug= false;
 <link href="../vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
 
 <!-- Custom Theme Style -->
-<link href="../build/css/custom.min.css" rel="stylesheet">
+<link href="../build/css/custom.css" rel="stylesheet">
 
 <!-- Datatable CSS -->
 <link href="../vendors/datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">
@@ -106,6 +109,10 @@ $db->debug= false;
 
 <!-- NProgress -->
 <script type="text/javascript" src="../vendors/nprogress/nprogress.js"></script>
+
+<!-- Dropzone.js --> 
+<script src="../vendors/dropzone/dist/min/dropzone.min.js"></script>
+
 <!-- bootstrap-progressbar -->
 <script type="text/javascript" src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
 
@@ -229,7 +236,7 @@ body {
 <input name="modules" id="modules" type="hidden" value="<?=$Config['modules']?>">
 <input name="page" id="page" type="hidden" value="<?=$Config['page']?>">
 <input name="chkMenuAuth" id="chkMenuAuth" type="hidden" value="<?=$chkMenuAuth?>">
-<input name="pageRedirect" id="pageRedirect" type="text" value="<?=$_SERVER['HTTP_REFERER']?>">
+<input name="pageRedirect" id="pageRedirect" type="hidden" value="<?=$_SERVER['HTTP_REFERER']?>">
 <div id="divMsg"></div>
 <!-- JS Custom --> 
 <script type="text/javascript" src="../build/js/custom.min.js"></script>

@@ -49,7 +49,7 @@ $tbl->openTable();
       <tr>
         <th width="8%">No.</th>
         <th width="72%">Program Name</th>
-        <th width="20%">Authorize</th>
+        <th width="20%" class="no-sort">Authorize</th>
       </tr>
     </thead>
     <tbody>
@@ -71,7 +71,7 @@ $tbl->openTable();
         <td><u><b>
           <?=$rs_gmenu[$i]['menu_group_en']?>
           </b></u></td>
-        <td align="center"></td>
+        <td align="center"><input type="checkbox" name="check-all" class="check-all" value="<?=$rs_gmenu[$i]['mgroup_id']?>"/></td>
       </tr>
       <?php
 			// หาเมนูย่อย
@@ -102,7 +102,7 @@ $tbl->openTable();
         <td align="center"><?=$loop?></td>
         <td>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-
           <?=$rs_menu[$j]['menu_name_en']?></td>
-        <td align="center"><input type="checkbox" name="chk_menu[]" id="chk_menu_<?=$rs_menu[$j]['menu_id']?>" value="<?=$rs_menu[$j]['menu_id']?>" <?=$chk_status?> /></td>
+        <td align="center"><input type="checkbox" name="chk_menu[]" id="chk_menu_<?=$rs_menu[$j]['menu_id']?>" value="<?=$rs_menu[$j]['menu_id']?>" <?=$chk_status?> class="program_<?=$mgroup_id?>" /></td>
       </tr>
       <?php 
 				} // Emd loop เมนูย่อย
@@ -116,5 +116,4 @@ $tbl->openTable();
   <input type="hidden" name="action" id="action" value="actionUpdate" />
 </form>
 <?=MainWeb::closeTemplate();?>
-
 <script  type="text/javascript" src="./modules/<?=$Config['modules']?>/<?=$Config['page']?>.js"></script> 

@@ -14,6 +14,7 @@ $mgroup_id = $_POST['mgroup_id'];
 $menu_order = $_POST['menu_order'];
 $menu_param = $_POST['menu_param'];
 $icon_id = $_POST['icon_id'] =="" ? "1" : $_POST['icon_id'];
+$is_active =$_POST['is_active']  ?  $_POST['is_active'] : '0';
 $user_id = $_SESSION['sess_user_id'];
 
 
@@ -22,7 +23,7 @@ $db->debug =0;
 
 if($action == "actionCreate"){     
 		$sql = "INSERT INTO menu 
-								(  menu_name_th, menu_name_en,menu_desc,menu_file,menu_param,mgroup_id,menu_order,icon_id , update_by )
+								(  menu_name_th, menu_name_en,menu_desc,menu_file,menu_param,mgroup_id,menu_order,icon_id , is_active , update_by )
 					VALUES ( '$menu_name_th',
 								 '$menu_name_en', 
 								 '$menu_desc',
@@ -31,6 +32,7 @@ if($action == "actionCreate"){
 								  $mgroup_id, 
 								 $menu_order, 
 								 $icon_id ,
+								  $is_active ,
 								 '$user_id'
 								 );";
 								 
@@ -47,6 +49,7 @@ if($action == "actionCreate"){
 										mgroup_id = $mgroup_id,  
 										menu_order = $menu_order,
 										icon_id = $icon_id ,
+										is_active = $is_active,
 										update_by = $user_id
 					WHERE menu_id = $menu_id ";
 

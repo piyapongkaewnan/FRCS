@@ -130,13 +130,13 @@ if ( $rs_edit['IsActive'] == "1" ||  $_GET['action'] ==  'actionCreate'){
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="PaymentChannel">Payment Channel </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <textarea name="PaymentChannel" class="form-control  col-md-7 col-xs-12 has-feedback-left" id="PaymentChannel"><?=$rs_edit['PaymentChannel']?></textarea>
+      <textarea name="PaymentChannel" rows="3" class="form-control  col-md-7 col-xs-12 has-feedback-left" id="PaymentChannel"><?=$rs_edit['PaymentChannel']?></textarea>
       <span class="fa fa-keyboard-o  form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="DataSourceRemarks">DataSource Remarks </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <textarea name="DataSourceRemarks" class="form-control  col-md-7 col-xs-12 has-feedback-left" id="DataSourceRemarks"><?=$rs_edit['DataSourceRemarks']?>
+      <textarea name="DataSourceRemarks" rows="3" class="form-control  col-md-7 col-xs-12 has-feedback-left" id="DataSourceRemarks"><?=$rs_edit['DataSourceRemarks']?>
 </textarea>
       <span class="fa fa-keyboard-o  form-control-feedback left" aria-hidden="true"></span> </div>
   </div>

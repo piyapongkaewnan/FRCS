@@ -19,9 +19,9 @@ $rs_list = $db->GetAll($sql_list);
   <thead>
     <tr>
       <th width="5%"  class="no-sort text-center"> <input type="checkbox" id="check-all" class="" /></th>
-      <th width="33%" align="center">User Group Name</th>
-      <th width="32%" align="center">User Group Description</th>
-      <th width="21%" align="center">Update Time</th>
+      <th width="30%" align="center">User Group Name</th>
+      <th width="38%" align="center">User Group Description</th>
+      <th width="18%" align="center">Update Time</th>
       <th width="9%" class="no-sort"> Action</th>
     </tr>
   </thead>

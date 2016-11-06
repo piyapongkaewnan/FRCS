@@ -3,15 +3,7 @@
 if($_GET['action'] == 'actionUpdate'){
 	$id = $_GET['id'];
 	$sql_edit = "SELECT
-					 a.menu_id,
-					 a.menu_name_th,
-					 a.menu_name_en,
-					 a.menu_desc,
-					 a.menu_file,
-					 a.menu_param,
-					 a.mgroup_id,
-					 a.menu_order,
-					 a.icon_id,
+					 a.*,
 					 b.icon_name
 				FROM menu AS a
 					 LEFT JOIN icons b
@@ -23,6 +15,11 @@ if($_GET['action'] == 'actionUpdate'){
 }else{
 	$mgroup_id = $_GET['select_id'];
 }
+
+if ( $rs_edit['is_active'] == "1" ||  $_GET['action'] ==  'actionCreate'){
+	$is_active =  "checked";
+}
+	
 
 ?>
 <style type="text/css">
@@ -44,49 +41,48 @@ if($_GET['action'] == 'actionUpdate'){
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mgroup_id">Menu Group <span class="required">*</span> </label>
     <div class="col-md-4 col-sm-3 col-xs-12">
-     <select name="mgroup_id" id="mgroup_id" class="form-control input-sm" required>
-          <?php
+      <select name="mgroup_id" id="mgroup_id" class="form-control input-sm" required>
+        <?php
 		  $sql_mgroup = "SELECT * FROM menu_group ORDER BY menu_group_en";
 		  $rs_mgroup = $db->GetAll($sql_mgroup);
 		  Form::genOptionSelect($rs_mgroup,'mgroup_id','menu_group_en',$mgroup_id);
 		  ?>
-        </select>
-     </div>
+      </select>
+    </div>
   </div>
-  
-   <div class="form-group">
+  <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu_name_en">Menu Group EN <span class="required">*</span> </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
       <input type="text" id="menu_name_en" name="menu_name_en" value="<?=$rs_edit['menu_name_en']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
       <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
-    <div class="form-group">
+  <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu_name_th">Menu Group TH <span class="required">*</span> </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
       <input type="text" id="menu_name_th" name="menu_name_th" value="<?=$rs_edit['menu_name_th']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
       <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
-<div class="form-group">
+  <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu_desc">Menu Description <span class="required"></span> </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-       <textarea name="menu_desc" rows="2"  class="form-control input-sm" id="menu_desc"><?=$rs_edit['menu_desc']?></textarea>
-	</div>
+      <textarea name="menu_desc" rows="2"  class="form-control input-sm has-feedback-left" id="menu_desc" ><?=$rs_edit['menu_desc']?></textarea>
+      <span class="fa fa-keyboard-o  form-control-feedback left" aria-hidden="true"></span> 
+    </div>
   </div>
- 
- <div class="form-group">
+  <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu_file">Menu File <span class="required">*</span> </label>
     <div class="col-md-4 col-sm-3 col-xs-12">
       <input type="text" id="menu_file" name="menu_file" value="<?=$rs_edit['menu_file']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
       <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
- <div class="form-group">
+  <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu_order">Menu Order <span class="required">*</span> </label>
     <div class="col-md-3 col-sm-3 col-xs-12">
       <input type="number" id="menu_order" name="menu_order" value="<?=$rs_edit['menu_order']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left" min="1">
       <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
-   <div class="form-group">
-    <label for="message-text" class="control-label col-md-3 col-sm-3 col-xs-12">Menu Icon   </label>
+  <div class="form-group">
+    <label for="message-text" class="control-label col-md-3 col-sm-3 col-xs-12">Menu Icon </label>
     <div class="col-md-7 col-sm-12 col-xs-12"> <a href="javascript:$('.fontawesome-icon-list').toggle();$('#btn-icon').toggleClass('fa-caret-up', 'fa-caret-down');" class="btn btn-danger btn-xs"> Selected Icon <i id="btn-icon" class="fa fa-caret-down"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<i id="show_icon" class="<?=$rs_edit['icon_name']?>"></i>
       <div class="row fontawesome-icon-list" style="display:none">
         <?php
@@ -99,7 +95,13 @@ if($_GET['action'] == 'actionUpdate'){
       </div>
     </div>
   </div>
-   <div class="ln_solid"></div>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="is_active">Is Active <span class="required"></span> </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input type="checkbox" class=" input-sm" name="is_active" id="is_active" value="1"  <?=$is_active?> />
+    </div>
+  </div>
+  <div class="ln_solid"></div>
   <div class="form-group">
     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
       <?=MENU_SUBMIT?>
@@ -136,4 +138,4 @@ $('.fa-hover1').click(function(){
 		
 		
 });
-</script>
+</script> 

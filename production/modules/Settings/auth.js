@@ -17,6 +17,13 @@ $(function(){
 	$('#group_id').change(function(){
 		window.location = '?modules='+modules+'&page='+page+'&group_id='+$(this).val();
 	});
+	
+	// Check All checkbox
+	$('input[type=checkbox].check-all').click (function () {
+	  $('input[type=checkbox].program_'+$(this).val()).prop('checked', this.checked);
+	  
+	});
+
 				
  });
 

@@ -1,5 +1,4 @@
 ﻿<?php
-
 if($_GET['action'] == 'actionUpdate'){
 	$id = $_GET['id'];
 	$sql_edit = "SELECT  *  FROM user WHERE user_id = '$id';";
@@ -10,8 +9,7 @@ if($_GET['action'] == 'actionUpdate'){
 ?>
 <?=MainWeb::openTemplate();?>
 
-<br />
-<form  data-parsley-validate name="form_<?=$_GET['page']?>" id="form_<?=$_GET['page']?>" method="post" class="form-horizontal   " enctype="multipart/form-data"  action="">
+<form  data-parsley-validate name="form_<?=$_GET['page']?>" id="form_<?=$_GET['page']?>" method="post" class="form-horizontal  dropzone" enctype="multipart/form-data"  action="">
   <div class="row">
     <div class="col-xs-7">
       <div class="form-group">
@@ -52,11 +50,11 @@ if($_GET['action'] == 'actionUpdate'){
     <div class="col-xs-5">
       <div class="form-group"> 
         <!--  data:image/jpeg;base64,<? //=base64_encode($rs_edit['picture'])?>-->
-        <div class=" text-center"> <img  src="./images/img.jpg"  alt="..." width="130" height="130" id="profile-img" class="img-thumbnail" style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Click for change profile picture">
+        <div class=" text-center"> <img  src="./images/img.jpg"  alt="..." width="130" height="130" id="profile-img" class="img-circle" style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Click for change profile picture">
           <div style="height:5px"></div>
-          <button type="button" class="btn btn-xs btn-danger">Remove Picture</button>
-          <span class="btn btn-xs btn-info" id="newPic">New Picture</span> </div>
-      </div>
+          <button type="button" class="btn btn-xs btn-danger" alt="Click me to remove the file." data-dz-remove>Remove Picture</button>
+          <!--<span class="btn btn-xs btn-info" id="newPic">New Picture</span>--> </div>
+            </div>
       <div class="form-group">
         <label for="user_group" class="fcontrol-label col-md-2 col-sm-3 col-xs-12"></label>
         <div class="col-md-8 col-sm-8 col-xs-12">
@@ -101,10 +99,6 @@ if($_GET['action'] == 'actionUpdate'){
   </div>
 </form>
 <?=MainWeb::closeTemplate();?>
-
-<!-- Dropzone.js --> 
-<!--<script src="../vendors/dropzone/dist/min/dropzone.min.js"></script>
---> 
 <script type="text/javascript">
 $(document).ready(function() {
 	// Trigger form submit
@@ -124,15 +118,43 @@ $(document).ready(function() {
 		// jQuery
 		
 		
-/*		var myDropzone = new Dropzone("#profile-img", { 
-    url: 'test.php',
-    autoProcessQueue:true
-  });
+/*var myfile = $("#profile-img").dropzone({
+				url: 'modules/Settings/user_upload.php',
+				autoProcessQueue:true ,
+				});
+console.log(myfile);		*/
 
-  $('#newPic').on('click',function(e){
+  $('#profile-img').on('click',function(e){
     e.preventDefault();
     myDropzone.processQueue();  
-  });   */
+  });   
+  
+  
+  // instantiate the uploader
+ var myDropzone =  $('#profile-img ').dropzone({ 
+    url: "modules/Settings/user_upload.php",
+    maxFilesize: 100,
+   // paramName: "uploadfile",
+    maxThumbnailFilesize: 1,
+    init: function() {
+      
+      this.on('success', function(file, json) {
+		  console.log(file.name);	
+		   $('#profile-img').attr('src' , './images/avatar/tmp/'+file.name);
+      });
+      
+      this.on('addedfile', function(file) {
+         console.log(file);	
+      });
+      
+      this.on('drop', function(file) {
+         console.log(file);	
+      }); 
+    }
+  });
+  
+  
+  
 		
 	if(actions == 'actionUpdate'){
 		$('#rememPass').prop( "checked", true );

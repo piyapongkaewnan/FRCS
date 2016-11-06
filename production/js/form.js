@@ -167,7 +167,6 @@ $("button[name='cancel']").click(function(){
 					dataType  : 'html' // text, html, xml, json, jsonp, and script.
 					});
 
-								
 					//Success
 					request.done (function(textStatus){
 								NProgress.done();

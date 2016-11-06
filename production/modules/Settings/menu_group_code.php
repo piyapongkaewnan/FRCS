@@ -15,18 +15,21 @@ $menu_group_en = $_POST['menu_group_en'];
 $module_name = $_POST['module_name'];
 $menu_order = $_POST['menu_order'];
 $icon_id = $_POST['icon_id'] =="" ? "1" : $_POST['icon_id'];
+$is_active =$_POST['is_active']  ?  $_POST['is_active'] : '0';
+
 $user_id = $_SESSION['sess_user_id'];
 
 $db->debug =0;
 
 if($action == "actionCreate"){     
 		$sql = "INSERT INTO menu_group 
-								(  menu_group_th, menu_group_en, module_name,menu_order, icon_id ,update_by )
+								(  menu_group_th, menu_group_en, module_name,menu_order, icon_id, $is_active ,update_by )
 					VALUES ( '$menu_group_th',
 								 '$menu_group_en', 
 								'$module_name',
 								 $menu_order, 
 								 $icon_id,
+								 $is_active ,
 								 $user_id
 								 );";
 		
@@ -38,6 +41,7 @@ if($action == "actionCreate"){
 										module_name= '$module_name',  
 										menu_order = $menu_order,  
 										icon_id = $icon_id ,
+										is_active = $is_active,
 										update_by  = $user_id 										
 					WHERE mgroup_id = $mgroup_id ";
 

@@ -336,7 +336,6 @@ body {
 	background: #2A3F54;
 	font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
 	font-size: 12px;
-	
 }
 .main_container .top_nav {
 	display: block;
@@ -448,7 +447,7 @@ a:hover, a:focus {
 	text-decoration: none;
 }
 .sidebar-footer a {
-	color : #aaaaaa;	
+	color : #aaaaaa;
 }
 .navbar {
 	margin-bottom: 0;
@@ -1934,14 +1933,14 @@ span.section {
 	border-bottom: 1px solid #e5e5e5;
 }
 .form-control {
-	/*border-radius: 0;
+/*border-radius: 0;
 	width: 100%;*/
 }
 .form-horizontal .control-label {
 	padding-top: 8px;
 }
 .form-control:focus {
-	/*border-color: #CCD0D7;
+/*border-color: #CCD0D7;
 	box-shadow: none !important;*/
 }
 legend {
@@ -4147,7 +4146,7 @@ ul.notifications {
 /** Dropzone.js **/
 .dropzone {
 	min-height: 300px;
-	border: 1px solid #e5e5e5;
+	border: 0px solid #e5e5e5;
 }
 
 /** /Dropzone.js **/

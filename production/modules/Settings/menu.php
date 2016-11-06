@@ -19,6 +19,7 @@ $sql_list = "SELECT
 					 a.menu_id,
 					 a.menu_order,
 					 a.icon_id,
+					 a.is_active,
 					 b.icon_name
 				FROM menu AS a
 					 LEFT JOIN icons b
@@ -44,13 +45,14 @@ $rs_list = $db->GetAll($sql_list);
   <thead>
     <tr class="headings">
       <th width="5%"  class="no-sort text-center"> <input type="checkbox" id="check-all" class="" /></th>
-      <th width="6%"> Order</th>
-      <th width="17%">Menu name (TH)</th>
-      <th width="18%">Menu name (EN)</th>
-      <th width="24%">Menu Description</th>
-      <th width="13%">Menu File</th>
+      <th width="7%"> Order</th>
+      <th width="13%">Menu name (TH)</th>
+      <th width="17%">Menu name (EN)</th>
+      <th width="21%">Menu Description</th>
+      <th width="12%">Menu File</th>
+      <th width="9%">Is Active</th>
       <th width="8%">Icons</th>
-       <th width="9%" class="no-sort"> Action</th>
+       <th width="8%" class="no-sort"> Action</th>
     </tr>
   </thead>
   <tbody>
@@ -62,6 +64,7 @@ $rs_list = $db->GetAll($sql_list);
       <td valign="top"><?=$rs_list[$i]['menu_name_en']?></td>
       <td valign="top"><?=$rs_list[$i]['menu_desc']?></td>
       <td valign="top"><?=$rs_list[$i]['menu_file']?></td>
+      <td align="center" valign="top"> <?=$rs_list[$i]['is_active']=="1" ? "YES" : "NO";?></td>
       <td align="center" valign="top"><i class ="<?=$rs_list[$i]['icon_name']?>"></i></td>
       <td align="center"><a href="<?=MainWeb::getURI()?>&form=keyin&action=actionUpdate&id=<?=$rs_list[$i]['menu_id']?>" class="btn btn-xs btn-info btnUpdate" >Edit</a></td>
     </tr>

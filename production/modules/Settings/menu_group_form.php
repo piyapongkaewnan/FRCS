@@ -15,6 +15,11 @@ $rs_edit =  $db ->GetRow($sql_edit);
 
 $DirModule =  MainWeb::ScanDir( 'modules/'); // path from top);
 
+if ( $rs_edit['is_active'] == "1" ||  $_GET['action'] ==  'actionCreate'){
+	$is_active =  "checked";
+}
+	
+
 ?>
 <style type="text/css">
 .fontawesome-icon-list .fa-hover1 a .fa {
@@ -58,8 +63,8 @@ $DirModule =  MainWeb::ScanDir( 'modules/'); // path from top);
       <input type="number" id="menu_order" name="menu_order" value="<?=$rs_edit['menu_order']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left" min="1">
       <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
   </div>
- <div class="form-group">
-    <label for="message-text" class="control-label col-md-3 col-sm-3 col-xs-12">Menu Icon   </label>
+  <div class="form-group">
+    <label for="message-text" class="control-label col-md-3 col-sm-3 col-xs-12">Menu Icon </label>
     <div class="col-md-7 col-sm-12 col-xs-12"> <a href="javascript:$('.fontawesome-icon-list').toggle();$('#btn-icon').toggleClass('fa-caret-up', 'fa-caret-down');" class="btn btn-danger btn-xs"> Selected Icon <i id="btn-icon" class="fa fa-caret-down"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<i id="show_icon" class="<?=$rs_edit['icon_name']?>"></i>
       <div class="row fontawesome-icon-list" style="display:none">
         <?php
@@ -71,7 +76,14 @@ $DirModule =  MainWeb::ScanDir( 'modules/'); // path from top);
 	  ?>
       </div>
     </div>
-  </div>  <div class="ln_solid"></div>
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="is_active">Is Active <span class="required"></span> </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <input type="checkbox" class=" input-sm" name="is_active" id="is_active" value="1"  <?=$is_active?> />
+      </div>
+    </div>
+  </div>
+  <div class="ln_solid"></div>
   <div class="form-group">
     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
       <?=MENU_SUBMIT?>

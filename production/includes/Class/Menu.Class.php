@@ -40,6 +40,7 @@ class MENU extends Auth {
 																			   group_id
 																			 FROM user_auth
 																			 WHERE user_id = ".Auth::$user_id."))
+										AND b.is_active = 1
 										GROUP BY a.mgroup_id
 										ORDER BY b.menu_order ASC";									
 				
@@ -69,6 +70,7 @@ class MENU extends Auth {
 																			 group_id
 																		   FROM user_auth
 																		   WHERE user_id =  ".Auth::$user_id."))
+									AND a.is_active = 1
 									ORDER BY a.menu_order";
 	
 				$rsMenu =  Auth::$db ->GetAll($sqlMenu);
