@@ -82,8 +82,8 @@ $db->debug= false;
 <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
 
 <!--  parsley -->
-<!--<link rel='stylesheet' type='text/css' href='../vendors/parsleyjs/src/parsley.css'/>
--->
+<link rel='stylesheet' type='text/css' href='../vendors/parsleyjs/src/parsley.css'/>
+
 <!-- iCheck -->
 <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
 
@@ -91,7 +91,7 @@ $db->debug= false;
 <link href="../vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
 
 <!-- Custom Theme Style -->
-<link href="../build/css/custom.css" rel="stylesheet">
+<link href="../build/css/custom.min.css" rel="stylesheet">
 
 <!-- Datatable CSS -->
 <link href="../vendors/datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">
