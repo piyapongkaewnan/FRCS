@@ -101,3 +101,5 @@ function chkMenuAuth(status){
 		window.location = 'page_403.php';
 	}
 }*/
+
+

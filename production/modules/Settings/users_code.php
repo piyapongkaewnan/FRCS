@@ -9,6 +9,8 @@ $password_hash = trim($_POST['password_hash']);
 $realname = trim($_POST['realname']);
 $email = $_POST['email'];
 $rememPass = $_POST['rememPass'];
+$avatar = basename($_POST['avatar']);
+
 $update_user_id = $_SESSION['sess_user_id'];
 /*print "<pre>";
 print_r($_POST);
@@ -71,8 +73,8 @@ global $db ,$update_user_id,$action ,$user_id;
 
 if($action == "actionCreate"){     
 	 	 $sql = "INSERT INTO user
-								( username, password_hash,  realname  , email, update_by  )
-					VALUES ( '$username',PASSWORD('$password_hash'),'$realname','$email' ,$update_user_id)";
+								( username, password_hash,  realname  , email ,avatar , update_by  )
+					VALUES ( '$username',PASSWORD('$password_hash'),'$realname','$email' , '$avatar', $update_user_id);";
 		$result = $db->Execute($sql);
 		
 			
@@ -88,14 +90,15 @@ if($action == "actionCreate"){
 										$str
 										realname='$realname',															
 										update_by = '$update_user_id',
-										email = '$email'										
-					WHERE user_id = $user_id ";
+										email = '$email'	,
+										avatar = '$avatar' 
+					WHERE user_id = $user_id ;";
 		$result = $db->Execute($sql);
 		
 		set_authorize(); // เรียกใช้การ update ค่าในตาราง tbl_user_on_site และ tbl_user_auth
 
 }else if($action == "actionDelete"){
-	$sql = "DELETE FROM user WHERE user_id IN ($user_id)";
+	$sql = "DELETE FROM user WHERE user_id IN ($user_id);";
 	$result = $db->Execute($sql);
 	
 }

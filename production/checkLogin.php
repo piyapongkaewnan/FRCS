@@ -5,7 +5,6 @@ include('./includes/DBConnect.php');
 include("./includes/Class/Auth.Class.php");
 include("./includes/Class/Main.Class.php");
 
-
 $db->debug=0;
 
 //$main = new MainWeb();
@@ -32,7 +31,7 @@ if(sizeof($rsUser)>0){
 	$_SESSION['sess_user_name'] = $rsUser['username'];
 	$_SESSION['sess_email'] = $rsUser['email'];
 	$_SESSION['sess_realname'] = $rsUser['realname'];
-	$_SESSION['sess_picture'] = $rsUser['picture'];
+	$_SESSION['sess_avatar'] = $rsUser['avatar'];
 	
 	// หาค่า IP Address
 	if($_SERVER['HTTP_X_FORWARDED_FOR'] == ""){

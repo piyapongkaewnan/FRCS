@@ -1,16 +1,12 @@
 <?php
 session_start();
 
-//echo $_SERVER['HTTP_REFERER'];
-
-
 #############################
 # Section : Includes Files
 require_once(".//includes/DBConnect.php");
 require_once("./includes/Class/Auth.Class.php");
 require_once("./includes/Class/Main.Class.php");
 //require_once("./includes/functions.php");
-
 
 //Call Auth Class
 $user_id =  $_SESSION['sess_user_id'];
@@ -137,7 +133,7 @@ setInterval(function(){
   <p>&nbsp;</p>
   <div class="alert alert-success alert-dismissible" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <strong><i class="fa fa-sign-out"></i> Sign Out Success !! </strong>&nbsp;&nbsp; Please wait <span class="countdown"></span> secound for see more activity below. Or don't wail click <label class="label label-primary">Sign In</label> button </div>
+    <strong><i class="fa fa-sign-out"></i> Sign Out Success !! </strong>&nbsp;&nbsp; Please wait <span class="countdown"></span> second, for see more activity below Or don't wait click <label class="label label-primary">Sign In</label> button </div>
   <div class="panel panel-default "> 
     <!-- Default panel contents -->
     <div class="panel-heading"><strong><i class="fa fa-line-chart"></i> Activity Summary :

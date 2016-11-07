@@ -12,7 +12,7 @@ class Auth {
 	protected static  $language;	
 	protected static  $user_id;	
 	protected static  $realname;
-	protected static  $picture;
+	protected static  $avatar;
 	protected static  $modules;	
 	protected static  $page;
 	protected static  $picPath = "./images/avatar";
@@ -57,15 +57,15 @@ class Auth {
         return self::$realname;
     }
 	
-	// Function for Set Profile Picture
-	public static function setProfilePicture($picture) {
-        self::$picture = $picture;
+	// Function for Set Profile avatar
+	public static function setProfileAvatar($avatar) {
+        self::$avatar = $avatar;
     }
 	
-	// Function for Get Profile Picture
-	public static function getProfilePicture() {
-		if(file_exists(self::$picPath."/".self::$picture)) {   
-			return self::$picPath."/".self::$picture; 
+	// Function for Get Profile avatar
+	public static function getProfileAvatar() {
+		if(file_exists(self::$picPath."/".self::$avatar)) {   
+			return self::$picPath."/".self::$avatar; 
 		}else{ 
 			return self::$picPath."/".'user.png';
 		}
