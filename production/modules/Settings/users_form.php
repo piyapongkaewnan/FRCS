@@ -8,6 +8,16 @@ if($_GET['action'] == 'actionUpdate'){
 
 $avatar = $_GET['action'] == 'actionUpdate' ? $rs_edit['avatar'] : 'user.png';
 ?>
+
+<!--
+<div class="container">
+    <div class="row">
+    <?php //for($i=0;$i<12;$i++){ ?>
+        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6"><p>Box <?=($i+1) ?></p></div>
+       <?php// } ?>
+    </div>
+</div>
+-->
 <?=MainWeb::openTemplate();?>
 <!-- Cropper -->
 <link rel="stylesheet" type="text/css" href="./css/crop-avatar.css">
@@ -15,43 +25,47 @@ $avatar = $_GET['action'] == 'actionUpdate' ? $rs_edit['avatar'] : 'user.png';
 <br />
 <form  data-parsley-validate name="form_<?=$_GET['page']?>" id="form_<?=$_GET['page']?>" method="post" class="form-horizontal " enctype="multipart/form-data"  action="">
   <div class="row">
-    <div class="col-xs-8">
+    <div class="col-xs-12 col-sm-8 col-md-8">
       <div class="form-group">
-        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username <span class="required">*</span> </label>
+        <label class="control-label col-md-3 col-sm-4 col-xs-12" for="username">Username <span class="required">*</span> </label>
         <div class="col-md-8 col-sm-8 col-xs-12">
           <input type="text" id="username" name="username" value="<?=$rs_edit['username']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
           <span class="fa fa-user-o form-control-feedback left" aria-hidden="true"></span> </div>
       </div>
+      <?php if($_GET['action'] == 'actionUpdate') { ?>
       <div class="form-group">
-        <label for="password_hash" class="control-label col-md-3 col-sm-3 col-xs-12">Password <span class="required">*</span>
-          <?=$_GET['action'] == 'actionUpdate' ? "<label><input type='checkbox' id='rememPass' name='rememPass' value='Y'/> Not Change</label>" : ""?>
-        </label>
+        <label class="control-label col-md-3 col-sm-4 col-xs-12" for="isChange"><span class="rememLabel">Change password</span></label>
         <div class="col-md-8 col-sm-8 col-xs-12">
-          <input type="password" id="password_hash" name="password_hash" value="<?=$rs_edit['password_hash']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
-          <!--   required="required" data-parsley-equalto="#re_password"  data-parsley-length="[6, 50]" pattern="[a-zA-Z0-9\s]+"  --> 
+          <input type='checkbox' id='isChange' name='isChange' value='Y'/>
+        </div>
+      </div>
+      <?php } ?>
+      <div class="form-group divChange">
+        <label class="control-label col-md-3 col-sm-4 col-xs-12" for="password_hash">Password <span class="required">*</span> </label>
+        <div class="col-md-8 col-sm-8 col-xs-12">
+          <input type="password" id="password_hash" name="password_hash" required="required" value="" data-parsley-equalto="#re_password"   data-parsley-length="[6, 50]"    class="form-control col-md-7 col-xs-12 has-feedback-left">
+          <span class="fa fa-lock  form-control-feedback left" aria-hidden="true"></span> </div>
+      </div>
+      <div class="form-group divChange">
+        <label for="re_password" class="control-label col-md-3 col-sm-4 col-xs-12">Retry Password *</label>
+        <div class="col-md-8 col-sm-8 col-xs-12">
+          <input id="re_password"  name="re_password" class="form-control col-md-7 col-xs-12 has-feedback-left" type="password" data-parsley-equalto="#password_hash"  data-parsley-length="[6, 50]" value=""  required="required" >
           <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span> </div>
       </div>
       <div class="form-group">
-        <label for="re_password" class="control-label col-md-3 col-sm-3 col-xs-12">Re-Password <span class="required">*</span> </label>
-        <div class="col-md-8 col-sm-8 col-xs-12">
-          <input type="password" id="re_password" name="re_password" value="<?=$rs_edit['password_hash']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
-          <!-- required="required" data-parsley-equalto="#password_hash"  data-parsley-length="[6, 50]" pattern="[a-zA-Z0-9\s]+" --> 
-          <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span> </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="realname">Real Name <span class="required">*</span> </label>
+        <label class="control-label col-md-3 col-sm-4 col-xs-12" for="realname">Real Name <span class="required">*</span> </label>
         <div class="col-md-8 col-sm-8 col-xs-12">
           <input type="text" id="realname" name="realname" value="<?=$rs_edit['realname']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
           <span class="fa fa-user-o form-control-feedback left" aria-hidden="true"></span> </div>
       </div>
       <div class="form-group">
-        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span> </label>
+        <label class="control-label col-md-3 col-sm-4 col-xs-12" for="email">Email <span class="required">*</span> </label>
         <div class="col-md-8 col-sm-8 col-xs-12">
           <input type="email" id="email" name="email" value="<?=$rs_edit['email']?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
           <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span> </div>
       </div>
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-12 col-sm-4 col-md-3">
       <div class="form-group">
         <div  id="crop-avatar"> 
           <!-- Current avatar -->
@@ -67,11 +81,7 @@ $avatar = $_GET['action'] == 'actionUpdate' ? $rs_edit['avatar'] : 'user.png';
          <span class="btn btn-xs btn-info" id="newPic">New Picture</span></div>--> 
       </div>
       <div class="form-group">
-        <div class="col-md-8 col-sm-12 col-xs-12">
-          <select name="user_group[]" size="5" multiple="multiple" id="user_group" class="form-control  input-sm" required="required">
-            <?php
-			// ถ้าเลือกแก้ไขให้ slect group_id ใน tbl_user_auth
-
+        <?php
 if($_GET['action'] == 'actionUpdate'){
 				$sql_group = "SELECT  a.group_id,  a.group_name, b.group_id   AS group_id_chk,  b.user_id
 									FROM user_group a
@@ -79,23 +89,22 @@ if($_GET['action'] == 'actionUpdate'){
 										   ON a.group_id = b.group_id
 											 AND b.user_id = $id 
 									ORDER BY a.group_name";
-				$rs_group = $db->GetAll($sql_group);
-				 for($i=0;$i<count($rs_group);$i++){
-					 $group_id = $rs_group[$i]['group_id'];
-					 	$sel = $group_id ==  $rs_group[$i]['group_id_chk'] ? 'selected' : '';
-					 
-						echo "<option value='$group_id' $sel>".$rs_group[$i]['group_name']."</option>\n";
-				 }
+}else{
+			 $sql_group = "SELECT * FROM user_group ORDER BY group_name";
+}
+			$rs_group = $db->GetAll($sql_group);
+			
+						 for($i=0;$i<count($rs_group);$i++){
+					 			$group_id = $rs_group[$i]['group_id'];
+					 			$_chk = $group_id ==  $rs_group[$i]['group_id_chk'] ? 'checked' : '';
+								echo "      <div class='checkbox'>\n";
+								echo "  <label><input type=\"checkbox\" name=\"user_group[]\" value=\"$group_id\" required=\"required\" class=\"flat\" $_chk> ".$rs_group[$i]['group_name']."</label>\n";
+								echo "</div>\n";			
+						 }
+					
 				
-			  }else{
-					  $sql_group = "SELECT * FROM user_group ORDER BY group_name";
-					  $rs_group = $db->GetAll($sql_group);
-					  Form::genOptionSelect($rs_group,'group_id','group_name');
-			  }
-			  ?>
-          </select>
-        </div>
-        <div class="col-md-12 col-sm-12 col-xs-12"> <span class="font-small">*Press Ctrl to select multiple</span></div>
+//}
+?>
       </div>
     </div>
   </div>
@@ -105,12 +114,10 @@ if($_GET['action'] == 'actionUpdate'){
       <?=MENU_SUBMIT?>
       <input type="hidden" name="action" id="action" value="<?=$_GET['action']?>">
       <input type="hidden" name="id" id="id" value="<?=$_GET['id']?>">
-       <input type="hidden" name="avatar" id="avatar" value="<?=$avatar?>">
+      <input type="hidden" name="avatar" id="avatar" value="<?=$avatar?>">
     </div>
   </div>
 </form>
-
-
 <?=MainWeb::closeTemplate();?>
 
 <!-- Cropping modal -->
@@ -142,7 +149,7 @@ if($_GET['action'] == 'actionUpdate'){
                 <div class="avatar-preview preview-lg "></div>
                 <!--<div class="avatar-preview preview-md img-thumbnail"></div>--> 
                 <br>
-                 <button type="submit" class="btn btn-success btn-block avatar-save btn-lg"><i class="fa fa-check"></i> Done</button>
+                <button type="submit" class="btn btn-success btn-block avatar-save btn-lg"><i class="fa fa-check"></i> Done</button>
               </div>
             </div>
             <div class="row avatar-btns">
@@ -160,8 +167,8 @@ if($_GET['action'] == 'actionUpdate'){
                       <button type="button" class="btn btn-primary" data-method="rotate" data-option="45">45deg</button>
 --> </div>
               </div>
-              <div class="col-md-3">
-               <!-- <button type="submit" class="btn btn-success btn-block avatar-save btn-lg"><i class="fa fa-check"></i> Done</button>-->
+              <div class="col-md-3"> 
+                <!-- <button type="submit" class="btn btn-success btn-block avatar-save btn-lg"><i class="fa fa-check"></i> Done</button>--> 
               </div>
             </div>
           </div>
@@ -173,7 +180,7 @@ if($_GET['action'] == 'actionUpdate'){
     </div>
   </div>
 </div>
-<!-- /.modal -->
+<!-- /.modal --> 
 <!-- Cropper --> 
 <script src="./js/crop-avatar.js"></script> 
 <script type="text/javascript">
@@ -234,34 +241,37 @@ console.log(myfile);
   });*/
   
   
-  
-		
-	if(actions == 'actionUpdate'){
-		$('#rememPass').prop( "checked", true );
-		$('#password_hash').prop( "disabled", "disabled" );
-		$('#re_password').prop( "disabled", "disabled" );
-		
-	}else{
-		$('#password_hash').removeAttr( "disabled");
-		 $('#re_password').removeAttr( "disabled");
-		 $('#re_password').attr("required","required");
-			$('#password_hash').attr("required","required");
-	}
+
+
+		// Call function setPassSelect 
+		setPassSelect();
 	
 	
+	$('#isChange').click(function(){
+		setPassSelect();
+	});
 	
-	$('#rememPass').click(function(){
-		if ($('#rememPass').is(':checked')){
-			$('#password_hash').prop( "disabled", "disabled" );
-		    $('#re_password').prop( "disabled", "disabled" );
-			$('#password_hash').removeAttr('required');
-			$('#re_password').removeAttr('required');
-		}else{
+	
+	// Function for check change password select
+	function setPassSelect(){
+		if ($('#isChange').is(':checked') ||  actions =='actionCreate'){
 			$('#password_hash').removeAttr( "disabled");
 		    $('#re_password').removeAttr( "disabled");
 			$('#re_password').attr("required","required");
 			$('#password_hash').attr("required","required");
-		}
-	});
+			 $('#re_password').attr("required","required");
+		 	$('#password_hash').attr("required","required");
+			//$('.divChange').show();
+		 
+		}else{
+			$('#password_hash').prop( "disabled", "disabled" );
+		    $('#re_password').prop( "disabled", "disabled" );
+			$('#password_hash').removeAttr('required');
+			$('#re_password').removeAttr('required');
+			//$('.divChange').hide();
+		}	
+	}
+
+  
 });
 </script> 

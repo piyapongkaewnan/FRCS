@@ -65,13 +65,13 @@ if ( $rs_edit['is_active'] == "1" ||  $_GET['action'] ==  'actionCreate'){
   </div>
   <div class="form-group">
     <label for="message-text" class="control-label col-md-3 col-sm-3 col-xs-12">Menu Icon </label>
-    <div class="col-md-7 col-sm-12 col-xs-12"> <a href="javascript:$('.fontawesome-icon-list').toggle();$('#btn-icon').toggleClass('fa-caret-up', 'fa-caret-down');" class="btn btn-danger btn-xs"> Selected Icon <i id="btn-icon" class="fa fa-caret-down"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<i id="show_icon" class="<?=$rs_edit['icon_name']?>"></i>
-      <div class="row fontawesome-icon-list" style="display:none">
+    <div class="col-md-7 col-sm-7 col-xs-7"> <a href="javascript:$('.fontawesome-icon-list').toggle();$('#btn-icon').toggleClass('fa-caret-up', 'fa-caret-down');" class="btn btn-danger btn-xs"> Selected Icon <i id="btn-icon" class="fa fa-caret-down"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<i id="show_icon" class="<?=$rs_edit['icon_name']?>"></i>
+      <div class="row fontawesome-icon-list" style="display:none ;border:1px solid #CCC;padding:5px;border-radius:5px" >
         <?php
 	  $sql_icon = "SELECT icon_id,icon_name FROM icons";
 	  $rs_icons = $db->GetAll($sql_icon);
 	  foreach($rs_icons as   $icons){
-	  	echo "<div class='fa-hover1 col-md-2 col-sm-2 col-xs-2' rel='".$icons['icon_id']."|".$icons['icon_name']."' title='".$icons['icon_name']."' ><a href='javascript:void(0);'><i class='".$icons['icon_name']."'></i></a> </div>\n";
+	  	echo "<div class='fa-hover1 text-center col-md-2 col-sm-2 col-xs-2' rel='".$icons['icon_id']."|".$icons['icon_name']."' title='".$icons['icon_name']."' ><a href='javascript:void(0);'><i class='".$icons['icon_name']."'></i></a> </div>\n";
 	  }
 	  ?>
       </div>

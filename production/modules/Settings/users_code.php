@@ -10,6 +10,7 @@ $realname = trim($_POST['realname']);
 $email = $_POST['email'];
 $rememPass = $_POST['rememPass'];
 $avatar = basename($_POST['avatar']);
+$isChange = $_POST['isChange'];
 
 $update_user_id = $_SESSION['sess_user_id'];
 /*print "<pre>";
@@ -83,7 +84,7 @@ if($action == "actionCreate"){
 		
 }else if($action == "actionUpdate"){ 
 	
-	$str = $rememPass  <> 'Y' ? "password_hash = PASSWORD('$password_hash'), " : "";
+	$str = $isChange   == 'Y' ? "password_hash = PASSWORD('$password_hash'), " : "";
 	
 	 $sql = "UPDATE user
 								SET  username ='".$username."', 

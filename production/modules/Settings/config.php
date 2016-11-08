@@ -10,6 +10,7 @@ $maxlifetime = ini_get("session.gc_maxlifetime") / 60;
 ?>
 
 <?=MainWeb::openTemplate();?> 
+<br />
         <form id="form_<?=$Config['page']?>" name="form_<?=$Config['page']?>" method="post" data-parsley-validate class="form-horizontal form-label-left">
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="website_name">Site Name <span class="required">*</span> </label>
@@ -47,8 +48,7 @@ $maxlifetime = ini_get("session.gc_maxlifetime") / 60;
           <div class="ln_solid"></div>
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-              <button type="reset" class="btn btn-primary"><i class="fa fa-close"></i> Cancel</button>
-              <button type="submit" class="btn btn-success"><i class="fa fa-pencil-square-o"></i> Submit</button>
+      		<?=MENU_SUBMIT2?>
             </div>
           </div>
         </form>

@@ -20,6 +20,10 @@ $timeCountDown = 10; // Set time countdown x secound
 Auth::setDB($db);
 Auth::setUserID($user_id);
 
+//Call MainWeb Class
+MainWeb::GetSiteInfo(); // Get webpage variable
+
+
 $sqlUpdateStat = "UPDATE stats_login SET logout_datetime = Now() WHERE session_id = '$sess_id' ";
 $db->Execute($sqlUpdateStat);
 

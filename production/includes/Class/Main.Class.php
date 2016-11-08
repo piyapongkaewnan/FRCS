@@ -29,14 +29,16 @@ class MainWeb extends Auth {
 			/* Session timeout*/
 			define("SESSION_TIMEOUT",$rs_config['session_timeout']);
 			
-			define("COPYRIGHT"," &copy;".date('Y')."  ".$rs_config['website_name']);
+			define("COPYRIGHT"," &copy; ".date('Y')."  ".$rs_config['website_name']);
 			
-			define("COPYRIGHT"," &copy;".date('Y')."  ".$rs_config['website_name']);
 			
 			/* Menu Action*/
 			define("MENU_ACTION","<div class='doActionModal toolbarGroup'><div class='btn-group' role='group' aria-label='...'><button type='button' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Add Data' id='btnCreate' rel='actionCreate'><i class='fa fa-plus'></i> &nbsp;Add&nbsp; </button><button type='button' class='btn  btn-danger  btn-sm' data-toggle='tooltip' data-placement='top' title='Delete Data' id='btnDelete' rel='actionDelete' disabled><i class='fa fa-trash'></i> Delete </button></div></div>");
 			
 			define("MENU_SUBMIT","<button type='button' name='cancel' class='btn btn-primary'><i class='fa fa-close'></i> Cancel</button>
+<button type='submit' class='btn btn-success'><i class='fa fa-save'></i> Submit</button>
+");
+			define("MENU_SUBMIT2","<button type='reset' name='cancel1' class='btn btn-primary'><i class='fa fa-close'></i> Cancel</button>
 <button type='submit' class='btn btn-success'><i class='fa fa-save'></i> Submit</button>
 ");
 			/*
@@ -135,7 +137,7 @@ class MainWeb extends Auth {
         	$str .= "<li><a href=\"./index.php\"><i class=\"glyphicon glyphicon-home\"></i> Home</a></li>";
 			if(isset(self::$modules)){
 				//$str .=  "<li class=\"active\"><i class='".$title['icon_name_gmenu']."'></i> <a href=\"?modules=".$title['module_name']."&listModule=true\"\n>".$title['menu_group_'.self::$language]."</a></li>";	
-				$str .=  "<li class=\"active\"><i class='".$title['icon_name_gmenu']."'></i> ".$title['menu_group_'.self::$language]."</li>";	
+				$str .=  "<li class=\"active\"><i class='".$title['icon_name_gmenu']."'></i> ".$title['menu_group_'.self::$language]."</li>\n";	
 			}
 			if(isset(self::$page)){
 				$str .=  "<li class=\"active\"><i class='".$title['icon_name_menu']."'></i> ".$title['menu_name_'.self::$language]."</li>\n";	
@@ -350,8 +352,5 @@ function redirect($backStep)
 
 
 }
-
-
-
 
 ?>

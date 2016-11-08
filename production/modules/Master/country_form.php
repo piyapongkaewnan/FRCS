@@ -82,18 +82,15 @@ $(function(){
 		var modules = '<?=$_GET['modules']?>';
 		//Page
 		var page = '<?=$_GET['page']?>';		
-
 	
 		//  actions , modules  ,page , selected , debug , isCurrentPage
 		$.FormAction( actions ,modules  ,page ,  '<?=$_GET['id']?>' , false ,  false );
 		
-
 		 $("#FxId").select2({
           placeholder: "Select a FX",
-          allowClear: true
+          allowClear: true/*,
+		  theme: "classic"*/
         });
 	
-	
-
 });
 </script>
