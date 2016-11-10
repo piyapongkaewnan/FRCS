@@ -17,10 +17,9 @@ $Config['email'] = $_SESSION['sess_email'];
 $Config['modules'] = $_GET['modules'];
 $Config['page'] = $_GET['page'];
 
-if (!isset($_SESSION['sess_user_id'])) {
-    MainWeb::redirect('signin.php');
-}
-
+//if (!isset($_SESSION['sess_user_id'])) {
+//    MainWeb::redirect('signin.php');
+//}
 //Call Auth Class
 Auth::setDB($db);
 Auth::setUserID($Config['user_id']);
@@ -38,7 +37,10 @@ $titleVal = MainWeb::getTitleVal();
 $chkMenuAuth = Auth::isAllowPage();
 
 //Check is Guest = to login page
-//if(Auth::isGuest()){ pageback('login.php',''); }
+if (Auth::isGuest()) {
+    MainWeb::redirect('signin.php');
+}
+
 if (!$chkMenuAuth) {
     include('page_403.php');
     return;
