@@ -9,7 +9,6 @@ $r = [['cation' => ['FX Code', 'FX Symbol', 'FX Name', 'Rate To Base', 'Is Activ
     ]
 ];
 
-
 $c = array_merge($arrData1, $arrData2, $arrData3);
 print '<pre>';
 print_r($c);
