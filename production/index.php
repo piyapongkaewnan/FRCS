@@ -41,6 +41,7 @@ if (Auth::isGuest()) {
     MainWeb::redirect('signin.php');
 }
 
+//If page not allow redrect to Error 403 page
 if (!$chkMenuAuth) {
     include('page_403.php');
     return;
