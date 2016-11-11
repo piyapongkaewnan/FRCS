@@ -1,23 +1,20 @@
 // JavaScript Document
-$(function(){
+$(function () {
 
-		
-		// modules = module name
-		// pages = page name
-		// select_id = selection id
-		// Get modules name
-		var modules = $('#modules').val();
-		
-		// Get page name
-		var page = $('#page').val();	
-		
+    // modules = module name
+    // pages = page name
+    // select_id = selection id
+    // Get modules name
+    var modules = $('#modules').val();
 
-		//form.js -> MainAction (modules  ,page  ,select_id) 
-		$.MainAction(modules , page,'');
+    // Get page name
+    var page = $('#page').val();
 
-		//datatable.custom.js ->(page  ,iDisplayLength  , aaSorting , orderType , bStateSave);
-	    $.MyDataTable(page   , 10   , 1 , 'asc' , true);
-		
+    //form.js -> MainAction (modules  ,page  ,select_id) 
+    $.MainAction(modules, page, '');
 
- });
+    //datatable.custom.js ->(page  ,iDisplayLength  , aaSorting , orderType , bStateSave);
+    $.MyDataTable(page, 20, 1, 'asc', true);
+
+});
 

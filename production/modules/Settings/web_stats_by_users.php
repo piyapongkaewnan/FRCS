@@ -15,34 +15,32 @@ $tbl->order = 0;
 
 $tbl->id = "table_2";
 
-     // List Menu Group
-$sql_list = "SELECT
-					 *
-				FROM 01_view_stats_by_login	  ";
+// List Menu Group
+$sql_list = "SELECT * FROM 01_view_stats_by_login	  ";
 $rs_list = $db->GetAll($sql_list);
 
 $tbl->openTemplate();
-  ?>
-   <table width="100%" border="0" cellpadding="0" cellspacing="0" class="display compact" id="<?=$tbl->id?>">
-      <thead>
+?>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="display compact" id="<?= $tbl->id ?>">
+    <thead>
         <tr>
-          <th width="21%">Event Date</th>
-          <th width="33%">User</th>
-          <th width="26%">IP Address</th>
-          <th width="20%">Hits</th>
+            <th width="21%">Event Date</th>
+            <th width="33%">User</th>
+            <th width="26%">IP Address</th>
+            <th width="20%">Hits</th>
         </tr>
-      </thead>
-      <tbody>
-        <?php for($i=0;$i<count($rs_list);$i++){ ?>
-        <tr>
-          <td align="center"><?=$rs_list[$i]['login_date']?></td>
-          <td><?=$rs_list[$i]['users']?></td>
-          <td><?=$rs_list[$i]['ip_address']?></td>
-          <td align="center"><?=$rs_list[$i]['counts']?></td>
-        </tr>
+    </thead>
+    <tbody>
+        <?php for ($i = 0; $i < count($rs_list); $i++) { ?>
+            <tr>
+                <td align="center"><?= $rs_list[$i]['login_date'] ?></td>
+                <td><?= $rs_list[$i]['users'] ?></td>
+                <td><?= $rs_list[$i]['ip_address'] ?></td>
+                <td align="center"><?= $rs_list[$i]['counts'] ?></td>
+            </tr>
         <?php } // End For ?>
-      </tbody>
-    </table>
+    </tbody>
+</table>
 <?php
 $tbl->closeTemplate();
 ?>

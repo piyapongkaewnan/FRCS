@@ -17,43 +17,39 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Easy set variables
  */
- 
+
 require( '../../includes/DBConnect.php' );
 require( 'ssp.class.php' );
 
-class DataTableSS  extends SSP  {
-	
-var $GET;
+class DataTableSS extends SSP {
+
+    var $GET;
 // DB table to use
-var $table;
-
+    var $table;
 // Table's primary key
-var $primaryKey;
-var $getVar;
-var $whereAll;
-
+    var $primaryKey;
+    var $getVar;
+    var $whereAll;
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
-var $columns = array();
-
+    var $columns = array();
 // SQL server connection information
-var $sql_details = array(
-	'user' =>DB_USER ,
-	'pass' =>DB_PASS ,
-	'db'   => DB,
-	'host' => DB_HOST
-);
+    var $sql_details = array(
+        'user' => DB_USER,
+        'pass' => DB_PASS,
+        'db' => DB,
+        'host' => DB_HOST
+    );
 
+    /*     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+     * If you just want to use the basic configuration for DataTables with PHP
+     * server-side, there is no need to edit below this line.
+     */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * If you just want to use the basic configuration for DataTables with PHP
- * server-side, there is no need to edit below this line.
- */
- 
-public function Init(){
-	return SSP::complex( $this->GET, $this->sql_details, $this->table, $this->primaryKey, $this->columns , null , $this->whereAll );
-}
+    public function Init() {
+        return SSP::complex($this->GET, $this->sql_details, $this->table, $this->primaryKey, $this->columns, null, $this->whereAll);
+    }
 
 }

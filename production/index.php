@@ -52,8 +52,7 @@ $db->debug = false;
 <!DOCTYPE html>
 <html lang="en" ng-app="apps">
     <head>
-        <title><?= SITE_NAME; ?> | <?= MainWeb::setTitleBar(); ?>
-        </title>
+        <title><?= SITE_NAME; ?> | <?= MainWeb::setTitleBar(); ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -68,7 +67,7 @@ $db->debug = false;
         <!-- NProgress -->
         <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
         <!-- Dropzone.js -->
-        <link href="../vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
+        <!--        <link href="../vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">-->
         <!-- bootstrap-progressbar -->
         <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
         <!-- PNotify -->
@@ -83,12 +82,12 @@ $db->debug = false;
         <link href="../vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
         <!-- cropper -->
         <link rel="stylesheet" type="text/css" href="../vendors/cropper/dist/cropper.css">
-        <!-- Custom Theme Style -->
-        <link href="../build/css/custom.min.css" rel="stylesheet">
         <!-- Datatable CSS -->
         <link href="../vendors/datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">
-        <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+        <!--<link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">-->
         <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+        <!-- Custom Theme Style -->
+        <link href="../build/css/custom.min.css" rel="stylesheet">        
         <!-- jQuery -->
         <script type="text/javascript" src="../vendors/jquery/dist/jquery.min.js"></script>
         <!-- parsley -->
@@ -98,7 +97,7 @@ $db->debug = false;
         <!-- NProgress -->
         <script type="text/javascript" src="../vendors/nprogress/nprogress.js"></script>
         <!-- Dropzone.js --> 
-        <script src="../vendors/dropzone/dist/min/dropzone.min.js"></script>
+<!--        <script src="../vendors/dropzone/dist/min/dropzone.min.js"></script>-->
         <!-- bootstrap-progressbar -->
         <script type="text/javascript" src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
         <!-- jQuery custom content scroller -->
@@ -121,7 +120,7 @@ $db->debug = false;
         <!-- Datatables -->
         <script type='text/javascript' src='../vendors/datatables/media/js/jquery.dataTables.min.js'></script>
         <script type='text/javascript' src='../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js'></script>
-        <script type='text/javascript' src='../vendors/datatables.net-responsive/js/dataTables.responsive.min.js'></script>
+        <!--<script type='text/javascript' src='../vendors/datatables.net-responsive/js/dataTables.responsive.min.js'></script>-->
         <script type='text/javascript' src='../vendors/datatables.net-buttons/js/dataTables.buttons.min.js'></script>
         <script type='text/javascript' src='../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js'></script>
         <script type='text/javascript' src='../vendors/datatables.net-buttons/js/buttons.html5.min.js'></script>
@@ -131,7 +130,7 @@ $db->debug = false;
         <script type='text/javascript' src='../vendors/pdfmake/build/vfs_fonts.js'></script>
         <!-- My Custom Core JS -->
         <script type="text/javascript" src="./js/datatable.custom.js"></script>
-        <script type="text/javascript" src="js/main.core.js"></script>
+        <script type="text/javascript" src="./js/main.core.js"></script>
         <script type="text/javascript" src="./js/form.js"></script>
         <script type="text/javascript" src="./js/apps.js"></script>
         <style type="text/css">
@@ -148,18 +147,14 @@ $db->debug = false;
             <div class="main_container">
                 <div class="col-md-3 left_col menu_fixed"> <!--  -->
                     <div class="left_col scroll-view">
-                        <div class="navbar nav_title"><a href="index.php" class="site_title"><i class="fa fa-globe"></i> <span>
-                                    <?= SITE_NAME ?>
-                                </span></a> </div>
+                        <div class="navbar nav_title"><a href="index.php" class="site_title"><i class="fa fa-globe"></i><span> <?= SITE_NAME ?></span></a> </div>
                         <div class="clearfix"></div>
 
                         <!-- menu profile quick info -->
                         <div class="profile">
                             <div class="profile_pic"> <img src="<?= Auth::getProfileAvatar() ?>" alt="..." class="img-circle profile_img"> </div>
                             <div class="profile_info"> <span>Welcome,</span>
-                                <h2> <span id="show_realname">
-                                        <?= Auth::getRealName() ?>
-                                    </span> </h2>
+                                <h2> <span id="show_realname"><?= Auth::getRealName() ?></span> </h2>
                             </div>
                         </div>
                         <!-- /menu profile quick info --> 

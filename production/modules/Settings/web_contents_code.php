@@ -12,41 +12,35 @@ $update_by = $_POST['update_by'];
 $db->debug = 0;
 
 
-if($action == "new"){     
-	
-		
-		$sql = "INSERT INTO tbl_contents
-								(
-								content_name,								
-								content_desc	,
-								update_by							
-								 )
-					VALUES (
-								 '$name',								 
-								  '".nl2br ($desc)."'	,
-								  	'$update_by'							 
-								 );";
-		
-}else if($action == "edit"){ 
-		
-			 $sql = "UPDATE tbl_contents
-								SET  																				
-										content_name = '$name' , 										
-										content_desc ='".nl2br ($desc)."'	,
-										update_by = '$update_by'									
-					WHERE id = $id ";
-		
+if ($action == "new") {
 
-}else if($_GET['doAction'] == "delete"){
-	$sql = "DELETE FROM tbl_contents WHERE id = ".$_GET['id'];
 
+    $sql = "INSERT INTO tbl_contents
+                    (
+                    content_name,								
+                    content_desc,
+                    update_by							
+                     )
+            VALUES (
+                    '$name',								 
+                     '" . nl2br($desc) . "'	,
+                           '$update_by'							 
+                    );";
+} else if ($action == "edit") {
+
+    $sql = "UPDATE tbl_contents
+            SET  																				
+                content_name = '$name' , 										
+                content_desc ='" . nl2br($desc) . "'	,
+                update_by = '$update_by'									
+            WHERE id = $id ";
+} else if ($_GET['doAction'] == "delete") {
+    $sql = "DELETE FROM tbl_contents WHERE id = " . $_GET['id'];
 }
-	$result = $db->Execute($sql);
-	if($result){
-			echo  "1";
-	}else{
-			echo "0";
-			
+$result = $db->Execute($sql);
+if ($result) {
+    echo "1";
+} else {
+    echo "0";
 }
-
 ?>

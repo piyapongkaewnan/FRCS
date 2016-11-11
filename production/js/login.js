@@ -2,83 +2,83 @@
 
 // DOM ready
 
-    // Test data
-    /*
-     * To test the script you should discomment the function
-     * testLocalStorageData and refresh the page. The function
-     * will load some test data and the loadProfile
-     * will do the changes in the UI
-     */
-    // testLocalStorageData();
-    // Load profile if it exits
-	//setLocalStorageData();
+// Test data
+/*
+ * To test the script you should discomment the function
+ * testLocalStorageData and refresh the page. The function
+ * will load some test data and the loadProfile
+ * will do the changes in the UI
+ */
+// testLocalStorageData();
+// Load profile if it exits
+//setLocalStorageData();
 
-   
- // Trigger form submit
- $('form[name=form-signin]').submit(function(event){
-		
-		event.preventDefault(); // avoid to execute the actual submit of the form.
 
-		var 	inputUsername =$('#inputUsername').val();
-		var 	inputPassword =$('#inputPassword').val();
-		var 	inputRemember =  $('#inputRemember').is(':checked') ? $('#inputRemember').val() : '';
-		var 	SignDiffAccount =$('#SignDiffAccount').val();
-		
-		var URLs  = localStorage.getItem("APPS.SITE.URL_REDIRECT"); 
-		
-		
-		// Ajax progressbar loading start
-		NProgress.start();
-		$('.btn-signin').html('<i class="fa fa-spinner fa-spin"></i> Please Wait...');
-		
-		// if checkbox #inputRemember = TRUE is checked -> Store Var to localStorage
-		if(inputRemember == 'TRUE'){
-			setLocalStorageData();
-		}
-		
-		
-		// Define Var for submitform
-		 var request = $.ajax({
-					type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-					url         : 'checkLogin.php', // the url where we want to POST
-					data        : $(this).serialize(), // our data object
-					dataType    : 'html' // text, html, xml, json, jsonp, and script.
-					});
-									
-					//Success
-					request.done (function(textStatus){
-					//console.log(URLs);   
-					
-					NProgress.done();  // Stop akax data progress
-					
-					
-					// Check return from target submit from (TRUE,FALSE)
-					if(textStatus == true){ // if true
-						//showNotify('success');
-						
-						//var redirect = URLs == null ? 'index.php' : URLs; 
-						var redirect  = 'index.php';
-						$('#message').show();
-						$('#message').removeClass('alert alert-danger');
-						$('#message').addClass('alert alert-success');
-						$('#message').html('<i class="fa fa-check"></i> Sign In Success!!');									
-						setTimeout("window.location.href = '"+redirect+"' ",1000);	// Redirect to main page
-						
-					}else{ // If false -> show error message
-						//console.log('Invalid username or Password!!'); 									
-						$('#message').show();
-						$('.btn-signin').html('<i class="fa fa-sign-in"></i> Sign In');
-						$('#message').removeClass('alert alert-success');
-						$('#message').addClass('alert alert-danger');
-						if(profileReRememberMe == 'TRUE'){
-							$('#message').html('<i class="fa fa-warning"></i> Password wrong, Try again!');	
-						}else{
-							 $('#message').html('<i class="fa fa-warning"></i> Invalid username or password!!');		
-						}
-					}
-		});
- });
-		
+// Trigger form submit
+$('form[name=form-signin]').submit(function (event) {
+
+    event.preventDefault(); // avoid to execute the actual submit of the form.
+
+    var inputUsername = $('#inputUsername').val();
+    var inputPassword = $('#inputPassword').val();
+    var inputRemember = $('#inputRemember').is(':checked') ? $('#inputRemember').val() : '';
+    var SignDiffAccount = $('#SignDiffAccount').val();
+
+    var URLs = localStorage.getItem("APPS.SITE.URL_REDIRECT");
+
+
+    // Ajax progressbar loading start
+    NProgress.start();
+    $('.btn-signin').html('<i class="fa fa-spinner fa-spin"></i> Please Wait...');
+
+    // if checkbox #inputRemember = TRUE is checked -> Store Var to localStorage
+    if (inputRemember == 'TRUE') {
+        setLocalStorageData();
+    }
+
+
+    // Define Var for submitform
+    var request = $.ajax({
+        type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+        url: 'checkLogin.php', // the url where we want to POST
+        data: $(this).serialize(), // our data object
+        dataType: 'html' // text, html, xml, json, jsonp, and script.
+    });
+
+    //Success
+    request.done(function (textStatus) {
+        //console.log(URLs);   
+
+        NProgress.done();  // Stop akax data progress
+
+
+        // Check return from target submit from (TRUE,FALSE)
+        if (textStatus == true) { // if true
+            //showNotify('success');
+
+            //var redirect = URLs == null ? 'index.php' : URLs; 
+            var redirect = 'index.php';
+            $('#message').show();
+            $('#message').removeClass('alert alert-danger');
+            $('#message').addClass('alert alert-success');
+            $('#message').html('<i class="fa fa-check"></i> Sign In Success!!');
+            setTimeout("window.location.href = '" + redirect + "' ", 1000);	// Redirect to main page
+
+        } else { // If false -> show error message
+            //console.log('Invalid username or Password!!'); 									
+            $('#message').show();
+            $('.btn-signin').html('<i class="fa fa-sign-in"></i> Sign In');
+            $('#message').removeClass('alert alert-success');
+            $('#message').addClass('alert alert-danger');
+            if (profileReRememberMe == 'TRUE') {
+                $('#message').html('<i class="fa fa-warning"></i> Password wrong, Try again!');
+            } else {
+                $('#message').html('<i class="fa fa-warning"></i> Invalid username or password!!');
+            }
+        }
+    });
+});
+
 
 
 //#############################################################
@@ -86,29 +86,29 @@
 //Get Current Datetime from store in localStorage	
 var dt = new Date();
 var dateTime = moment().format('MMMM Do YYYY, h:mm:ss a'); //= dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-			
+
 // Get Remember Me Status   
 var profileReRememberMe = localStorage.getItem("APPS.SITE.PROFILE_REMEMBER_ME");
-		//console.log(profileReRememberMe);
-		
-		
+//console.log(profileReRememberMe);
+
+
 // if remember me not equa TURE -> Show div #rememberme 	
-if(profileReRememberMe != 'TRUE'){
-		 $("#remember").show();
-         $("#profile-name").hide();
-		 $("#SignDiffAccount").hide();
-}else{
-		loadProfile();
-		$("#SignDiffAccount").show();
+if (profileReRememberMe != 'TRUE') {
+    $("#remember").show();
+    $("#profile-name").hide();
+    $("#SignDiffAccount").hide();
+} else {
+    loadProfile();
+    $("#SignDiffAccount").show();
 }
 
 
 //#############################################################
 
 // Reset remember accout to login other user
-$('#SignDiffAccount').click(function(text){
-		ResetLocalStorageData(); // Reset localStorage
-		window.location.reload(true); // Refresh current page
+$('#SignDiffAccount').click(function (text) {
+    ResetLocalStorageData(); // Reset localStorage
+    window.location.reload(true); // Refresh current page
 });
 
 
@@ -121,19 +121,19 @@ $('#SignDiffAccount').click(function(text){
  * A not existing key in localstorage return null
  *
  */
- 
- // Function for get localStorage
-function getLocalProfile(callback){
-	var profileImgSrc      = localStorage.getItem("APPS.SITE.PROFILE_IMG_SRC");
-	var profileName        = localStorage.getItem("APPS.SITE.PROFILE_NAME");
-	var profileReAuthUserName = localStorage.getItem("APPS.SITE.PROFILE_REAUTH_USERNAME");
-	var profileReRememberMe = localStorage.getItem("APPS.SITE.PROFILE_REMEMBER_ME");
-	var profilelastLogin = localStorage.getItem("APPS.SITE.PROFILE_LAST_LOGIN");
 
-    if(profileName !== null
+// Function for get localStorage
+function getLocalProfile(callback) {
+    var profileImgSrc = localStorage.getItem("APPS.SITE.PROFILE_IMG_SRC");
+    var profileName = localStorage.getItem("APPS.SITE.PROFILE_NAME");
+    var profileReAuthUserName = localStorage.getItem("APPS.SITE.PROFILE_REAUTH_USERNAME");
+    var profileReRememberMe = localStorage.getItem("APPS.SITE.PROFILE_REMEMBER_ME");
+    var profilelastLogin = localStorage.getItem("APPS.SITE.PROFILE_LAST_LOGIN");
+
+    if (profileName !== null
             && profileReAuthUserName !== null
             && profileImgSrc !== null) {
-        callback(profileImgSrc, profileName, profileReAuthUserName ,profileReRememberMe, profilelastLogin);
+        callback(profileImgSrc, profileName, profileReAuthUserName, profileReRememberMe, profilelastLogin);
     }
 }
 
@@ -142,20 +142,22 @@ function getLocalProfile(callback){
  * in localstorage
  */
 function loadProfile() {
-    if(!supportsHTML5Storage()) { return false; }
+    if (!supportsHTML5Storage()) {
+        return false;
+    }
     // we have to provide to the callback the basic
     // information to set the profile
-    getLocalProfile(function(profileImgSrc, profileName, profileReAuthUserName ,profileReRememberMe, profilelastLogin) {
+    getLocalProfile(function (profileImgSrc, profileName, profileReAuthUserName, profileReRememberMe, profilelastLogin) {
         //changes in the UI
-		$("#profile-img").attr("src",profileImgSrc);
-		$("#profile-name").html(profileName);
-		$("#reauth-username").html(profileReAuthUserName);
-		$("#remember").html(profileReRememberMe);
-		$("#reauth-last-login").html(profilelastLogin);		 
-		$("#inputUsername").val(profileReAuthUserName);
-		$("#inputUsername").hide();
-		$("#remember").hide();
-		$("#reauth-last-login").show();
+        $("#profile-img").attr("src", profileImgSrc);
+        $("#profile-name").html(profileName);
+        $("#reauth-username").html(profileReAuthUserName);
+        $("#remember").html(profileReRememberMe);
+        $("#reauth-last-login").html(profilelastLogin);
+        $("#inputUsername").val(profileReAuthUserName);
+        $("#inputUsername").hide();
+        $("#remember").hide();
+        $("#reauth-last-login").show();
     });
 }
 
@@ -182,12 +184,14 @@ function supportsHTML5Storage() {
  * @returns {boolean}
  */
 function setLocalStorageData() {
-    if(!supportsHTML5Storage()) { return false; }		
-		localStorage.setItem("APPS.SITE.PROFILE_IMG_SRC", $(".profile_img").attr('src')); //"./images/img.jpg" 
-		localStorage.setItem("APPS.SITE.PROFILE_NAME", $("#profile-name").text());
-		localStorage.setItem("APPS.SITE.PROFILE_REAUTH_USERNAME", inputUsername.value);
-		localStorage.setItem("APPS.SITE.PROFILE_REMEMBER_ME", inputRemember.value);
-		localStorage.setItem("APPS.SITE.PROFILE_LAST_LOGIN", 'Last login : '+dateTime);
+    if (!supportsHTML5Storage()) {
+        return false;
+    }
+    localStorage.setItem("APPS.SITE.PROFILE_IMG_SRC", $(".profile_img").attr('src')); //"./images/img.jpg" 
+    localStorage.setItem("APPS.SITE.PROFILE_NAME", $("#profile-name").text());
+    localStorage.setItem("APPS.SITE.PROFILE_REAUTH_USERNAME", inputUsername.value);
+    localStorage.setItem("APPS.SITE.PROFILE_REMEMBER_ME", inputRemember.value);
+    localStorage.setItem("APPS.SITE.PROFILE_LAST_LOGIN", 'Last login : ' + dateTime);
 }
 
 /**
@@ -195,10 +199,12 @@ function setLocalStorageData() {
  * @returns {boolean}
  */
 function ResetLocalStorageData() {
-    if(!supportsHTML5Storage()) { return false; }
+    if (!supportsHTML5Storage()) {
+        return false;
+    }
     localStorage.setItem("APPS.SITE.PROFILE_IMG_SRC", "./images/avatar/user.png");
     localStorage.setItem("APPS.SITE.PROFILE_NAME", "");
     localStorage.setItem("APPS.SITE.PROFILE_REAUTH_USERNAME", "<input type='text' name='inputUsername' id='inputUsername' class='form-control' placeholder='Username' required autofocus>");
-	 localStorage.setItem("APPS.SITE.PROFILE_REMEMBER_ME", "<input type='checkbox' name='inputRemember' id='inputRemember' value='TRUE'>");
-	 localStorage.setItem("APPS.SITE.PROFILE_LAST_LOGIN", '');
+    localStorage.setItem("APPS.SITE.PROFILE_REMEMBER_ME", "<input type='checkbox' name='inputRemember' id='inputRemember' value='TRUE'>");
+    localStorage.setItem("APPS.SITE.PROFILE_LAST_LOGIN", '');
 }
