@@ -63,7 +63,7 @@ $rs_list = $db->GetAll($sql_list);
                 <td valign="top"><?= $rs_list[$i]['menu_file'] ?></td>
                 <td align="center" valign="top"><?= $rs_list[$i]['is_active'] == "1" ? "YES" : "NO"; ?></td>
                 <td align="center" valign="top"><i class ="<?= $rs_list[$i]['icon_name'] ?>"></i></td>
-                <td align="center"><a href="<?= MainWeb::getURI() ?>&form=keyin&action=actionUpdate&id=<?= $rs_list[$i]['menu_id'] ?>" class="btn btn-xs btn-info btnUpdate" >Edit</a></td>
+                <td align="center"><a href="<?= MainWeb::getURI() ?>&form=keyin&action=actionUpdate&id=<?= $rs_list[$i]['menu_id'] ?>" class="btn btn-xs btn-info btnUpdate" ><i class="fa fa-pencil"></i> Edit</a></td>
             </tr>
         <?php } // End For  ?>
     </tbody>

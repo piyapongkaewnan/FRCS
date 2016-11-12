@@ -8,23 +8,24 @@ $(function () {
 
             var table = $('#table_' + tableID).dataTable({
                 //'bJQueryUI': true,
-                'bStateSave': bStateSave,
-                'sPaginationType': 'full_numbers',
-                'bPaginate': '1',
-                'iDisplayLength': iDisplayLength,
-                'iDisplayStart': 0,
+                bStateSave: bStateSave,
+                sPaginationType: 'full_numbers',
+                bPaginate: '1',
+                iDisplayLength: iDisplayLength,
+                iDisplayStart: 0,
                 //'iDisplayEnd' :  20 ,
-                'scrollX': true,
-                'aaSorting': [[aaSorting, orderType]],
-                'lengthMenu': [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
-                'language': {
-                    'sProcessing': '<img src="./images/loading-gear.gif">',
-                    'oPaginate': {sFirst: '&laquo;', sLast: '&raquo;', sNext: '&#8250;', sPrevious: '&#8249;'}
+                scrollX: true,
+                aaSorting: [[aaSorting, orderType]],
+                lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
+                language: {
+                    sProcessing: '<img src="./images/loading-gear.gif">',
+                    oPaginate: {sFirst: '&laquo;', sLast: '&raquo;', sNext: '&#8250;', sPrevious: '&#8249;'}
                 },
-                dom: '<Bf<rt>lip>',
-                'columnDefs': [{
-                        'targets': 'no-sort',
-                        'orderable': false
+                dom: '<"toolbarGroup clearfix"><Bf<rt>lip>',
+                // dom: '<"toolbarGroup clearfix"lr>fB,t,<"clearfix"<"pull-left"i><"pull-right"p>>',
+                columnDefs: [{
+                        targets: 'no-sort',
+                        orderable: false
                     }],
                 buttons: [
                     {
@@ -194,6 +195,6 @@ $(function () {
     // checkbox is true when click tr //
 
 
-
+//$("div.toolbarGroup").html('<b>Custom tool bar! Text/images etc.</b>');
 });
 

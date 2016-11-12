@@ -1147,7 +1147,7 @@ table tr.heading2 td {
     border-bottom: 1px solid #aaa;
 }
 table tr td {
-    padding: 3px 5px;
+    padding: 5px 5px;
     vertical-align : middle;
 }
 table td.center {

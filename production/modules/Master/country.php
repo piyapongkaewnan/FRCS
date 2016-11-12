@@ -24,7 +24,7 @@ $rs_list = $db->GetAll($sql_list);
   <td align="right" valign="top" style="height:5px"></td>
 </tr>
 </table>-->
-<table width="100%" border="0" cellpadding="0" cellspacing="0" class="table-striped table-hover table-bordered"  id="table_<?= $Config['page'] ?>">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="data-table table-striped table-hover table-bordered"  id="table_<?= $Config['page'] ?>">
     <thead>
         <tr class="headings">
             <th width="5%"  class="no-sort text-center"> <input type="checkbox" id="check-all" class="" /></th>
@@ -43,7 +43,7 @@ $rs_list = $db->GetAll($sql_list);
                 <td><?= $rs_list[$i]['CountryName'] ?></td>
                 <td><?= $rs_list[$i]['FxName'] ?></td>
                 <td align="center"><?= $rs_list[$i]['IsActive'] == "1" ? "YES" : "NO"; ?></td>
-                <td align="center"><a href="<?= MainWeb::getURI() ?>&form=keyin&action=actionUpdate&id=<?= $rs_list[$i]['id'] ?>" class="btn btn-xs btn-info btnUpdate" >Edit</a></td>
+                <td align="center"><a href="<?= MainWeb::getURI() ?>&form=keyin&action=actionUpdate&id=<?= $rs_list[$i]['id'] ?>" class="btn btn-xs btn-info btnUpdate" ><i class="fa fa-pencil"></i> Edit</a></td>
             </tr>
         <?php } // End For  ?>
     </tbody>

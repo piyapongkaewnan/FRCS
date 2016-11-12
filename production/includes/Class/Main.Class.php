@@ -209,7 +209,7 @@ class MainWeb extends Auth {
         echo "      <button type='button' class='close' data-dismiss='modal' aria-label='Close'> <span aria-hidden='true'>&times;</span> </button>\n";
         echo "      <h4 class='modal-title' id='ModalLabel'>Confirm!</h4>\n";
         echo "      </div>\n";
-        echo "      <div class='modal-body'>Are you sure You want to delete selected items ?</div>\n";
+        echo "      <div class='modal-body text-danger'>Are you sure You want to delete selected items ?</div>\n";
         echo "      <div class='modal-footer'>\n";
         echo "      <button type='button' class='btn btn-default' data-dismiss='modal'><i class='fa fa-close'></i> Cancel</button>\n";
         echo "      <button type='button' class='btn btn-danger' id='actionDelete'><i class='fa fa-trash'></i> Delete</button>\n";

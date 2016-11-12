@@ -52,12 +52,12 @@ if ($rs_edit['is_active'] == "1" || $_GET['action'] == 'actionCreate') {
             <input type="text" id="menu_name_en" name="menu_name_en" value="<?= $rs_edit['menu_name_en'] ?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
             <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
     </div>
-<!--    <div class="form-group">
-        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu_name_th">Menu Group TH <span class="required">*</span> </label>
-        <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="menu_name_th" name="menu_name_th" value="<?= $rs_edit['menu_name_th'] ?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
-            <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
-    </div>-->
+    <!--    <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu_name_th">Menu Group TH <span class="required">*</span> </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="menu_name_th" name="menu_name_th" value="<?= $rs_edit['menu_name_th'] ?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
+                <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
+        </div>-->
     <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu_desc">Menu Description <span class="required"></span> </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -94,7 +94,7 @@ if ($rs_edit['is_active'] == "1" || $_GET['action'] == 'actionCreate') {
     <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="is_active">Is Active <span class="required"></span> </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="checkbox" class=" input-sm" name="is_active" id="is_active" value="1"  <?= $is_active ?> />
+            <input type="checkbox" class=" input-sm js-switch" name="is_active" id="is_active" value="1"  <?= $is_active ?> />
         </div>
     </div>
     <div class="ln_solid"></div>

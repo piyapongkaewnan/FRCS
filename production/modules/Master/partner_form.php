@@ -28,7 +28,7 @@ if ($rs_edit['IsActive'] == "1" || $_GET['action'] == 'actionCreate') {
     <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="IsActive">IsActive <span class="required"></span> </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="checkbox" class=" input-sm" name="IsActive" id="IsActive" value="1"  <?= $strIsActive ?> />
+            <input type="checkbox" class=" input-sm js-switch" name="IsActive" id="IsActive" value="1"  <?= $strIsActive ?> />
         </div>
     </div>
     <div class="ln_solid"></div>

@@ -35,7 +35,7 @@ if ($rs_edit['IsActive'] == "1" || $_GET['action'] == 'actionCreate') {
     <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="IsBase">Is Base [<span data-toggle='tooltip' data-placement='top' title="If True, RateToBase is automatically set to 1"> ?</span> ]</label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="checkbox" class=" input-sm" name="IsBase" id="IsBase" value="1" <?= $rs_edit['IsBase'] == "1" ? "checked" : "" ?>/>
+            <input type="checkbox" class=" input-sm js-switch" name="IsBase" id="IsBase" value="1" <?= $rs_edit['IsBase'] == "1" ? "checked" : "" ?>/>
         </div>
     </div>
     <div class="form-group">
@@ -47,7 +47,7 @@ if ($rs_edit['IsActive'] == "1" || $_GET['action'] == 'actionCreate') {
     <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="IsActive">IsActive <span class="required"></span> </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="checkbox" class=" input-sm" name="IsActive" id="IsActive" value="1"  <?= $strIsActive ?>  />
+            <input type="checkbox" class=" input-sm js-switch" name="IsActive" id="IsActive" value="1"  <?= $strIsActive ?>  />
         </div>
     </div>
     <div class="ln_solid"></div>

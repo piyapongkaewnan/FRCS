@@ -82,6 +82,8 @@ $db->debug = false;
         <link href="../vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
         <!-- cropper -->
         <link rel="stylesheet" type="text/css" href="../vendors/cropper/dist/cropper.css">
+        <!-- Switchery -->
+        <link href="../vendors/switchery/dist/switchery.min.css" rel="stylesheet">
         <!-- Datatable CSS -->
         <link href="../vendors/datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">
         <!--<link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">-->
@@ -117,6 +119,8 @@ $db->debug = false;
         <script type="text/javascript" src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
         <!-- cropper -->
         <script src="../vendors/cropper/dist/cropper.min.js"></script>
+        <!-- Switchery -->
+        <script src="../vendors/switchery/dist/switchery.min.js"></script>
         <!-- Datatables -->
         <script type='text/javascript' src='../vendors/datatables/media/js/jquery.dataTables.min.js'></script>
         <script type='text/javascript' src='../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js'></script>
