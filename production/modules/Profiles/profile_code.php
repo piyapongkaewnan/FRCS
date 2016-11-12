@@ -28,7 +28,8 @@ $sql = "UPDATE user
             $str
             email = '" . $email . "',
             realname = '$realname',
-            update_by = $user_id 									
+            ModifiedBy = '$user_id',
+            ModifiedOn = NOW()									
         WHERE user_id = $user_id;";
 $result = $db->Execute($sql);
 

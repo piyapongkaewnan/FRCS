@@ -70,7 +70,7 @@ $rs_list = $db->GetAll($sql_list);
                 -->       <td align="right"><?= $rs_list[$i]['PercentShare'] ?></td>
                 <td><?= $rs_list[$i]['CountryName'] ?></td>
                 <td width="8%" align="center"><?= $rs_list[$i]['IsActive'] == "1" ? "YES" : "NO"; ?></td>
-                <td align="center"><a href="<?= MainWeb::getURI() ?>&form=keyin&action=actionUpdate&id=<?= $rs_list[$i]['id'] ?>" class="btn btn-xs btn-info btnUpdate" ><i class="fa fa-pencil"></i> Edit</a></td>
+                <td align="center"><?= MainWeb::doUpdateParam('keyin', $rs_list[$i]['id']) ?></td>
             </tr>
         <?php } // End For ?>
     </tbody>

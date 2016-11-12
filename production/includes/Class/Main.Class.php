@@ -59,54 +59,60 @@ class MainWeb extends Auth {
     }
 
     // Function for Get URI from Get $_GET['modules']
-    public static function getURI($URIForm = null) {
+    public static function getMainURI() {
         //$uri = $URIForm <> ""  ?  $URIForm : "";
         return "?modules=" . Auth::getModule() . "&page=" . Auth::getPage(); //.$uri;
     }
 
-    // Get title from URL
+    // Function for edit button link
+    public static function doUpdateParam($actionForm, $id) {
+
+        return "<a href='" . MainWeb::getMainURI() . "&form=" . $actionForm . "&id=".$id."&action=actionUpdate' class='btn btn-xs btn-info btnUpdate' ><i class='fa fa-pencil'></i> Edit</a>"; //.$uri;
+    }
+
+// Get title from URL
     public function getPageInfo($param = "") {
 
         $str = $param == "" ? " AND a.menu_file  = '" . Auth::$page . "' " : "AND a.menu_param  = '$param' ";
 
         $sql_title = "SELECT
-                        a.menu_name_th,
-                        a.menu_name_en,
-                        a.menu_desc,
-                        b.menu_group_en,
-                        b.menu_group_th,
-                        b.module_name,
-                        (SELECT
-                               icon_name
-                         FROM icons
-                         WHERE icon_id = a.icon_id) AS icon_name_menu,
-                        (SELECT
-                               icon_name
-                         FROM icons
-                         WHERE icon_id = b.icon_id) AS icon_name_gmenu
-                      FROM menu a,
-                        menu_group b
-                      WHERE a.mgroup_id = b.mgroup_id
-                              $str ";
+a.menu_name_th,
+a.menu_name_en,
+a.menu_desc,
+b.menu_group_en,
+b.menu_group_th,
+b.module_name,
+(SELECT
+icon_name
+FROM icons
+WHERE icon_id = a.icon_id) AS icon_name_menu,
+(SELECT
+icon_name
+FROM icons
+WHERE icon_id = b.icon_id) AS icon_name_gmenu
+FROM menu a,
+menu_group b
+WHERE a.mgroup_id = b.mgroup_id
+$str ";
 
         $rs_title = Auth::$db->GetRow($sql_title);
-        //$stmt->execute();
-        //$rs_title  = $stmt->fetch(PDO::FETCH_ASSOC);
+//$stmt->execute();
+//$rs_title  = $stmt->fetch(PDO::FETCH_ASSOC);
 
         self::seTtitleVars($rs_title);
     }
 
-    // Functio for Set title Valriable
+// Functio for Set title Valriable
     public function seTtitleVars($rsTitle) {
         self::$titleVal = $rsTitle;
     }
 
-    // Function get Title var
+// Function get Title var
     public function getTitleVal() {
         return self::$titleVal;
     }
 
-    // Set Title Bar
+// Set Title Bar
     public function setTitleBar() {
         if (self::$page) {
             $title = self::$titleVal;
@@ -116,19 +122,19 @@ class MainWeb extends Auth {
         }
     }
 
-    // Set App Title 
+// Set App Title 
     public function setAppTitle() {
         if (self::$page) {
             $title = self::$titleVal;
             $do = isset($_GET['form']) ? " (" . $_GET['form'] . ") " : "";
-            // <i class='fa fa-question' data-toggle='tooltip' data-placement='right' title='".$title['menu_desc']."' style='cursor:pointer'></i>
+// <i class='fa fa-question' data-toggle='tooltip' data-placement='right' title='".$title['menu_desc']."' style='cursor:pointer'></i>
             return "<i class='" . $title['icon_name_menu'] . "'></i> <a href=\"?modules=" . self::$modules . "&page=" . self::$page . "\"\n>" . $title['menu_name_' . self::$language] . "</a> $do  &raquo; <small>" . $title['menu_desc'] . "</small>\n";
         } else {
             return "Home";
         }
     }
 
-    // function set 
+// function set 
     public function setBreadcrumb() {
         $title = self::$titleVal;
         $str = '';
@@ -147,12 +153,9 @@ class MainWeb extends Auth {
         echo $str;
     }
 
-    //Open Web Content Template
+//Open Web Content Template
     public function openTemplate() {
         $str = "<!-- open Template -->\n";
-        /* $str .= "     <script type='text/javascript' src='../vendors/parsleyjs/dist/parsley.min.js'></script> \n"; */
-        /* $str .= "     <script type='text/javascript' src='../vendors/parsleyjs/src/i18n/th.js'></script> \n"; */
-        /* $str .= "     <link rel='stylesheet' type='text/css' href='../vendors/parsleyjs/src/parsley.css'/> \n"; */
         $str .= "<div class='row'>\n";
         $str .= "  <div class='col-md-12 col-sm-12 col-xs-12'>\n";
         $str .= "    <div class='x_panel'>\n";
@@ -164,9 +167,9 @@ class MainWeb extends Auth {
         $str .= "            <ul class='dropdown-menu' role='menu'>\n";
 
         if (self::getFavoriteStatus()) {
-            $str .= "			<li><a href='javascript:void(0);' class='actionFavorites' rel='" . self::getMenuID() . "' rule='remove_favorites'><i class='fa fa-thumb-tack'></i> Remove favorite</a> </li>\n";
+            $str .= "	<li><a href='javascript:void(0);' class='actionFavorites' rel='" . self::getMenuID() . "' rule='remove_favorites'><i class='fa fa-thumb-tack'></i> Remove favorite</a> </li>\n";
         } else {
-            $str .= "			<li><a href='javascript:void(0);' class='actionFavorites' rel='" . self::getMenuID() . "'  rule='add_favorites'><i class='fa fa-thumb-tack'></i> Add to favorite</a> </li>\n";
+            $str .= "	<li><a href='javascript:void(0);' class='actionFavorites' rel='" . self::getMenuID() . "'  rule='add_favorites'><i class='fa fa-thumb-tack'></i> Add to favorite</a> </li>\n";
         }
         //$str .= "              <li><a href='#'>Settings 2</a> </li>\n";
         $str .= "            </ul>\n";
@@ -179,7 +182,7 @@ class MainWeb extends Auth {
         return $str;
     }
 
-// Close Web Content Template
+    // Close Web Content Template
     public function closeTemplate() {
         $str = "      </div> \n";
         $str .= "         </div> \n";
@@ -193,7 +196,7 @@ class MainWeb extends Auth {
 
 // Function for setting Modal Ready for call	
     public function setModal() {
-        echo "	<div class='modal fade' id='FormModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true' data-keyboard='false' data-backdrop='static'>\n";
+        echo "<div class='modal fade' id='FormModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true' data-keyboard='false' data-backdrop='static'>\n";
         echo "    <div class='modal-dialog' role='document'>\n";
         echo "      <div class='modal-content'></div>\n";
         echo "    </div>\n";
@@ -202,7 +205,7 @@ class MainWeb extends Auth {
 
 // Function for setting Modal Delete confirm Ready for call	
     public function setModalDelete() {
-        echo "	<div class='modal fade' id='FormModalDelete' tabindex='-1' role='dialog' aria-labelledby='ModalLabel' aria-hidden='true' data-keyboard='false' data-backdrop='static'>\n";
+        echo "<div class='modal fade' id='FormModalDelete' tabindex='-1' role='dialog' aria-labelledby='ModalLabel' aria-hidden='true' data-keyboard='false' data-backdrop='static'>\n";
         echo "    <div class='modal-dialog modal-sm' role='document'>\n";
         echo "      <div class='modal-content'>\n";
         echo "      <div class='modal-header'>\n";
@@ -219,7 +222,7 @@ class MainWeb extends Auth {
         echo "  </div>\n";
     }
 
-    // Function for Favorite Status
+// Function for Favorite Status
     public function getFavoriteStatus() {
         if (!self::$page) {
             return;
@@ -235,14 +238,14 @@ class MainWeb extends Auth {
         }
     }
 
-    // Function for Get Menu id from menu_file
+// Function for Get Menu id from menu_file
     public function getMenuID() {
         $sql = "SELECT menu_id FROM menu WHERE menu_file = '" . Auth::$page . "'";
         $rs = Auth::$db->GetRow($sql);
         return $rs['menu_id'];
     }
 
-    // function hightlight word 
+// function hightlight word 
     public function highlight($str, $getKeywords = '') {
         $keywords = preg_replace('/\s\s+/', ' ', strip_tags(trim($getKeywords))); // filter
 
@@ -262,7 +265,7 @@ class MainWeb extends Auth {
         return str_ireplace(rtrim($var), "<span class='" . $style_i . "'>" . $keywords . "</span>", $str);
     }
 
-    // Show Active Icon	
+// Show Active Icon	
     public function ShowActiveIcon($status) {
         if ($status == "Y") {
             $img = "<img src='" . $this->IconPath . "/on.gif'>";
@@ -273,15 +276,15 @@ class MainWeb extends Auth {
         return $img;
     }
 
-    //#######################################################
-    // Fuction for generate Radom string
+//#######################################################
+// Fuction for generate Radom string
     public function random_gen($length) {
         $random = "";
         srand((double) microtime() * 1000000);
         $char_list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         $char_list .= "abcdefghijklmnopqrstuvwxyz";
         $char_list .= "1234567890";
-        // Add the special characters to $char_list if needed
+// Add the special characters to $char_list if needed
 
         for ($i = 0; $i < $length; $i++) {
             $random .= substr($char_list, (rand() % (strlen($char_list))), 1);
@@ -289,7 +292,7 @@ class MainWeb extends Auth {
         return $random;
     }
 
-    #######################################################
+#######################################################
 //echo Functio for Scan Dir
 
     public function ScanDir($dir) {
@@ -313,14 +316,14 @@ class MainWeb extends Auth {
         }
     }
 
-    #######################################################
+#######################################################
 ###########################################
 //Set Page goto
 
     function redirect($backStep) {
 
         echo "<script language=\"javascript\">";
-        if ($backStep == -1) {
+        if ($backStep == - 1) {
             echo "	history.back($backStep);";
         } else if ($backStep == "x") {
             echo "window.close();";
@@ -330,8 +333,8 @@ class MainWeb extends Auth {
         echo "</script>";
     }
 
-    //#######################################################
-    // Function for Substring if greater than fill  ...
+//#######################################################
+// Function for Substring if greater than fill  ...
     public function subString($string, $length = 25) {
         return strlen($string) > $length ? substr($string, 0, $length) . '...' : $string;
     }

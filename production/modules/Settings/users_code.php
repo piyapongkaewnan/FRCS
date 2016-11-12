@@ -72,8 +72,8 @@ function setAuthorize() {
 
 if ($action == "actionCreate") {
     $sql = "INSERT INTO user
-                    ( username, password_hash,  realname  , email ,avatar , update_by  )
-            VALUES ( '$username',PASSWORD('$password_hash'),'$realname','$email' , '$avatar', $update_user_id);";
+                    ( username, password_hash,  realname  , email ,avatar , CreatedBy, CreatedOn  )
+            VALUES ( '$username',PASSWORD('$password_hash'),'$realname','$email' , '$avatar', $update_user_id , NOW());";
     $result = $db->Execute($sql);
 
 
@@ -86,9 +86,10 @@ if ($action == "actionCreate") {
             SET  username ='" . $username . "', 
                 $str
                 realname='$realname',															
-                update_by = '$update_user_id',
-                email = '$email'	,
-                avatar = '$avatar' 
+                email = '$email',
+                avatar = '$avatar',
+                ModifiedBy = '$update_user_id',
+                ModifiedOn = NOW()
             WHERE user_id = $user_id ;";
     $result = $db->Execute($sql);
 

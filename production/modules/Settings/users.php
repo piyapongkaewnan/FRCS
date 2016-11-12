@@ -22,14 +22,14 @@ $sql_list = "SELECT
                 a.username,
                 a.password_hash,
                 a.realname,
-                a.update_time,
-                a.email
-            FROM user a
-            LEFT JOIN user_auth b
-                  ON a.user_id = b.user_id 
-            $str_query
-            GROUP BY a.user_id
-            ORDER BY a.update_time DESC";
+                a.email,
+                ( CASE WHEN a.ModifiedOn IS NULL THEN a.CreatedOn ELSE a.ModifiedOn END ) AS ModifiedOn
+              FROM USER a
+                LEFT JOIN user_auth b
+                  ON a.user_id = b.user_id
+                  $str_query
+              GROUP BY a.user_id
+              ORDER BY ModifiedOn DESC";
 $rs_list = $db->GetAll($sql_list);
 ?>
 <?= MainWeb::openTemplate(); ?>
@@ -63,8 +63,8 @@ $rs_list = $db->GetAll($sql_list);
                 <td><?= $rs_list[$i]['username'] ?></td>
                 <td><?= $rs_list[$i]['realname'] ?></td>
                 <td><?= $rs_list[$i]['email'] ?></td>
-                <td align="center"><?= $rs_list[$i]['update_time']; ?></td>
-                <td align="center"><a href="<?= MainWeb::getURI() ?>&form=keyin&action=actionUpdate&id=<?= $rs_list[$i]['user_id'] ?>" class="btn btn-xs btn-info btnUpdate" ><i class="fa fa-pencil"></i> Edit</a></td>
+                <td align="center"><?= $rs_list[$i]['ModifiedOn']; ?></td>
+                <td align="center"><?= MainWeb::doUpdateParam('keyin', $rs_list[$i]['user_id']) ?></td>
             </tr>
 <?php } // End for  ?>
     </tbody>

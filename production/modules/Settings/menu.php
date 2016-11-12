@@ -57,13 +57,13 @@ $rs_list = $db->GetAll($sql_list);
             <tr>
                 <td align="center" valign="top"><input type="checkbox" class="selCheckBox" name="selID[]" id="<?= $rs_list[$i]['menu_id'] ?>" value="<?= $rs_list[$i]['menu_id'] ?>"></td>
                 <td align="center" valign="top"><?= $rs_list[$i]['menu_order'] ?></td>
-<!--                <td valign="top"><?= $rs_list[$i]['menu_name_th'] ?></td>-->
+    <!--                <td valign="top"><?= $rs_list[$i]['menu_name_th'] ?></td>-->
                 <td valign="top"><?= $rs_list[$i]['menu_name_en'] ?></td>
                 <td valign="top"><?= $rs_list[$i]['menu_desc'] ?></td>
                 <td valign="top"><?= $rs_list[$i]['menu_file'] ?></td>
                 <td align="center" valign="top"><?= $rs_list[$i]['is_active'] == "1" ? "YES" : "NO"; ?></td>
                 <td align="center" valign="top"><i class ="<?= $rs_list[$i]['icon_name'] ?>"></i></td>
-                <td align="center"><a href="<?= MainWeb::getURI() ?>&form=keyin&action=actionUpdate&id=<?= $rs_list[$i]['menu_id'] ?>" class="btn btn-xs btn-info btnUpdate" ><i class="fa fa-pencil"></i> Edit</a></td>
+                <td align="center"><?= MainWeb::doUpdateParam('keyin', $rs_list[$i]['menu_id']) ?></td>
             </tr>
         <?php } // End For  ?>
     </tbody>

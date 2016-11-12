@@ -42,7 +42,7 @@ if ($rs_edit['IsActive'] == "1" || $_GET['action'] == 'actionCreate') {
         <div class="col-md-4 col-sm-3 col-xs-12">
             <select class="form-control col-md-7 col-xs-12 input-sm" name="FxId" id="FxId" tabindex="-1" required>
                 <option></option>
-<?= Form::genOptionSelect($rsFx, 'id', 'FxName', $rs_edit['FxId']); ?>
+                <?= Form::genOptionSelect($rsFx, 'id', 'FxName', $rs_edit['FxId']); ?>
             </select>
         </div>
     </div>
@@ -55,7 +55,7 @@ if ($rs_edit['IsActive'] == "1" || $_GET['action'] == 'actionCreate') {
     <div class="ln_solid"></div>
     <div class="form-group">
         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-<?= MENU_SUBMIT ?>
+            <?= MENU_SUBMIT ?>
             <input type="hidden" name="action" id="action" value="<?= $_GET['action'] ?>">
             <input type="hidden" name="id" id="id" value="<?= $_GET['id'] ?>">
         </div>
