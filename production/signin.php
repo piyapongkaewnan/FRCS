@@ -16,7 +16,7 @@ Auth::setUserID($user_id);
 
 //Call MainWeb Class
 MainWeb::GetSiteInfo(); // Get webpage variable
-//Check user login  <> isGuest ->index 
+//Check user signin  <> isGuest ->index 
 if (!Auth::isGuest()) {
     MainWeb::redirect('index.php');
 }
@@ -31,7 +31,7 @@ if (!Auth::isGuest()) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="./images/favicon.ico" />
-        <title><?= SITE_NAME ?> | Login</title>
+        <title><?= SITE_NAME ?> | Sign In</title>
 
         <!-- Bootstrap -->
         <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -43,7 +43,7 @@ if (!Auth::isGuest()) {
         <!--<link href="../vendors/animate.css/animate.min.css" rel="stylesheet">-->
 
         <!-- Custom Theme Style -->
-        <link href="css/login.css" rel="stylesheet">
+        <link href="css/signin.css" rel="stylesheet">
         <script type="text/javascript" src="../vendors/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="../vendors/parsleyjs/dist/parsley.min.js"></script>
@@ -51,7 +51,7 @@ if (!Auth::isGuest()) {
         <!-- NProgress -->
         <script type="text/javascript" src="../vendors/nprogress/nprogress.js"></script>
     </head>
-    <body class="login">
+    <body class="signin">
 
         <!--
             you can substitue the span of reauth email for a input with the email and
@@ -69,7 +69,7 @@ if (!Auth::isGuest()) {
                 <img  src="./images/user.png" id="profile-img"  alt="..." class="profile-img-card"> 
                 <p id="profile-name" class="profile-name-card"><?= $_SESSION['sess_realname'] ?></p>
                 <form class="form-signin" name="form-signin" id="form-signin" method="post">
-                    <div id="reauth-username" class="reauth-username"></div> <div id="reauth-last-login" style="font-weight:normal; font-size:11px; margin:5px; display:none;text-align:center"></div>
+                    <div id="reauth-username" class="reauth-username"></div> <div id="reauth-last-signin" style="font-weight:normal; font-size:11px; margin:5px; display:none;text-align:center"></div>
                     <input type="text" name="inputUsername" id="inputUsername" class="form-control" placeholder="Username" required autofocus value="admin">
                     <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required value="123456">
                     <div id="remember" class="checkbox">
@@ -87,7 +87,7 @@ if (!Auth::isGuest()) {
         </div>
         <!-- /container --> 
         <script type="text/javascript" src="../vendors/moment/min/moment.min.js"></script> 
-        <script type="text/javascript" src="js/login.js"></script>
+        <script type="text/javascript" src="js/signin.js"></script>
 
         <script type="text/javascript">
             $(function () {

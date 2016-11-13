@@ -33,7 +33,7 @@ class MainWeb extends Auth {
 
 
         /* Menu Action */
-        define("MENU_ACTION", "<div class='doActionModal toolbarGroup'><div class='btn-group' role='group' aria-label='...'><button type='button' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Add Data' id='btnCreate' rel='actionCreate'><i class='fa fa-plus'></i> &nbsp;Add&nbsp; </button><button type='button' class='btn  btn-danger  btn-sm' data-toggle='tooltip' data-placement='top' title='Delete Data' id='btnDelete' rel='actionDelete' disabled><i class='fa fa-trash'></i> Delete </button></div></div>");
+        define("MENU_ACTION", "<div class='doActionModal toolbarGroup'><div class='btn-group' role='group' aria-label='...'><button type='button' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Add new item' id='btnCreate' rel='actionCreate'><i class='fa fa-plus'></i> &nbsp;Add&nbsp; </button><button type='button' class='btn  btn-danger  btn-sm' data-toggle='tooltip' data-placement='top' title='Delete Data' id='btnDelete' rel='actionDelete' disabled><i class='fa fa-trash'></i> Delete </button></div></div>");
 
         define("MENU_SUBMIT", "<button type='button' name='cancel' class='btn btn-primary'><i class='fa fa-close'></i> Cancel</button>
 <button type='submit' class='btn btn-success'><i class='fa fa-save'></i> Submit</button>

@@ -95,7 +95,7 @@ class MENU extends Auth {
         $menu .= "<a data-toggle=\"tooltip\" data-placement=\"top\" title=\"Settings\"> <span class=\"glyphicon glyphicon-cog\" aria-hidden=\"true\"></span> </a>";
         $menu .= " <a data-toggle=\"tooltip\" data-placement=\"top\" title=\"FullScreen\" onclick=\"toggleFullScreen(document.body)\"> <span class=\"glyphicon glyphicon-fullscreen\" aria-hidden=\"true\"></span> </a>";
         $menu .= "<a data-toggle=\"tooltip\" data-placement=\"top\" title=\"Lock\"> <span class=\"glyphicon glyphicon-eye-close\" aria-hidden=\"true\"></span> </a>";
-        $menu .= " <a  href=\"signout.php\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Logout\"> <span class=\"glyphicon glyphicon-off\" aria-hidden=\"true\"></span> </a>";
+        $menu .= " <a  href=\"signout.php\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Sign Out\"> <span class=\"glyphicon glyphicon-off\" aria-hidden=\"true\"></span> </a>";
         $menu .= " </div>";
         $menu .= "<!-- /menu footer buttons --> 			";
 
@@ -116,7 +116,7 @@ class MENU extends Auth {
         echo "                    <!--                <li> <a href='javascript:;'> <i class='fa fa-edit'></i><span class='badge bg-red pull-right'>50%</span> <span>Settings</span> </a> </li>\n";
         echo "-->\n";
         //echo "                    <li><a href='javascript:;'><i class='fa fa-question'></i> Help</a></li>\n";
-        echo "                    <li><a href='signout.php'><i class='fa fa-power-off pull-left'></i> Log Out</a></li>\n";
+        echo "                    <li><a href='signout.php'><i class='fa fa-power-off pull-left'></i> Sign Out</a></li>\n";
         echo "                  </ul>\n";
         echo "                </li>\n";
         //						self::showMessage();												
