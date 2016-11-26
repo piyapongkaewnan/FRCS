@@ -13,9 +13,9 @@ $avatar = basename($_POST['avatar']);
 $isChange = $_POST['isChange'];
 
 $update_user_id = $_SESSION['sess_user_id'];
-/* print "<pre>";
-  print_r($_POST);
-  print "</pre>"; */
+//print "<pre>";
+//print_r($_POST);
+//print "</pre>";
 
 $db->debug = 0;
 /* * ********************************************* */
@@ -45,7 +45,7 @@ function setAuthorize() {
         $set_user_id = $user_id;
     }
 
-    // วนเพิ่มข้อมูลใน Table tbl_user_auth
+    // วนเพิ่มข้อมูลใน Table user_auth
 
     if ($_POST['user_group']) { // ถ้าไม่มีการเลือกกลุ่มผู้ใช้งานให้ค่าเริ่มต้นเป็น User/Requester group_id =4						
         //	echo	$sql_add_ugroup = "INSERT INTO tbl_user_auth (group_id,user_id) VALUES (4,$set_user_id); ";			
@@ -56,15 +56,18 @@ function setAuthorize() {
         }
     }
 
-    // วนเพิ่มข้อมูลใน Table tbl_module_auth
+    // วนเพิ่มข้อมูลใน Table user_country
 
-    /* if($_POST['module_name']){
+    if ($_POST['country']) {
+        $sql_del_user_country = "DELETE FROM user_country WHERE user_id = $set_user_id ";
+        $db->Execute($sql_del_user_country);
 
-      foreach($_POST['module_name'] as $v){
-      $sql_add_module = "INSERT INTO tbl_module_auth (user_id , module_name) VALUES ($set_user_id ,  '$v'); ";
-      $db->Execute($sql_add_module);
-      }
-      } */
+        for($i=0;$i<count($_POST['country']);$i++) {
+            $v = $_POST['country'][$i];
+            $sql_add_user_country = "INSERT INTO user_country (user_id , CountryCode, update_by) VALUES ($set_user_id ,  '$v' ,$update_user_id); ";
+            $db->Execute($sql_add_user_country);
+        }
+    }
 }
 
 // End function

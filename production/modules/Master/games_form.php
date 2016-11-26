@@ -37,19 +37,6 @@ if ($rs_edit['IsActive'] == "1" || $_GET['action'] == 'actionCreate') {
     $strIsActive = "checked";
 }
 
-/* 					
-  RefCode,
-  GroupCode,
-  GameName,
-  GameType,
-  Partner1,
-  Partner2,
-  PercentShare,
-  Territory,
-  Publisher,
-  PaymentChannel,
-  DataSourceRemarks,
-  IsActive */
 ?>
 <?= MainWeb::openTemplate(); ?>
 

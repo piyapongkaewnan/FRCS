@@ -47,7 +47,7 @@ if ($rs_edit['is_active'] == "1" || $_GET['action'] == 'actionCreate') {
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu_name_en">Menu group name <span class="required">*</span> </label>
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu_name_en">Menu name <span class="required">*</span> </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
             <input type="text" id="menu_name_en" name="menu_name_en" value="<?= $rs_edit['menu_name_en'] ?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
             <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
@@ -122,12 +122,11 @@ if ($rs_edit['is_active'] == "1" || $_GET['action'] == 'actionCreate') {
         //  actions , modules  ,page , selected , debug , isCurrentPage
         $.FormAction(actions, modules, page, '<?= $_GET['id'] ?>', false, false);
 
-//Set icon_id when click as icon list
+///Set icon_id when click as icon list
         $('.fa-hover1').click(function () {
             var Split = $(this).attr('rel').split('|');
             $('#icon_id').val(Split[0]);
-            $('#show_icon').toggleClass('fa-chevron-up fa-chevron-down');//.attr('class', Split[1]);               
+            $('#show_icon').attr('class', Split[1]);
         });
-
     });
 </script> 

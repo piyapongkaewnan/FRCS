@@ -89,7 +89,7 @@ $db->debug = false;
         <!--<link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">-->
         <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
         <!-- Custom Theme Style -->
-        <link href="../build/css/custom.css" rel="stylesheet">
+        <link href="../build/css/custom.min.css" rel="stylesheet">
         <!-- jQuery -->
         <script type="text/javascript" src="../vendors/jquery/dist/jquery.min.js"></script>
         <!-- parsley -->
@@ -225,7 +225,7 @@ $db->debug = false;
         <input name="pageRedirect" id="pageRedirect" type="hidden" value="<?= $_SERVER['HTTP_REFERER'] ?>">
         <div id="divMsg"></div>
         <!-- JS Custom --> 
-        <script type="text/javascript" src="../build/js/custom.js"></script>
+        <script type="text/javascript" src="../build/js/custom.min.js"></script>
     </body>
 </html>
 <?php

@@ -1,9 +1,30 @@
 ﻿<?php
+// Get Data from countrys
+
 if ($_GET['action'] == 'actionUpdate') {
     $id = $_GET['id'];
     $sql_edit = "SELECT  *  FROM user WHERE user_id = '$id';";
     $rs_edit = $db->GetRow($sql_edit);
+
+    $sqlCountry = "SELECT
+                        a.CountryCode,
+                        a.CountryName,
+                        (CASE WHEN b.CountryCode IS NULL THEN '' ELSE 'selected' END) AS IsCountryCode
+                      FROM country a
+                        LEFT JOIN user_country b
+                          ON a.CountryCode = b.CountryCode
+                          AND b.user_id = $id
+                      WHERE a.countrycode IN('TH','ID', 'VN')";
+} else if ($_GET['action'] == 'actionCreate') {
+    $sqlCountry = "SELECT
+                    CountryCode,
+                    CountryName
+                  FROM country
+                  WHERE countrycode IN('TH','ID', 'VN') ";
 }
+
+
+$rsCountry = $db->GetAll($sqlCountry);
 
 $avatar = $_GET['action'] == 'actionUpdate' ? $rs_edit['avatar'] : 'user.png';
 ?>
@@ -11,7 +32,7 @@ $avatar = $_GET['action'] == 'actionUpdate' ? $rs_edit['avatar'] : 'user.png';
 <!--
 <div class="container">
     <div class="row">
-<?php //for($i=0;$i<12;$i++){ ?>
+<?php //for($i=0;$i<12;$i++){  ?>
         <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6"><p>Box <?= ($i + 1) ?></p></div>
 <?php // } ?>
     </div>
@@ -20,7 +41,9 @@ $avatar = $_GET['action'] == 'actionUpdate' ? $rs_edit['avatar'] : 'user.png';
 <?= MainWeb::openTemplate(); ?>
 <!-- Cropper -->
 <link rel="stylesheet" type="text/css" href="./css/crop-avatar.css">
-<!-- dropzone -->
+<!-- Select2 --> 
+<link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
+<script src="../vendors/select2/dist/js/select2.full.min.js"></script> 
 <br />
 <form  data-parsley-validate name="form_<?= $_GET['page'] ?>" id="form_<?= $_GET['page'] ?>" method="post" class="form-horizontal " enctype="multipart/form-data"  action="">
     <div class="row">
@@ -31,14 +54,14 @@ $avatar = $_GET['action'] == 'actionUpdate' ? $rs_edit['avatar'] : 'user.png';
                     <input type="text" id="username" name="username" value="<?= $rs_edit['username'] ?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
                     <span class="fa fa-user-o form-control-feedback left" aria-hidden="true"></span> </div>
             </div>
-            <?php if ($_GET['action'] == 'actionUpdate') { ?>
+<?php if ($_GET['action'] == 'actionUpdate') { ?>
                 <div class="form-group">
                     <label class="control-label col-md-3 col-sm-4 col-xs-12" for="isChange"><span class="rememLabel">Change password</span></label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
                         <input type='checkbox' id='isChange' name='isChange' value='Y'/>
                     </div>
                 </div>
-            <?php } ?>
+<?php } ?>
             <div class="form-group divChange">
                 <label class="control-label col-md-3 col-sm-4 col-xs-12" for="password_hash">Password <span class="required">*</span> </label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -63,6 +86,19 @@ $avatar = $_GET['action'] == 'actionUpdate' ? $rs_edit['avatar'] : 'user.png';
                     <input type="email" id="email" name="email" value="<?= $rs_edit['email'] ?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
                     <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span> </div>
             </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-4 col-xs-12" for="country">Country <span class="required">*</span> </label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <select class="form-control col-md-7 col-xs-12 input-sm" name="country[]" id="country" tabindex="-1" required  multiple>
+                        <option></option>
+<?php
+for ($i = 0; $i < count($rsCountry); $i++) {
+    echo "<option value='" . $rsCountry[$i]['CountryCode'] . "' " . $rsCountry[$i]['IsCountryCode'] . ">" . $rsCountry[$i]['CountryName'] . "</option>\n";
+}
+?>
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="col-xs-12 col-sm-4 col-md-3">
             <div class="form-group">
@@ -80,37 +116,37 @@ $avatar = $_GET['action'] == 'actionUpdate' ? $rs_edit['avatar'] : 'user.png';
                          <span class="btn btn-xs btn-info" id="newPic">New Picture</span></div>--> 
             </div>
             <div class="form-group">
-                <?php
-                if ($_GET['action'] == 'actionUpdate') {
-                    $sql_group = "SELECT  
+<?php
+if ($_GET['action'] == 'actionUpdate') {
+    $sql_group = "SELECT  
                                         a.group_id,  a.group_name, b.group_id   AS group_id_chk,  b.user_id
                                 FROM user_group a
                                          LEFT JOIN user_auth b
                                            ON a.group_id = b.group_id
                                                  AND b.user_id = $id 
                                 ORDER BY a.group_name";
-                } else {
-                    $sql_group = "SELECT * FROM user_group ORDER BY group_name";
-                }
-                $rs_group = $db->GetAll($sql_group);
+} else {
+    $sql_group = "SELECT * FROM user_group ORDER BY group_name";
+}
+$rs_group = $db->GetAll($sql_group);
 
-                for ($i = 0; $i < count($rs_group); $i++) {
-                    $group_id = $rs_group[$i]['group_id'];
-                    $_chk = $group_id == $rs_group[$i]['group_id_chk'] ? 'checked' : '';
-                    echo "      <div class='checkbox'>\n";
-                    echo "  <label><input type=\"checkbox\" name=\"user_group[]\" value=\"$group_id\" required=\"required\" class=\"flat\" $_chk> " . $rs_group[$i]['group_name'] . "</label>\n";
-                    echo "</div>\n";
-                }
+for ($i = 0; $i < count($rs_group); $i++) {
+    $group_id = $rs_group[$i]['group_id'];
+    $_chk = $group_id == $rs_group[$i]['group_id_chk'] ? 'checked' : '';
+    echo "      <div class='checkbox'>\n";
+    echo "  <label><input type=\"checkbox\" name=\"user_group[]\" value=\"$group_id\" required=\"required\" class=\"flat\" $_chk> " . $rs_group[$i]['group_name'] . "</label>\n";
+    echo "</div>\n";
+}
 
 //}
-                ?>
+?>
             </div>
         </div>
     </div>
     <div class="ln_solid"></div>
     <div class="form-group">
         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-2">
-            <?= MENU_SUBMIT ?>
+<?= MENU_SUBMIT ?>
             <input type="hidden" name="action" id="action" value="<?= $_GET['action'] ?>">
             <input type="hidden" name="id" id="id" value="<?= $_GET['id'] ?>">
             <input type="hidden" name="avatar" id="avatar" value="<?= $avatar ?>">
@@ -264,6 +300,25 @@ $avatar = $_GET['action'] == 'actionUpdate' ? $rs_edit['avatar'] : 'user.png';
                 //$('.divChange').hide();
             }
         }
+
+        $("#country").select2({
+            tags: true,
+            placeholder: "Select a country",
+            templateResult: formatState,
+            templateSelection: formatState
+        });
+
+        function formatState(state) {
+            if (!state.id) {
+                return state.text;
+            }
+            var $state = $(
+                    '<span><img src="./images/flags/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + state.text + '</span>'
+                    );
+            return $state;
+        }
+        ;
+
 
     });
 </script> 
