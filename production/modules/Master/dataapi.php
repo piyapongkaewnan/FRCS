@@ -8,43 +8,31 @@ $sql_list = "SELECT
                    ON a.DataSourceType = b.id
            ORDER BY a.APIRefCode";
 $rs_list = $db->GetAll($sql_list);
-
-//$DirModule =  MainWeb::ScanDir( '../production/modules'); // path from top);
 ?>
 <?= MainWeb::openTemplate(); ?>
 
 <div class="row">
-    <div class="col-xs-4"></div>
-    <div class="col-xs-8 text-right">
+    <div class="col-xs-12 text-right">
         <?= MENU_ACTION ?>
     </div>
 </div>
 <div style="height:3px"></div>
-<!--<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr>
-    <td width="50%" align="left" valign="middle"></td>
-    <td width="50%" align="right" valign="top"><? //=MENU_ACTION    ?></td>
-  </tr>
-<tr>
-  <td align="left" valign="middle"></td>
-  <td align="right" valign="top" style="height:5px"></td>
-</tr>
-</table>-->
-<table width="100%" border="0" cellpadding="0" cellspacing="0" class="table-striped table-hover table-bordered"  id="table_<?= $Config['page'] ?>">
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="table-striped table-bordered table-hover"  id="table_<?= $Config['page'] ?>">
     <thead>
-        <tr class="headings">
-            <th width="5%"  class="no-sort text-center">&nbsp;<input type="checkbox" id="check-all" class="" />&nbsp;</th>
-            <th width="9%" align="center">APIRefCode</th>
-            <th width="16%" align="center">APIName</th>
-            <th width="16%" align="center">APIUrl</th>
-            <th width="12%" align="center">UserName</th>
-            <th width="13%" align="center"> Password</th>
-            <th width="13%" align="center">DataSourceType</th>
-            <th width="8%" align="center">Is Active</th>
-            <th width="8%" class="no-sort"> Action</th>
+        <tr>
+            <th class="no-sort text-center noExport"><input type="checkbox" id="check-all" class=""></th>
+            <th>APIRefCode</th>
+            <th>APIName</th>
+            <th>APIUrl</th>
+            <th>UserName</th>
+            <th> Password</th>
+            <th>DataSourceType</th>
+            <th>Is Active</th>
+            <th class="no-sort noExport"> Action</th>
         </tr>
     </thead>
-    <tbody >
+    <tbody>
         <?php for ($i = 0; $i < count($rs_list); $i++) { ?>
             <tr>
                 <td align="center"><input type="checkbox" class="selCheckBox" name="selID[]" id="<?= $rs_list[$i]['id'] ?>" value="<?= $rs_list[$i]['id'] ?>"></td>
@@ -54,10 +42,10 @@ $rs_list = $db->GetAll($sql_list);
                 <td><?= $rs_list[$i]['UserName'] ?></td>
                 <td><?= $rs_list[$i]['Password'] ?></td>
                 <td><?= $rs_list[$i]['type'] ?></td>
-                <td width="10%" align="center"><?= $rs_list[$i]['IsActive'] == "1" ? "YES" : "NO"; ?></td>
+                <td align="center"><?= $rs_list[$i]['IsActive'] == "1" ? "YES" : "NO"; ?></td>
                 <td align="center"><?= MainWeb::doUpdateParam('keyin', $rs_list[$i]['id']) ?></td>
             </tr>
-        <?php } // End For ?>
+        <?php } // End For  ?>
     </tbody>
 </table>
 <input type="hidden" name="hidRadio" id="hidRadio" value="" />

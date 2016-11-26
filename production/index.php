@@ -68,8 +68,8 @@ $db->debug = false;
         <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
         <!-- Dropzone.js -->
         <!--        <link href="../vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">-->
-        <!-- bootstrap-progressbar -->
-        <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+        <!--         bootstrap-progressbar 
+                <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">-->
         <!-- PNotify -->
         <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
         <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
@@ -89,7 +89,7 @@ $db->debug = false;
         <!--<link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">-->
         <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
         <!-- Custom Theme Style -->
-        <link href="../build/css/custom.css" rel="stylesheet">        
+        <link href="../build/css/custom.css" rel="stylesheet">
         <!-- jQuery -->
         <script type="text/javascript" src="../vendors/jquery/dist/jquery.min.js"></script>
         <!-- parsley -->
@@ -143,6 +143,13 @@ $db->debug = false;
             }
             .form-control, select {
                 font-size:12px;
+            }
+            .table ,table.dataTable tbody th,  table.dataTable tbody td {
+                white-space: nowrap;                   
+            }
+            .table-striped > tbody > tr:nth-child(odd) > td, 
+            .table-striped > tbody > tr:nth-child(odd) > th {
+                white-space: nowrap;
             }
         </style>
     </head>
@@ -218,7 +225,7 @@ $db->debug = false;
         <input name="pageRedirect" id="pageRedirect" type="hidden" value="<?= $_SERVER['HTTP_REFERER'] ?>">
         <div id="divMsg"></div>
         <!-- JS Custom --> 
-        <script type="text/javascript" src="../build/js/custom.min.js"></script>
+        <script type="text/javascript" src="../build/js/custom.js"></script>
     </body>
 </html>
 <?php

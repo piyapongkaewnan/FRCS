@@ -27,14 +27,14 @@ $rs_list = $db->GetAll($sql_list);
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table-striped table-hover table-bordered"  id="table_<?= $Config['page'] ?>">
     <thead>
         <tr class="headings">
-            <th width="5%"  class="no-sort text-center"> <input type="checkbox" id="check-all" class="" /></th>
+            <th width="5%"  class="no-sort text-center noExport"> <input type="checkbox" id="check-all" class="" /></th>
             <th width="10%" align="center">Coin Code</th>
             <th width="22%" align="center"> Coin Name</th>
             <th width="18%" align="center">Fx Name</th>
             <th width="12%" align="center">Base Value</th>
             <th width="15%" align="center">USD Conv. Rate</th>
             <th width="10%" align="center">Is Active</th>
-            <th width="8%" class="no-sort"> Action</th>
+            <th width="8%" class="no-sort noExport"> Action</th>
         </tr>
     </thead>
     <tbody >

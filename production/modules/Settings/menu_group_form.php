@@ -33,12 +33,12 @@ if ($rs_edit['is_active'] == "1" || $_GET['action'] == 'actionCreate') {
 <?= MainWeb::openTemplate(); ?>
 <br />
 <form  data-parsley-validate name="form_<?= $_GET['page'] ?>" id="form_<?= $_GET['page'] ?>" method="post" class="form-horizontal form-label-left">
-<!--    <div class="form-group">
-        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu_group_th">Menu Group TH <span class="required">*</span> </label>
-        <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="menu_group_th" name="menu_group_th" value="<?= $rs_edit['menu_group_th'] ?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
-            <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
-    </div>-->
+    <!--    <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu_group_th">Menu Group TH <span class="required">*</span> </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="menu_group_th" name="menu_group_th" value="<?= $rs_edit['menu_group_th'] ?>" required="required "  class="form-control col-md-7 col-xs-12 has-feedback-left">
+                <span class="fa fa-keyboard-o form-control-feedback left" aria-hidden="true"></span> </div>
+        </div>-->
     <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu_group_en">Menu Group  <span class="required">*</span> </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -111,7 +111,8 @@ if ($rs_edit['is_active'] == "1" || $_GET['action'] == 'actionCreate') {
         $('.fa-hover1').click(function () {
             var Split = $(this).attr('rel').split('|');
             $('#icon_id').val(Split[0]);
-            $('#show_icon').attr('class', Split[1]);
+            //$('#show_icon').attr('class', Split[1]);
+            $('#show_icon').toggleClass('fa-chevron-up fa-chevron-down');//.attr('class', Split[1]);     
 
         });
 

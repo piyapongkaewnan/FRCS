@@ -23,14 +23,14 @@ $rs_list = $db->GetAll($sql_list);
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table-striped table-hover table-bordered"  id="table_<?= $Config['page'] ?>">
     <thead>
         <tr class="headings">
-            <th width="8%"  class="no-sort text-center"> <input type="checkbox" id="check-all" class="" /></th>
+            <th width="8%"  class="no-sort text-center noExport"> <input type="checkbox" id="check-all" class="" /></th>
             <th width="32%"> Menu Group</th>
 <!--            <th width="21%">Menu Group TH</th>-->
             <th width="16%"> Module Name</th>
             <th width="9%">Order</th>
-            <th width="12%"> Icons</th>
-            <th width="9%" class="no-sort">Is Active</th>
-            <th width="9%" class="no-sort"> Action</th>
+            <th width="12%" class="noExport"> Icons</th>
+            <th width="9%">Is Active</th>
+            <th width="9%" class="no-sort noExport"> Action</th>
         </tr>
      <!-- <th class="bulk-actions" colspan="8"> <a class="antoo" style="color:#333; font-weight:500;"><i class="fa fa-chevron-down"></i> Bulk Actions ( <span class="action-cnt"> </span> ) </a> </th>-->
     </thead>

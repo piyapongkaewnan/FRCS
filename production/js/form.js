@@ -16,6 +16,16 @@ $(function () {
     var RedirectURL = $('#pageRedirect').val();
 
 
+// NProgress Ajax loading 
+    $(document).ajaxStart(function () {
+        NProgress.start();
+    });
+
+    $(document).ajaxStop(function () {
+        NProgress.done();
+    });
+
+
     /*****************************************************************************************/
 
     $("#FormModal ,  #FormModalDelete , #PermissionModal").on('hide.bs.modal', function (e) {
@@ -67,7 +77,7 @@ $(function () {
             var actions = $(this).attr('rel');
             var selID = $(this).attr('id');//getSelID();
 
-            NProgress.start();
+            //NProgress.start();
 
             switch (actions) {
                 case 'actionCreate'  :
@@ -83,16 +93,16 @@ $(function () {
                     //var FormModals = 'FormModalDelete';
 
                     $('#FormModalDelete').modal('show');
-                    NProgress.done();
-                   // return false;
+                    // NProgress.done();
+                    // return false;
 
                     break;
             }
 
-            NProgress.done();
+            // NProgress.done();
         });
-        
-        
+
+
         // Action for Delete program by ID
         $('#actionDelete').click(function () {
 
@@ -146,7 +156,7 @@ $(function () {
 
         $('#form_' + page).submit(function (event, redirect) {
 
-            NProgress.start();
+            // NProgress.start();
             event.preventDefault(); // avoid to execute the actual submit of the form.
             //$("button[type='submit']").addClass("disabled");
             $("button[type='submit']").prop("disabled", true);
@@ -161,7 +171,7 @@ $(function () {
 
             //Success
             request.done(function (textStatus) {
-                NProgress.done();
+                //  NProgress.done();
 
                 if (debug == true) {
                     console.log(textStatus);
@@ -196,7 +206,7 @@ $(function () {
                 if (debug == true) {
                     console.log(textStatus);
                 }
-                NProgress.done();
+                //  NProgress.done();
                 $.showNotify('error');
             });
 

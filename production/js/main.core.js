@@ -11,11 +11,6 @@ $(function () {
 // Get page name
     var page = $('#page').val();
 
-
-// Setting Dialogs
-//$.setDialog = function(page,w,h , title){
-
-
 //#########################################################
 // Set Realname to localStorage
     var profileRealname = localStorage.getItem("APPS.SITE.PROFILE_NAME");
@@ -39,8 +34,6 @@ $(function () {
         });
     });
 
-
-
     /*****************************************************************************************/
 
 //Save Stats Event when click menu
@@ -50,8 +43,6 @@ $(function () {
             //console.log(data);				
         });
     });
-
-
 
 
     /*****************************************************************************************/
@@ -88,7 +79,7 @@ $(function () {
                 break;
         }
         new PNotify(opts);
-    }
+    };
 
 });
 

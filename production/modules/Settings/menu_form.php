@@ -126,8 +126,7 @@ if ($rs_edit['is_active'] == "1" || $_GET['action'] == 'actionCreate') {
         $('.fa-hover1').click(function () {
             var Split = $(this).attr('rel').split('|');
             $('#icon_id').val(Split[0]);
-            $('#show_icon').attr('class', Split[1]);
-
+            $('#show_icon').toggleClass('fa-chevron-up fa-chevron-down');//.attr('class', Split[1]);               
         });
 
     });

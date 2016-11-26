@@ -41,7 +41,7 @@ $tbl->openTable();
             <?= MENU_SAVE_ONLY ?>
         </div>
     </div>
-    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table able-striped  table-hover"   id="auth">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table display table-striped table-condensed table-hover"  id="auth">
         <thead>
             <tr>
                 <th width="8%">No.</th>
@@ -64,21 +64,21 @@ $tbl->openTable();
                 ?>
                 <tr class="warning">
                     <td align="center"><?= $loop ?></td>
-                    <td><u><b>
-                                <?= $rs_gmenu[$i]['menu_group_en'] ?>
-                            </b></u></td>
+                    <td><u>
+                            <label class="pull-left"><?= $rs_gmenu[$i]['menu_group_en'] ?></label>
+                        </u></td>
                     <td align="center"><input type="checkbox" name="check-all" class="check-all" value="<?= $rs_gmenu[$i]['mgroup_id'] ?>"/></td>
                 </tr>
                 <?php
                 // หาเมนูย่อย
                 $mgroup_id = $rs_gmenu[$i]['mgroup_id'];
                 $sql_menu = "SELECT
-                        menu_id,
-                        menu_name_en,
-                        mgroup_id
-               FROM menu
-               WHERE mgroup_id = $mgroup_id
-               ORDER BY menu_order";
+                                            menu_id,
+                                            menu_name_en,
+                                            mgroup_id
+                                   FROM menu
+                                   WHERE mgroup_id = $mgroup_id
+                                   ORDER BY menu_order";
                 $rs_menu = $db->GetAll($sql_menu);
 
                 for ($j = 0; $j < count($rs_menu); $j++) { // Loop Sub menu	
@@ -94,8 +94,8 @@ $tbl->openTable();
                     ?>
                     <tr>
                         <td align="center"><?= $loop ?></td>
-                        <td>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-
-                            <?= $rs_menu[$j]['menu_name_en'] ?></td>
+                        <td><span class="pull-left">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-
+                                <?= $rs_menu[$j]['menu_name_en'] ?></span></td>
                         <td align="center"><input type="checkbox" name="chk_menu[]" id="chk_menu_<?= $rs_menu[$j]['menu_id'] ?>" value="<?= $rs_menu[$j]['menu_id'] ?>" <?= $chk_status ?> class="program_<?= $mgroup_id ?>" /></td>
                     </tr>
                     <?php

@@ -6,22 +6,24 @@ $(function () {
 
         if ($('#table_' + tableID).length) {
 
-            var table = $('#table_' + tableID).dataTable({
-                //'bJQueryUI': true,
+            var dtTable = $('#table_' + tableID).dataTable({
+                //bJQueryUI: true,
                 bStateSave: bStateSave,
                 sPaginationType: 'full_numbers',
                 bPaginate: '1',
                 iDisplayLength: iDisplayLength,
                 iDisplayStart: 0,
                 //'iDisplayEnd' :  20 ,
-                scrollX: true,
+                'autoWidth': true,            
+                sScrollX: '100%',
                 aaSorting: [[aaSorting, orderType]],
                 lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
                 language: {
                     sProcessing: '<img src="./images/loading-gear.gif">',
-                    oPaginate: {sFirst: '&laquo;', sLast: '&raquo;', sNext: '&#8250;', sPrevious: '&#8249;'}
+                    'oPaginate': {sFirst: '&laquo;', sLast: '&raquo;', sNext: '&#8250;', sPrevious: '&#8249;'}
                 },
-                dom: '<"toolbarGroup clearfix"><Bf<rt>lip>',
+                dom: '<"toolbarGroup clearfix">Bf<rt><lip>',
+                //dom: '<"toolbarGroup clearfix"><Bf<rt>lip>',
                 // dom: '<"toolbarGroup clearfix"lr>fB,t,<"clearfix"<"pull-left"i><"pull-right"p>>',
                 columnDefs: [{
                         targets: 'no-sort',
@@ -30,23 +32,38 @@ $(function () {
                 buttons: [
                     {
                         extend: 'copy',
-                        className: 'btn-sm'
+                        className: 'btn-sm',
+                        exportOptions: {
+                            columns: "thead th:not(.noExport)"
+                        }
                     },
                     {
                         extend: 'csv',
-                        className: 'btn-sm'
+                        className: 'btn-sm',
+                        exportOptions: {
+                            columns: "thead th:not(.noExport)"
+                        }
                     },
                     {
                         extend: 'excel',
-                        className: 'btn-sm'
+                        className: 'btn-sm',
+                        exportOptions: {
+                            columns: "thead th:not(.noExport)"
+                        }
                     },
                     {
                         extend: 'pdfHtml5',
-                        className: 'btn-sm'
+                        className: 'btn-sm',
+                        exportOptions: {
+                            columns: "thead th:not(.noExport)"
+                        }
                     },
                     {
                         extend: 'print',
-                        className: 'btn-sm'
+                        className: 'btn-sm',
+                        exportOptions: {
+                            columns: "thead th:not(.noExport)"
+                        }
                     }
                 ],
                 responsive: true
@@ -157,7 +174,6 @@ $(function () {
                 });
 
 
-
         /*  $('#'+table_id+' tbody').on('click', 'tr', function () {
          var data = table.row( this ).data();
          $('#rowID_'+data[0]).prop( "checked", true );
@@ -166,10 +182,6 @@ $(function () {
          } );	*/
 
     };
-
-
-
-
 
     /*function turn_on_icheck(checkboxClass)
      {
@@ -198,3 +210,23 @@ $(function () {
 //$("div.toolbarGroup").html('<b>Custom tool bar! Text/images etc.</b>');
 });
 
+//$(document).ready(function () {
+//    $(window).on('resize', function () {
+//        $('.dataTables_scrollHeadInner').width(0);
+//    });
+//});
+//$(document).ready(function(){
+//        
+//    $(window).on('resize',function(){
+//       var winWidth =  $(window).width();
+//       if(winWidth < 768 ){
+//          console.log('Window Width: '+ winWidth + 'class used: col-xs');
+//       }else if( winWidth <= 991){
+//          console.log('Window Width: '+ winWidth + 'class used: col-sm');
+//       }else if( winWidth <= 1199){
+//          console.log('Window Width: '+ winWidth + 'class used: col-md');
+//       }else{
+//          console.log('Window Width: '+ winWidth + 'class used: col-lg');
+//       }
+//    });
+//});

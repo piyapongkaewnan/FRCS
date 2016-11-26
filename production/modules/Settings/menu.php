@@ -41,15 +41,15 @@ $rs_list = $db->GetAll($sql_list);
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table-striped table-hover table-bordered"  id="table_<?= $Config['page'] ?>">
     <thead>
         <tr class="headings">
-            <th width="7%"  class="no-sort text-center"> <input type="checkbox" id="check-all" class="" /></th>
+            <th width="7%"  class="no-sort text-center noExport"> <input type="checkbox" id="check-all" class="" /></th>
             <th width="7%"> Order</th>
 <!--            <th width="13%">Menu name (TH)</th>-->
             <th width="20%">Menu name</th>
             <th width="30%">Menu Description</th>
             <th width="12%">Menu File</th>
             <th width="9%">Is Active</th>
-            <th width="8%">Icons</th>
-            <th width="8%" class="no-sort"> Action</th>
+            <th width="8%" class="noExport">Icons</th>
+            <th width="8%" class="no-sort noExport"> Action</th>
         </tr>
     </thead>
     <tbody>

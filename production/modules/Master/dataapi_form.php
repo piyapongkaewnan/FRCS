@@ -87,7 +87,7 @@ if ($rs_edit['IsActive'] == "1" || $_GET['action'] == 'actionCreate') {
             <div class="x_content" id="APIParam">
                 <div class="form-group  pull-left">
                     <label class="control-label col-md-12 col-sm-12 col-xs-12">
-                        <button id="b1" class="btn btn-info addParamMore" type="button"><i class="fa fa-plus"></i> Add Parameters <span class="badge totalParam"></span></button>  
+                        <button id="b1" class="btn  btn-info addParamMore" type="button"><i class="fa fa-plus"></i> Add Parameters <span class="badge totalParam"></span></button>  
                     </label>
 
                 </div>
@@ -97,7 +97,7 @@ if ($rs_edit['IsActive'] == "1" || $_GET['action'] == 'actionCreate') {
                             <th>#</th>
                             <th>Parameter Name</th>
                             <th>Parameter Value</th>
-                            <th>Action</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -112,22 +112,22 @@ if ($rs_edit['IsActive'] == "1" || $_GET['action'] == 'actionCreate') {
                                         <th><?= ($i + 1) ?></th>
                                         <td><input type="text" name="paramName[]" id="paramName_<?= $i ?>" class="form-control input-sm read" required="required" value="<?= $rsApiDetail[$i]['ParameterName'] ?>" readonly/></td>
                                         <td><input type="text" name="paramValue[]" id="paramValue_<?= $i ?>" class="form-control input-sm" required="required"  value="<?= $rsApiDetail[$i]['ParameterValue'] ?>" readonly/></td>
-                                        <td><span class="actionParam"><a href="javascript:void(0);" class="btn btn-info btn-xs editParam">Edit</a></span><a href="javascript:void(0);" class="btn btn-danger btn-xs removeParam">Remove</a></td>
+                                        <td><span class="actionParam"><a href="javascript:void(0);" class="btn btn-info btn-xs editParam"><i class="fa fa-pencil"></i></a></span><a href="javascript:void(0);" class="btn btn-danger btn-xs removeParam"><i class="fa fa-trash"></i></a></td>
                                     </tr>
                                     <?php
                                 } // End for
                                 // }else{ 
                                 ?>
-                     <!--   <tr>
-                          <td colspan="4" scope="row" class="text-center"><label class="text-danger">No Parameter</label></th>
-                        </tr>
+        <!--   <tr>
+        <td colspan="4" scope="row" class="text-center"><label class="text-danger">No Parameter</label></th>
+        </tr>
                                 <?php
                                 //}
                                 //	}else{
                                 ?>
-                        <tr>
-                          <td colspan="4" scope="row" class="text-center"><label class="text-danger">No Parameter</label></td>
-                        </tr>-->
+        <tr>
+        <td colspan="4" scope="row" class="text-center"><label class="text-danger">No Parameter</label></td>
+        </tr>-->
                                 <?php
                             }
                         }
@@ -174,13 +174,14 @@ if ($rs_edit['IsActive'] == "1" || $_GET['action'] == 'actionCreate') {
         });
 
 // Add Parameter
-        $('.addParamMore').click(function () {
+        $(document).on('click', '.addParamMore', function (e) {
+            // $('.addParamMore').click(function () {
             //	console.log($('#tableParam > tbody tr:last-child td:first-child').html());		
             var input = '<tr>\n';
             input += '<th scope="row"><i class="fa fa-bolt"></i></th>\n';
             input += '<td><input type="text" name="paramName[]" id="paramName" class="form-control input-sm" required="required" /></td>\n';
             input += '<td><input type="text" name="paramValue[]" id="paramValue" class="form-control input-sm" required="required" /></td>\n';
-            input += ' <td><span class="actionParam"><a href="javascript:void(0);" class="btn btn-info btn-xs editParam">Done</a></span><a href="javascript:void(0);" class="btn btn-danger btn-xs removeParam">Remove</a></td>\n';
+            input += ' <td><span class="actionParam"><a href="javascript:void(0);"  title="Done" class="btn btn-success btn-xs editParam"><i class="fa fa-check"></i></a></span><a href="javascript:void(0);" title="Remove"  class="btn btn-danger btn-xs removeParam"><i class="fa fa-trash"></i></a></td>\n';
             input += '</tr>\n';
             $('#tableParam tbody:parent').append(input);
             $('#isChange').val(1);
@@ -196,18 +197,28 @@ if ($rs_edit['IsActive'] == "1" || $_GET['action'] == 'actionCreate') {
             //var rowID = $(this).closest('tr').attr('id'); // table row ID 
             var rowIndex = $(this).parents("tr").index();
 
-            if ($.trim($(this).text()) === 'Edit') {
-                $(this).text('Done');
-//				$(this).addClass('btn-success');
+            $(this).toggleClass('btn-info btn-success');
+
+            // if ($.trim($(this).text()) === 'Edit') {
+            if ($(this).children().hasClass('fa-pencil')) {
+                $(this).attr('title', 'Done');
+                $(this).children().addClass('fa-check');
+                $(this).children().removeClass('fa-pencil');
+                //console.log('Edit');
+//	$(this).addClass('btn-success');
                 $('input[name^=paramName]').eq(rowIndex).prop('readonly', false);
                 $('input[name^=paramValue]').eq(rowIndex).prop('readonly', false);
             } else {
-                $(this).text('Edit');
-//				$(this).addClass('btn-info');
+                //console.log('Done');
+                $(this).attr('title', 'Edit');
+                //$(this).text('Edit');
+                // $(this).toggleClass('fa-pencil fa-check');
+                $(this).children().addClass('fa-pencil');
+                $(this).children().removeClass('fa-check');
+//	$(this).addClass('btn-info');
                 $('input[name^=paramName]').eq(rowIndex).prop('readonly', true);
                 $('input[name^=paramValue]').eq(rowIndex).prop('readonly', true);
             }
-
         });
 
 
