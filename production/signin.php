@@ -41,6 +41,10 @@ if (!Auth::isGuest()) {
         <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
         <!-- Animate.css -->
         <!--<link href="../vendors/animate.css/animate.min.css" rel="stylesheet">-->
+        <!-- PNotify -->
+        <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+        <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+        <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
 
         <!-- Custom Theme Style -->
         <link href="css/signin.css" rel="stylesheet">
@@ -50,6 +54,10 @@ if (!Auth::isGuest()) {
 
         <!-- NProgress -->
         <script type="text/javascript" src="../vendors/nprogress/nprogress.js"></script>
+        <!-- PNotify -->
+        <script type="text/javascript" src="../vendors/pnotify/dist/pnotify.js"></script>
+        <script type="text/javascript" src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+        <script type="text/javascript" src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
     </head>
     <body class="signin">
 
@@ -70,8 +78,8 @@ if (!Auth::isGuest()) {
                 <p id="profile-name" class="profile-name-card"><?= $_SESSION['sess_realname'] ?></p>
                 <form class="form-signin" name="form-signin" id="form-signin" method="post">
                     <div id="reauth-username" class="reauth-username"></div> <div id="reauth-last-signin" style="font-weight:normal; font-size:11px; margin:5px; display:none;text-align:center"></div>
-                    <input type="text" name="inputUsername" id="inputUsername" class="form-control" placeholder="Username" required autofocus value="admin">
-                    <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required value="123456">
+                    <input type="text" name="inputUsername" id="inputUsername" class="form-control" placeholder="Username" required autofocus value="">
+                    <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required value="">
                     <div id="remember" class="checkbox">
                         <label>
                             <input type="checkbox" name="inputRemember" id="inputRemember" value="TRUE">
@@ -94,6 +102,33 @@ if (!Auth::isGuest()) {
 
             });
         </script>
+        <!-- PNotify -->
+        <script>
+            $(document).ready(function () {
+                new PNotify({
+                    title: "Users information",
+                    type: "info",
+                    text: "Admin Group\n***************************\nUser : admin\nPassword : 123456\n\n\
+                            Operation Group\n***************************\nUser : oper\nPassword : 123456\n\n\
+                            Viewer Group\n***************************\nUser : view\nPassword : 123456",
+                    addclass: 'dark',
+                    styling: 'bootstrap3',
+                    hide: true,
+                    before_close: function (PNotify) {
+                        PNotify.update({
+                            title: PNotify.options.title + " - Enjoy your Stay",
+                            before_close: null
+                        });
+
+                        PNotify.queueRemove();
+
+                        return false;
+                    }
+                });
+
+            });
+        </script>
+        <!-- /PNotify -->
 
 
     </body>

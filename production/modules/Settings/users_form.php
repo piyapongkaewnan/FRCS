@@ -313,7 +313,7 @@ for ($i = 0; $i < count($rs_group); $i++) {
                 return state.text;
             }
             var $state = $(
-                    '<span><img src="./images/flags/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + state.text + '</span>'
+                    '<span><img src="./images/flags/' + state.element.value.toUpperCase() + '.png" class="img-flag" /> ' + state.text + '</span>'
                     );
             return $state;
         }

@@ -24,7 +24,7 @@ $sql_list = "SELECT
                 a.realname,
                 a.email,
                 ( CASE WHEN a.ModifiedOn IS NULL THEN a.CreatedOn ELSE a.ModifiedOn END ) AS ModifiedOn
-              FROM USER a
+              FROM user a
                 LEFT JOIN user_auth b
                   ON a.user_id = b.user_id
                   $str_query

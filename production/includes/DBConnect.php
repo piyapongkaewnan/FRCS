@@ -7,9 +7,9 @@ include("adodb/adodb-exceptions.inc.php");
 require('adodb/adodb.inc.php');
 #Define Valiable for DB Connection
 define("DB_HOST","localhost");
-define("DB_USER","catadmin");
-define("DB_PASS","p@ssw0rd");
-define("DB","true_db");
+define("DB_USER","9d9221_frcs");
+define("DB_PASS","frcs-##-00");
+define("DB","db_9d9221_frcs");
 
 # Create DB Connecttion
 try {
